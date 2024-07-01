@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="a26b87d8-bbc5-40b6-b377-f3f41d0bab4d" name="Changes" comment="" />
+    <list default="true" id="a26b87d8-bbc5-40b6-b377-f3f41d0bab4d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataObjects/DataListTrains.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataObjects/DataListTrainsHistory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataObjects/DataListTrainsQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataObjects/DataTrain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataObjects/DataTrainQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataOnly/ListTrains.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataOnly/ListTrainsHistory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataOnly/ListTrainsQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataOnly/Train.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataOnly/TrainQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/THESIS/Controllers_2L/Controller_L11_L12.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/THESIS/Controllers_2L/Controller_L7_L8.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/THESIS/Controllers_2L/Controller_L9_L10.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/THESIS/Main/Main_Railway.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/THESIS/Stations/Station_A.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/THESIS/Stations/Station_B.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/THESIS/Stations/Station_C.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_A.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_B.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_C.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -13,9 +49,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2iZ1GUzbws9Ao1cNCKJ24ppLGGR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -26,8 +62,10 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true"
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/simin/UTCN/Anul 4/Railway/code/Railway"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
