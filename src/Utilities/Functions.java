@@ -23,6 +23,13 @@ import PetriDataPackage.GuardCondition;
 import PetriDataPackage.Place;
 import PetriDataPackage.Transition;
 
+import com.sun.jdi.Value;
+
+import java.time.LocalTime;
+import java.time.Duration;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Functions implements Serializable {
 
 	/**
@@ -67,6 +74,7 @@ public class Functions implements Serializable {
 		}
 		return -1;
 	}
+
 
 	public PetriObject GetFromListByName(String name, ArrayList<PetriObject> list) {
 		if (name.contains("-")) {
@@ -479,15 +487,15 @@ public class Functions implements Serializable {
 		return false;
 	}
 
-	public boolean HaveListTrain(DataListTrains list) {
-		if (list == null)
-			return false;
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i) != null && list.get(i).Value != null)
-				return true;
-		}
-		return false;
-	}
+//	public boolean HaveListTrain(DataListTrains list) {
+//		if (list == null)
+//			return false;
+//		for (int i = 0; i < list.size(); i++) {
+//			if (list.get(i) != null && list.get(i).Value != null)
+//				return true;
+//		}
+//		return false;
+//	}
 
 	public boolean HaveListTrainForMe(PetriTransition t, ArrayList<DataCar> list) {
 		if (list == null)
@@ -501,5 +509,96 @@ public class Functions implements Serializable {
 		}
 		return false;
 	}
+
+	public DataListTrains Create_Train_Null(DataTrain T,DataLocalTime Dep_Time, DataString Dep_Platform, DataListTrainsQueue list, DataInteger length1, DataInteger length2,  DataInteger speed){
+
+		DataListTrains new_train_list = new DataListTrains();
+		DataLocalTime leaving_time;
+		DataLocalTime dep_time;
+
+		if(list == null){
+			leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
+		}else{
+			String prev_platform = list.GetPlatform(0);
+			if(Dep_Platform.Value.equals(prev_platform)){
+				DataLocalTime prev_time = TimeAfterPassing(list.GetDepTime(0),list.GetLength(0),length1,null,speed);
+				DataLocalTime second_train = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,null,speed);
+				if(second_train.Value.isAfter(prev_time.Value)){
+					leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
+				}else{
+					dep_time = prev_time; // when the first train arrives at the first intersectio
+											// then the second train will depart
+					leaving_time = TimeAfterPassing(dep_time.Value,T.GetLength(),length1,length2,speed);
+				}
+			}else{
+
+			}
+		}
+		DataLocalTime leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
+
+
+
+//		ListTrains new_train = new ListTrains(T.Value,Dep_Time.Value,Dep_Platform.Value);
+		new_train_list.SetValue(new_train);
+
+		return new_train_list;
+	}
+
+	public DataListTrains Create_Train_NotNull(DataTrain T,DataLocalTime Dep_Time, DataString Dep_Platform, DataLocalTime C_Time, DataString C_Platform, DataInteger length1, DataInteger length2, DataInteger speed){
+		DataListTrains new_train_list = new DataListTrains();
+		DataLocalTime leaving_time;
+
+
+		if(Dep_Platform.GetString().equals(C_Platform.GetString())){
+			if(Dep_Time.Value.isAfter(C_Time.Value.plusMinutes(10))) {
+				leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
+				ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value,Dep_Platform.Value);
+				new_train_list.SetValue(new_train);
+			} else {
+				leaving_time = TimeAfterPassing(C_Time.Value.plusMinutes(10),T.GetLength(),length1,length2,speed);
+				ListTrains new_train = new ListTrains(T.Value, C_Time.Value.plusMinutes(10),leaving_time.Value, Dep_Platform.Value);
+				new_train_list.SetValue(new_train);
+			}
+
+		}else{
+			if(C_Platform.Contains("4") && (Dep_Platform.Contains("2")||(Dep_Platform.Contains("1")))){
+				if(Dep_Time.Value.isAfter(C_Time.Value.plusMinutes(10))) {
+					leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
+					ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value,leaving_time.Value, Dep_Platform.Value);
+					new_train_list.SetValue(new_train);
+				} else {
+					leaving_time = TimeAfterPassing(C_Time.Value.plusMinutes(10),T.GetLength(),length1,length2,speed);
+					ListTrains new_train = new ListTrains(T.Value, C_Time.Value.plusMinutes(10),leaving_time.Value, Dep_Platform.Value);
+					new_train_list.SetValue(new_train);
+				}
+			}
+			else{
+				leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
+				ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value,leaving_time.Value, Dep_Platform.Value);
+				new_train_list.SetValue(new_train);
+			}
+		}
+
+
+		return new_train_list;
+	}
+
+
+	public DataLocalTime TimeAfterPassing(LocalTime dep_time, int train_length, DataInteger first_length, DataInteger second_length, DataInteger speed){
+
+		double totalDistance = 2 * (train_length + first_length.Value + second_length.Value);
+
+		double timeTakenSeconds = totalDistance / speed.Value;
+
+		Duration timeTaken = Duration.ofSeconds((long) timeTakenSeconds);
+
+
+		LocalTime finalTime = dep_time.plus(timeTaken);
+		DataLocalTime place = new DataLocalTime();
+		place.Value = finalTime;
+
+		return place;
+	}
+
 
 }

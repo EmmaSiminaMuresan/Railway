@@ -3,19 +3,10 @@ package Components;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import DataObjects.DataCar;
-import DataObjects.DataCarQueue;
+import DataObjects.*;
 import DataOnly.CarQueue;
 import DataOnly.FloatFloat;
 import DataOnly.RELQueue;
-import DataObjects.DataFloat;
-import DataObjects.DataFloatFloat;
-import DataObjects.DataInteger;
-import DataObjects.DataREL;
-import DataObjects.DataRELQueue;
-import DataObjects.DataString;
-import DataObjects.DataTransfer;
-import DataObjects.DataSubPetriNet;
 import Enumerations.TransitionOperation;
 import Interfaces.PetriObject;
 import Utilities.Functions;
@@ -31,10 +22,22 @@ public class Activation implements Serializable {
 
 	public String InputPlaceName;
 	public ArrayList<String> InputPlaceNames;
+	ArrayList<PetriObject> InputPlaces;
 	public String OutputPlaceName;
 	public ArrayList<String> OutputPlaceNames;
 	public TransitionOperation Operation;
 	public Functions util;
+
+	public DataTrain T;
+	public DataLocalTime Dep_Time;
+	public DataString Dep_Platform;
+	public DataLocalTime C_Time;
+	public DataString C_Platform;
+	public DataListTrainsQueue list;
+	public DataInteger length1;
+	public DataInteger length2;
+	public DataInteger speed;
+
 
 	public Activation(PetriTransition Parent) {
 		util = new Functions();
@@ -50,13 +53,47 @@ public class Activation implements Serializable {
 	}
 
 	public Activation(PetriTransition Parent, ArrayList<String> InputPlaceNames, TransitionOperation Condition,
-			String OutputPlaceName) {
+					  String OutputPlaceName) {
 		util = new Functions();
 		this.Parent = Parent;
 		this.InputPlaceNames = InputPlaceNames;
 		this.OutputPlaceName = OutputPlaceName;
 		this.Operation = Condition;
 	}
+
+	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataLocalTime c_time, DataString c_platform,DataListTrainsQueue list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
+					  String OutputPlaceName) {
+		util = new Functions();
+		this.Parent = Parent;
+		this.OutputPlaceName = OutputPlaceName;
+		this.Operation = Condition;
+		this.T = train;
+		this.Dep_Time = dep_time;
+		this.Dep_Platform = dep_platform;
+		this.C_Time = c_time;
+		this.C_Platform = c_platform;
+		this.list = list;
+		this.length1 = length1;
+		this.length2 = length2;
+		this.speed = speed;
+	}
+
+	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataListTrainsQueue list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
+					  String OutputPlaceName) {
+		util = new Functions();
+		this.Parent = Parent;
+		this.OutputPlaceName = OutputPlaceName;
+		this.Operation = Condition;
+		this.T = train;
+		this.Dep_Time = dep_time;
+		this.Dep_Platform = dep_platform;
+		this.list = list;
+		this.length1 = length1;
+		this.length2 = length2;
+		this.speed = speed;
+
+	}
+
 
 	public Activation(PetriTransition Parent, String InputPlaceName, TransitionOperation Condition,
 			ArrayList<String> OutputPlaceNames) {
@@ -69,6 +106,11 @@ public class Activation implements Serializable {
 
 	
 	public void Activate() throws CloneNotSupportedException {
+		if (Operation == TransitionOperation.CreateTrain_Null)
+			CreateTrain_Null();
+
+		if (Operation == TransitionOperation.CreateTrain_NotNull)
+			CreateTrain_NotNull();
 
 		if (Operation == TransitionOperation.Move)
 			Move();
@@ -138,6 +180,19 @@ public class Activation implements Serializable {
 		// ---------------------------------------------------------
 	}
 
+	private void CreateTrain_Null() throws CloneNotSupportedException{
+		DataListTrains result = new DataListTrains();
+		result = util.Create_Train_Null(T,Dep_Time,Dep_Platform,list, length1,  length2, speed);
+
+		result.SetValue(OutputPlaceName);
+	}
+	private void CreateTrain_NotNull() throws CloneNotSupportedException{
+		DataListTrains result = new DataListTrains();
+			result = util.Create_Train_NotNull(T,Dep_Time,Dep_Platform,C_Time, C_Platform, length1,  length2, speed);
+
+		result.SetValue(OutputPlaceName);
+	}
+
 	private void MakeNull() throws CloneNotSupportedException {
 		PetriObject temp = util.GetFromListByName(OutputPlaceName, Parent.Parent.PlaceList);
 		if (temp == null) {
@@ -146,6 +201,7 @@ public class Activation implements Serializable {
 			util.SetNullToListByName(OutputPlaceName, Parent.Parent.PlaceList);
 		}
 	}
+
 
 	private void Move() throws CloneNotSupportedException {
 
@@ -161,6 +217,26 @@ public class Activation implements Serializable {
 
 		if (temp instanceof DataInteger) {
 			result = (PetriObject) ((DataInteger) temp).clone();
+		}
+
+		if (temp instanceof DataTrain) {
+			result = (PetriObject) ((DataTrain) temp).clone();
+		}
+
+		if (temp instanceof DataTrainQueue) {
+			result = (PetriObject) ((DataTrainQueue) temp).clone();
+		}
+
+		if (temp instanceof DataListTrains) {
+			result = (PetriObject) ((DataListTrains) temp).clone();
+		}
+
+		if (temp instanceof DataListTrainsHistory) {
+			result = (PetriObject) ((DataListTrainsHistory) temp).clone();
+		}
+
+		if (temp instanceof DataListTrainsQueue) {
+			result = (PetriObject) ((DataListTrainsQueue) temp).clone();
 		}
 
 		if (temp instanceof DataString) {
@@ -251,6 +327,42 @@ public class Activation implements Serializable {
 		}
 	}
 
+	private  void CalculateTime() throws CloneNotSupportedException {
+		Integer outputIndex = util.GetIndexByName(OutputPlaceName, Parent.Parent.PlaceList);
+		PetriObject result = null;
+
+		for (String placeName : InputPlaceNames) {
+			PetriObject temp;
+			Integer inputIndex = util.GetIndexByName(placeName, Parent.TempMarking);
+			if (inputIndex == -1) {
+				temp = util.GetFromListByName(placeName, Parent.Parent.ConstantPlaceList);
+			} else {
+				temp = Parent.TempMarking.get(inputIndex);
+			}
+
+			if (temp == null) {
+				continue;
+			}
+
+			if (temp instanceof DataFloat) {
+				if (result == null) {
+					result = (PetriObject) ((DataFloat) temp).clone();
+				} else {
+					result.SetValue((float) result.GetValue() + (float) temp.GetValue());
+				}
+			}
+
+			if (temp instanceof DataInteger) {
+				if (result == null) {
+					result = (PetriObject) ((DataInteger) temp).clone();
+				} else {
+					result.SetValue((Integer) result.GetValue() + (Integer) temp.GetValue());
+				}
+			}
+		}
+		result.SetName(OutputPlaceName);
+		Parent.Parent.PlaceList.set(outputIndex, result);
+	}
 	private void Add() throws CloneNotSupportedException {
 		Integer outputIndex = util.GetIndexByName(OutputPlaceName, Parent.Parent.PlaceList);
 		PetriObject result = null;
@@ -435,6 +547,26 @@ public class Activation implements Serializable {
 			result = (PetriObject) ((DataREL) temp).clone();
 		}
 
+		if (temp instanceof DataTrain) {
+			result = (PetriObject) ((DataTrain) temp).clone();
+		}
+
+		if (temp instanceof DataTrainQueue) {
+			result = (PetriObject) ((DataTrainQueue) temp).clone();
+		}
+
+		if (temp instanceof DataListTrains) {
+			result = (PetriObject) ((DataListTrains) temp).clone();
+		}
+
+		if (temp instanceof DataListTrainsHistory) {
+			result = (PetriObject) ((DataListTrainsHistory) temp).clone();
+		}
+
+		if (temp instanceof DataListTrainsQueue) {
+			result = (PetriObject) ((DataListTrainsQueue) temp).clone();
+		}
+
 		result.SetName(OutputPlaceName);
 		result.SetValue(temp.GetValue());
 
@@ -451,6 +583,26 @@ public class Activation implements Serializable {
 
 		if (temp instanceof DataCar) {
 			result = (PetriObject) ((DataCar) temp).clone();
+		}
+
+		if (temp instanceof DataTrain) {
+			result = (PetriObject) ((DataTrain) temp).clone();
+		}
+
+		if (temp instanceof DataTrainQueue) {
+			result = (PetriObject) ((DataTrainQueue) temp).clone();
+		}
+
+		if (temp instanceof DataListTrains) {
+			result = (PetriObject) ((DataListTrains) temp).clone();
+		}
+
+		if (temp instanceof DataListTrainsHistory) {
+			result = (PetriObject) ((DataListTrainsHistory) temp).clone();
+		}
+
+		if (temp instanceof DataListTrainsQueue) {
+			result = (PetriObject) ((DataListTrainsQueue) temp).clone();
 		}
 
 		result.SetName(OutputPlaceName);

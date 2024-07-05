@@ -39,9 +39,6 @@ public class Train implements Cloneable, Serializable{
         attributes.add(Number);
         return attributes;
     }
-    public int getLength() {
-        return Length;
-    }
 
     public String toString() {
         return "Train " + Number + " having " + Length + " m";

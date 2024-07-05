@@ -2,18 +2,14 @@ package DataObjects;
 
 import java.io.Serializable;
 import java.time.LocalTime;
-import java.util.List;
 
-import DataOnly.ListTrains;
 import Enumerations.PetriObjectType;
 import Interfaces.PetriObject;
-public class DataListTrains implements Interfaces.PetriObject, Cloneable, Serializable{
+public class DataLocalTime implements Interfaces.PetriObject, Cloneable, Serializable {
+    /**
+     *
+     */
     private static final long serialVersionUID = 1L;
-    @Override
-    public void AddElement(Object value) {
-        // TODO Auto-generated method stub
-
-    }
 
     @Override
     public void Execute() {
@@ -35,16 +31,15 @@ public class DataListTrains implements Interfaces.PetriObject, Cloneable, Serial
 
     @Override
     public PetriObjectType GetType() {
-        return PetriObjectType.DataListTrains;
+        return PetriObjectType.DataLocalTime;
     }
 
-    public ListTrains Value = null;
+    public LocalTime Value;
 
     @Override
     public Object GetValue() {
         return Value;
     }
-
 
     @Override
     public void SetValue(Object value) {
@@ -52,15 +47,15 @@ public class DataListTrains implements Interfaces.PetriObject, Cloneable, Serial
             Value = null;
             SetToken(false);
         }
-        if (value instanceof ListTrains) {
-            Value = (ListTrains) value;
+        if (value instanceof LocalTime) {
+            Value = (LocalTime) value;
             SetToken(true);
         }
     }
 
     // Overriding clone() method of Object class
     public PetriObject clone() throws CloneNotSupportedException {
-        return (DataListTrains) super.clone();
+        return (DataLocalTime) super.clone();
     }
 
     public boolean Printable = true;
@@ -74,29 +69,9 @@ public class DataListTrains implements Interfaces.PetriObject, Cloneable, Serial
         if (Value != null) {
             return GetName() + "(" + GetValue().toString() + ")";
         } else {
-            return GetName() +"(Null)";
+            return GetName() + "(Null)";
         }
     }
-
-    public ListTrains getValue() {
-        return Value;
-    }
-
-
-    public List<Object> getTrainAttributes() {return Value.getTrainAttributes();}
-
-    public LocalTime getDep_time() {
-        return Value.getDep_time();
-    }
-
-    public LocalTime getLeaving_time() {
-        return Value.getLeaving_time();
-    }
-
-    public String getPlatform(){
-        return Value.getPlatform();
-    }
-    public int GetLength() {return Value.getTrain().Length;}
 
     private String name = "";
 
@@ -108,6 +83,15 @@ public class DataListTrains implements Interfaces.PetriObject, Cloneable, Serial
     @Override
     public void SetName(String name) {
         this.name = name;
+    }
+
+    public LocalTime getTime() {
+        return Value;
+    }
+    @Override
+    public void AddElement(Object value) {
+        // TODO Auto-generated method stub
+
     }
 
     private boolean token;
@@ -122,3 +106,4 @@ public class DataListTrains implements Interfaces.PetriObject, Cloneable, Serial
         return this.token;
     }
 }
+

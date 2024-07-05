@@ -1,6 +1,8 @@
 package DataObjects;
 
 import java.io.Serializable;
+import java.time.LocalTime;
+
 import DataOnly.ListTrainsQueue;
 import Enumerations.PetriObjectType;
 import Interfaces.PetriObject;
@@ -38,6 +40,15 @@ public class DataListTrainsQueue implements Interfaces.PetriObject, Cloneable, S
     public Object GetValue() {
         return Value;
     }
+
+    public int GetSize() {return Value.getSize();}
+
+    public String GetPlatform(int i) {return Value.getPlatform(i);}
+
+    public LocalTime GetDepTime(int i) {return Value.GetDepTime(i);}
+
+    public LocalTime GetLeavingTime(int i) {return Value.GetLeavingTime(i);}
+    public int GetLength(int i) {return Value.GetLength(i);}
 
     @Override
     public void SetValue(Object value) {

@@ -23,6 +23,10 @@ public enum TransitionOperation implements Serializable{
 	ActivateSubPetri,
 	StopPetriNet,
 	MakeNull,
+	CalculateTime,
+	CreateTrain_NotNull,
+
+	CreateTrain_Null,
 	
 	Add_FloatFlaot,  //the new activations for floatfloat
 	Sub_FloatFloat,

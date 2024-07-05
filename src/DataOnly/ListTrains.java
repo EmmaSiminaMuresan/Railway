@@ -1,6 +1,7 @@
 package DataOnly;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 public class ListTrains implements Cloneable, Serializable{
@@ -14,19 +15,28 @@ public class ListTrains implements Cloneable, Serializable{
     }
 
     public Train train;
-    public String time;
+    public LocalTime dep_time;
+    public LocalTime leaving_time;
     public String platform;
     public List<String> Targets;
 
-    public ListTrains(Train train, String time, String platform) {
+    public ListTrains(Train train, LocalTime time, String platform) {
         this.train = train;
-        this.time = time;
+        this.dep_time = time;
         this.platform = platform;
     }
 
-    public ListTrains(Train train, String time, String platform, String[] Targets) {
+    public ListTrains(Train train, LocalTime dep_time,LocalTime leaving_time, String platform) {
         this.train = train;
-        this.time = time;
+        this.dep_time = dep_time;
+        this.leaving_time = leaving_time;
+        this.platform = platform;
+    }
+
+    public ListTrains(Train train, LocalTime time,LocalTime leaving_time, String platform, String[] Targets) {
+        this.train = train;
+        this.dep_time = time;
+        this.leaving_time = leaving_time;
         this.platform = platform;
         this.Targets = new ArrayList<String>();
         for (String string : Targets) {
@@ -41,16 +51,19 @@ public class ListTrains implements Cloneable, Serializable{
         return train;
     }
 
-    public String getTime() {
-        return time;
+    public LocalTime getDep_time() {
+        return dep_time;
     }
+    public LocalTime getLeaving_time() {return leaving_time;}
 
     public String getPlatform() {
         return platform;
     }
 
+
+
     public String toString() {
-        return "Train " + train.toString() + " leaves at " + time + " on platform " + platform;
+        return "Train " + train.toString() + " leaves at " + dep_time + " on platform " + platform;
     }
 
 }

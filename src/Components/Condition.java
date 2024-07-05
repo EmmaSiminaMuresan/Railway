@@ -245,42 +245,42 @@ public class Condition implements Serializable {
 			}
 			break;
 		}
-			case HaveListTrain: {
-				if (Value1 == null)
-					return false;
-				if (Value1.GetValue() == null)
-					return false;
-				if (Value1.GetType() == PetriObjectType.DataListTrains) {
-					if (util.HaveListTrain(((DataListTrains) Value1.GetValue()))) {
-						return true;
-					}
-				}
-				break;
-			}
-			case HaveListTrainForMe: {
-				if (Value1 == null)
-					return false;
-				if (Value1.GetValue() == null)
-					return false;
-					if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
-					if (util.HaveListTrainForMe(Parent, ((ListTrainsQueue) Value1.GetValue()))) {
-						return true;
-					}
-				}
-				break;
-			}
-			case HaveHListTrainForMe: {
-				if (Value1 == null)
-					return false;
-				if (Value1.GetValue() == null)
-					return false;
-				if (Value1.GetType() == PetriObjectType.DataCarQueue) {
-					if (util.HaveHListTrainForMe(Parent, ((CarQueue) Value1.GetValue()).Cars)) {
-						return true;
-					}
-				}
-				break;
-			}
+//			case HaveListTrain: {
+//				if (Value1 == null)
+//					return false;
+//				if (Value1.GetValue() == null)
+//					return false;
+//				if (Value1.GetType() == PetriObjectType.DataListTrains) {
+//					if (util.HaveListTrain(((DataListTrains) Value1.GetValue()))) {
+//						return true;
+//					}
+//				}
+//				break;
+//			}
+//			case HaveListTrainForMe: {
+//				if (Value1 == null)
+//					return false;
+//				if (Value1.GetValue() == null)
+//					return false;
+//					if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
+//					if (util.HaveListTrainForMe(Parent, ((ListTrainsQueue) Value1.GetValue()))) {
+//						return true;
+//					}
+//				}
+//				break;
+//			}
+//			case HaveHListTrainForMe: {
+//				if (Value1 == null)
+//					return false;
+//				if (Value1.GetValue() == null)
+//					return false;
+//				if (Value1.GetType() == PetriObjectType.DataCarQueue) {
+//					if (util.HaveHListTrainForMe(Parent, ((CarQueue) Value1.GetValue()).Cars)) {
+//						return true;
+//					}
+//				}
+//				break;
+//			}
 			case CanAddTrains_List: {
 				if (Value1 == null)
 					return false;
@@ -305,30 +305,30 @@ public class Condition implements Serializable {
 				}
 				break;
 			}
-			case CanNotAddTrains_List: {
-				if (Value1 == null)
-					return false;
-				if (Value1.GetValue() == null)
-					return false;
-				if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
-					if (((ListTrainsQueue) Value1.GetValue()).CanNotAddtrain()) {
-						return true;
-					}
-				}
-				break;
-			}
-			case CanNotAddTrains_HList: {
-				if (Value1 == null)
-					return false;
-				if (Value1.GetValue() == null)
-					return false;
-				if (Value1.GetType() == PetriObjectType.DataListTrainsHistory) {
-					if (((ListTrainsHistory) Value1.GetValue()).CanNotAddtrain()) {
-						return true;
-					}
-				}
-				break;
-			}
+//			case CanNotAddTrains_List: {
+//				if (Value1 == null)
+//					return false;
+//				if (Value1.GetValue() == null)
+//					return false;
+//				if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
+//					if (((ListTrainsQueue) Value1.GetValue()).CanNotAddtrain()) {
+//						return true;
+//					}
+//				}
+//				break;
+//			}
+//			case CanNotAddTrains_HList: {
+//				if (Value1 == null)
+//					return false;
+//				if (Value1.GetValue() == null)
+//					return false;
+//				if (Value1.GetType() == PetriObjectType.DataListTrainsHistory) {
+//					if (((ListTrainsHistory) Value1.GetValue()).CanNotAddtrain()) {
+//						return true;
+//					}
+//				}
+//				break;
+//			}
 		case HaveREL: {
 			if (Value1 == null)
 				return false;

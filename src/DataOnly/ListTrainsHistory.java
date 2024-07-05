@@ -28,71 +28,70 @@ public class ListTrainsHistory implements Cloneable, Serializable{
         String timeString = "23:59:59";
 
         DataListTrains lastTrain = Trains.get(Trains.size() - 1);
-        String lastDepTime = lastTrain.getTime();
+        LocalTime lastDepTime = lastTrain.getTime();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-        LocalTime givenTime = LocalTime.parse(lastDepTime, formatter);
         LocalTime timeStringC = LocalTime.parse(timeString, formatter);
 
-        if (givenTime.isBefore(timeStringC)) {
+        if (lastDepTime.isBefore(timeStringC)) {
             Trains.add(train);
             return true;
-        } else {
-
         }
-
-
-        if (formattedTime) {
-            Trains.add(train);
-            return true;
-        } else {
-            for (int i = 0; i < Trains.size(); i++) {
-                if (Trains.get(i) == null) {
-                    Trains.set(i, train);
-                    return true;
-                }
-            }
-        }
-        return false;
+        return true;
     }
 
-    public boolean CanAddtrain() {
-        if (Trains.size() < Size) {
-            return true;
-        } else {
-            for (int i = 0; i < Trains.size(); i++) {
-                if (Trains.get(i) == null) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+//
+//        if (formattedTime) {
+//            Trains.add(train);
+//            return true;
+//        } else {
+//            for (int i = 0; i < Trains.size(); i++) {
+//                if (Trains.get(i) == null) {
+//                    Trains.set(i, train);
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
-    public boolean CanNotAddtrain() {
-        if (Trains.size() >= Size) {
-            return true;
-        } else {
-            for (int i = 0; i < Trains.size(); i++) {
-                if (Trains.get(i) == null) {
-                    return false;
-                }
-            }
-        }
-        return false;
-    }
+//    public boolean CanAddtrain() {
+////        if (Trains.size() < Size) {
+////            return true;
+////        } else {
+////            for (int i = 0; i < Trains.size(); i++) {
+////                if (Trains.get(i) == null) {
+////                    return true;
+////                }
+////            }
+////        }
+//        return false;
+//    }
 
-    public String toString() {
-        ArrayList<String> temp1 = new ArrayList<String>();
-        for (DataListTrains train : Trains) {
-            if (train == null)
-                temp1.add("NULL");
-            else
-                temp1.add(train.toString());
-        }
-
-        return "(" + String.join(",", temp1) + ")";
-    }
+//    public boolean CanNotAddtrain() {
+////        if (Trains.size() >= Size) {
+////            return true;
+////        } else {
+////            for (int i = 0; i < Trains.size(); i++) {
+////                if (Trains.get(i) == null) {
+////                    return false;
+////                }
+////            }
+////        }
+////        return false;
+//    }
+//
+//    public String toString() {
+//        ArrayList<String> temp1 = new ArrayList<String>();
+//        for (DataListTrains train : Trains) {
+//            if (train == null)
+//                temp1.add("NULL");
+//            else
+//                temp1.add(train.toString());
+//        }
+//
+//        return "(" + String.join(",", temp1) + ")";
+//    }
 }
 

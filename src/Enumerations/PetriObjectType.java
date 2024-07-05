@@ -24,6 +24,7 @@ public enum PetriObjectType implements Serializable{
 	DataListTrains,
 	DataListTrainsHistory,
 	DataListTrainsQueue,
+	DataLocalTime,
 	
 	DataFloatFloat	//the new data type
 }

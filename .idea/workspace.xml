@@ -4,32 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a26b87d8-bbc5-40b6-b377-f3f41d0bab4d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataObjects/DataListTrains.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataObjects/DataListTrainsHistory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataObjects/DataListTrainsQueue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataObjects/DataTrain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataObjects/DataTrainQueue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataOnly/ListTrains.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataOnly/ListTrainsHistory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataOnly/ListTrainsQueue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataOnly/Train.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataOnly/TrainQueue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L3.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/THESIS/Controllers_2L/Controller_L11_L12.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/THESIS/Controllers_2L/Controller_L7_L8.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/THESIS/Controllers_2L/Controller_L9_L10.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/THESIS/Main/Main_Railway.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/THESIS/Stations/Station_A.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/THESIS/Stations/Station_B.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/THESIS/Stations/Station_C.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_A.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_B.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_C.java" afterDir="false" />
+    <list default="true" id="a26b87d8-bbc5-40b6-b377-f3f41d0bab4d" name="Changes" comment="second commit">
+      <change afterPath="$PROJECT_DIR$/src/DataObjects/DataLocalTime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataOnly/TrainDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUIs/InputTrain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Activation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Condition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataListTrains.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataListTrains.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataListTrainsQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataListTrainsQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataTrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataTrain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataOnly/ListTrains.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataOnly/ListTrains.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataOnly/ListTrainsHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataOnly/ListTrainsHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataOnly/ListTrainsQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataOnly/ListTrainsQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataOnly/Train.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataOnly/Train.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enumerations/PetriObjectType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enumerations/PetriObjectType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enumerations/TransitionOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enumerations/TransitionOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/THESIS/Main/Main_Railway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Main/Main_Railway.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/THESIS/Stations/Station_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Stations/Station_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utilities/Functions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utilities/Functions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,14 +56,58 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.InputTrain (1).executor": "Run",
+    "Application.InputTrain.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/simin/UTCN/Anul 4/Railway/code/Railway"
+    "last_opened_file_path": "C:/Users/simin/UTCN/Anul 4/Railway/code/Railway",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
+  <component name="RunManager" selected="Application.InputTrain (1)">
+    <configuration name="InputTrain (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUIs.InputTrain" />
+      <module name="Railway" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GUIs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InputTrain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUIs.InputTrain" />
+      <module name="Railway" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GUIs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.InputTrain (1)" />
+        <item itemvalue="Application.InputTrain" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-18.0.2-corretto-18.0.2-4caba194b151-5720f15e" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -77,6 +117,41 @@
       <option name="presentableId" value="Default" />
       <updated>1719683191154</updated>
     </task>
+    <task id="LOCAL-00001" summary="second commit">
+      <option name="closed" value="true" />
+      <created>1719865360624</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1719865360624</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="second commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="second commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/GUIs/InputCar.java</url>
+          <line>102</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

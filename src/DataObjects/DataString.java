@@ -41,6 +41,8 @@ public class DataString implements Interfaces.PetriObject, Cloneable, Serializab
 		return Value;
 	}
 
+	public String GetString() {return Value;}
+
 	@Override
 	public void SetValue(Object value) {
 		if (value == null) {
@@ -91,6 +93,10 @@ public class DataString implements Interfaces.PetriObject, Cloneable, Serializab
 
 	}
 
+	public boolean Contains(String search){
+		boolean result = Value.contains(search);
+		return result;
+	}
 	private boolean token;
 
 	@Override

@@ -2,9 +2,11 @@ package DataOnly;
 
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import DataObjects.DataListTrains;
+import com.sun.jdi.Value;
 
 public class ListTrainsQueue implements Cloneable, Serializable{
     /**
@@ -23,6 +25,16 @@ public class ListTrainsQueue implements Cloneable, Serializable{
     public ListTrainsQueue() {
 
     }
+
+    public int getSize() {return Trains.size();}
+
+    public String getPlatform(int i) {return Trains.get(i).getPlatform();}
+
+    public LocalTime GetLeavingTime(int i) {return Trains.get(i).getLeaving_time();}
+
+    public LocalTime GetDepTime(int i) {return Trains.get(i).getDep_time();}
+
+    public int GetLength(int i) {return Trains.get(i).GetLength();}
 
     public boolean AddTrain(DataListTrains train) {
         if (Trains.size() < Size) {
