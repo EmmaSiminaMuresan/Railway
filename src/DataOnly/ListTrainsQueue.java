@@ -77,6 +77,14 @@ public class ListTrainsQueue implements Cloneable, Serializable{
         return false;
     }
 
+    public void Remove(){
+        Trains.remove(0);
+    }
+
+    public int LastIndex(){
+        return Trains.size()-1;
+    }
+
     public DataListTrains PopTrain(String target) {
         Integer index = -1;
         for (int i = 0; i < Trains.size(); i++) {

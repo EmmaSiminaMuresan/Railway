@@ -50,6 +50,8 @@ public class DataListTrainsQueue implements Interfaces.PetriObject, Cloneable, S
     public LocalTime GetLeavingTime(int i) {return Value.GetLeavingTime(i);}
     public int GetLength(int i) {return Value.GetLength(i);}
 
+    public int LastIndex() {return Value.LastIndex();}
+
     @Override
     public void SetValue(Object value) {
 

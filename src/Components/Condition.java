@@ -1,6 +1,7 @@
 package Components;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import DataObjects.DataListTrains;
@@ -245,18 +246,42 @@ public class Condition implements Serializable {
 			}
 			break;
 		}
-//			case HaveListTrain: {
-//				if (Value1 == null)
-//					return false;
-//				if (Value1.GetValue() == null)
-//					return false;
-//				if (Value1.GetType() == PetriObjectType.DataListTrains) {
-//					if (util.HaveListTrain(((DataListTrains) Value1.GetValue()))) {
-//						return true;
-//					}
-//				}
-//				break;
-//			}
+			case HaveListTrain_History: {
+				if (Value1 == null)
+					return false;
+				if (Value1.GetValue() == null)
+					return false;
+				if (Value1.GetType() == PetriObjectType.DataListTrainsHistory) {
+					if (util.HaveListTrain_History(((ListTrainsHistory) Value1.GetValue()).Trains)) {
+						return true;
+					}
+				}
+				break;
+			}
+			case HaveListTrain: {
+				if (Value1 == null)
+					return false;
+				if (Value1.GetValue() == null)
+					return false;
+				if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
+					if (util.HaveListTrain(((ListTrainsQueue) Value1.GetValue()).Trains)) {
+						return true;
+					}
+				}
+				break;
+			}
+			case Have_NoListTrain: {
+				if (Value1 == null)
+					return false;
+				if (Value1.GetValue() == null)
+					return false;
+				if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
+					if (!util.HaveListTrain(((ListTrainsQueue) Value1.GetValue()).Trains)) {
+						return true;
+					}
+				}
+				break;
+			}
 //			case HaveListTrainForMe: {
 //				if (Value1 == null)
 //					return false;
@@ -281,6 +306,19 @@ public class Condition implements Serializable {
 //				}
 //				break;
 //			}
+			case CheckTime_Before:
+				if (Value1.GetType() == PetriObjectType.DataListTrainsHistory)
+					if (((ListTrainsHistory) Value1.GetValue()).Last_Dep_Time().isBefore(LocalTime.of(23,59,59)) ||
+							((ListTrainsHistory) Value1.GetValue()).Last_Dep_Time().equals(LocalTime.of(23,59,59))) {
+						return true;
+					}
+				break;
+			case CheckTime_After:
+				if (Value1.GetType() == PetriObjectType.DataListTrainsHistory)
+					if (((ListTrainsHistory) Value1.GetValue()).Last_Dep_Time().isAfter(LocalTime.of(23,59,59))) {
+						return true;
+					}
+				break;
 			case CanAddTrains_List: {
 				if (Value1 == null)
 					return false;
@@ -293,42 +331,19 @@ public class Condition implements Serializable {
 				}
 				break;
 			}
-			case CanAddTrains_HList: {
+
+			case CanNotAddTrains_List: {
 				if (Value1 == null)
 					return false;
 				if (Value1.GetValue() == null)
 					return false;
-				if (Value1.GetType() == PetriObjectType.DataListTrainsHistory) {
-					if (((ListTrainsHistory) Value1.GetValue()).CanAddtrain()) {
+				if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
+					if (((ListTrainsQueue) Value1.GetValue()).CanNotAddtrain()) {
 						return true;
 					}
 				}
 				break;
 			}
-//			case CanNotAddTrains_List: {
-//				if (Value1 == null)
-//					return false;
-//				if (Value1.GetValue() == null)
-//					return false;
-//				if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
-//					if (((ListTrainsQueue) Value1.GetValue()).CanNotAddtrain()) {
-//						return true;
-//					}
-//				}
-//				break;
-//			}
-//			case CanNotAddTrains_HList: {
-//				if (Value1 == null)
-//					return false;
-//				if (Value1.GetValue() == null)
-//					return false;
-//				if (Value1.GetType() == PetriObjectType.DataListTrainsHistory) {
-//					if (((ListTrainsHistory) Value1.GetValue()).CanNotAddtrain()) {
-//						return true;
-//					}
-//				}
-//				break;
-//			}
 		case HaveREL: {
 			if (Value1 == null)
 				return false;

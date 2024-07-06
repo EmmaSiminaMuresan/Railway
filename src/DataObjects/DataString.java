@@ -1,5 +1,8 @@
 package DataObjects;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 
 import Enumerations.PetriObjectType;
@@ -42,6 +45,15 @@ public class DataString implements Interfaces.PetriObject, Cloneable, Serializab
 	}
 
 	public String GetString() {return Value;}
+	public void textfile(){
+		if(GetValue().toString().contains(".txt")){
+			try(BufferedWriter writer = new BufferedWriter(new FileWriter(Value))){
+
+			} catch (IOException e){
+				e.printStackTrace();
+			}
+		}
+	}
 
 	@Override
 	public void SetValue(Object value) {

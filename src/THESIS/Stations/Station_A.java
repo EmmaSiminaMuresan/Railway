@@ -1,14 +1,19 @@
 package THESIS.Stations;
 
-import Components.PetriNet;
+import Components.*;
 import DataObjects.*;
 import DataOnly.TransferOperation;
+import Enumerations.LogicConnector;
+import Enumerations.TransitionCondition;
+import Enumerations.TransitionOperation;
+
 public class Station_A {
     public static void main(String[] args) {
         PetriNet pn = new PetriNet();
         pn.PetriNetName = "Station A";
 
         pn.NetworkPort = 1081;
+        int x=7;
 
         DataTrain p1 = new DataTrain();
         p1.SetName("Train_A1");
@@ -101,8 +106,478 @@ public class Station_A {
         OP_i2.Value = new TransferOperation("localhost", "1083", "inA");
         pn.PlaceList.add(OP_i2);
 
-        // t1_A1
+        DataString A1 = new DataString();
+        A1.SetName("A1");
+        A1.SetValue("A1");
+        pn.ConstantPlaceList.add(A1);
+
+        DataString A2 = new DataString();
+        A2.SetName("A2");
+        A2.SetValue("A2");
+        pn.ConstantPlaceList.add(A2);
+
+        DataString A3 = new DataString();
+        A3.SetName("A3");
+        A3.SetValue("A3");
+        pn.ConstantPlaceList.add(A3);
+
+        DataInteger A1_Length = new DataInteger();
+        A1_Length.SetName("A1_Length");
+        A1_Length.SetValue(x);  /////////
+        pn.ConstantPlaceList.add(A1_Length);
+
+        DataInteger A2_Length = new DataInteger();
+        A2_Length.SetName("A2_Length");
+        A2_Length.SetValue(x);//////////
+        pn.ConstantPlaceList.add(A2_Length);
+
+        DataInteger A3_Length = new DataInteger();
+        A3_Length.SetName("A3_Length");
+        A3_Length.SetValue(x);//////////
+        pn.ConstantPlaceList.add(A3_Length);
+
+        DataInteger A4_Length = new DataInteger();
+        A4_Length.SetName("A1_Length");
+        A4_Length.SetValue(x);////////////
+        pn.ConstantPlaceList.add(A4_Length);
+
+        DataInteger speed_on_platform = new DataInteger();
+        speed_on_platform.SetName("Speed_On_Platform");
+        speed_on_platform.SetValue(x); //////////////
+        pn.ConstantPlaceList.add(speed_on_platform);
+
+        DataLocalTime time = new DataLocalTime(); // needed for when it is pass 23:59:59
+        time.SetName("Time");
+        time.SetValue(null);
+        pn.ConstantPlaceList.add(time);
+
+        // t1_A1 ------------------------------------------------
+
+        PetriTransition t1_A1 = new PetriTransition(pn);
+        t1_A1.TransitionName = "t1_A1";
+        t1_A1.InputPlaceName.add("Train_A1");
 
 
+        Condition t1_A1Ct1a = new Condition(t1_A1, "Train_A1", TransitionCondition.NotNull);
+        Condition t1_A1Ct2a = new Condition(t1_A1, "A1", TransitionCondition.IsNull);
+
+        t1_A1Ct1a.SetNextCondition(LogicConnector.AND, t1_A1Ct2a);
+
+        GuardMapping grdt1_A1a = new GuardMapping();
+        grdt1_A1a.condition = t1_A1Ct1a;
+        grdt1_A1a.Activations.add(new Activation(t1_A1, "Train_A1", TransitionOperation.Move, "A1"));
+        t1_A1.GuardMappingList.add(grdt1_A1a);
+
+
+        t1_A1.Delay = 0;
+        pn.Transitions.add(t1_A1);
+
+
+        // t2_A1 ------------------------------------------------
+
+        PetriTransition t2_A1 = new PetriTransition(pn);
+        t2_A1.TransitionName = "t2_A1";
+        t2_A1.InputPlaceName.add("A1");
+
+
+        Condition t2_A1Ct1a = new Condition(t2_A1, "A1", TransitionCondition.NotNull);
+        Condition t2_A1Ct2a = new Condition(t2_A1, "Exit_A1", TransitionCondition.IsNull);
+
+        t2_A1Ct1a.SetNextCondition(LogicConnector.AND, t2_A1Ct2a);
+
+        GuardMapping grdt2_A1a = new GuardMapping();
+        grdt2_A1a.condition = t2_A1Ct1a;
+        grdt2_A1a.Activations.add(new Activation(t2_A1, "A1", TransitionOperation.Move, "Exit_A1"));
+        t2_A1.GuardMappingList.add(grdt2_A1a);
+
+
+        t2_A1.Delay = 3; // fictional time for people to get off
+        pn.Transitions.add(t2_A1);
+
+
+        // S1 ------------------------------------------------
+
+        PetriTransition S1 = new PetriTransition(pn);
+        S1.TransitionName = "S1";
+        S1.InputPlaceName.add("Time_A1");
+        S1.InputPlaceName.add("P_A1");
+        S1.InputPlaceName.add("A_A1");
+
+
+        Condition S1Ct1a = new Condition(S1, "Train_A1", TransitionCondition.NotNull);
+        Condition S1Ct2a = new Condition(S1, "A1", TransitionCondition.NotNull);
+        Condition S1Ct3a = new Condition(S1, "P_A1", TransitionCondition.IsNull);
+
+        S1Ct2a.SetNextCondition(LogicConnector.AND, S1Ct3a);
+        S1Ct1a.SetNextCondition(LogicConnector.AND, S1Ct2a);
+
+        GuardMapping grdS1a = new GuardMapping();
+        grdS1a.condition = S1Ct1a;
+        grdS1a.Activations.add(new Activation(S1, "Time_A1", TransitionOperation.SendOverNetwork, "OP_A1"));
+        grdS1a.Activations.add(new Activation(S1, "A1", TransitionOperation.Move, "P_A1"));
+        S1.GuardMappingList.add(grdS1a);
+
+
+        Condition S1Ct1b = new Condition(S1, "Train_A1", TransitionCondition.IsNull);
+        Condition S1Ct2b = new Condition(S1, "A1", TransitionCondition.IsNull);
+        Condition S1Ct3b = new Condition(S1, "P_A1", TransitionCondition.NotNull);
+
+        S1Ct2b.SetNextCondition(LogicConnector.AND, S1Ct3b);
+        S1Ct1b.SetNextCondition(LogicConnector.AND, S1Ct2b);
+
+        GuardMapping grdS1b = new GuardMapping();
+        grdS1b.condition = S1Ct1b;
+        grdS1b.Activations.add(new Activation(S1, "P_A1", TransitionOperation.Move, "A1"));
+        S1.GuardMappingList.add(grdS1b);
+
+
+        S1.Delay = 0;
+        pn.Transitions.add(S1);
+
+
+
+        // t3_A1------------------------------------------------
+
+        PetriTransition t3_A1 = new PetriTransition(pn);
+        t3_A1.TransitionName = "t3_A1";
+        t3_A1.InputPlaceName.add("i1");
+        t3_A1.InputPlaceName.add("P_A1");
+
+
+
+        Condition t3_A1Ct2a = new Condition(t3_A1, "i1", TransitionCondition.IsNull);
+        Condition t3_A1Ct3a = new Condition(t3_A1, "P_A1", TransitionCondition.NotNull);
+
+        t3_A1Ct2a.SetNextCondition(LogicConnector.AND, t3_A1Ct3a);
+
+        GuardMapping grdt3_A1a = new GuardMapping();
+        grdt3_A1a.condition = t3_A1Ct2a;
+        grdt3_A1a.Activations.add(new Activation(t3_A1, "P_A1", TransitionOperation.Move, "i1"));
+        t3_A1.GuardMappingList.add(grdt3_A1a);
+
+
+
+        Condition t3_A1Ct1b = new Condition(t3_A1, "P_A1", TransitionCondition.IsNull);
+        Condition t3_A1Ct2b = new Condition(t3_A1, "i1", TransitionCondition.NotNull);
+
+        t3_A1Ct1b.SetNextCondition(LogicConnector.AND, t3_A1Ct2b);
+
+        GuardMapping grdt3_A1b = new GuardMapping();
+        grdt3_A1b.condition = t3_A1Ct1b;
+        grdt3_A1b.Activations.add(new Activation(t3_A1, p13,A1_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_A1b.Activations.add(new Activation(t3_A1, "A1", TransitionOperation.SendOverNetwork, "OP_PA1"));
+        grdt3_A1b.Activations.add(new Activation(t3_A1, "i1", TransitionOperation.Move, "P_A1"));
+        t3_A1.GuardMappingList.add(grdt3_A1b);
+
+
+        t3_A1.Delay = 0;
+        pn.Transitions.add(t3_A1);
+
+
+
+        /// PLATFORM A2
+
+        // t1_A2 ------------------------------------------------
+
+        PetriTransition t1_A2 = new PetriTransition(pn);
+        t1_A2.TransitionName = "t1_A2";
+        t1_A2.InputPlaceName.add("Train_A2");
+
+
+        Condition t1_A2Ct1a = new Condition(t1_A2, "Train_A2", TransitionCondition.NotNull);
+        Condition t1_A2Ct2a = new Condition(t1_A2, "A2", TransitionCondition.IsNull);
+
+        t1_A2Ct1a.SetNextCondition(LogicConnector.AND, t1_A2Ct2a);
+
+        GuardMapping grdt1_A2a = new GuardMapping();
+        grdt1_A2a.condition = t1_A2Ct1a;
+        grdt1_A2a.Activations.add(new Activation(t1_A2, "Train_A2", TransitionOperation.Move, "A2"));
+        t1_A2.GuardMappingList.add(grdt1_A2a);
+
+
+        t1_A2.Delay = 0;
+        pn.Transitions.add(t1_A2);
+
+
+        // t2_A2 ------------------------------------------------
+
+        PetriTransition t2_A2 = new PetriTransition(pn);
+        t2_A2.TransitionName = "t2_A2";
+        t2_A2.InputPlaceName.add("A2");
+
+
+        Condition t2_A2Ct1a = new Condition(t2_A2, "A2", TransitionCondition.NotNull);
+        Condition t2_A2Ct2a = new Condition(t2_A2, "Exit_A2", TransitionCondition.IsNull);
+
+        t2_A2Ct1a.SetNextCondition(LogicConnector.AND, t2_A2Ct2a);
+
+        GuardMapping grdt2_A2a = new GuardMapping();
+        grdt2_A2a.condition = t2_A2Ct1a;
+        grdt2_A2a.Activations.add(new Activation(t2_A2, "A2", TransitionOperation.Move, "Exit_A2"));
+        t2_A2.GuardMappingList.add(grdt2_A2a);
+
+
+        t2_A2.Delay = 3; // fictional time for people to get off
+        pn.Transitions.add(t2_A2);
+
+
+        // S2 ------------------------------------------------
+
+        PetriTransition S2 = new PetriTransition(pn);
+        S2.TransitionName = "S2";
+        S2.InputPlaceName.add("Time_A2");
+        S2.InputPlaceName.add("P_A2");
+        S2.InputPlaceName.add("A_A2");
+
+
+        Condition S2Ct1a = new Condition(S2, "Train_A2", TransitionCondition.NotNull);
+        Condition S2Ct2a = new Condition(S2, "A2", TransitionCondition.NotNull);
+        Condition S2Ct3a = new Condition(S2, "P_A2", TransitionCondition.IsNull);
+
+        S2Ct2a.SetNextCondition(LogicConnector.AND, S2Ct3a);
+        S2Ct1a.SetNextCondition(LogicConnector.AND, S2Ct2a);
+
+        GuardMapping grdS2a = new GuardMapping();
+        grdS2a.condition = S2Ct1a;
+        grdS2a.Activations.add(new Activation(S2, "Time_A2", TransitionOperation.SendOverNetwork, "OP_A2"));
+        grdS2a.Activations.add(new Activation(S2, "A2", TransitionOperation.Move, "P_A2"));
+        S2.GuardMappingList.add(grdS2a);
+
+
+        Condition S2Ct1b = new Condition(S2, "Train_A2", TransitionCondition.IsNull);
+        Condition S2Ct2b = new Condition(S2, "A2", TransitionCondition.IsNull);
+        Condition S2Ct3b = new Condition(S2, "P_A2", TransitionCondition.NotNull);
+
+        S2Ct2b.SetNextCondition(LogicConnector.AND, S2Ct3b);
+        S2Ct1b.SetNextCondition(LogicConnector.AND, S2Ct2b);
+
+        GuardMapping grdS2b = new GuardMapping();
+        grdS2b.condition = S2Ct1b;
+        grdS2b.Activations.add(new Activation(S2, "P_A2", TransitionOperation.Move, "A2"));
+        S2.GuardMappingList.add(grdS2b);
+
+
+        S2.Delay = 0;
+        pn.Transitions.add(S2);
+
+        // t3_A2------------------------------------------------
+
+        PetriTransition t3_A2 = new PetriTransition(pn);
+        t3_A2.TransitionName = "t3_A2";
+        t3_A2.InputPlaceName.add("i1");
+        t3_A2.InputPlaceName.add("P_A2");
+
+
+
+        Condition t3_A2Ct2a = new Condition(t3_A2, "i1", TransitionCondition.IsNull);
+        Condition t3_A2Ct3a = new Condition(t3_A2, "P_A2", TransitionCondition.NotNull);
+
+        t3_A2Ct2a.SetNextCondition(LogicConnector.AND, t3_A2Ct3a);
+
+        GuardMapping grdt3_A2a = new GuardMapping();
+        grdt3_A2a.condition = t3_A2Ct2a;
+        grdt3_A2a.Activations.add(new Activation(t3_A2, "P_A2", TransitionOperation.Move, "i1"));
+        t3_A2.GuardMappingList.add(grdt3_A2a);
+
+
+
+        Condition t3_A2Ct1b = new Condition(t3_A2, "P_A2", TransitionCondition.IsNull);
+        Condition t3_A2Ct2b = new Condition(t3_A2, "i1", TransitionCondition.NotNull);
+
+        t3_A2Ct1b.SetNextCondition(LogicConnector.AND, t3_A2Ct2b);
+
+        GuardMapping grdt3_A2b = new GuardMapping();
+        grdt3_A2b.condition = t3_A2Ct1b;
+        grdt3_A2b.Activations.add(new Activation(t3_A2, p13,A2_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_A2b.Activations.add(new Activation(t3_A2, "A2", TransitionOperation.SendOverNetwork, "OP_PA2"));
+        grdt3_A2b.Activations.add(new Activation(t3_A2, "i1", TransitionOperation.Move, "P_A2"));
+        t3_A2.GuardMappingList.add(grdt3_A2b);
+
+
+        t3_A2.Delay = 0;
+        pn.Transitions.add(t3_A2);
+
+
+        // t4_A1------------------------------------------------
+
+        PetriTransition t4_A1 = new PetriTransition(pn);
+        t4_A1.TransitionName = "t4_A1";
+        t4_A1.InputPlaceName.add("i1");
+        t4_A1.InputPlaceName.add("i2");
+
+
+
+        Condition t4_A1Ct2a = new Condition(t4_A1, "i2", TransitionCondition.IsNull);
+        Condition t4_A1Ct4a = new Condition(t4_A1, "i1", TransitionCondition.NotNull);
+
+        t4_A1Ct2a.SetNextCondition(LogicConnector.AND, t4_A1Ct4a);
+
+        GuardMapping grdt4_A1a = new GuardMapping();
+        grdt4_A1a.condition = t4_A1Ct2a;
+        grdt4_A1a.Activations.add(new Activation(t4_A1, "i1", TransitionOperation.Move, "i2"));
+        t4_A1.GuardMappingList.add(grdt4_A1a);
+
+
+
+        Condition t4_A1Ct1b = new Condition(t4_A1, "i1", TransitionCondition.IsNull);
+        Condition t4_A1Ct2b = new Condition(t4_A1, "i2", TransitionCondition.NotNull);
+
+        t4_A1Ct1b.SetNextCondition(LogicConnector.AND, t4_A1Ct2b);
+
+        GuardMapping grdt4_A1b = new GuardMapping();
+        grdt4_A1b.condition = t4_A1Ct1b;
+        grdt4_A1b.Activations.add(new Activation(t4_A1, p13,A1_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt4_A1b.Activations.add(new Activation(t4_A1, "A4", TransitionOperation.SendOverNetwork, "OP_PA1"));
+        grdt4_A1b.Activations.add(new Activation(t4_A1, "i2", TransitionOperation.Move, "i1"));
+        t4_A1.GuardMappingList.add(grdt4_A1b);
+
+
+        t4_A1.Delay = 0;
+        pn.Transitions.add(t4_A1);
+
+
+        /// PLATFORM A3
+
+        // t1_A3 ------------------------------------------------
+
+        PetriTransition t1_A3 = new PetriTransition(pn);
+        t1_A3.TransitionName = "t1_A3";
+        t1_A3.InputPlaceName.add("Train_A3");
+
+
+        Condition t1_A3Ct1a = new Condition(t1_A3, "Train_A3", TransitionCondition.NotNull);
+        Condition t1_A3Ct2a = new Condition(t1_A3, "A3", TransitionCondition.IsNull);
+
+        t1_A3Ct1a.SetNextCondition(LogicConnector.AND, t1_A3Ct2a);
+
+        GuardMapping grdt1_A3a = new GuardMapping();
+        grdt1_A3a.condition = t1_A3Ct1a;
+        grdt1_A3a.Activations.add(new Activation(t1_A3, "Train_A3", TransitionOperation.Move, "A3"));
+        t1_A3.GuardMappingList.add(grdt1_A3a);
+
+
+        t1_A3.Delay = 0;
+        pn.Transitions.add(t1_A3);
+
+
+        // t2_A3 ------------------------------------------------
+
+        PetriTransition t2_A3 = new PetriTransition(pn);
+        t2_A3.TransitionName = "t2_A3";
+        t2_A3.InputPlaceName.add("A3");
+
+
+        Condition t2_A3Ct1a = new Condition(t2_A3, "A3", TransitionCondition.NotNull);
+        Condition t2_A3Ct2a = new Condition(t2_A3, "Exit_A3", TransitionCondition.IsNull);
+
+        t2_A3Ct1a.SetNextCondition(LogicConnector.AND, t2_A3Ct2a);
+
+        GuardMapping grdt2_A3a = new GuardMapping();
+        grdt2_A3a.condition = t2_A3Ct1a;
+        grdt2_A3a.Activations.add(new Activation(t2_A3, "A3", TransitionOperation.Move, "Exit_A3"));
+        t2_A3.GuardMappingList.add(grdt2_A3a);
+
+
+        t2_A3.Delay = 3; // fictional time for people to get off
+        pn.Transitions.add(t2_A3);
+
+
+        // S3 ------------------------------------------------
+
+        PetriTransition S3 = new PetriTransition(pn);
+        S3.TransitionName = "S3";
+        S3.InputPlaceName.add("Time_A3");
+        S3.InputPlaceName.add("P_A3");
+        S3.InputPlaceName.add("A_A3");
+
+
+        Condition S3Ct1a = new Condition(S3, "Train_A3", TransitionCondition.NotNull);
+        Condition S3Ct2a = new Condition(S3, "A3", TransitionCondition.NotNull);
+        Condition S3Ct3a = new Condition(S3, "P_A3", TransitionCondition.IsNull);
+
+        S3Ct2a.SetNextCondition(LogicConnector.AND, S3Ct3a);
+        S3Ct1a.SetNextCondition(LogicConnector.AND, S3Ct2a);
+
+        GuardMapping grdS3a = new GuardMapping();
+        grdS3a.condition = S3Ct1a;
+        grdS3a.Activations.add(new Activation(S3, "Time_A3", TransitionOperation.SendOverNetwork, "OP_A3"));
+        grdS3a.Activations.add(new Activation(S3, "A3", TransitionOperation.Move, "P_A3"));
+        S3.GuardMappingList.add(grdS3a);
+
+
+        Condition S3Ct1b = new Condition(S3, "Train_A3", TransitionCondition.IsNull);
+        Condition S3Ct2b = new Condition(S3, "A3", TransitionCondition.IsNull);
+        Condition S3Ct3b = new Condition(S3, "P_A3", TransitionCondition.NotNull);
+
+        S3Ct2b.SetNextCondition(LogicConnector.AND, S3Ct3b);
+        S3Ct1b.SetNextCondition(LogicConnector.AND, S3Ct2b);
+
+        GuardMapping grdS3b = new GuardMapping();
+        grdS3b.condition = S3Ct1b;
+        grdS3b.Activations.add(new Activation(S3, "P_A3", TransitionOperation.Move, "A3"));
+        S3.GuardMappingList.add(grdS3b);
+
+
+        S3.Delay = 0;
+        pn.Transitions.add(S3);
+
+
+        // t3_A3------------------------------------------------
+
+        PetriTransition t3_A3 = new PetriTransition(pn);
+        t3_A3.TransitionName = "t3_A3";
+        t3_A3.InputPlaceName.add("i2");
+        t3_A3.InputPlaceName.add("P_A3");
+
+
+
+        Condition t3_A3Ct2a = new Condition(t3_A3, "i2", TransitionCondition.IsNull);
+        Condition t3_A3Ct3a = new Condition(t3_A3, "P_A3", TransitionCondition.NotNull);
+
+        t3_A3Ct2a.SetNextCondition(LogicConnector.AND, t3_A3Ct3a);
+
+        GuardMapping grdt3_A3a = new GuardMapping();
+        grdt3_A3a.condition = t3_A3Ct2a;
+        grdt3_A3a.Activations.add(new Activation(t3_A3, "P_A3", TransitionOperation.Move, "i2"));
+        t3_A3.GuardMappingList.add(grdt3_A3a);
+
+
+
+        Condition t3_A3Ct1b = new Condition(t3_A3, "P_A3", TransitionCondition.IsNull);
+        Condition t3_A3Ct2b = new Condition(t3_A3, "i2", TransitionCondition.NotNull);
+
+        t3_A3Ct1b.SetNextCondition(LogicConnector.AND, t3_A3Ct2b);
+
+        GuardMapping grdt3_A3b = new GuardMapping();
+        grdt3_A3b.condition = t3_A3Ct1b;
+        grdt3_A3b.Activations.add(new Activation(t3_A3, p13,A3_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_A3b.Activations.add(new Activation(t3_A3, "A3", TransitionOperation.SendOverNetwork, "OP_PA3"));
+        grdt3_A3b.Activations.add(new Activation(t3_A3, "i2", TransitionOperation.Move, "P_A3"));
+        t3_A3.GuardMappingList.add(grdt3_A3b);
+
+
+        t3_A3.Delay = 0;
+        pn.Transitions.add(t3_A3);
+
+
+
+        // t4_A2------------------------------------------------
+
+        PetriTransition t4_A2 = new PetriTransition(pn);
+        t4_A2.TransitionName = "t4_A2";
+        t4_A2.InputPlaceName.add("i2");
+
+
+        Condition t4_A2Ct2a = new Condition(t4_A2, "i2", TransitionCondition.NotNull);
+
+        GuardMapping grdt4_A2a = new GuardMapping();
+        grdt4_A2a.condition = t4_A2Ct2a;
+        grdt4_A2a.Activations.add(new Activation(t4_A2, "i2", TransitionOperation.SendOverNetwork, "OP_i2"));
+        t4_A2.GuardMappingList.add(grdt4_A2a);
+
+
+        t3_A3.Delay = 0;
+        pn.Transitions.add(t3_A3);
     }
+
 }

@@ -37,6 +37,12 @@ public class Activation implements Serializable {
 	public DataInteger length1;
 	public DataInteger length2;
 	public DataInteger speed;
+	public DataListTrains list_train;
+	public DataListTrainsQueue list_queue_in;
+	public DataListTrainsQueue list_queue_out;
+	public DataListTrainsHistory old_history;
+	public DataListTrainsHistory new_history;
+	public DataString filePath;
 
 
 	public Activation(PetriTransition Parent) {
@@ -52,6 +58,18 @@ public class Activation implements Serializable {
 		this.Operation = Condition;
 	}
 
+
+
+	public Activation(PetriTransition Parent, DataListTrainsHistory old_history, DataString filePath, TransitionOperation Condition,
+					  DataListTrainsHistory new_history) {
+		util = new Functions();
+		this.Parent = Parent;
+		this.old_history = old_history;
+		this.filePath = filePath;
+		this.new_history = new_history;
+		this.Operation = Condition;
+	}
+
 	public Activation(PetriTransition Parent, ArrayList<String> InputPlaceNames, TransitionOperation Condition,
 					  String OutputPlaceName) {
 		util = new Functions();
@@ -61,11 +79,29 @@ public class Activation implements Serializable {
 		this.Operation = Condition;
 	}
 
-	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataLocalTime c_time, DataString c_platform,DataListTrainsQueue list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
-					  String OutputPlaceName) {
+	public Activation(PetriTransition Parent, DataListTrainsQueue list_queue_in,  TransitionOperation Condition,
+					  DataListTrainsQueue list_queue_out) {
 		util = new Functions();
 		this.Parent = Parent;
-		this.OutputPlaceName = OutputPlaceName;
+		this.list_queue_in = list_queue_in;
+		this.list_queue_out = list_queue_out;
+		this.Operation = Condition;
+
+	}
+
+//	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataLocalTime c_time, DataString c_platform,DataListTrainsQueue list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
+//					  DataListTrains list_train) {
+//		util = new Functions();
+//		this.Parent = Parent;
+//		this.T = train;
+//		this.Dep_Time = dep_time;
+//	}
+
+	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataLocalTime c_time, DataString c_platform,DataListTrainsQueue list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
+					  DataListTrains list_train) {
+		util = new Functions();
+		this.Parent = Parent;
+		this.list_train = list_train;
 		this.Operation = Condition;
 		this.T = train;
 		this.Dep_Time = dep_time;
@@ -79,10 +115,10 @@ public class Activation implements Serializable {
 	}
 
 	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataListTrainsQueue list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
-					  String OutputPlaceName) {
+					  DataListTrains list_train) {
 		util = new Functions();
 		this.Parent = Parent;
-		this.OutputPlaceName = OutputPlaceName;
+		this.list_train = list_train;
 		this.Operation = Condition;
 		this.T = train;
 		this.Dep_Time = dep_time;
@@ -106,6 +142,16 @@ public class Activation implements Serializable {
 
 	
 	public void Activate() throws CloneNotSupportedException {
+
+//		if (Operation == TransitionOperation.CalculateTime)
+//			CalculateTime();
+
+		if (Operation == TransitionOperation.SaveAndDelete)
+			SaveAndDelete();
+
+		if (Operation == TransitionOperation.RemoveFirst)
+			RemoveFirst();
+
 		if (Operation == TransitionOperation.CreateTrain_Null)
 			CreateTrain_Null();
 
@@ -180,17 +226,36 @@ public class Activation implements Serializable {
 		// ---------------------------------------------------------
 	}
 
+//	private void CalculateTime() throws CloneNotSupportedException{
+//		DataLocalTime result = new DataLocalTime();
+//		result = util.Calculate_Time(old_history,filePath);
+//
+//		new_history.SetValue(result);
+//	}
+	private void SaveAndDelete() throws CloneNotSupportedException{
+		DataListTrainsHistory result = new DataListTrainsHistory();
+		result = util.Save_And_Delete(old_history,filePath);
+
+		new_history.SetValue(result);
+	}
+	private void RemoveFirst() throws CloneNotSupportedException{
+		DataListTrainsQueue result = new DataListTrainsQueue();
+		result = util.Remove_First(list_queue_in);
+
+		list_queue_out.SetValue(result);
+	}
+
 	private void CreateTrain_Null() throws CloneNotSupportedException{
 		DataListTrains result = new DataListTrains();
 		result = util.Create_Train_Null(T,Dep_Time,Dep_Platform,list, length1,  length2, speed);
 
-		result.SetValue(OutputPlaceName);
+		list_train.SetValue(result);
 	}
 	private void CreateTrain_NotNull() throws CloneNotSupportedException{
 		DataListTrains result = new DataListTrains();
-			result = util.Create_Train_NotNull(T,Dep_Time,Dep_Platform,C_Time, C_Platform, length1,  length2, speed);
+		result = util.Create_Train_NotNull(T,Dep_Time,Dep_Platform,C_Time, C_Platform, length1,  length2, speed);
 
-		result.SetValue(OutputPlaceName);
+		list_train.SetValue(result);
 	}
 
 	private void MakeNull() throws CloneNotSupportedException {
@@ -327,42 +392,7 @@ public class Activation implements Serializable {
 		}
 	}
 
-	private  void CalculateTime() throws CloneNotSupportedException {
-		Integer outputIndex = util.GetIndexByName(OutputPlaceName, Parent.Parent.PlaceList);
-		PetriObject result = null;
 
-		for (String placeName : InputPlaceNames) {
-			PetriObject temp;
-			Integer inputIndex = util.GetIndexByName(placeName, Parent.TempMarking);
-			if (inputIndex == -1) {
-				temp = util.GetFromListByName(placeName, Parent.Parent.ConstantPlaceList);
-			} else {
-				temp = Parent.TempMarking.get(inputIndex);
-			}
-
-			if (temp == null) {
-				continue;
-			}
-
-			if (temp instanceof DataFloat) {
-				if (result == null) {
-					result = (PetriObject) ((DataFloat) temp).clone();
-				} else {
-					result.SetValue((float) result.GetValue() + (float) temp.GetValue());
-				}
-			}
-
-			if (temp instanceof DataInteger) {
-				if (result == null) {
-					result = (PetriObject) ((DataInteger) temp).clone();
-				} else {
-					result.SetValue((Integer) result.GetValue() + (Integer) temp.GetValue());
-				}
-			}
-		}
-		result.SetName(OutputPlaceName);
-		Parent.Parent.PlaceList.set(outputIndex, result);
-	}
 	private void Add() throws CloneNotSupportedException {
 		Integer outputIndex = util.GetIndexByName(OutputPlaceName, Parent.Parent.PlaceList);
 		PetriObject result = null;

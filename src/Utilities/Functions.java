@@ -1,5 +1,8 @@
 package Utilities;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -33,7 +36,7 @@ import java.time.format.DateTimeParseException;
 public class Functions implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -215,45 +218,45 @@ public class Functions implements Serializable {
 		for (Place p : pd.Places) {
 			PetriObject pls;
 			switch (p.Type) {
-			case DataFloat: {
-				pls = new DataFloat();
-				break;
-			}
-			case DataString: {
-				pls = new DataString();
-				break;
-			}
-			case DataInteger: {
-				pls = new DataInteger();
-				break;
-			}
-			case DataCar: {
-				pls = new DataCar();
-				break;
-			}
-			case DataCarQueue: {
-				pls = new DataCarQueue();
-				break;
-			}
-			case DataREL: {
-				pls = new DataREL();
-				break;
-			}
-			case DataRELQueue: {
-				pls = new DataRELQueue();
-				break;
-			}
-			case DataSubPetri: {
-				pls = new DataSubPetriNet();
-				break;
-			}
-			case DataTransfer: {
-				pls = new DataTransfer();
-				break;
-			}
-			default:
-				pls = new DataFloat();
-				break;
+				case DataFloat: {
+					pls = new DataFloat();
+					break;
+				}
+				case DataString: {
+					pls = new DataString();
+					break;
+				}
+				case DataInteger: {
+					pls = new DataInteger();
+					break;
+				}
+				case DataCar: {
+					pls = new DataCar();
+					break;
+				}
+				case DataCarQueue: {
+					pls = new DataCarQueue();
+					break;
+				}
+				case DataREL: {
+					pls = new DataREL();
+					break;
+				}
+				case DataRELQueue: {
+					pls = new DataRELQueue();
+					break;
+				}
+				case DataSubPetri: {
+					pls = new DataSubPetriNet();
+					break;
+				}
+				case DataTransfer: {
+					pls = new DataTransfer();
+					break;
+				}
+				default:
+					pls = new DataFloat();
+					break;
 			}
 
 			if (p.Type == PetriObjectType.DataTransfer) {
@@ -271,45 +274,45 @@ public class Functions implements Serializable {
 		for (Place p : pd.ConstantPlaces) {
 			PetriObject pls;
 			switch (p.Type) {
-			case DataFloat: {
-				pls = new DataFloat();
-				break;
-			}
-			case DataString: {
-				pls = new DataString();
-				break;
-			}
-			case DataInteger: {
-				pls = new DataInteger();
-				break;
-			}
-			case DataCar: {
-				pls = new DataCar();
-				break;
-			}
-			case DataCarQueue: {
-				pls = new DataCarQueue();
-				break;
-			}
-			case DataREL: {
-				pls = new DataREL();
-				break;
-			}
-			case DataRELQueue: {
-				pls = new DataRELQueue();
-				break;
-			}
-			case DataSubPetri: {
-				pls = new DataSubPetriNet();
-				break;
-			}
-			case DataTransfer: {
-				pls = new DataTransfer();
-				break;
-			}
-			default:
-				pls = new DataFloat();
-				break;
+				case DataFloat: {
+					pls = new DataFloat();
+					break;
+				}
+				case DataString: {
+					pls = new DataString();
+					break;
+				}
+				case DataInteger: {
+					pls = new DataInteger();
+					break;
+				}
+				case DataCar: {
+					pls = new DataCar();
+					break;
+				}
+				case DataCarQueue: {
+					pls = new DataCarQueue();
+					break;
+				}
+				case DataREL: {
+					pls = new DataREL();
+					break;
+				}
+				case DataRELQueue: {
+					pls = new DataRELQueue();
+					break;
+				}
+				case DataSubPetri: {
+					pls = new DataSubPetriNet();
+					break;
+				}
+				case DataTransfer: {
+					pls = new DataTransfer();
+					break;
+				}
+				default:
+					pls = new DataFloat();
+					break;
 			}
 
 			if (p.Type == PetriObjectType.DataTransfer) {
@@ -446,7 +449,7 @@ public class Functions implements Serializable {
 						if (!PlaceTransitionExists(pt, pn.Metrics.Pieces)) {
 							pn.Metrics.Pieces.add(pt);
 						}
-						
+
 					} else {
 						if (a.OutputPlaceNames != null) {
 							outputArcs += a.OutputPlaceNames.size();
@@ -510,71 +513,124 @@ public class Functions implements Serializable {
 		return false;
 	}
 
-	public DataListTrains Create_Train_Null(DataTrain T,DataLocalTime Dep_Time, DataString Dep_Platform, DataListTrainsQueue list, DataInteger length1, DataInteger length2,  DataInteger speed){
+	public DataListTrains Create_Train_Null(DataTrain T, DataLocalTime Dep_Time, DataString Dep_Platform, DataListTrainsQueue list, DataInteger length1, DataInteger length2, DataInteger speed) {
 
+		// no upcoming train
 		DataListTrains new_train_list = new DataListTrains();
 		DataLocalTime leaving_time;
-		DataLocalTime dep_time;
+		DataLocalTime dep_time = new DataLocalTime();
+		int last_index = list.LastIndex();
 
-		if(list == null){
-			leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
-		}else{
-			String prev_platform = list.GetPlatform(0);
-			if(Dep_Platform.Value.equals(prev_platform)){
-				DataLocalTime prev_time = TimeAfterPassing(list.GetDepTime(0),list.GetLength(0),length1,null,speed);
-				DataLocalTime second_train = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,null,speed);
-				if(second_train.Value.isAfter(prev_time.Value)){
-					leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
-				}else{
-					dep_time = prev_time; // when the first train arrives at the first intersectio
-											// then the second train will depart
-					leaving_time = TimeAfterPassing(dep_time.Value,T.GetLength(),length1,length2,speed);
+
+		if (list == null) { // first train to create
+			leaving_time = TimeAfterPassing(Dep_Time.Value, T.GetLength(), length1, length2, speed);
+			ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value, Dep_Platform.Value);
+			new_train_list.SetValue(new_train);
+		} else { // a train left
+			String prev_platform = list.GetPlatform(last_index);
+			if (Dep_Platform.Value.equals(prev_platform)) { // same platform as the one before
+				// times after passing the first common intersection
+				DataLocalTime prev_time = TimeAfterPassing(list.GetDepTime(last_index), list.GetLength(last_index), length1, null, speed);
+				DataLocalTime second_train = TimeAfterPassing(Dep_Time.Value, T.GetLength(), length1, null, speed);
+				if (second_train.Value.isAfter(prev_time.Value.plusMinutes(10))) {
+					leaving_time = TimeAfterPassing(Dep_Time.Value, T.GetLength(), length1, length2, speed);
+					ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value, Dep_Platform.Value);
+					new_train_list.SetValue(new_train);
+				} else { // not enough time to pass, 2nd train may reach the 1st one (2nd too long)
+					dep_time = prev_time; // when the first train arrives at the first intersection
+					// then the second train will depart
+					leaving_time = TimeAfterPassing(dep_time.Value, T.GetLength(), length1, length2, speed);
+					ListTrains new_train = new ListTrains(T.Value, dep_time.Value, leaving_time.Value, Dep_Platform.Value);
+					new_train_list.SetValue(new_train);
 				}
-			}else{
+			} else {
+				if ((Dep_Platform.Contains("1") && list.GetPlatform(last_index).contains("2") ) || (( Dep_Platform.Contains("2")) && list.GetPlatform(last_index).contains("1"))) {
+					// as the case of equality
+					DataLocalTime prev_time = TimeAfterPassing(list.GetDepTime(last_index), list.GetLength(last_index), length1, null, speed);
+					DataLocalTime second_train = TimeAfterPassing(Dep_Time.Value, T.GetLength(), length1, null, speed);
+					if (second_train.Value.isAfter(prev_time.Value.plusMinutes(10))) {
+						leaving_time = TimeAfterPassing(Dep_Time.Value, T.GetLength(), length1, length2, speed);
+						ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value, Dep_Platform.Value);
+						new_train_list.SetValue(new_train);
+					} else {
+						dep_time = prev_time; // when the first train arrives at the first intersection
+						// then the second train will depart
+						leaving_time = TimeAfterPassing(dep_time.Value, T.GetLength(), length1, length2, speed);
+						ListTrains new_train = new ListTrains(T.Value, dep_time.Value, leaving_time.Value, Dep_Platform.Value);
+						new_train_list.SetValue(new_train);
+					}
+				} else {
+					leaving_time = TimeAfterPassing(Dep_Time.Value, T.GetLength(), length1, length2, speed);
+					if(leaving_time.Value.equals(list.GetLeavingTime(last_index))){
+						// they both would pass the exit intersection at the same time
+						// so the new train will leave 10 min later
+						leaving_time.Value = leaving_time.Value.plusMinutes(10);
+						dep_time.Value = Dep_Time.Value.plusMinutes(10);
+						ListTrains new_train = new ListTrains(T.Value, dep_time.Value, leaving_time.Value, Dep_Platform.Value);
+						new_train_list.SetValue(new_train);
+					}
+					else {
+						if(leaving_time.Value.isBefore(list.GetLeavingTime(last_index)) && (Duration.between(leaving_time.Value,list.GetDepTime(last_index)).toMinutes()<10)){
+							// the new train leaves earlier than the last one, but with a gap of less than 10 minutes
+							Dep_Time.Value = Dep_Time.Value.minusMinutes(10);
+							leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
+							ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value, Dep_Platform.Value);
+							new_train_list.SetValue(new_train);
+						}
+						else{
+							if(leaving_time.Value.isAfter(list.GetLeavingTime(last_index)) && (Duration.between(list.GetDepTime(last_index),leaving_time.Value).toMinutes()<10)) {
+								// the new train leaves later than the last one, but with a gap of less than 10 minutes
+								Dep_Time.Value = Dep_Time.Value.plusMinutes(10);
+								leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
+								ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value, Dep_Platform.Value);
+								new_train_list.SetValue(new_train);
+							}
+							else {
+								// new train perfect
+								leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
+								ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value, Dep_Platform.Value);
+								new_train_list.SetValue(new_train);
+							}
+						}
 
+					}
+				}
 			}
+
 		}
-		DataLocalTime leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
-
-
-
-//		ListTrains new_train = new ListTrains(T.Value,Dep_Time.Value,Dep_Platform.Value);
-		new_train_list.SetValue(new_train);
-
 		return new_train_list;
 	}
 
-	public DataListTrains Create_Train_NotNull(DataTrain T,DataLocalTime Dep_Time, DataString Dep_Platform, DataLocalTime C_Time, DataString C_Platform, DataInteger length1, DataInteger length2, DataInteger speed){
+	public DataListTrains Create_Train_NotNull(DataTrain T, DataLocalTime Dep_Time, DataString Dep_Platform, DataLocalTime C_Time, DataString C_Platform, DataInteger length1, DataInteger length2, DataInteger speed){
 		DataListTrains new_train_list = new DataListTrains();
 		DataLocalTime leaving_time;
 
 
-		if(Dep_Platform.GetString().equals(C_Platform.GetString())){
-			if(Dep_Time.Value.isAfter(C_Time.Value.plusMinutes(10))) {
-				leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
-				ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value,Dep_Platform.Value);
+		if (Dep_Platform.GetString().equals(C_Platform.GetString())) {
+			if (Dep_Time.Value.isAfter(C_Time.Value.plusMinutes(10))) {
+				leaving_time = TimeAfterPassing(Dep_Time.Value, T.GetLength(), length1, length2, speed);
+				ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value, Dep_Platform.Value);
 				new_train_list.SetValue(new_train);
 			} else {
-				leaving_time = TimeAfterPassing(C_Time.Value.plusMinutes(10),T.GetLength(),length1,length2,speed);
-				ListTrains new_train = new ListTrains(T.Value, C_Time.Value.plusMinutes(10),leaving_time.Value, Dep_Platform.Value);
+				leaving_time = TimeAfterPassing(C_Time.Value.plusMinutes(10), T.GetLength(), length1, length2, speed);
+				ListTrains new_train = new ListTrains(T.Value, C_Time.Value.plusMinutes(10), leaving_time.Value, Dep_Platform.Value);
 				new_train_list.SetValue(new_train);
 			}
 
-		}else{
-			if(C_Platform.Contains("4") && (Dep_Platform.Contains("2")||(Dep_Platform.Contains("1")))){
-				if(Dep_Time.Value.isAfter(C_Time.Value.plusMinutes(10))) {
-					leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
-					ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value,leaving_time.Value, Dep_Platform.Value);
+		} else {
+			if (C_Platform.Contains("4") && (Dep_Platform.Contains("2") || (Dep_Platform.Contains("1")))) {
+				if (Dep_Time.Value.isAfter(C_Time.Value.plusMinutes(10))) {
+					leaving_time = TimeAfterPassing(Dep_Time.Value, T.GetLength(), length1, length2, speed);
+					ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value, Dep_Platform.Value);
 					new_train_list.SetValue(new_train);
 				} else {
-					leaving_time = TimeAfterPassing(C_Time.Value.plusMinutes(10),T.GetLength(),length1,length2,speed);
-					ListTrains new_train = new ListTrains(T.Value, C_Time.Value.plusMinutes(10),leaving_time.Value, Dep_Platform.Value);
+					leaving_time = TimeAfterPassing(C_Time.Value.plusMinutes(10), T.GetLength(), length1, length2, speed);
+					ListTrains new_train = new ListTrains(T.Value, C_Time.Value.plusMinutes(10), leaving_time.Value, Dep_Platform.Value);
 					new_train_list.SetValue(new_train);
 				}
-			}
-			else{
-				leaving_time = TimeAfterPassing(Dep_Time.Value,T.GetLength(),length1,length2,speed);
-				ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value,leaving_time.Value, Dep_Platform.Value);
+			} else {
+				leaving_time = TimeAfterPassing(Dep_Time.Value, T.GetLength(), length1, length2, speed);
+				ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value, Dep_Platform.Value);
 				new_train_list.SetValue(new_train);
 			}
 		}
@@ -584,7 +640,7 @@ public class Functions implements Serializable {
 	}
 
 
-	public DataLocalTime TimeAfterPassing(LocalTime dep_time, int train_length, DataInteger first_length, DataInteger second_length, DataInteger speed){
+	public DataLocalTime TimeAfterPassing(LocalTime dep_time,int train_length, DataInteger first_length, DataInteger second_length, DataInteger speed){
 
 		double totalDistance = 2 * (train_length + first_length.Value + second_length.Value);
 
@@ -600,5 +656,54 @@ public class Functions implements Serializable {
 		return place;
 	}
 
+	public DataListTrainsQueue Remove_First(DataListTrainsQueue list_1){
+
+		DataListTrainsQueue new_list = new DataListTrainsQueue();
+
+		list_1.Value.Remove();
+		new_list = list_1;
+
+		return new_list;
+	}
+
+	public DataListTrainsHistory Save_And_Delete(DataListTrainsHistory list_1, DataString filePath){
+
+		DataListTrainsHistory new_list = new DataListTrainsHistory();
+
+		try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.Value,true))) {
+			for(int i = 0; i < list_1.GetSize() - 1; i++){
+				writer.write(list_1.GetElement(i).toString());
+				writer.newLine();
+			}
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+		for(int i = 0; i < list_1.GetSize() - 1; i++){
+			list_1.Value.Remove(i);
+		}
+
+		new_list = list_1;
+
+		return new_list;
+	}
+
+	public boolean HaveListTrain(ArrayList<DataListTrains> list) {
+		if (list == null)
+			return false;
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i) != null && list.get(i).Value != null)
+				return true;
+		}
+		return false;
+	}
+	public boolean HaveListTrain_History(ArrayList<DataListTrains> list) {
+		if (list == null)
+			return false;
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i) != null && list.get(i).Value != null)
+				return true;
+		}
+		return false;
+	}
 
 }

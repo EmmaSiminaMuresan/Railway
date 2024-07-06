@@ -2,6 +2,8 @@ package DataObjects;
 
 
 import java.io.Serializable;
+
+import DataOnly.ListTrains;
 import DataOnly.ListTrainsHistory;
 import Enumerations.PetriObjectType;
 import Interfaces.PetriObject;
@@ -35,10 +37,6 @@ public class DataListTrainsHistory implements Interfaces.PetriObject, Cloneable,
 
     public ListTrainsHistory Value = new ListTrainsHistory();
 
-    @Override
-    public Object GetValue() {
-        return Value;
-    }
 
     @Override
     public void SetValue(Object value) {
@@ -64,11 +62,16 @@ public class DataListTrainsHistory implements Interfaces.PetriObject, Cloneable,
     }
 
     private String name = "";
+    public Object GetValue() {
+        return Value;
+    }
 
     @Override
     public String GetName() {
         return name;
     }
+    public int GetSize() {return Value.GetSize();}
+    public ListTrains GetElement(int i){return Value.Trains.get(i).Value;}
 
     @Override
     public void SetName(String name) {

@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import DataObjects.DataListTrains;
+import com.sun.jdi.Value;
+
 public class ListTrainsHistory implements Cloneable, Serializable{
     /**
      *
@@ -18,43 +20,20 @@ public class ListTrainsHistory implements Cloneable, Serializable{
 
     public ArrayList<DataListTrains> Trains = new ArrayList<DataListTrains>();
 
-///// i should have also the .txt file (3 files each station)
 
     public ListTrainsHistory() {
+    }
+    public int GetSize() {return Trains.size();}
 
+    public void Remove(int i){
+        Trains.remove(i);
     }
 
+    public LocalTime Last_Dep_Time() {return Trains.get(Trains.size()-1).getDep_time();}
     public boolean AddTrain(DataListTrains train) {
-        String timeString = "23:59:59";
-
-        DataListTrains lastTrain = Trains.get(Trains.size() - 1);
-        LocalTime lastDepTime = lastTrain.getTime();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-
-        LocalTime timeStringC = LocalTime.parse(timeString, formatter);
-
-        if (lastDepTime.isBefore(timeStringC)) {
-            Trains.add(train);
-            return true;
-        }
+        Trains.add(train);
         return true;
     }
-
-//
-//        if (formattedTime) {
-//            Trains.add(train);
-//            return true;
-//        } else {
-//            for (int i = 0; i < Trains.size(); i++) {
-//                if (Trains.get(i) == null) {
-//                    Trains.set(i, train);
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
 
 //    public boolean CanAddtrain() {
 ////        if (Trains.size() < Size) {

@@ -27,6 +27,8 @@ public enum TransitionOperation implements Serializable{
 	CreateTrain_NotNull,
 
 	CreateTrain_Null,
+	RemoveFirst,
+	SaveAndDelete,
 	
 	Add_FloatFlaot,  //the new activations for floatfloat
 	Sub_FloatFloat,

@@ -26,8 +26,11 @@ public enum TransitionCondition implements Serializable{
 	CanNotAddTrains_HList,
 	CanNotAddTrains_List,
 	HaveTrainForMe,
-	HaveTrain,
+	HaveListTrain_History,
+	Have_NoListTrain,
 	HaveListTrain,
+	CheckTime_After,
+	CheckTime_Before,
 	
 	Equal_FloatFloat,   //the new transition conditions for floatfloat
 	MoreThan_FloatFloat,
