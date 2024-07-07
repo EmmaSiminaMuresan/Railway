@@ -40,6 +40,10 @@ public class Train implements Cloneable, Serializable{
         return attributes;
     }
 
+    public List<String> getTargets() {
+        return Targets;
+    }
+
     public String toString() {
         return "Train " + Number + " having " + Length + " m";
     }

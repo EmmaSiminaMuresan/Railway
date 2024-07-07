@@ -106,6 +106,46 @@ public class Station_A {
         OP_i2.Value = new TransferOperation("localhost", "1083", "inA");
         pn.PlaceList.add(OP_i2);
 
+        DataTransfer OP_PA1 = new DataTransfer();
+        OP_PA1.SetName("OP_PA1");
+        OP_PA1.Value = new TransferOperation("localhost", "1080", "C_PA1");
+        pn.PlaceList.add(OP_PA1);
+
+        DataTransfer OP_PA2 = new DataTransfer();
+        OP_PA2.SetName("OP_PA2");
+        OP_PA2.Value = new TransferOperation("localhost", "1080", "C_PA2");
+        pn.PlaceList.add(OP_PA2);
+
+        DataTransfer OP_PA3 = new DataTransfer();
+        OP_PA3.SetName("OP_PA3");
+        OP_PA3.Value = new TransferOperation("localhost", "1080", "C_PA3");
+        pn.PlaceList.add(OP_PA3);
+
+        DataTransfer OP_PA4 = new DataTransfer();
+        OP_PA4.SetName("OP_PA4");
+        OP_PA1.Value = new TransferOperation("localhost", "1080", "C_PA4");
+        pn.PlaceList.add(OP_PA4);
+
+        DataTransfer OP_TimeA1 = new DataTransfer();
+        OP_TimeA1.SetName("OP_TimeA1");
+        OP_TimeA1.Value = new TransferOperation("localhost", "1080", "C_TimeA1");
+        pn.PlaceList.add(OP_TimeA1);
+
+        DataTransfer OP_TimeA2 = new DataTransfer();
+        OP_TimeA2.SetName("OP_TimeA2");
+        OP_TimeA2.Value = new TransferOperation("localhost", "1080", "C_TimeA2");
+        pn.PlaceList.add(OP_TimeA2);
+
+        DataTransfer OP_TimeA3 = new DataTransfer();
+        OP_TimeA3.SetName("OP_TimeA3");
+        OP_TimeA3.Value = new TransferOperation("localhost", "1080", "C_TimeA3");
+        pn.PlaceList.add(OP_TimeA3);
+
+        DataTransfer OP_TimeA4 = new DataTransfer();
+        OP_TimeA4.SetName("OP_TimeA4");
+        OP_TimeA4.Value = new TransferOperation("localhost", "1080", "C_TimeA4");
+        pn.PlaceList.add(OP_TimeA4);
+
         DataString A1 = new DataString();
         A1.SetName("A1");
         A1.SetValue("A1");
@@ -120,6 +160,11 @@ public class Station_A {
         A3.SetName("A3");
         A3.SetValue("A3");
         pn.ConstantPlaceList.add(A3);
+
+        DataString A4 = new DataString();
+        A4.SetName("A4");
+        A4.SetValue("A4");
+        pn.ConstantPlaceList.add(A4);
 
         DataInteger A1_Length = new DataInteger();
         A1_Length.SetName("A1_Length");
@@ -244,7 +289,7 @@ public class Station_A {
         t3_A1.InputPlaceName.add("P_A1");
 
 
-
+        // train leaving station
         Condition t3_A1Ct2a = new Condition(t3_A1, "i1", TransitionCondition.IsNull);
         Condition t3_A1Ct3a = new Condition(t3_A1, "P_A1", TransitionCondition.NotNull);
 
@@ -255,16 +300,16 @@ public class Station_A {
         grdt3_A1a.Activations.add(new Activation(t3_A1, "P_A1", TransitionOperation.Move, "i1"));
         t3_A1.GuardMappingList.add(grdt3_A1a);
 
-
-
+        // train coming
         Condition t3_A1Ct1b = new Condition(t3_A1, "P_A1", TransitionCondition.IsNull);
         Condition t3_A1Ct2b = new Condition(t3_A1, "i1", TransitionCondition.NotNull);
 
-        t3_A1Ct1b.SetNextCondition(LogicConnector.AND, t3_A1Ct2b);
+        t3_A1Ct2b.SetNextCondition(LogicConnector.AND, t3_A1Ct1b);
 
         GuardMapping grdt3_A1b = new GuardMapping();
         grdt3_A1b.condition = t3_A1Ct1b;
-        grdt3_A1b.Activations.add(new Activation(t3_A1, p13,A1_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_A1b.Activations.add(new Activation(t3_A1, p14,A1_Length,null,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_A1b.Activations.add(new Activation(t3_A1, "Time", TransitionOperation.SendOverNetwork, "OP_TimeA1"));
         grdt3_A1b.Activations.add(new Activation(t3_A1, "A1", TransitionOperation.SendOverNetwork, "OP_PA1"));
         grdt3_A1b.Activations.add(new Activation(t3_A1, "i1", TransitionOperation.Move, "P_A1"));
         t3_A1.GuardMappingList.add(grdt3_A1b);
@@ -380,15 +425,16 @@ public class Station_A {
         t3_A2.GuardMappingList.add(grdt3_A2a);
 
 
-
+        // train coming
         Condition t3_A2Ct1b = new Condition(t3_A2, "P_A2", TransitionCondition.IsNull);
         Condition t3_A2Ct2b = new Condition(t3_A2, "i1", TransitionCondition.NotNull);
 
-        t3_A2Ct1b.SetNextCondition(LogicConnector.AND, t3_A2Ct2b);
+        t3_A2Ct2b.SetNextCondition(LogicConnector.AND, t3_A2Ct1b);
 
         GuardMapping grdt3_A2b = new GuardMapping();
         grdt3_A2b.condition = t3_A2Ct1b;
-        grdt3_A2b.Activations.add(new Activation(t3_A2, p13,A2_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_A2b.Activations.add(new Activation(t3_A2, p14,A2_Length,null,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_A2b.Activations.add(new Activation(t3_A2, "Time", TransitionOperation.SendOverNetwork, "OP_TimeA2"));
         grdt3_A2b.Activations.add(new Activation(t3_A2, "A2", TransitionOperation.SendOverNetwork, "OP_PA2"));
         grdt3_A2b.Activations.add(new Activation(t3_A2, "i1", TransitionOperation.Move, "P_A2"));
         t3_A2.GuardMappingList.add(grdt3_A2b);
@@ -398,6 +444,8 @@ public class Station_A {
         pn.Transitions.add(t3_A2);
 
 
+        // Connecting platform A4
+
         // t4_A1------------------------------------------------
 
         PetriTransition t4_A1 = new PetriTransition(pn);
@@ -406,7 +454,7 @@ public class Station_A {
         t4_A1.InputPlaceName.add("i2");
 
 
-
+        // train leaving station
         Condition t4_A1Ct2a = new Condition(t4_A1, "i2", TransitionCondition.IsNull);
         Condition t4_A1Ct4a = new Condition(t4_A1, "i1", TransitionCondition.NotNull);
 
@@ -418,18 +466,38 @@ public class Station_A {
         t4_A1.GuardMappingList.add(grdt4_A1a);
 
 
-
+        // train coming and having as target Platform A1
         Condition t4_A1Ct1b = new Condition(t4_A1, "i1", TransitionCondition.IsNull);
         Condition t4_A1Ct2b = new Condition(t4_A1, "i2", TransitionCondition.NotNull);
+        Condition t4_A1Ct3b = new Condition(t4_A1, "i2", TransitionCondition.Platform,"A1");
 
-        t4_A1Ct1b.SetNextCondition(LogicConnector.AND, t4_A1Ct2b);
+        t4_A1Ct3b.SetNextCondition(LogicConnector.AND, t4_A1Ct2b);
+        t4_A1Ct2b.SetNextCondition(LogicConnector.AND, t4_A1Ct1b);
 
         GuardMapping grdt4_A1b = new GuardMapping();
         grdt4_A1b.condition = t4_A1Ct1b;
-        grdt4_A1b.Activations.add(new Activation(t4_A1, p13,A1_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
-        grdt4_A1b.Activations.add(new Activation(t4_A1, "A4", TransitionOperation.SendOverNetwork, "OP_PA1"));
+        grdt4_A1b.Activations.add(new Activation(t4_A1, p14,A1_Length,A4_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt4_A1b.Activations.add(new Activation(t4_A1, "Time", TransitionOperation.SendOverNetwork, "OP_TimeA4"));
+        grdt4_A1b.Activations.add(new Activation(t4_A1, "A4", TransitionOperation.SendOverNetwork, "OP_PA4"));
         grdt4_A1b.Activations.add(new Activation(t4_A1, "i2", TransitionOperation.Move, "i1"));
         t4_A1.GuardMappingList.add(grdt4_A1b);
+
+
+        // train coming and having as target Platform A2
+        Condition t4_A1Ct1c = new Condition(t4_A1, "i1", TransitionCondition.IsNull);
+        Condition t4_A1Ct2c = new Condition(t4_A1, "i2", TransitionCondition.NotNull);
+        Condition t4_A1Ct3c = new Condition(t4_A1, "i2", TransitionCondition.Platform,"A2");
+
+        t4_A1Ct3c.SetNextCondition(LogicConnector.AND, t4_A1Ct2c);
+        t4_A1Ct2c.SetNextCondition(LogicConnector.AND, t4_A1Ct1c);
+
+        GuardMapping grdt4_A1c = new GuardMapping();
+        grdt4_A1c.condition = t4_A1Ct1b;
+        grdt4_A1c.Activations.add(new Activation(t4_A1, p14,A2_Length,A4_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt4_A1c.Activations.add(new Activation(t4_A1, "Time", TransitionOperation.SendOverNetwork, "OP_TimeA4"));
+        grdt4_A1c.Activations.add(new Activation(t4_A1, "A4", TransitionOperation.SendOverNetwork, "OP_PA4"));
+        grdt4_A1c.Activations.add(new Activation(t4_A1, "i2", TransitionOperation.Move, "i1"));
+        t4_A1.GuardMappingList.add(grdt4_A1c);
 
 
         t4_A1.Delay = 0;
@@ -543,14 +611,16 @@ public class Station_A {
 
 
 
+        // train coming
         Condition t3_A3Ct1b = new Condition(t3_A3, "P_A3", TransitionCondition.IsNull);
         Condition t3_A3Ct2b = new Condition(t3_A3, "i2", TransitionCondition.NotNull);
 
-        t3_A3Ct1b.SetNextCondition(LogicConnector.AND, t3_A3Ct2b);
+        t3_A3Ct2b.SetNextCondition(LogicConnector.AND, t3_A3Ct1b);
 
         GuardMapping grdt3_A3b = new GuardMapping();
         grdt3_A3b.condition = t3_A3Ct1b;
-        grdt3_A3b.Activations.add(new Activation(t3_A3, p13,A3_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_A3b.Activations.add(new Activation(t3_A3, p14,A3_Length,null,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_A3b.Activations.add(new Activation(t3_A3, "Time", TransitionOperation.SendOverNetwork, "OP_TimeA3"));
         grdt3_A3b.Activations.add(new Activation(t3_A3, "A3", TransitionOperation.SendOverNetwork, "OP_PA3"));
         grdt3_A3b.Activations.add(new Activation(t3_A3, "i2", TransitionOperation.Move, "P_A3"));
         t3_A3.GuardMappingList.add(grdt3_A3b);

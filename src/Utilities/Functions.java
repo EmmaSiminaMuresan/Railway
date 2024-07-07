@@ -13,6 +13,7 @@ import Components.PetriNet;
 import Components.PetriTransition;
 import DataObjects.*;
 import DataOnly.ListTrains;
+import DataOnly.Train;
 import DataOnly.TransferOperation;
 import Enumerations.PetriObjectType;
 import Enumerations.TransitionOperation;
@@ -32,6 +33,7 @@ import java.time.LocalTime;
 import java.time.Duration;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 public class Functions implements Serializable {
 
@@ -477,43 +479,10 @@ public class Functions implements Serializable {
 		return false;
 	}
 
-	public boolean HaveTrainForMe(PetriTransition t, ArrayList<DataCar> list) {
-		if (list == null)
-			return false;
-		if (t == null)
-			return false;
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i) != null && list.get(i).Value != null)
-				if (list.get(i).Value.Targets.contains(t.TransitionName))
-					return true;
-		}
-		return false;
-	}
 
-//	public boolean HaveListTrain(DataListTrains list) {
-//		if (list == null)
-//			return false;
-//		for (int i = 0; i < list.size(); i++) {
-//			if (list.get(i) != null && list.get(i).Value != null)
-//				return true;
-//		}
-//		return false;
-//	}
 
-	public boolean HaveListTrainForMe(PetriTransition t, ArrayList<DataCar> list) {
-		if (list == null)
-			return false;
-		if (t == null)
-			return false;
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i) != null && list.get(i).Value != null)
-				if (list.get(i).Value.Targets.contains(t.TransitionName))
-					return true;
-		}
-		return false;
-	}
 
-	public DataListTrains Create_Train_Null(DataTrain T, DataLocalTime Dep_Time, DataString Dep_Platform, DataListTrainsQueue list, DataInteger length1, DataInteger length2, DataInteger speed) {
+	public DataListTrains Create_Train_Null(DataTrain T, DataLocalTime Dep_Time, DataString Dep_Platform, DataListTrainsHistory list, DataInteger length1, DataInteger length2, DataInteger speed) {
 
 		// no upcoming train
 		DataListTrains new_train_list = new DataListTrains();
@@ -522,7 +491,7 @@ public class Functions implements Serializable {
 		int last_index = list.LastIndex();
 
 
-		if (list == null) { // first train to create
+		if (list == null) { // first train to create in a day
 			leaving_time = TimeAfterPassing(Dep_Time.Value, T.GetLength(), length1, length2, speed);
 			ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value, Dep_Platform.Value);
 			new_train_list.SetValue(new_train);
@@ -685,6 +654,95 @@ public class Functions implements Serializable {
 		new_list = list_1;
 
 		return new_list;
+	}
+
+	public String Platform(Train T){
+		String platform = null;
+		String target = null;
+		List<String> targets = null;
+		targets = T.getTargets();
+
+		target = targets.get(targets.size()-1);
+		if(target.startsWith("t3_")){
+			if(target.endsWith("A1")) platform = "A1";
+			if(target.endsWith("A2")) platform = "A2";
+			if(target.endsWith("A3")) platform = "A3";
+			if(target.endsWith("B1")) platform = "B1";
+			if(target.endsWith("B2")) platform = "B2";
+			if(target.endsWith("B3")) platform = "B3";
+			if(target.endsWith("C1")) platform = "C1";
+			if(target.endsWith("C2")) platform = "C2";
+			if(target.endsWith("C3")) platform = "C3";
+		}
+
+		return platform;
+	}
+
+
+	public DataInteger Calculate_Light_Time_Station(LocalTime Time1, LocalTime Time2, LocalTime Time3){
+		DataInteger time = new DataInteger();
+		time.SetValue(0);
+
+		DataLocalTime current_time = new DataLocalTime();
+		current_time.SetValue(LocalTime.now());
+
+		if(Time1==null && Time2==null && Time3==null) time.Value = 0;
+		if(Time1!=null && Time2==null && Time3==null) time.Value = (int)(Duration.between(current_time.Value, Time1).getSeconds());
+		if(Time1==null && Time2!=null && Time3==null) time.Value = (int)(Duration.between(current_time.Value, Time2).getSeconds());
+		if(Time1==null && Time2==null && Time3!=null) time.Value = (int)(Duration.between(current_time.Value, Time3).getSeconds());
+		if(Time1!=null && Time2!=null && Time3==null) {
+			if(Time1.isAfter(Time2)) time.Value = (int)(Duration.between(current_time.Value, Time1).getSeconds());
+			else time.Value = (int)(Duration.between(current_time.Value, Time2).getSeconds());
+		}
+		if(Time1==null && Time2!=null && Time3!=null) {
+			if(Time2.isAfter(Time3)) time.Value = (int)(Duration.between(current_time.Value, Time2).getSeconds());
+			else time.Value = (int)(Duration.between(current_time.Value, Time3).getSeconds());
+		}
+		if(Time1!=null && Time2==null && Time3!=null) {
+			if(Time1.isAfter(Time3)) time.Value = (int)(Duration.between(current_time.Value, Time1).getSeconds());
+			else time.Value = (int)(Duration.between(current_time.Value, Time3).getSeconds());
+		}
+		if(Time1!=null && Time2!=null && Time3!=null){
+			if((Time1.isAfter(Time2) && Time2.isAfter(Time3)) || (Time1.isAfter(Time3) && Time3.isAfter(Time2))){
+				time.Value = (int)(Duration.between(current_time.Value, Time1).getSeconds());
+			}
+			if((Time2.isAfter(Time1) && Time1.isAfter(Time3)) || (Time2.isAfter(Time3) && Time3.isAfter(Time1))){
+				time.Value = (int)(Duration.between(current_time.Value, Time2).getSeconds());
+			}
+			if((Time3.isAfter(Time1) && Time1.isAfter(Time2)) || (Time3.isAfter(Time2) && Time2.isAfter(Time1))){
+				time.Value = (int)(Duration.between(current_time.Value, Time3).getSeconds());
+			}
+		}
+
+		return time;
+	}
+
+	public DataInteger Calculate_Light_Time_Railway(int length, int speed){
+
+		DataInteger time = new DataInteger();
+		time.SetValue((500 + length)/speed);
+
+		return time;
+	}
+
+
+	public DataLocalTime Calculate_Time(DataTrain T,DataInteger length1,DataInteger length2,DataInteger speed){
+		// time for the comming train to reach the platform for the people to get off
+
+		DataLocalTime time = new DataLocalTime();
+		time = TimeAfterPassing(LocalTime.now(),T.GetLength(),length1,length2,speed);
+
+		return time;
+	}
+
+	public boolean Train_Length(Train t1, Train t2){
+		if(t1.Length > t2.Length) return true;
+		else return false;
+	}
+
+	public boolean Equal_Length(Train t1, Train t2){
+		if(t1.Length == t2.Length) return true;
+		else return false;
 	}
 
 	public boolean HaveListTrain(ArrayList<DataListTrains> list) {

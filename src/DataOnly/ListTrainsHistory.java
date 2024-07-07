@@ -29,48 +29,35 @@ public class ListTrainsHistory implements Cloneable, Serializable{
         Trains.remove(i);
     }
 
+    public String getPlatform(int i) {return Trains.get(i).getPlatform();}
+
+    public LocalTime GetLeavingTime(int i) {return Trains.get(i).getLeaving_time();}
+
+    public LocalTime GetDepTime(int i) {return Trains.get(i).getDep_time();}
+
+    public int GetLength(int i) {return Trains.get(i).GetLength();}
+
+    public int LastIndex(){
+        return Trains.size()-1;
+    }
+
     public LocalTime Last_Dep_Time() {return Trains.get(Trains.size()-1).getDep_time();}
     public boolean AddTrain(DataListTrains train) {
         Trains.add(train);
         return true;
     }
 
-//    public boolean CanAddtrain() {
-////        if (Trains.size() < Size) {
-////            return true;
-////        } else {
-////            for (int i = 0; i < Trains.size(); i++) {
-////                if (Trains.get(i) == null) {
-////                    return true;
-////                }
-////            }
-////        }
-//        return false;
-//    }
 
-//    public boolean CanNotAddtrain() {
-////        if (Trains.size() >= Size) {
-////            return true;
-////        } else {
-////            for (int i = 0; i < Trains.size(); i++) {
-////                if (Trains.get(i) == null) {
-////                    return false;
-////                }
-////            }
-////        }
-////        return false;
-//    }
-//
-//    public String toString() {
-//        ArrayList<String> temp1 = new ArrayList<String>();
-//        for (DataListTrains train : Trains) {
-//            if (train == null)
-//                temp1.add("NULL");
-//            else
-//                temp1.add(train.toString());
-//        }
-//
-//        return "(" + String.join(",", temp1) + ")";
-//    }
+    public String toString() {
+       ArrayList<String> temp1 = new ArrayList<String>();
+        for (DataListTrains train : Trains) {
+            if (train == null)
+               temp1.add("NULL");
+            else
+                temp1.add(train.toString());
+        }
+
+        return "(" + String.join(",", temp1) + ")";
+    }
 }
 

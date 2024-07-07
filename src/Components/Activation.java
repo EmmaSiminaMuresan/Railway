@@ -32,8 +32,9 @@ public class Activation implements Serializable {
 	public DataLocalTime Dep_Time;
 	public DataString Dep_Platform;
 	public DataLocalTime C_Time;
+	public DataLocalTime Time;
 	public DataString C_Platform;
-	public DataListTrainsQueue list;
+	public DataListTrainsHistory list;
 	public DataInteger length1;
 	public DataInteger length2;
 	public DataInteger speed;
@@ -43,6 +44,11 @@ public class Activation implements Serializable {
 	public DataListTrainsHistory old_history;
 	public DataListTrainsHistory new_history;
 	public DataString filePath;
+
+	public DataLocalTime time1;
+	public DataLocalTime time2;
+	public DataLocalTime time3;
+	public DataInteger seconds;
 
 
 	public Activation(PetriTransition Parent) {
@@ -89,15 +95,40 @@ public class Activation implements Serializable {
 
 	}
 
-//	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataLocalTime c_time, DataString c_platform,DataListTrainsQueue list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
-//					  DataListTrains list_train) {
-//		util = new Functions();
-//		this.Parent = Parent;
-//		this.T = train;
-//		this.Dep_Time = dep_time;
-//	}
+	public Activation(PetriTransition Parent, DataTrain train,  DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
+					  DataLocalTime time) {
+		util = new Functions();
+		this.Parent = Parent;
+		this.T = train;
+		this.length1 = length1;
+		this.length2 = length2;
+		this.speed = speed;
+		this.Time = time;
+		this.Operation = Condition;
+	}
 
-	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataLocalTime c_time, DataString c_platform,DataListTrainsQueue list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
+	public Activation(PetriTransition Parent,DataTrain train,  DataInteger speed, TransitionOperation Condition,
+					  DataInteger time) {
+		util = new Functions();
+		this.Parent = Parent;
+		this.T = train;
+		this.speed = speed;
+		this.seconds = time;
+		this.Operation = Condition;
+	}
+
+	public Activation(PetriTransition Parent, DataLocalTime time1,  DataLocalTime time2, DataLocalTime time3, TransitionOperation Condition,
+					  DataInteger seconds) {
+		util = new Functions();
+		this.Parent = Parent;
+		this.time1 = time1;
+		this.time2 = time2;
+		this.time3 = time3;
+		this.seconds = seconds;
+		this.Operation = Condition;
+	}
+
+	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataLocalTime c_time, DataString c_platform,DataListTrainsHistory list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
 					  DataListTrains list_train) {
 		util = new Functions();
 		this.Parent = Parent;
@@ -114,7 +145,7 @@ public class Activation implements Serializable {
 		this.speed = speed;
 	}
 
-	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataListTrainsQueue list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
+	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataListTrainsHistory list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
 					  DataListTrains list_train) {
 		util = new Functions();
 		this.Parent = Parent;
@@ -143,8 +174,14 @@ public class Activation implements Serializable {
 	
 	public void Activate() throws CloneNotSupportedException {
 
-//		if (Operation == TransitionOperation.CalculateTime)
-//			CalculateTime();
+		if (Operation == TransitionOperation.CalculateLightTimeRailway)
+			CalculateLightTimeRailway();
+
+		if (Operation == TransitionOperation.CalculateLightTimeStation)
+			CalculateLightTimeStation();
+
+		if (Operation == TransitionOperation.CalculateTime)
+			CalculateTime();
 
 		if (Operation == TransitionOperation.SaveAndDelete)
 			SaveAndDelete();
@@ -225,13 +262,24 @@ public class Activation implements Serializable {
 			Div_FloatFlaot();
 		// ---------------------------------------------------------
 	}
+	private void CalculateLightTimeStation() throws CloneNotSupportedException{
+		DataInteger result = new DataInteger();
+		result = util.Calculate_Light_Time_Station(time1.Value,time2.Value,time3.Value);
 
-//	private void CalculateTime() throws CloneNotSupportedException{
-//		DataLocalTime result = new DataLocalTime();
-//		result = util.Calculate_Time(old_history,filePath);
-//
-//		new_history.SetValue(result);
-//	}
+		seconds.SetValue(result);
+	}
+	private void CalculateLightTimeRailway() throws CloneNotSupportedException{
+		DataInteger result = new DataInteger();
+		result = util.Calculate_Light_Time_Railway(T.GetLength(),speed.Value);
+
+		seconds.SetValue(result);
+	}
+	private void CalculateTime() throws CloneNotSupportedException{
+		DataLocalTime result = new DataLocalTime();
+		result = util.Calculate_Time(T,length1,length2,speed);
+
+		Time.SetValue(result);
+	}
 	private void SaveAndDelete() throws CloneNotSupportedException{
 		DataListTrainsHistory result = new DataListTrainsHistory();
 		result = util.Save_And_Delete(old_history,filePath);

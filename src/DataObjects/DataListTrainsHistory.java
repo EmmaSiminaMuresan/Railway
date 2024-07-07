@@ -2,6 +2,7 @@ package DataObjects;
 
 
 import java.io.Serializable;
+import java.time.LocalTime;
 
 import DataOnly.ListTrains;
 import DataOnly.ListTrainsHistory;
@@ -66,6 +67,14 @@ public class DataListTrainsHistory implements Interfaces.PetriObject, Cloneable,
         return Value;
     }
 
+    public String GetPlatform(int i) {return Value.getPlatform(i);}
+
+    public LocalTime GetDepTime(int i) {return Value.GetDepTime(i);}
+
+    public LocalTime GetLeavingTime(int i) {return Value.GetLeavingTime(i);}
+    public int GetLength(int i) {return Value.GetLength(i);}
+
+    public int LastIndex() {return Value.LastIndex();}
     @Override
     public String GetName() {
         return name;

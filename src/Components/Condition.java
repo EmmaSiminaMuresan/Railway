@@ -246,6 +246,45 @@ public class Condition implements Serializable {
 			}
 			break;
 		}
+			case Equal_Length: {
+				if (Value1 == null || Value2 == null)
+					return false;
+				if (Value1.GetValue() == null || Value2.GetValue() == null)
+					return false;
+				if (Value1.GetType() == PetriObjectType.DataTrain) {
+					if (util.Equal_Length((Train) Value1.GetValue(),(Train) Value2.GetValue())) {
+						return true;
+					}
+					else return false;
+				}
+				break;
+			}
+			case MoreThan_Length: {
+				if (Value1 == null || Value2 == null)
+					return false;
+				if (Value1.GetValue() == null || Value2.GetValue() == null)
+					return false;
+				if (Value1.GetType() == PetriObjectType.DataTrain) {
+					if (util.Train_Length((Train) Value1.GetValue(),(Train) Value2.GetValue())) {
+						return true;
+					}
+					else return false;
+				}
+				break;
+			}
+			case Platform: {
+				if (Value1 == null || Value2 == null)
+					return false;
+				if (Value1.GetValue() == null || Value2.GetValue() == null)
+					return false;
+				if (Value1.GetType() == PetriObjectType.DataTrain) {
+					if (util.Platform((Train) Value1.GetValue()).contains((String) Value2.GetValue())) {
+						return true;
+					}
+					else return false;
+				}
+				break;
+			}
 			case HaveListTrain_History: {
 				if (Value1 == null)
 					return false;
@@ -253,6 +292,18 @@ public class Condition implements Serializable {
 					return false;
 				if (Value1.GetType() == PetriObjectType.DataListTrainsHistory) {
 					if (util.HaveListTrain_History(((ListTrainsHistory) Value1.GetValue()).Trains)) {
+						return true;
+					}
+				}
+				break;
+			}
+			case Have_NoListTrain_History: {
+				if (Value1 == null)
+					return false;
+				if (Value1.GetValue() == null)
+					return false;
+				if (Value1.GetType() == PetriObjectType.DataListTrainsHistory) {
+					if (!util.HaveListTrain_History(((ListTrainsHistory) Value1.GetValue()).Trains)) {
 						return true;
 					}
 				}
@@ -282,30 +333,6 @@ public class Condition implements Serializable {
 				}
 				break;
 			}
-//			case HaveListTrainForMe: {
-//				if (Value1 == null)
-//					return false;
-//				if (Value1.GetValue() == null)
-//					return false;
-//					if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
-//					if (util.HaveListTrainForMe(Parent, ((ListTrainsQueue) Value1.GetValue()))) {
-//						return true;
-//					}
-//				}
-//				break;
-//			}
-//			case HaveHListTrainForMe: {
-//				if (Value1 == null)
-//					return false;
-//				if (Value1.GetValue() == null)
-//					return false;
-//				if (Value1.GetType() == PetriObjectType.DataCarQueue) {
-//					if (util.HaveHListTrainForMe(Parent, ((CarQueue) Value1.GetValue()).Cars)) {
-//						return true;
-//					}
-//				}
-//				break;
-//			}
 			case CheckTime_Before:
 				if (Value1.GetType() == PetriObjectType.DataListTrainsHistory)
 					if (((ListTrainsHistory) Value1.GetValue()).Last_Dep_Time().isBefore(LocalTime.of(23,59,59)) ||

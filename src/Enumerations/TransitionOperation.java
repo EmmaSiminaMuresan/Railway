@@ -24,6 +24,8 @@ public enum TransitionOperation implements Serializable{
 	StopPetriNet,
 	MakeNull,
 	CalculateTime,
+	CalculateLightTimeStation,
+	CalculateLightTimeRailway,
 	CreateTrain_NotNull,
 
 	CreateTrain_Null,
