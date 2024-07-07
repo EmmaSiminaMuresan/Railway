@@ -3,15 +3,7 @@ package Components;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import DataObjects.DataCar;
-import DataObjects.DataCarQueue;
-import DataObjects.DataFloat;
-import DataObjects.DataFloatFloat;
-import DataObjects.DataInteger;
-import DataObjects.DataREL;
-import DataObjects.DataRELQueue;
-import DataObjects.DataString;
-import DataObjects.DataSubPetriNet;
+import DataObjects.*;
 import Enumerations.PetriObjectType;
 import Interfaces.PetriObject;
 import PetriDataPackage.Place;
@@ -112,6 +104,46 @@ public class PetriTransition implements PetriObject, Serializable {
 		for (String string : InputPlaceName) {
 			PetriObject currentInputPlace = util.GetPetriObjectByName(string, Parent.PlaceList);
 			PetriObject result = null;
+
+			if (currentInputPlace instanceof DataLocalTime) {
+				result = (PetriObject) ((DataLocalTime) currentInputPlace).clone();
+
+				TempMarking.add(result);
+				currentInputPlace.SetValue(null);
+				Parent.PlaceList.set(util.GetIndexByName(string, Parent.PlaceList), currentInputPlace);
+			}
+
+			if (currentInputPlace instanceof DataListTrainsQueue) {
+				result = (PetriObject) ((DataListTrainsQueue) currentInputPlace).clone();
+
+				TempMarking.add(result);
+				currentInputPlace.SetValue(null);
+				Parent.PlaceList.set(util.GetIndexByName(string, Parent.PlaceList), currentInputPlace);
+			}
+
+			if (currentInputPlace instanceof DataListTrainsHistory) {
+				result = (PetriObject) ((DataListTrainsHistory) currentInputPlace).clone();
+
+				TempMarking.add(result);
+				currentInputPlace.SetValue(null);
+				Parent.PlaceList.set(util.GetIndexByName(string, Parent.PlaceList), currentInputPlace);
+			}
+
+			if (currentInputPlace instanceof DataListTrains) {
+				result = (PetriObject) ((DataListTrains) currentInputPlace).clone();
+
+				TempMarking.add(result);
+				currentInputPlace.SetValue(null);
+				Parent.PlaceList.set(util.GetIndexByName(string, Parent.PlaceList), currentInputPlace);
+			}
+
+			if (currentInputPlace instanceof DataTrain) {
+				result = (PetriObject) ((DataTrain) currentInputPlace).clone();
+
+				TempMarking.add(result);
+				currentInputPlace.SetValue(null);
+				Parent.PlaceList.set(util.GetIndexByName(string, Parent.PlaceList), currentInputPlace);
+			}
 
 			if (currentInputPlace instanceof DataFloat) {
 				result = (PetriObject) ((DataFloat) currentInputPlace).clone();

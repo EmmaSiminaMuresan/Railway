@@ -18,10 +18,9 @@ public class Supervisor_A {
     public static void main(String[] args) {
         PetriNet pn = new PetriNet();
         pn.PetriNetName = "Supervisor A";
+        pn.SetName("Supervisor A");
 
         pn.NetworkPort = 1080;
-
-        int x = 7; ///// READ FROM THE KEYBOARD;
 
         LocalTime currentTime = LocalTime.now();
 
@@ -108,27 +107,22 @@ public class Supervisor_A {
 
         DataInteger A1_Length = new DataInteger();
         A1_Length.SetName("A1_Length");
-        A1_Length.SetValue(x);  /////////
         pn.ConstantPlaceList.add(A1_Length);
 
         DataInteger A2_Length = new DataInteger();
         A2_Length.SetName("A2_Length");
-        A2_Length.SetValue(x);//////////
         pn.ConstantPlaceList.add(A2_Length);
 
         DataInteger A3_Length = new DataInteger();
         A3_Length.SetName("A3_Length");
-        A3_Length.SetValue(x);//////////
         pn.ConstantPlaceList.add(A3_Length);
 
         DataInteger A4_Length = new DataInteger();
         A4_Length.SetName("A1_Length");
-        A4_Length.SetValue(x);////////////
         pn.ConstantPlaceList.add(A4_Length);
 
         DataInteger speed_on_platform = new DataInteger();
         speed_on_platform.SetName("Speed_On_Platform");
-        speed_on_platform.SetValue(x); //////////////
         pn.ConstantPlaceList.add(speed_on_platform);
 
         DataInteger zero = new DataInteger();
@@ -592,7 +586,7 @@ public class Supervisor_A {
 
 
         Condition t4Ct1a = new Condition(t4, "List_A", TransitionCondition.HaveListTrain);
-        Condition t4Ct1b = new Condition(t4, "List_A", TransitionCondition.Platform1);
+        Condition t4Ct1b = new Condition(t4, "List_A", TransitionCondition.Platform);//////no
 
         t4Ct1a.SetNextCondition(LogicConnector.AND, t4Ct1b);
 

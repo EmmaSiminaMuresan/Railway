@@ -26,6 +26,7 @@ public enum TransitionCondition implements Serializable{
 	CanAddTrains_List,
 	CanNotAddTrains_List,
 	Platform,
+	HaveTrainForMe,
 	HaveListTrain_History,
 	Have_NoListTrain,
 	Have_NoListTrain_History,

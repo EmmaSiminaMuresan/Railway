@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import DataObjects.DataListTrains;
+import DataObjects.DataTrain;
 import DataOnly.*;
 import Enumerations.LogicConnector;
 import Enumerations.PetriNetState;
@@ -246,6 +247,10 @@ public class Condition implements Serializable {
 			}
 			break;
 		}
+
+
+
+
 			case Equal_Length: {
 				if (Value1 == null || Value2 == null)
 					return false;
@@ -282,6 +287,18 @@ public class Condition implements Serializable {
 						return true;
 					}
 					else return false;
+				}
+				break;
+			}
+			case HaveTrainForMe: {
+				if (Value1 == null)
+					return false;
+				if (Value1.GetValue() == null)
+					return false;
+				if (Value1.GetType() == PetriObjectType.DataTrain) {
+					if (util.HaveTrainForMe(Parent, ((DataTrain) Value1))) {
+						return true;
+					}
 				}
 				break;
 			}

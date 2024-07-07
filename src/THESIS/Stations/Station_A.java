@@ -11,6 +11,7 @@ public class Station_A {
     public static void main(String[] args) {
         PetriNet pn = new PetriNet();
         pn.PetriNetName = "Station A";
+        pn.SetName("Station A");
 
         pn.NetworkPort = 1081;
         int x=7;
@@ -246,7 +247,7 @@ public class Station_A {
         S1.TransitionName = "S1";
         S1.InputPlaceName.add("Time_A1");
         S1.InputPlaceName.add("P_A1");
-        S1.InputPlaceName.add("A_A1");
+        S1.InputPlaceName.add("A1");
 
 
         Condition S1Ct1a = new Condition(S1, "Train_A1", TransitionCondition.NotNull);
@@ -302,7 +303,7 @@ public class Station_A {
 
         // train coming
         Condition t3_A1Ct1b = new Condition(t3_A1, "P_A1", TransitionCondition.IsNull);
-        Condition t3_A1Ct2b = new Condition(t3_A1, "i1", TransitionCondition.NotNull);
+        Condition t3_A1Ct2b = new Condition(t3_A1, "i1", TransitionCondition.HaveTrainForMe);
 
         t3_A1Ct2b.SetNextCondition(LogicConnector.AND, t3_A1Ct1b);
 
@@ -372,7 +373,7 @@ public class Station_A {
         S2.TransitionName = "S2";
         S2.InputPlaceName.add("Time_A2");
         S2.InputPlaceName.add("P_A2");
-        S2.InputPlaceName.add("A_A2");
+        S2.InputPlaceName.add("A2");
 
 
         Condition S2Ct1a = new Condition(S2, "Train_A2", TransitionCondition.NotNull);
@@ -427,7 +428,7 @@ public class Station_A {
 
         // train coming
         Condition t3_A2Ct1b = new Condition(t3_A2, "P_A2", TransitionCondition.IsNull);
-        Condition t3_A2Ct2b = new Condition(t3_A2, "i1", TransitionCondition.NotNull);
+        Condition t3_A2Ct2b = new Condition(t3_A2, "i1", TransitionCondition.HaveTrainForMe);
 
         t3_A2Ct2b.SetNextCondition(LogicConnector.AND, t3_A2Ct1b);
 
@@ -456,7 +457,7 @@ public class Station_A {
 
         // train leaving station
         Condition t4_A1Ct2a = new Condition(t4_A1, "i2", TransitionCondition.IsNull);
-        Condition t4_A1Ct4a = new Condition(t4_A1, "i1", TransitionCondition.NotNull);
+        Condition t4_A1Ct4a = new Condition(t4_A1, "i1", TransitionCondition.HaveTrainForMe);
 
         t4_A1Ct2a.SetNextCondition(LogicConnector.AND, t4_A1Ct4a);
 
@@ -468,7 +469,7 @@ public class Station_A {
 
         // train coming and having as target Platform A1
         Condition t4_A1Ct1b = new Condition(t4_A1, "i1", TransitionCondition.IsNull);
-        Condition t4_A1Ct2b = new Condition(t4_A1, "i2", TransitionCondition.NotNull);
+        Condition t4_A1Ct2b = new Condition(t4_A1, "i2", TransitionCondition.HaveTrainForMe);
         Condition t4_A1Ct3b = new Condition(t4_A1, "i2", TransitionCondition.Platform,"A1");
 
         t4_A1Ct3b.SetNextCondition(LogicConnector.AND, t4_A1Ct2b);
@@ -485,7 +486,7 @@ public class Station_A {
 
         // train coming and having as target Platform A2
         Condition t4_A1Ct1c = new Condition(t4_A1, "i1", TransitionCondition.IsNull);
-        Condition t4_A1Ct2c = new Condition(t4_A1, "i2", TransitionCondition.NotNull);
+        Condition t4_A1Ct2c = new Condition(t4_A1, "i2", TransitionCondition.HaveTrainForMe);
         Condition t4_A1Ct3c = new Condition(t4_A1, "i2", TransitionCondition.Platform,"A2");
 
         t4_A1Ct3c.SetNextCondition(LogicConnector.AND, t4_A1Ct2c);
@@ -556,7 +557,7 @@ public class Station_A {
         S3.TransitionName = "S3";
         S3.InputPlaceName.add("Time_A3");
         S3.InputPlaceName.add("P_A3");
-        S3.InputPlaceName.add("A_A3");
+        S3.InputPlaceName.add("A3");
 
 
         Condition S3Ct1a = new Condition(S3, "Train_A3", TransitionCondition.NotNull);
@@ -598,7 +599,7 @@ public class Station_A {
         t3_A3.InputPlaceName.add("P_A3");
 
 
-
+        // train leaving
         Condition t3_A3Ct2a = new Condition(t3_A3, "i2", TransitionCondition.IsNull);
         Condition t3_A3Ct3a = new Condition(t3_A3, "P_A3", TransitionCondition.NotNull);
 
@@ -613,7 +614,7 @@ public class Station_A {
 
         // train coming
         Condition t3_A3Ct1b = new Condition(t3_A3, "P_A3", TransitionCondition.IsNull);
-        Condition t3_A3Ct2b = new Condition(t3_A3, "i2", TransitionCondition.NotNull);
+        Condition t3_A3Ct2b = new Condition(t3_A3, "i2", TransitionCondition.HaveTrainForMe);
 
         t3_A3Ct2b.SetNextCondition(LogicConnector.AND, t3_A3Ct1b);
 
@@ -638,7 +639,7 @@ public class Station_A {
         t4_A2.InputPlaceName.add("i2");
 
 
-        Condition t4_A2Ct2a = new Condition(t4_A2, "i2", TransitionCondition.NotNull);
+        Condition t4_A2Ct2a = new Condition(t4_A2, "i2", TransitionCondition.HaveTrainForMe);
 
         GuardMapping grdt4_A2a = new GuardMapping();
         grdt4_A2a.condition = t4_A2Ct2a;

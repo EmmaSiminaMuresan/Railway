@@ -19,8 +19,6 @@ public enum PetriObjectType implements Serializable{
 	PetriData,
 	DataBoolean,
 	DataTrain,
-	DataTrainQueue,
-	DataDate,
 	DataListTrains,
 	DataListTrainsHistory,
 	DataListTrainsQueue,

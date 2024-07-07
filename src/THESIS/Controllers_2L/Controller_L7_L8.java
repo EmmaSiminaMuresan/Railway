@@ -16,7 +16,7 @@ public class Controller_L7_L8 {
         pn.PetriNetName = "Controller L7 L8";
         pn.SetName("Controller L7 L8");
 
-        pn.NetworkPort = 1083;
+        pn.NetworkPort = 1084;
 
 
         DataInteger Delay = new DataInteger();
@@ -302,6 +302,78 @@ public class Controller_L7_L8 {
         pn.Transitions.add(t0);
 
 
+        // t1----------------------------------------------------------------
+        PetriTransition t1 = new PetriTransition(pn);
+        t1.TransitionName = "t1";
+        t1.InputPlaceName.add("r1g2");
+
+
+        Condition t1Ct1 = new Condition(t1, "r1g2", TransitionCondition.NotNull);
+
+
+        GuardMapping grdt1 = new GuardMapping();
+        grdt1.condition= t1Ct1;
+        grdt1.Activations.add(new Activation(t1, "r1g2", TransitionOperation.Move, "P1"));
+        t1.GuardMappingList.add(grdt1);
+
+        t1.Delay =5;
+        pn.Transitions.add(t1);
+
+
+        // t2----------------------------------------------------------------
+        PetriTransition t2 = new PetriTransition(pn);
+        t2.TransitionName = "t2";
+        t2.InputPlaceName.add("g1r2");
+
+
+        Condition t2Ct1 = new Condition(t2, "g1r2", TransitionCondition.NotNull);
+
+
+        GuardMapping grdt2 = new GuardMapping();
+        grdt2.condition= t2Ct1;
+        grdt2.Activations.add(new Activation(t2, "g1r2", TransitionOperation.Move, "P2"));
+        t2.GuardMappingList.add(grdt2);
+
+        t2.Delay = 5;
+        pn.Transitions.add(t2);
+
+
+        // t3----------------------------------------------------------------
+        PetriTransition t3 = new PetriTransition(pn);
+        t3.TransitionName = "t3";
+        t3.InputPlaceName.add("P1");
+
+
+        Condition t3Ct1 = new Condition(t3, "P1", TransitionCondition.NotNull);
+
+
+        GuardMapping grdt3 = new GuardMapping();
+        grdt3.condition= t3Ct1;
+        grdt0h.Activations.add(new Activation(t0, "green", TransitionOperation.SendOverNetwork, "OP_L7"));
+        grdt3.Activations.add(new Activation(t3, "P1", TransitionOperation.Move, "g1g2"));
+        t3.GuardMappingList.add(grdt3);
+
+        t3.Delay = 0;
+        pn.Transitions.add(t3);
+
+
+        // t4----------------------------------------------------------------
+        PetriTransition t4 = new PetriTransition(pn);
+        t4.TransitionName = "t4";
+        t4.InputPlaceName.add("P1");
+
+
+        Condition t4Ct1 = new Condition(t4, "P2", TransitionCondition.NotNull);
+
+
+        GuardMapping grdt4 = new GuardMapping();
+        grdt4.condition= t4Ct1;
+        grdt0h.Activations.add(new Activation(t0, "green", TransitionOperation.SendOverNetwork, "OP_L8"));
+        grdt4.Activations.add(new Activation(t4, "P2", TransitionOperation.Move, "g1g2"));
+        t4.GuardMappingList.add(grdt4);
+
+        t4.Delay = 0;
+        pn.Transitions.add(t4);
 
     }
 }

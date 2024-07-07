@@ -324,6 +324,8 @@ public class Activation implements Serializable {
 		}
 		PetriObject result = null;
 
+
+
 		if (temp instanceof DataFloat) {
 			result = (PetriObject) ((DataFloat) temp).clone();
 		}
@@ -332,12 +334,12 @@ public class Activation implements Serializable {
 			result = (PetriObject) ((DataInteger) temp).clone();
 		}
 
-		if (temp instanceof DataTrain) {
-			result = (PetriObject) ((DataTrain) temp).clone();
+		if (temp instanceof DataLocalTime) {
+			result = (PetriObject) ((DataLocalTime) temp).clone();
 		}
 
-		if (temp instanceof DataTrainQueue) {
-			result = (PetriObject) ((DataTrainQueue) temp).clone();
+		if (temp instanceof DataTrain) {
+			result = (PetriObject) ((DataTrain) temp).clone();
 		}
 
 		if (temp instanceof DataListTrains) {
@@ -393,6 +395,31 @@ public class Activation implements Serializable {
 		}
 		PetriObject result = null;
 		PetriObject resultBack = null;
+
+		if (temp instanceof DataLocalTime) {
+			result = (PetriObject) ((DataLocalTime) temp).clone();
+			resultBack = (PetriObject) ((DataLocalTime) temp).clone();
+		}
+
+		if (temp instanceof DataListTrains) {
+			result = (PetriObject) ((DataListTrains) temp).clone();
+			resultBack = (PetriObject) ((DataListTrains) temp).clone();
+		}
+
+		if (temp instanceof DataListTrainsQueue) {
+			result = (PetriObject) ((DataListTrainsQueue) temp).clone();
+			resultBack = (PetriObject) ((DataListTrainsQueue) temp).clone();
+		}
+
+		if (temp instanceof DataListTrainsHistory) {
+			result = (PetriObject) ((DataListTrainsHistory) temp).clone();
+			resultBack = (PetriObject) ((DataListTrainsHistory) temp).clone();
+		}
+
+		if (temp instanceof DataTrain) {
+			result = (PetriObject) ((DataTrain) temp).clone();
+			resultBack = (PetriObject) ((DataTrain) temp).clone();
+		}
 
 		if (temp instanceof DataFloat) {
 			result = (PetriObject) ((DataFloat) temp).clone();
@@ -629,10 +656,6 @@ public class Activation implements Serializable {
 			result = (PetriObject) ((DataTrain) temp).clone();
 		}
 
-		if (temp instanceof DataTrainQueue) {
-			result = (PetriObject) ((DataTrainQueue) temp).clone();
-		}
-
 		if (temp instanceof DataListTrains) {
 			result = (PetriObject) ((DataListTrains) temp).clone();
 		}
@@ -643,6 +666,10 @@ public class Activation implements Serializable {
 
 		if (temp instanceof DataListTrainsQueue) {
 			result = (PetriObject) ((DataListTrainsQueue) temp).clone();
+		}
+
+		if (temp instanceof DataLocalTime) {
+			result = (PetriObject) ((DataLocalTime) temp).clone();
 		}
 
 		result.SetName(OutputPlaceName);
@@ -665,10 +692,6 @@ public class Activation implements Serializable {
 
 		if (temp instanceof DataTrain) {
 			result = (PetriObject) ((DataTrain) temp).clone();
-		}
-
-		if (temp instanceof DataTrainQueue) {
-			result = (PetriObject) ((DataTrainQueue) temp).clone();
 		}
 
 		if (temp instanceof DataListTrains) {
@@ -819,6 +842,26 @@ public class Activation implements Serializable {
 
 		if (temp instanceof DataSubPetriNet) {
 			result.SetValue((PetriObject) ((DataSubPetriNet) temp).clone());
+		}
+
+		if (temp instanceof DataLocalTime) {
+			result = (PetriObject) ((DataLocalTime) temp).clone();
+		}
+
+		if (temp instanceof DataTrain) {
+			result = (PetriObject) ((DataTrain) temp).clone();
+		}
+
+		if (temp instanceof DataListTrains) {
+			result = (PetriObject) ((DataListTrains) temp).clone();
+		}
+
+		if (temp instanceof DataListTrainsHistory) {
+			result = (PetriObject) ((DataListTrainsHistory) temp).clone();
+		}
+
+		if (temp instanceof DataListTrainsQueue) {
+			result = (PetriObject) ((DataListTrainsQueue) temp).clone();
 		}
 
 	}

@@ -16,6 +16,7 @@ public class Controller_L1 {
     public static void main(String[] args) {
         PetriNet pn = new PetriNet();
         pn.PetriNetName = "Controller L1";
+        pn.SetName("Controller L1");
 
         pn.NetworkPort = 1082;
 
@@ -190,22 +191,29 @@ public class Controller_L1 {
         t1.GuardMappingList.add(grdt1d);
 
 
-        // 2 comming train on A1
-        Condition t1Ct1d = new Condition(t1, "g", TransitionCondition.NotNull);
-        Condition t1Ct2d = new Condition(t1, "in_a1", TransitionCondition.IsNull);
-        Condition t1Ct3d = new Condition(t1, "in_a2", TransitionCondition.IsNull);
-        Condition t1Ct4d = new Condition(t1, "in_a3", TransitionCondition.NotNull);
+        // 2 comming trains on A1,A2
 
-        t1Ct4d.SetNextCondition(LogicConnector.AND, t1Ct3d);
-        t1Ct3d.SetNextCondition(LogicConnector.AND, t1Ct2d);
-        t1Ct2d.SetNextCondition(LogicConnector.AND, t1Ct1d);
+        /// IF I WOULD PUT In the activation in1,2,3 all the time and i would not have the last 3 conditions
+        // wouldnt it be ok? because in the CalculateLightTimeStation i treat all the cases and i have as inputs
+        // for now all these times as places DataLocalTime(in the activation)
+        // if we agree that i can receive directly both DataListTrainQueue which is List_A then i can substract
+        // the departure times and leaving times and so i will change the function accordingly
 
-        GuardMapping grdt1d = new GuardMapping();
-        grdt1d.condition= t1Ct1d;
-        grdt1d.Activations.add(new Activation(t1, null,null,in_a3,TransitionOperation.CalculateLightTimeStation,Delay));
-        grdt1d.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
-        grdt1d.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
-        t1.GuardMappingList.add(grdt1d);
+        Condition t1Ct1e = new Condition(t1, "g", TransitionCondition.NotNull);
+        Condition t1Ct2e = new Condition(t1, "in_a1", TransitionCondition.IsNull);
+        Condition t1Ct3e = new Condition(t1, "in_a2", TransitionCondition.IsNull);
+        Condition t1Ct4e = new Condition(t1, "in_a3", TransitionCondition.NotNull);
+
+        t1Ct4e.SetNextCondition(LogicConnector.AND, t1Ct3e);
+        t1Ct3e.SetNextCondition(LogicConnector.AND, t1Ct2e);
+        t1Ct2e.SetNextCondition(LogicConnector.AND, t1Ct1e);
+
+        GuardMapping grdt1e = new GuardMapping();
+        grdt1e.condition= t1Ct1e;
+        grdt1e.Activations.add(new Activation(t1, null,null,in_a3,TransitionOperation.CalculateLightTimeStation,Delay));
+        grdt1e.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
+        grdt1e.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
+        t1.GuardMappingList.add(grdt1e);
 
 
         t1.Delay = 0;
@@ -226,7 +234,7 @@ public class Controller_L1 {
         grdt2.Activations.add(new Activation(t2, "r", TransitionOperation.Move, "i"));
         t2.GuardMappingList.add(grdt2);
 
-        t2.Delay = Delay.Value;
+        t2.Delay = 5;
         pn.Transitions.add(t2);
 
     }

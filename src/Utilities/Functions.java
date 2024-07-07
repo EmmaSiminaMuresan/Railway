@@ -764,4 +764,13 @@ public class Functions implements Serializable {
 		return false;
 	}
 
+	public boolean HaveTrainForMe(PetriTransition t, DataTrain Train) {
+		if (Train == null)
+			return false;
+		if (t == null)
+			return false;
+		if(Train.Value.Targets.contains(t.TransitionName))
+			return true;
+		return false;
+	}
 }
