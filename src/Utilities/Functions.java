@@ -26,6 +26,8 @@ import PetriDataPackage.GuardActivation;
 import PetriDataPackage.GuardCondition;
 import PetriDataPackage.Place;
 import PetriDataPackage.Transition;
+import javax.swing.JOptionPane;
+
 
 import com.sun.jdi.Value;
 
@@ -679,38 +681,36 @@ public class Functions implements Serializable {
 	}
 
 
-	public DataInteger Calculate_Light_Time_Station(LocalTime Time1, LocalTime Time2, LocalTime Time3){
+	public DataInteger Calculate_Light_Time_Station(DataListTrainsQueue Time1, DataListTrainsQueue Time2, DataListTrainsQueue Time3){
 		DataInteger time = new DataInteger();
 		time.SetValue(0);
 
-		DataLocalTime current_time = new DataLocalTime();
-		current_time.SetValue(LocalTime.now());
 
 		if(Time1==null && Time2==null && Time3==null) time.Value = 0;
-		if(Time1!=null && Time2==null && Time3==null) time.Value = (int)(Duration.between(current_time.Value, Time1).getSeconds());
-		if(Time1==null && Time2!=null && Time3==null) time.Value = (int)(Duration.between(current_time.Value, Time2).getSeconds());
-		if(Time1==null && Time2==null && Time3!=null) time.Value = (int)(Duration.between(current_time.Value, Time3).getSeconds());
+		if(Time1!=null && Time2==null && Time3==null) time.Value = (int)(Duration.between(Time1.GetDepTime(0), Time1.GetLeavingTime(0)).getSeconds());
+		if(Time1==null && Time2!=null && Time3==null) time.Value = (int)(Duration.between(Time2.GetDepTime(0), Time2.GetLeavingTime(0)).getSeconds());
+		if(Time1==null && Time2==null && Time3!=null) time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
 		if(Time1!=null && Time2!=null && Time3==null) {
-			if(Time1.isAfter(Time2)) time.Value = (int)(Duration.between(current_time.Value, Time1).getSeconds());
-			else time.Value = (int)(Duration.between(current_time.Value, Time2).getSeconds());
+			if(Time1.GetDepTime(0).isAfter(Time2.GetDepTime(0))) time.Value = (int)(Duration.between(Time1.GetDepTime(0), Time1.GetLeavingTime(0)).getSeconds());
+			else time.Value = (int)(Duration.between(Time2.GetDepTime(0), Time2.GetLeavingTime(0)).getSeconds());
 		}
 		if(Time1==null && Time2!=null && Time3!=null) {
-			if(Time2.isAfter(Time3)) time.Value = (int)(Duration.between(current_time.Value, Time2).getSeconds());
-			else time.Value = (int)(Duration.between(current_time.Value, Time3).getSeconds());
+			if(Time2.GetDepTime(0).isAfter(Time3.GetDepTime(0))) time.Value = (int)(Duration.between(Time2.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
+			else time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
 		}
 		if(Time1!=null && Time2==null && Time3!=null) {
-			if(Time1.isAfter(Time3)) time.Value = (int)(Duration.between(current_time.Value, Time1).getSeconds());
-			else time.Value = (int)(Duration.between(current_time.Value, Time3).getSeconds());
+			if(Time1.GetDepTime(0).isAfter(Time3.GetDepTime(0))) time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
+			else time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
 		}
 		if(Time1!=null && Time2!=null && Time3!=null){
-			if((Time1.isAfter(Time2) && Time2.isAfter(Time3)) || (Time1.isAfter(Time3) && Time3.isAfter(Time2))){
-				time.Value = (int)(Duration.between(current_time.Value, Time1).getSeconds());
+			if((Time1.GetDepTime(0).isAfter(Time2.GetDepTime(0)) && (Time2.GetDepTime(0).isAfter(Time3.GetDepTime(0)))) || ((Time1.GetDepTime(0).isAfter(Time3.GetDepTime(0)) && (Time3.GetDepTime(0).isAfter(Time2.GetDepTime(0)))))){
+				time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
 			}
-			if((Time2.isAfter(Time1) && Time1.isAfter(Time3)) || (Time2.isAfter(Time3) && Time3.isAfter(Time1))){
-				time.Value = (int)(Duration.between(current_time.Value, Time2).getSeconds());
+			if((Time2.GetDepTime(0).isAfter(Time1.GetDepTime(0)) && (Time1.GetDepTime(0).isAfter(Time3.GetDepTime(0)))) || ((Time2.GetDepTime(0).isAfter(Time3.GetDepTime(0)) && (Time3.GetDepTime(0).isAfter(Time1.GetDepTime(0)))))){
+				time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
 			}
-			if((Time3.isAfter(Time1) && Time1.isAfter(Time2)) || (Time3.isAfter(Time2) && Time2.isAfter(Time1))){
-				time.Value = (int)(Duration.between(current_time.Value, Time3).getSeconds());
+			if((Time3.GetDepTime(0).isAfter(Time2.GetDepTime(0)) && (Time2.GetDepTime(0).isAfter(Time1.GetDepTime(0)))) || ((Time3.GetDepTime(0).isAfter(Time1.GetDepTime(0)) && (Time1.GetDepTime(0).isAfter(Time2.GetDepTime(0)))))){
+				time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
 			}
 		}
 
@@ -743,6 +743,26 @@ public class Functions implements Serializable {
 	public boolean Equal_Length(Train t1, Train t2){
 		if(t1.Length == t2.Length) return true;
 		else return false;
+	}
+
+	public void MessageBox_Controllers(DataInteger seconds,DataString controller){
+		String message = seconds.GetValue().toString() + " seconds for red light " + controller.GetValue().toString();
+		JOptionPane.showMessageDialog(null, message, controller.GetValue().toString(), JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void MessageBox_SupervisorA(DataListTrains list){
+		String message = "Train " + list.GetTrainNumber() + " depart at " + list.getDep_time() + " on platform " +list.getPlatform();
+		JOptionPane.showMessageDialog(null, message, "Supervisor A", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void MessageBox_SupervisorB(DataListTrains list){
+		String message = "Train " + list.GetTrainNumber() + " depart at " + list.getDep_time() + " on platform " +list.getPlatform();
+		JOptionPane.showMessageDialog(null, message, "Supervisor B", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void MessageBox_SupervisorC(DataListTrains list){
+		String message = "Train " + list.GetTrainNumber() + " depart at " + list.getDep_time() + " on platform " +list.getPlatform();
+		JOptionPane.showMessageDialog(null, message, "Supervisor C", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public boolean HaveListTrain(ArrayList<DataListTrains> list) {

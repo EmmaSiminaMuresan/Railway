@@ -18,6 +18,10 @@ public class Controller_L7_L8 {
 
         pn.NetworkPort = 1084;
 
+        DataString L7_L8 = new DataString();
+        L7_L8.SetName("L7_L8");
+        L7_L8.SetValue("L7_L8");
+        pn.ConstantPlaceList.add(L7_L8);
 
         DataInteger Delay = new DataInteger();
         Delay.SetName("Delay");
@@ -119,26 +123,7 @@ public class Controller_L7_L8 {
         t0.InputPlaceName.add("in8_1");
         t0.InputPlaceName.add("in8_2");
 
-        // not a single train before the intersection
-        Condition t0Ct1a = new Condition(t0, "g1g2", TransitionCondition.NotNull);
-        Condition t0Ct2a = new Condition(t0, "in7_1", TransitionCondition.IsNull);
-        Condition t0Ct3a = new Condition(t0, "in8_1", TransitionCondition.IsNull);
-        Condition t0Ct4a = new Condition(t0, "in7_2", TransitionCondition.NotNull); // always like this because the user introduces in the GUI each speed on the railways
-        Condition t0Ct5a = new Condition(t0, "in8_2", TransitionCondition.NotNull);
 
-        t0Ct5a.SetNextCondition(LogicConnector.AND, t0Ct4a);
-        t0Ct4a.SetNextCondition(LogicConnector.AND, t0Ct3a);
-        t0Ct3a.SetNextCondition(LogicConnector.AND, t0Ct2a);
-        t0Ct2a.SetNextCondition(LogicConnector.AND, t0Ct1a);
-
-        GuardMapping grdt0a = new GuardMapping();
-        grdt0a.condition= t0Ct1a;
-        grdt0a.Activations.add(new Activation(t0, null,null, TransitionOperation.CalculateLightTimeRailway,Delay));
-        grdt0a.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
-        grdt0a.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
-        grdt0a.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L7"));
-        grdt0a.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L8"));
-        t0.GuardMappingList.add(grdt0a);
 
         // a train before the intersection on Railway 7
         Condition t0Ct1b = new Condition(t0, "g1g2", TransitionCondition.NotNull);
@@ -155,6 +140,7 @@ public class Controller_L7_L8 {
         GuardMapping grdt0b = new GuardMapping();
         grdt0b.condition= t0Ct1b;
         grdt0b.Activations.add(new Activation(t0, in7_1,in7_2, TransitionOperation.CalculateLightTimeRailway,Delay));
+        grdt0b.Activations.add(new Activation(t0, Delay, L7_L8, TransitionOperation.MessageBox_Controllers));
         grdt0b.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0b.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0b.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L8"));
@@ -176,6 +162,7 @@ public class Controller_L7_L8 {
         grdt0c.condition= t0Ct1c;
         grdt0c.Activations.add(new Activation(t0, in8_1,in8_2, TransitionOperation.CalculateLightTimeRailway,Delay));
         grdt0c.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
+        grdt0c.Activations.add(new Activation(t0, Delay, L7_L8, TransitionOperation.MessageBox_Controllers));
         grdt0c.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0c.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L7"));
         t0.GuardMappingList.add(grdt0c);
@@ -199,6 +186,7 @@ public class Controller_L7_L8 {
         GuardMapping grdt0d = new GuardMapping();
         grdt0d.condition= t0Ct1d;
         grdt0d.Activations.add(new Activation(t0, in7_1,in7_2, TransitionOperation.CalculateLightTimeRailway,Delay));
+        grdt0d.Activations.add(new Activation(t0, Delay, L7_L8, TransitionOperation.MessageBox_Controllers));
         grdt0d.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0d.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0d.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L8"));
@@ -222,6 +210,7 @@ public class Controller_L7_L8 {
         grdt0e.condition= t0Ct1e;
         grdt0e.Activations.add(new Activation(t0, in8_1,in8_2, TransitionOperation.CalculateLightTimeRailway,Delay));
         grdt0e.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
+        grdt0e.Activations.add(new Activation(t0, Delay, L7_L8, TransitionOperation.MessageBox_Controllers));
         grdt0e.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0e.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L7"));
         t0.GuardMappingList.add(grdt0e);
@@ -246,6 +235,7 @@ public class Controller_L7_L8 {
         grdt0f.condition= t0Ct1f;
         grdt0f.Activations.add(new Activation(t0, in8_1,in8_2, TransitionOperation.CalculateLightTimeRailway,Delay));
         grdt0f.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
+        grdt0f.Activations.add(new Activation(t0, Delay, L7_L8, TransitionOperation.MessageBox_Controllers));
         grdt0f.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0f.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L7"));
         t0.GuardMappingList.add(grdt0f);
@@ -270,6 +260,7 @@ public class Controller_L7_L8 {
         grdt0g.condition= t0Ct1g;
         grdt0g.Activations.add(new Activation(t0, in7_1,in7_2, TransitionOperation.CalculateLightTimeRailway,Delay));
         grdt0g.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
+        grdt0g.Activations.add(new Activation(t0, Delay, L7_L8, TransitionOperation.MessageBox_Controllers));
         grdt0g.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0g.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L8"));
         t0.GuardMappingList.add(grdt0g);
@@ -294,6 +285,7 @@ public class Controller_L7_L8 {
         grdt0h.condition= t0Ct1h;
         grdt0h.Activations.add(new Activation(t0, in7_1,in7_2, TransitionOperation.CalculateLightTimeRailway,Delay));
         grdt0h.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
+        grdt0h.Activations.add(new Activation(t0, Delay, L7_L8, TransitionOperation.MessageBox_Controllers));
         grdt0h.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0h.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L8"));
         t0.GuardMappingList.add(grdt0h);
@@ -375,5 +367,11 @@ public class Controller_L7_L8 {
         t4.Delay = 0;
         pn.Transitions.add(t4);
 
+        System.out.println("Controller L7 L8 started \n ------------------------------");
+        pn.Delay = 3000;
+
+        PetriNetWindow frame = new PetriNetWindow(false);
+        frame.petriNet = pn;
+        frame.setVisible(true);
     }
 }

@@ -249,7 +249,14 @@ public class Condition implements Serializable {
 		}
 
 
-
+			case Platform_To_Send: {
+				if (Value1 == null || Value2 == null)
+					return false;
+				if (Value1.contains(Value2)) {
+						return true;
+				}
+				break;
+			}
 
 			case Equal_Length: {
 				if (Value1 == null || Value2 == null)
@@ -363,6 +370,7 @@ public class Condition implements Serializable {
 						return true;
 					}
 				break;
+
 			case CanAddTrains_List: {
 				if (Value1 == null)
 					return false;

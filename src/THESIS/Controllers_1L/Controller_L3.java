@@ -1,10 +1,7 @@
 package THESIS.Controllers_1L;
 
 import Components.*;
-import DataObjects.DataInteger;
-import DataObjects.DataLocalTime;
-import DataObjects.DataString;
-import DataObjects.DataTransfer;
+import DataObjects.*;
 import DataOnly.TransferOperation;
 import Enumerations.LogicConnector;
 import Enumerations.TransitionCondition;
@@ -18,24 +15,26 @@ public class Controller_L3 {
 
         pn.NetworkPort = 1088;
 
+        DataString L3 = new DataString();
+        L3.SetName("L3");
+        L3.SetValue("L3");
+        pn.ConstantPlaceList.add(L3);
+
         DataInteger Delay = new DataInteger();
         Delay.SetName("Delay");
         Delay.SetValue(0);
         pn.ConstantPlaceList.add(Delay);
 
-        DataLocalTime in_c1 = new DataLocalTime(); // time to pass for the prev train
+        DataListTrainsQueue in_c1 = new DataListTrainsQueue(); // time to pass for the prev train
         in_c1.SetName("in_c1");
-        in_c1.SetValue(null);
         pn.PlaceList.add(in_c1);
 
-        DataLocalTime in_c2 = new DataLocalTime(); // time to pass for the prev train
+        DataListTrainsQueue in_c2 = new DataListTrainsQueue(); // time to pass for the prev train
         in_c2.SetName("in_c1");
-        in_c2.SetValue(null);
         pn.PlaceList.add(in_c2);
 
-        DataLocalTime in_c3 = new DataLocalTime(); // time to pass for the prev train
+        DataListTrainsQueue in_c3 = new DataListTrainsQueue(); // time to pass for the prev train
         in_c3.SetName("in_c3");
-        in_c3.SetValue(null);
         pn.PlaceList.add(in_c3);
 
         DataString ini = new DataString();
@@ -91,22 +90,7 @@ public class Controller_L3 {
         t_ini.Delay = 0;
         pn.Transitions.add(t_ini);
 
-        // t0----------------------------------------------------------------
-        PetriTransition t0 = new PetriTransition(pn);
-        t0.TransitionName = "t0";
-        t0.InputPlaceName.add("i");
 
-
-        Condition t0Ct1 = new Condition(t0, "i", TransitionCondition.NotNull);
-
-        GuardMapping grdt0 = new GuardMapping();
-        grdt0.condition= t0Ct1;
-        grdt0.Activations.add(new Activation(t0, "i", TransitionOperation.Move, "g"));
-        grdt0.Activations.add(new Activation(t0, "green", TransitionOperation.SendOverNetwork, "OP_L3"));
-        t0.GuardMappingList.add(grdt0);
-
-        t0.Delay = 0;
-        pn.Transitions.add(t0);
 
 
         // t1----------------------------------------------------------------
@@ -117,25 +101,8 @@ public class Controller_L3 {
         t1.InputPlaceName.add("in_c2");
         t1.InputPlaceName.add("in_c3");
 
-        // no leaving train from the station
-        Condition t1Ct1a = new Condition(t1, "g", TransitionCondition.NotNull);
-        Condition t1Ct2a = new Condition(t1, "in_c1", TransitionCondition.IsNull);
-        Condition t1Ct3a = new Condition(t1, "in_c2", TransitionCondition.IsNull);
-        Condition t1Ct4a = new Condition(t1, "in_c3", TransitionCondition.IsNull);
 
-        t1Ct4a.SetNextCondition(LogicConnector.AND, t1Ct3a);
-        t1Ct3a.SetNextCondition(LogicConnector.AND, t1Ct2a);
-        t1Ct2a.SetNextCondition(LogicConnector.AND, t1Ct1a);
-
-        GuardMapping grdt1a = new GuardMapping();
-        grdt1a.condition= t1Ct1a;
-        grdt1a.Activations.add(new Activation(t1, null,null,null,TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1a.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
-        grdt1a.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L3"));
-        t1.GuardMappingList.add(grdt1a);
-
-
-        // 1 comming train on A1
+        // 1 comming train on C1
         Condition t1Ct1b = new Condition(t1, "g", TransitionCondition.NotNull);
         Condition t1Ct2b = new Condition(t1, "in_c1", TransitionCondition.NotNull);
         Condition t1Ct3b = new Condition(t1, "in_c2", TransitionCondition.IsNull);
@@ -148,12 +115,13 @@ public class Controller_L3 {
         GuardMapping grdt1b = new GuardMapping();
         grdt1b.condition= t1Ct1b;
         grdt1b.Activations.add(new Activation(t1, in_c1,null,null,TransitionOperation.CalculateLightTimeStation, Delay));
+        grdt1b.Activations.add(new Activation(t1, Delay, L3,TransitionOperation.MessageBox_Controllers));
         grdt1b.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1b.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L3"));
         t1.GuardMappingList.add(grdt1b);
 
 
-        // 1 comming train on A2
+        // 1 comming train on C2
         Condition t1Ct1c = new Condition(t1, "g", TransitionCondition.NotNull);
         Condition t1Ct2c = new Condition(t1, "in_c1", TransitionCondition.IsNull);
         Condition t1Ct3c= new Condition(t1, "in_c2", TransitionCondition.NotNull);
@@ -166,12 +134,13 @@ public class Controller_L3 {
         GuardMapping grdt1c = new GuardMapping();
         grdt1c.condition= t1Ct1c;
         grdt1c.Activations.add(new Activation(t1, null,in_c2,null,TransitionOperation.CalculateLightTimeStation, Delay));
+        grdt1c.Activations.add(new Activation(t1, Delay, L3,TransitionOperation.MessageBox_Controllers));
         grdt1c.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1c.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L3"));
         t1.GuardMappingList.add(grdt1c);
 
 
-        // 1 comming train on A3
+        // 1 comming train on C3
         Condition t1Ct1d = new Condition(t1, "g", TransitionCondition.NotNull);
         Condition t1Ct2d = new Condition(t1, "in_c1", TransitionCondition.IsNull);
         Condition t1Ct3d = new Condition(t1, "in_c2", TransitionCondition.IsNull);
@@ -184,34 +153,84 @@ public class Controller_L3 {
         GuardMapping grdt1d = new GuardMapping();
         grdt1d.condition= t1Ct1d;
         grdt1d.Activations.add(new Activation(t1, null,null,in_c3,TransitionOperation.CalculateLightTimeStation,Delay));
+        grdt1d.Activations.add(new Activation(t1, Delay, L3,TransitionOperation.MessageBox_Controllers));
         grdt1d.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1d.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L3"));
         t1.GuardMappingList.add(grdt1d);
 
 
-        // 2 comming trains on A1,A2
-
-        /// IF I WOULD PUT In the activation in1,2,3 all the time and i would not have the last 3 conditions
-        // wouldnt it be ok? because in the CalculateLightTimeStation i treat all the cases and i have as inputs
-        // for now all these times as places DataLocalTime(in the activation)
-        // if we agree that i can receive directly both DataListTrainQueue which is List_c then i can substract
-        // the departure times and leaving times and so i will change the function accordingly
-
+        // 2 coming trains on C1 C2
         Condition t1Ct1e = new Condition(t1, "g", TransitionCondition.NotNull);
-        Condition t1Ct2e = new Condition(t1, "in_c1", TransitionCondition.IsNull);
-        Condition t1Ct3e = new Condition(t1, "in_c2", TransitionCondition.IsNull);
-        Condition t1Ct4e = new Condition(t1, "in_c3", TransitionCondition.NotNull);
+        Condition t1Ct2e = new Condition(t1, "in_c1", TransitionCondition.NotNull);
+        Condition t1Ct3e = new Condition(t1, "in_c2", TransitionCondition.NotNull);
+        Condition t1Ct4e = new Condition(t1, "in_c3", TransitionCondition.IsNull);
 
         t1Ct4e.SetNextCondition(LogicConnector.AND, t1Ct3e);
         t1Ct3e.SetNextCondition(LogicConnector.AND, t1Ct2e);
         t1Ct2e.SetNextCondition(LogicConnector.AND, t1Ct1e);
 
         GuardMapping grdt1e = new GuardMapping();
-        grdt1e.condition= t1Ct1e;
-        grdt1e.Activations.add(new Activation(t1, null,null,in_c3,TransitionOperation.CalculateLightTimeStation,Delay));
+        grdt1e.condition = t1Ct1e;
+        grdt1e.Activations.add(new Activation(t1, in_c1, in_c2, null, TransitionOperation.CalculateLightTimeStation, Delay));
+        grdt1e.Activations.add(new Activation(t1, Delay, L3,TransitionOperation.MessageBox_Controllers));
         grdt1e.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1e.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L3"));
         t1.GuardMappingList.add(grdt1e);
+
+        // 2 coming trains on C1 C3
+        Condition t1Ct1f = new Condition(t1, "g", TransitionCondition.NotNull);
+        Condition t1Ct2f = new Condition(t1, "in_c1", TransitionCondition.NotNull);
+        Condition t1Ct3f = new Condition(t1, "in_c2", TransitionCondition.IsNull);
+        Condition t1Ct4f = new Condition(t1, "in_c3", TransitionCondition.NotNull);
+
+        t1Ct4f.SetNextCondition(LogicConnector.AND, t1Ct3f);
+        t1Ct3f.SetNextCondition(LogicConnector.AND, t1Ct2f);
+        t1Ct2f.SetNextCondition(LogicConnector.AND, t1Ct1f);
+
+        GuardMapping grdt1f = new GuardMapping();
+        grdt1f.condition = t1Ct1f;
+        grdt1f.Activations.add(new Activation(t1, in_c1, null, in_c3, TransitionOperation.CalculateLightTimeStation, Delay));
+        grdt1f.Activations.add(new Activation(t1, Delay, L3, TransitionOperation.MessageBox_Controllers));
+        grdt1f.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
+        grdt1f.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L3"));
+        t1.GuardMappingList.add(grdt1f);
+
+        // 2 coming trains on C2 C3
+        Condition t1Ct1g = new Condition(t1, "g", TransitionCondition.NotNull);
+        Condition t1Ct2g = new Condition(t1, "in_c1", TransitionCondition.IsNull);
+        Condition t1Ct3g = new Condition(t1, "in_c2", TransitionCondition.NotNull);
+        Condition t1Ct4g = new Condition(t1, "in_c3", TransitionCondition.NotNull);
+
+        t1Ct4g.SetNextCondition(LogicConnector.AND, t1Ct3g);
+        t1Ct3g.SetNextCondition(LogicConnector.AND, t1Ct2g);
+        t1Ct2g.SetNextCondition(LogicConnector.AND, t1Ct1g);
+
+        GuardMapping grdt1g = new GuardMapping();
+        grdt1g.condition = t1Ct1g;
+        grdt1g.Activations.add(new Activation(t1, null, in_c2, in_c3, TransitionOperation.CalculateLightTimeStation, Delay));
+        grdt1g.Activations.add(new Activation(t1, Delay, L3, TransitionOperation.MessageBox_Controllers));
+        grdt1g.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
+        grdt1g.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L3"));
+        t1.GuardMappingList.add(grdt1g);
+
+        // 3 coming trains
+        Condition t1Ct1h = new Condition(t1, "g", TransitionCondition.NotNull);
+        Condition t1Ct2h = new Condition(t1, "in_c1", TransitionCondition.NotNull);
+        Condition t1Ct3h = new Condition(t1, "in_c2", TransitionCondition.NotNull);
+        Condition t1Ct4h = new Condition(t1, "in_c3", TransitionCondition.NotNull);
+
+        t1Ct4h.SetNextCondition(LogicConnector.AND, t1Ct3h);
+        t1Ct3h.SetNextCondition(LogicConnector.AND, t1Ct2h);
+        t1Ct2h.SetNextCondition(LogicConnector.AND, t1Ct1h);
+
+        GuardMapping grdt1h = new GuardMapping();
+        grdt1h.condition = t1Ct1h;
+        grdt1h.Activations.add(new Activation(t1, in_c1, in_c2, in_c3, TransitionOperation.CalculateLightTimeStation, Delay));
+        grdt1h.Activations.add(new Activation(t1, Delay, L3, TransitionOperation.MessageBox_Controllers));
+        grdt1h.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
+        grdt1h.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L3"));
+        t1.GuardMappingList.add(grdt1h);
+
 
 
         t1.Delay = 0;
@@ -234,5 +253,30 @@ public class Controller_L3 {
 
         t2.Delay = 5;
         pn.Transitions.add(t2);
+
+        // t0----------------------------------------------------------------
+        PetriTransition t0 = new PetriTransition(pn);
+        t0.TransitionName = "t0";
+        t0.InputPlaceName.add("i");
+
+
+        Condition t0Ct1 = new Condition(t0, "i", TransitionCondition.NotNull);
+
+        GuardMapping grdt0 = new GuardMapping();
+        grdt0.condition= t0Ct1;
+        grdt0.Activations.add(new Activation(t0, "i", TransitionOperation.Move, "g"));
+        grdt0.Activations.add(new Activation(t0, "green", TransitionOperation.SendOverNetwork, "OP_L3"));
+        t0.GuardMappingList.add(grdt0);
+
+        t0.Delay = 0;
+        pn.Transitions.add(t0);
+
+
+        System.out.println("Controller L3 started \n ------------------------------");
+        pn.Delay = 3000;
+
+        PetriNetWindow frame = new PetriNetWindow(false);
+        frame.petriNet = pn;
+        frame.setVisible(true);
     }
 }

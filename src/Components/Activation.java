@@ -49,6 +49,7 @@ public class Activation implements Serializable {
 	public DataLocalTime time2;
 	public DataLocalTime time3;
 	public DataInteger seconds;
+	public DataString Controller;
 
 
 	public Activation(PetriTransition Parent) {
@@ -64,7 +65,33 @@ public class Activation implements Serializable {
 		this.Operation = Condition;
 	}
 
+	public Activation(PetriTransition Parent, String InputPlaceName, TransitionOperation Condition,
+					  ArrayList<String> OutputPlaceNames) {
+		util = new Functions();
+		this.Parent = Parent;
+		this.InputPlaceName = InputPlaceName;
+		this.OutputPlaceNames = OutputPlaceNames;
+		this.Operation = Condition;
+	}
 
+
+
+	public Activation(PetriTransition Parent, ArrayList<String> InputPlaceNames, TransitionOperation Condition,
+					  String OutputPlaceName) {
+		util = new Functions();
+		this.Parent = Parent;
+		this.InputPlaceNames = InputPlaceNames;
+		this.OutputPlaceName = OutputPlaceName;
+		this.Operation = Condition;
+	}
+
+	public Activation(PetriTransition Parent, DataInteger seconds, DataString controller, TransitionOperation Condition) {
+		util = new Functions();
+		this.Parent = Parent;
+		this.seconds = seconds;
+		this.Controller = controller;
+		this.Operation = Condition;
+	}
 
 	public Activation(PetriTransition Parent, DataListTrainsHistory old_history, DataString filePath, TransitionOperation Condition,
 					  DataListTrainsHistory new_history) {
@@ -76,14 +103,13 @@ public class Activation implements Serializable {
 		this.Operation = Condition;
 	}
 
-	public Activation(PetriTransition Parent, ArrayList<String> InputPlaceNames, TransitionOperation Condition,
-					  String OutputPlaceName) {
+	public Activation(PetriTransition Parent, DataListTrains list_train, TransitionOperation Condition) {
 		util = new Functions();
 		this.Parent = Parent;
-		this.InputPlaceNames = InputPlaceNames;
-		this.OutputPlaceName = OutputPlaceName;
+		this.list_train = list_train;
 		this.Operation = Condition;
 	}
+
 
 	public Activation(PetriTransition Parent, DataListTrainsQueue list_queue_in,  TransitionOperation Condition,
 					  DataListTrainsQueue list_queue_out) {
@@ -162,17 +188,23 @@ public class Activation implements Serializable {
 	}
 
 
-	public Activation(PetriTransition Parent, String InputPlaceName, TransitionOperation Condition,
-			ArrayList<String> OutputPlaceNames) {
-		util = new Functions();
-		this.Parent = Parent;
-		this.InputPlaceName = InputPlaceName;
-		this.OutputPlaceNames = OutputPlaceNames;
-		this.Operation = Condition;
-	}
-
 	
 	public void Activate() throws CloneNotSupportedException {
+
+		if (Operation == TransitionOperation.SendTrainOverNetwork)
+			SendTrainOverNetwork();
+
+		if (Operation == TransitionOperation.MessageBox_SupervisorA)
+			MessageBox_SupervisorA();
+
+		if (Operation == TransitionOperation.MessageBox_SupervisorB)
+			MessageBox_SupervisorB();
+
+		if (Operation == TransitionOperation.MessageBox_SupervisorC)
+			MessageBox_SupervisorC();
+
+		if (Operation == TransitionOperation.MessageBox_Controllers)
+			MessageBox_Controllers();
 
 		if (Operation == TransitionOperation.CalculateLightTimeRailway)
 			CalculateLightTimeRailway();
@@ -261,6 +293,18 @@ public class Activation implements Serializable {
 		if (Operation == TransitionOperation.Div_FloatFloat)
 			Div_FloatFlaot();
 		// ---------------------------------------------------------
+	}
+	private void MessageBox_SupervisorA() throws CloneNotSupportedException{
+		util.MessageBox_SupervisorA(list_train);
+	}
+	private void MessageBox_SupervisorB() throws CloneNotSupportedException{
+		util.MessageBox_SupervisorB(list_train);
+	}
+	private void MessageBox_SupervisorC() throws CloneNotSupportedException{
+		util.MessageBox_SupervisorC(list_train);
+	}
+	private void MessageBox_Controllers() throws CloneNotSupportedException{
+		util.MessageBox_Controllers(seconds,Controller);
 	}
 	private void CalculateLightTimeStation() throws CloneNotSupportedException{
 		DataInteger result = new DataInteger();
@@ -866,6 +910,8 @@ public class Activation implements Serializable {
 
 	}
 
+
+
 	private void SendROverNetwork() throws CloneNotSupportedException {
 
 		PetriObject output = util.GetPetriObjectByName(OutputPlaceName, Parent.Parent.PlaceList);
@@ -889,6 +935,35 @@ public class Activation implements Serializable {
 		if (temp.Value.GetFirstREL().Value.R != ((DataInteger) Parent.TempMarking.get(1)).Value) {
 			if (toSend instanceof DataInteger) {
 				result.SetValue((PetriObject) ((DataInteger) toSend).clone());
+			}
+		}
+	}
+
+
+
+	private void SendTrainOverNetwork() throws CloneNotSupportedException {
+
+		PetriObject output = util.GetPetriObjectByName(OutputPlaceName, Parent.Parent.PlaceList);
+		Integer inputIndex = util.GetIndexByName(InputPlaceName, Parent.TempMarking);
+
+		PetriObject result = null;
+
+		if (output instanceof DataTransfer) {
+			result = (PetriObject) ((DataTransfer) output).clone();
+		}
+
+		if (inputIndex == -1)
+			return;
+
+		DataListTrainsQueue temp = (DataListTrainsQueue) Parent.TempMarking.get(inputIndex);
+
+		DataTrain toSend = new DataTrain();
+		toSend.SetName(OutputPlaceName);
+		toSend.SetValue(temp.Value.Trains.get(0).getTrain());
+
+		if (temp.Value.Trains.get(0).getTrain() != ((DataTrain) Parent.TempMarking.get(1)).Value) {
+			if (toSend instanceof DataTrain) {
+				result.SetValue((PetriObject) ((DataTrain) toSend).clone());
 			}
 		}
 	}

@@ -308,6 +308,7 @@ public class Main_Railway {
         S7.GuardMappingList.add(grdS7a);
 
 
+        // NO:
         Condition S7Ct1b = new Condition(S7, "in7", TransitionCondition.NotNull);
         Condition S7Ct2b = new Condition(S7, "P7_1", TransitionCondition.IsNull);
 
@@ -908,6 +909,13 @@ public class Main_Railway {
 
         t11_2.Delay = 0;
         pn.Transitions.add(t11_2);
+
+        System.out.println("Main Railway started \n ------------------------------");
+        pn.Delay = 3000;
+
+        PetriNetWindow frame = new PetriNetWindow(false);
+        frame.petriNet = pn;
+        frame.setVisible(true);
 
     }
 }

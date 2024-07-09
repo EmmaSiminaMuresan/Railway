@@ -73,17 +73,17 @@ public class Station_C {
         p14.SetName("i8");
         pn.PlaceList.add(p14);
 
-        DataLocalTime Time_C1 = new DataLocalTime(); // time to pass for the prev train
+        DataListTrainsQueue Time_C1 = new DataListTrainsQueue(); // time to pass for the prev train
         Time_C1.SetName("Time_C1");
         Time_C1.SetValue(null);
         pn.PlaceList.add(Time_C1); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
 
-        DataLocalTime Time_C2 = new DataLocalTime(); // time to pass for the prev train
+        DataListTrainsQueue Time_C2 = new DataListTrainsQueue(); // time to pass for the prev train
         Time_C2.SetName("Time_C2");
         Time_C2.SetValue(null);
         pn.PlaceList.add(Time_C2); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
 
-        DataLocalTime Time_C3 = new DataLocalTime(); // time to pass for the prev train
+        DataListTrainsQueue Time_C3 = new DataListTrainsQueue(); // time to pass for the prev train
         Time_C3.SetName("Time_C3");
         Time_C3.SetValue(null);
         pn.PlaceList.add(Time_C3); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
@@ -650,5 +650,13 @@ public class Station_C {
 
         t3_C3.Delay = 0;
         pn.Transitions.add(t3_C3);
+
+
+        System.out.println("Station C started \n ------------------------------");
+        pn.Delay = 3000;
+
+        PetriNetWindow frame = new PetriNetWindow(false);
+        frame.petriNet = pn;
+        frame.setVisible(true);
     }
 }

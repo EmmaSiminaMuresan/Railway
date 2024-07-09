@@ -37,6 +37,7 @@ public class GuardCondition implements Serializable {
 		this.condition = condition;
 	}
 
+
 	public void SetNextCondition(LogicConnector Connector, GuardCondition NextCondition) {
 		this.NextCondition = NextCondition;
 		this.Connector = Connector;

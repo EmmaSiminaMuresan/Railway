@@ -60,7 +60,9 @@ public class ListTrains implements Cloneable, Serializable{
         return platform;
     }
 
-
+    public String geTrainNumber() {
+        return train.Number;
+    }
 
     public String toString() {
         return "Train " + train.toString() + " leaves at " + dep_time + " on platform " + platform;

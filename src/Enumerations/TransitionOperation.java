@@ -28,6 +28,11 @@ public enum TransitionOperation implements Serializable{
 	CalculateLightTimeRailway,
 	CreateTrain_NotNull,
 
+	MessageBox_Controllers,
+	MessageBox_SupervisorA,
+	MessageBox_SupervisorB,
+	MessageBox_SupervisorC,
+	SendTrainOverNetwork,
 	CreateTrain_Null,
 	RemoveFirst,
 	SaveAndDelete,

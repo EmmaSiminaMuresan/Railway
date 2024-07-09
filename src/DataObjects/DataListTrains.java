@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import DataOnly.ListTrains;
+import DataOnly.Train;
 import Enumerations.PetriObjectType;
 import Interfaces.PetriObject;
 public class DataListTrains implements Interfaces.PetriObject, Cloneable, Serializable{
@@ -82,7 +83,7 @@ public class DataListTrains implements Interfaces.PetriObject, Cloneable, Serial
         return Value;
     }
 
-
+    public Train getTrain() {return Value.getTrain();}
     public List<Object> getTrainAttributes() {return Value.getTrainAttributes();}
 
     public LocalTime getDep_time() {
@@ -97,6 +98,8 @@ public class DataListTrains implements Interfaces.PetriObject, Cloneable, Serial
         return Value.getPlatform();
     }
     public int GetLength() {return Value.getTrain().Length;}
+
+    public String GetTrainNumber() { return Value.geTrainNumber();}
 
     private String name = "";
 

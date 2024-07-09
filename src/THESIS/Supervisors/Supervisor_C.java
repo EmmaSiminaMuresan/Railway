@@ -1,4 +1,4 @@
-package THESIS.Supervisors;
+package THESIS.Supervisor;
 
 import Components.*;
 import DataObjects.*;
@@ -184,6 +184,98 @@ public class Supervisor_C {
         Time3_C.Value = new TransferOperation("localhost", "1081", "Time_C3");
         pn.PlaceList.add(Time3_C);
 
+
+        // T5 ------------------------------------------------
+        PetriTransition t5 = new PetriTransition(pn);
+        t5.TransitionName = "t5";
+        t5.InputPlaceName.add("C_TimeC1");
+        t5.InputPlaceName.add("C_TimeC2");
+        t5.InputPlaceName.add("C_TimeC3");
+        t5.InputPlaceName.add("C_TimeC4");
+
+
+        Condition t5Ct1a = new Condition(t5, "C_TimeC1", TransitionCondition.NotNull);
+
+        GuardMapping grdt5a = new GuardMapping();
+        grdt5a.condition = t5Ct1a;
+        grdt5a.Activations.add(new Activation(t5, "C_TimeC1", TransitionOperation.Move, "C_TimeC"));
+        t5.GuardMappingList.add(grdt5a);
+
+
+        Condition t5Ct1b = new Condition(t5, "C_TimeC2", TransitionCondition.NotNull);
+
+        GuardMapping grdt5b = new GuardMapping();
+        grdt5b.condition = t5Ct1b;
+        grdt5b.Activations.add(new Activation(t5, "C_TimeC2", TransitionOperation.Move, "C_TimeC"));
+        t5.GuardMappingList.add(grdt5b);
+
+
+        Condition t5Ct1c = new Condition(t5, "C_TimeC3", TransitionCondition.NotNull);
+
+        GuardMapping grdt5c = new GuardMapping();
+        grdt5c.condition = t5Ct1c;
+        grdt5c.Activations.add(new Activation(t5, "C_TimeC3", TransitionOperation.Move, "C_TimeC"));
+        t5.GuardMappingList.add(grdt5c);
+
+
+        Condition t5Ct1d = new Condition(t5, "C_TimeC4", TransitionCondition.NotNull);
+
+        GuardMapping grdt5d = new GuardMapping();
+        grdt5d.condition = t5Ct1d;
+        grdt5d.Activations.add(new Activation(t5, "C_TimeC4", TransitionOperation.Move, "C_TimeC"));
+        t5.GuardMappingList.add(grdt5d);
+
+
+        t5.Delay = 0;
+        pn.Transitions.add(t5);
+
+
+        // T6 ------------------------------------------------
+        PetriTransition t6 = new PetriTransition(pn);
+        t6.TransitionName = "t6";
+        t6.InputPlaceName.add("C_PC1");
+        t6.InputPlaceName.add("C_PC2");
+        t6.InputPlaceName.add("C_PC3");
+        t6.InputPlaceName.add("C_PC4");
+
+
+        Condition t6Ct1a = new Condition(t6, "C_PC1", TransitionCondition.NotNull);
+
+        GuardMapping grdt6a = new GuardMapping();
+        grdt6a.condition = t6Ct1a;
+        grdt6a.Activations.add(new Activation(t6, "C_PC1", TransitionOperation.Move, "C_PC"));
+        t6.GuardMappingList.add(grdt6a);
+
+
+        Condition t6Ct1b = new Condition(t6, "C_PC2", TransitionCondition.NotNull);
+
+        GuardMapping grdt6b = new GuardMapping();
+        grdt6b.condition = t6Ct1b;
+        grdt6b.Activations.add(new Activation(t6, "C_PC2", TransitionOperation.Move, "C_PC"));
+        t6.GuardMappingList.add(grdt6b);
+
+
+        Condition t6Ct1c = new Condition(t6, "C_PC3", TransitionCondition.NotNull);
+
+        GuardMapping grdt6c = new GuardMapping();
+        grdt6c.condition = t6Ct1c;
+        grdt6c.Activations.add(new Activation(t6, "C_PC3", TransitionOperation.Move, "C_PC"));
+        t6.GuardMappingList.add(grdt6c);
+
+
+        Condition t6Ct1d = new Condition(t6, "C_PC4", TransitionCondition.NotNull);
+
+        GuardMapping grdt6d = new GuardMapping();
+        grdt6d.condition = t6Ct1d;
+        grdt6d.Activations.add(new Activation(t6, "C_PC4", TransitionOperation.Move, "C_PC"));
+        t6.GuardMappingList.add(grdt6d);
+
+
+        t6.Delay = 0;
+        pn.Transitions.add(t6);
+
+
+
         // T0 ------------------------------------------------
         PetriTransition t0 = new PetriTransition(pn);
         t0.TransitionName = "t0";
@@ -217,6 +309,7 @@ public class Supervisor_C {
         GuardMapping grdt0a = new GuardMapping();
         grdt0a.condition = t0Ct1a;
         grdt0a.Activations.add(new Activation(t0,p1,p2,p3,null,C1_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
+        grdt0a.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0a);
 
 
@@ -240,6 +333,7 @@ public class Supervisor_C {
         GuardMapping grdt0b = new GuardMapping();
         grdt0b.condition = t0Ct1b;
         grdt0b.Activations.add(new Activation(t0,p1,p2,p3,null,C2_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
+        grdt0b.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0b);
 
 
@@ -263,6 +357,7 @@ public class Supervisor_C {
         GuardMapping grdt0c = new GuardMapping();
         grdt0c.condition = t0Ct1c;
         grdt0c.Activations.add(new Activation(t0,p1,p2,p3,null,C3_Length,null,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
+        grdt0c.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0c);
 
 
@@ -286,6 +381,7 @@ public class Supervisor_C {
         GuardMapping grdt0d = new GuardMapping();
         grdt0d.condition = t0Ct1d;
         grdt0d.Activations.add(new Activation(t0,p1,p2,p3,p6,C1_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
+        grdt0d.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0d);
 
 
@@ -309,6 +405,7 @@ public class Supervisor_C {
         GuardMapping grdt0e = new GuardMapping();
         grdt0e.condition = t0Ct1e;
         grdt0e.Activations.add(new Activation(t0,p1,p2,p3,p6,C2_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
+        grdt0e.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0e);
 
 
@@ -332,6 +429,7 @@ public class Supervisor_C {
         GuardMapping grdt0f = new GuardMapping();
         grdt0f.condition = t0Ct1f;
         grdt0f.Activations.add(new Activation(t0,p1,p2,p3,p6,C3_Length,null,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
+        grdt0f.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0f);
 
 
@@ -357,6 +455,7 @@ public class Supervisor_C {
         GuardMapping grdt0g = new GuardMapping();
         grdt0g.condition = t0Ct1g;
         grdt0g.Activations.add(new Activation(t0,p1,p2,p3,C_TimeC,C_PC,null,C1_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
+        grdt0g.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0g);
 
 
@@ -381,6 +480,7 @@ public class Supervisor_C {
         GuardMapping grdt0h = new GuardMapping();
         grdt0h.condition = t0Ct1h;
         grdt0h.Activations.add(new Activation(t0,p1,p2,p3,C_TimeC,C_PC,null,C2_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
+        grdt0h.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0h);
 
 
@@ -405,6 +505,7 @@ public class Supervisor_C {
         GuardMapping grdt0i = new GuardMapping();
         grdt0i.condition = t0Ct1i;
         grdt0i.Activations.add(new Activation(t0,p1,p2,p3,C_TimeC,C_PC,null,C3_Length,null,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
+        grdt0i.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0i);
 
 
@@ -429,6 +530,7 @@ public class Supervisor_C {
         GuardMapping grdt0j = new GuardMapping();
         grdt0j.condition = t0Ct1j;
         grdt0j.Activations.add(new Activation(t0,p1,p2,p3,C_TimeC,C_PC,p6,C1_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
+        grdt0j.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0j);
 
 
@@ -453,6 +555,7 @@ public class Supervisor_C {
         GuardMapping grdt0k = new GuardMapping();
         grdt0k.condition = t0Ct1k;
         grdt0k.Activations.add(new Activation(t0,p1,p2,p3,C_TimeC,C_PC,p6,C2_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
+        grdt0k.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0k);
 
 
@@ -477,6 +580,7 @@ public class Supervisor_C {
         GuardMapping grdt0l = new GuardMapping();
         grdt0l.condition = t0Ct1l;
         grdt0l.Activations.add(new Activation(t0,p1,p2,p3,C_TimeC,C_PC,p6,C3_Length,null,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
+        grdt0l.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0l);
 
         t0.Delay = 0;
@@ -575,107 +679,49 @@ public class Supervisor_C {
 
 
         Condition t4Ct1a = new Condition(t4, "List_C", TransitionCondition.HaveListTrain);
-        Condition t4Ct1b = new Condition(t4, "List_C", TransitionCondition.Platform);//////no
+        Condition t4Ct2a = new Condition(t4, p4.getPlatform(), TransitionCondition.Platform_To_Send,"C1");
 
-        t4Ct1a.SetNextCondition(LogicConnector.AND, t4Ct1b);
+        t4Ct1a.SetNextCondition(LogicConnector.AND, t4Ct2a);
 
         GuardMapping grdt4a = new GuardMapping();
         grdt4a.condition = t4Ct1a;
-        grdt4a.Activations.add(new Activation(t4, "current_time", TransitionOperation.SendOverNetwork, "Time1_C"));// NO
-        grdt4a.Activations.add(new Activation(t4, "Train_C", TransitionOperation.SendOverNetwork, "T1_C"));
+        grdt4a.Activations.add(new Activation(t4, "List_C", TransitionOperation.SendTrainOverNetwork, "T1_C"));
+        grdt4a.Activations.add(new Activation(t4, "List_C", TransitionOperation.SendOverNetwork, "Time1_C"));
         t4.GuardMappingList.add(grdt4a);
+
+        Condition t4Ct1b = new Condition(t4, "List_C", TransitionCondition.HaveListTrain);
+        Condition t4Ct2b = new Condition(t4, p4.getPlatform(), TransitionCondition.Platform_To_Send,"C2");
+
+        t4Ct1b.SetNextCondition(LogicConnector.AND, t4Ct2b);
+
+        GuardMapping grdt4b = new GuardMapping();
+        grdt4b.condition = t4Ct1b;
+        grdt4b.Activations.add(new Activation(t4, "List_C", TransitionOperation.SendTrainOverNetwork, "T2_C"));
+        grdt4b.Activations.add(new Activation(t4, "List_C", TransitionOperation.SendOverNetwork, "Time2_C"));
+        t4.GuardMappingList.add(grdt4b);
+
+        Condition t4Ct1c = new Condition(t4, "List_C", TransitionCondition.HaveListTrain);
+        Condition t4Ct2c = new Condition(t4, p4.getPlatform(), TransitionCondition.Platform_To_Send,"C3");
+
+        t4Ct1c.SetNextCondition(LogicConnector.AND, t4Ct2c);
+
+        GuardMapping grdt4c = new GuardMapping();
+        grdt4c.condition = t4Ct1c;
+        grdt4c.Activations.add(new Activation(t4, "List_C", TransitionOperation.SendTrainOverNetwork, "T3_C"));
+        grdt4c.Activations.add(new Activation(t4, "List_C", TransitionOperation.SendOverNetwork, "Time3_C"));
+        t4.GuardMappingList.add(grdt4c);
 
 
         t4.Delay = 0;
         pn.Transitions.add(t4);
 
-        // T5 ------------------------------------------------
-        PetriTransition t5 = new PetriTransition(pn);
-        t5.TransitionName = "t5";
-        t5.InputPlaceName.add("C_TimeC1");
-        t5.InputPlaceName.add("C_TimeC2");
-        t5.InputPlaceName.add("C_TimeC3");
-        t5.InputPlaceName.add("C_TimeC4");
 
 
-        Condition t5Ct1a = new Condition(t1, "C_TimeC1", TransitionCondition.NotNull);
+        System.out.println("Supervisor C started \n ------------------------------");
+        pn.Delay = 3000;
 
-        GuardMapping grdt5a = new GuardMapping();
-        grdt5a.condition = t5Ct1a;
-        grdt5a.Activations.add(new Activation(t5, "C_TimeC1", TransitionOperation.Move, "C_TimeC"));
-        t5.GuardMappingList.add(grdt5a);
-
-
-        Condition t5Ct1b = new Condition(t1, "C_TimeC2", TransitionCondition.NotNull);
-
-        GuardMapping grdt5b = new GuardMapping();
-        grdt5b.condition = t5Ct1b;
-        grdt5b.Activations.add(new Activation(t5, "C_TimeC2", TransitionOperation.Move, "C_TimeC"));
-        t5.GuardMappingList.add(grdt5b);
-
-
-        Condition t5Ct1c = new Condition(t1, "C_TimeC3", TransitionCondition.NotNull);
-
-        GuardMapping grdt5c = new GuardMapping();
-        grdt5c.condition = t5Ct1c;
-        grdt5c.Activations.add(new Activation(t5, "C_TimeC3", TransitionOperation.Move, "C_TimeC"));
-        t5.GuardMappingList.add(grdt5c);
-
-
-        Condition t5Ct1d = new Condition(t1, "C_TimeC4", TransitionCondition.NotNull);
-
-        GuardMapping grdt5d = new GuardMapping();
-        grdt5d.condition = t5Ct1d;
-        grdt5d.Activations.add(new Activation(t5, "C_TimeC4", TransitionOperation.Move, "C_TimeC"));
-        t5.GuardMappingList.add(grdt5d);
-
-
-        t5.Delay = 0;
-        pn.Transitions.add(t5);
-
-
-        // T6 ------------------------------------------------
-        PetriTransition t6 = new PetriTransition(pn);
-        t6.TransitionName = "t6";
-        t6.InputPlaceName.add("C_PC1");
-        t6.InputPlaceName.add("C_PC2");
-        t6.InputPlaceName.add("C_PC3");
-        t6.InputPlaceName.add("C_PC4");
-
-
-        Condition t6Ct1a = new Condition(t1, "C_PC1", TransitionCondition.NotNull);
-
-        GuardMapping grdt6a = new GuardMapping();
-        grdt6a.condition = t6Ct1a;
-        grdt6a.Activations.add(new Activation(t6, "C_PC1", TransitionOperation.Move, "C_PC"));
-        t6.GuardMappingList.add(grdt6a);
-
-
-        Condition t6Ct1b = new Condition(t1, "C_PC2", TransitionCondition.NotNull);
-
-        GuardMapping grdt6b = new GuardMapping();
-        grdt6b.condition = t6Ct1b;
-        grdt6b.Activations.add(new Activation(t6, "C_PC2", TransitionOperation.Move, "C_PC"));
-        t6.GuardMappingList.add(grdt6b);
-
-
-        Condition t6Ct1c = new Condition(t1, "C_PC3", TransitionCondition.NotNull);
-
-        GuardMapping grdt6c = new GuardMapping();
-        grdt6c.condition = t6Ct1c;
-        grdt6c.Activations.add(new Activation(t6, "C_PC3", TransitionOperation.Move, "C_PC"));
-        t6.GuardMappingList.add(grdt6c);
-
-
-        Condition t6Ct1d = new Condition(t1, "C_PC4", TransitionCondition.NotNull);
-
-        GuardMapping grdt6d = new GuardMapping();
-        grdt6d.condition = t6Ct1d;
-        grdt6d.Activations.add(new Activation(t6, "C_PC4", TransitionOperation.Move, "C_PC"));
-        t6.GuardMappingList.add(grdt6d);
-
-
-        t6.Delay = 0;
-        pn.Transitions.add(t6);
+        PetriNetWindow frame = new PetriNetWindow(false);
+        frame.petriNet = pn;
+        frame.setVisible(true);
     }
 }

@@ -16,7 +16,13 @@ public class Controller_L9_L10 {
         pn.PetriNetName = "Controller L9 L10";
         pn.SetName("Controller L9 L10");
 
-        pn.NetworkPort = 10105;
+        pn.NetworkPort = 1085;
+
+
+        DataString L9_L10 = new DataString();
+        L9_L10.SetName("L9_L10");
+        L9_L10.SetValue("L9_L10");
+        pn.ConstantPlaceList.add(L9_L10);
 
         DataInteger Delay = new DataInteger();
         Delay.SetName("Delay");
@@ -82,12 +88,12 @@ public class Controller_L9_L10 {
 
         DataTransfer OP_L9 = new DataTransfer();
         OP_L9.SetName("OP_L9");
-        OP_L9.Value = new TransferOperation("localhost", "10103" , "L9");
+        OP_L9.Value = new TransferOperation("localhost", "1083" , "L9");
         pn.PlaceList.add(OP_L9);
 
         DataTransfer OP_L10 = new DataTransfer();
         OP_L10.SetName("OP_L10");
-        OP_L10.Value = new TransferOperation("localhost", "10103" , "L10");
+        OP_L10.Value = new TransferOperation("localhost", "1083" , "L10");
         pn.PlaceList.add(OP_L10);
 
 
@@ -118,26 +124,7 @@ public class Controller_L9_L10 {
         t0.InputPlaceName.add("in10_1");
         t0.InputPlaceName.add("in10_2");
 
-        // not a single train before the intersection
-        Condition t0Ct1a = new Condition(t0, "g1g2", TransitionCondition.NotNull);
-        Condition t0Ct2a = new Condition(t0, "in9_1", TransitionCondition.IsNull);
-        Condition t0Ct3a = new Condition(t0, "in10_1", TransitionCondition.IsNull);
-        Condition t0Ct4a = new Condition(t0, "in9_2", TransitionCondition.NotNull); // always like this because the user introduces in the GUI each speed on the railways
-        Condition t0Ct5a = new Condition(t0, "in10_2", TransitionCondition.NotNull);
 
-        t0Ct5a.SetNextCondition(LogicConnector.AND, t0Ct4a);
-        t0Ct4a.SetNextCondition(LogicConnector.AND, t0Ct3a);
-        t0Ct3a.SetNextCondition(LogicConnector.AND, t0Ct2a);
-        t0Ct2a.SetNextCondition(LogicConnector.AND, t0Ct1a);
-
-        GuardMapping grdt0a = new GuardMapping();
-        grdt0a.condition= t0Ct1a;
-        grdt0a.Activations.add(new Activation(t0, null,null, TransitionOperation.CalculateLightTimeRailway,Delay));
-        grdt0a.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
-        grdt0a.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
-        grdt0a.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L9"));
-        grdt0a.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L10"));
-        t0.GuardMappingList.add(grdt0a);
 
         // a train before the intersection on Railway 9
         Condition t0Ct1b = new Condition(t0, "g1g2", TransitionCondition.NotNull);
@@ -155,6 +142,7 @@ public class Controller_L9_L10 {
         grdt0b.condition= t0Ct1b;
         grdt0b.Activations.add(new Activation(t0, in9_1,in9_2, TransitionOperation.CalculateLightTimeRailway,Delay));
         grdt0b.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
+        grdt0b.Activations.add(new Activation(t0, Delay, L9_L10, TransitionOperation.MessageBox_Controllers));
         grdt0b.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0b.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L10"));
         t0.GuardMappingList.add(grdt0b);
@@ -174,6 +162,7 @@ public class Controller_L9_L10 {
         GuardMapping grdt0c = new GuardMapping();
         grdt0c.condition= t0Ct1c;
         grdt0c.Activations.add(new Activation(t0, in10_1,in10_2, TransitionOperation.CalculateLightTimeRailway,Delay));
+        grdt0c.Activations.add(new Activation(t0, Delay, L9_L10, TransitionOperation.MessageBox_Controllers));
         grdt0c.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0c.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0c.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L9"));
@@ -199,6 +188,7 @@ public class Controller_L9_L10 {
         grdt0d.condition= t0Ct1d;
         grdt0d.Activations.add(new Activation(t0, in9_1,in9_2, TransitionOperation.CalculateLightTimeRailway,Delay));
         grdt0d.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
+        grdt0d.Activations.add(new Activation(t0, Delay, L9_L10, TransitionOperation.MessageBox_Controllers));
         grdt0d.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0d.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L10"));
         t0.GuardMappingList.add(grdt0d);
@@ -220,6 +210,7 @@ public class Controller_L9_L10 {
         GuardMapping grdt0e = new GuardMapping();
         grdt0e.condition= t0Ct1e;
         grdt0e.Activations.add(new Activation(t0, in10_1,in10_2, TransitionOperation.CalculateLightTimeRailway,Delay));
+        grdt0e.Activations.add(new Activation(t0, Delay, L9_L10, TransitionOperation.MessageBox_Controllers));
         grdt0e.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0e.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0e.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L9"));
@@ -244,6 +235,7 @@ public class Controller_L9_L10 {
         GuardMapping grdt0f = new GuardMapping();
         grdt0f.condition= t0Ct1f;
         grdt0f.Activations.add(new Activation(t0, in10_1,in10_2, TransitionOperation.CalculateLightTimeRailway,Delay));
+        grdt0f.Activations.add(new Activation(t0, Delay, L9_L10, TransitionOperation.MessageBox_Controllers));
         grdt0f.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0f.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0f.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L9"));
@@ -269,6 +261,7 @@ public class Controller_L9_L10 {
         grdt0g.condition= t0Ct1g;
         grdt0g.Activations.add(new Activation(t0, in9_1,in9_2, TransitionOperation.CalculateLightTimeRailway,Delay));
         grdt0g.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
+        grdt0g.Activations.add(new Activation(t0, Delay, L9_L10, TransitionOperation.MessageBox_Controllers));
         grdt0g.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0g.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L10"));
         t0.GuardMappingList.add(grdt0g);
@@ -293,6 +286,7 @@ public class Controller_L9_L10 {
         grdt0h.condition= t0Ct1h;
         grdt0h.Activations.add(new Activation(t0, in9_1,in9_2, TransitionOperation.CalculateLightTimeRailway,Delay));
         grdt0h.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
+        grdt0h.Activations.add(new Activation(t0, Delay, L9_L10, TransitionOperation.MessageBox_Controllers));
         grdt0h.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0h.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L10"));
         t0.GuardMappingList.add(grdt0h);
@@ -373,5 +367,12 @@ public class Controller_L9_L10 {
 
         t4.Delay = 0;
         pn.Transitions.add(t4);
+
+        System.out.println("Controller L9 L10 started \n ------------------------------");
+        pn.Delay = 3000;
+
+        PetriNetWindow frame = new PetriNetWindow(false);
+        frame.petriNet = pn;
+        frame.setVisible(true);
     }
 }
