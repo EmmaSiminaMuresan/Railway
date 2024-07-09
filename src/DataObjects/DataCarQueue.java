@@ -1,6 +1,8 @@
 package DataObjects;
 
 import java.io.Serializable;
+import java.time.LocalTime;
+
 import DataOnly.CarQueue;
 import Enumerations.PetriObjectType;
 import Interfaces.PetriObject;
@@ -28,6 +30,22 @@ public class DataCarQueue implements Interfaces.PetriObject, Cloneable, Serializ
 
 	}
 
+	@Override
+	public String GetPlatform(int i){
+		// TODO Auto-generated method stub
+		return "";
+	}
+	@Override
+	public LocalTime GetDepTime(int i){
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public LocalTime GetLeavingTime(int i){
+		// TODO Auto-generated method stub
+		return null;
+
+	}
 	@Override
 	public PetriObjectType GetType() {
 		return PetriObjectType.DataCarQueue;

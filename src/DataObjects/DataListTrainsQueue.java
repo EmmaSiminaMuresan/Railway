@@ -43,10 +43,13 @@ public class DataListTrainsQueue implements Interfaces.PetriObject, Cloneable, S
 
     public int GetSize() {return Value.getSize();}
 
+    @Override
     public String GetPlatform(int i) {return Value.getPlatform(i);}
 
+    @Override
     public LocalTime GetDepTime(int i) {return Value.GetDepTime(i);}
 
+    @Override
     public LocalTime GetLeavingTime(int i) {return Value.GetLeavingTime(i);}
     public int GetLength(int i) {return Value.GetLength(i);}
 

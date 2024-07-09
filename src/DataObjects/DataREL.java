@@ -1,6 +1,7 @@
 package DataObjects;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 
 import DataOnly.REL;
 import Enumerations.PetriObjectType;
@@ -29,6 +30,22 @@ public class DataREL  implements Interfaces.PetriObject, Cloneable, Serializable
 
 	}
 
+	@Override
+	public String GetPlatform(int i){
+		// TODO Auto-generated method stub
+		return "";
+	}
+	@Override
+	public LocalTime GetDepTime(int i){
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public LocalTime GetLeavingTime(int i){
+		// TODO Auto-generated method stub
+		return null;
+
+	}
 	@Override
 	public void Stop() {
 		// TODO Auto-generated method stub

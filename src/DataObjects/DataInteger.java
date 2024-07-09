@@ -1,6 +1,7 @@
 package DataObjects;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 
 import Enumerations.PetriObjectType;
 import Interfaces.PetriObject;
@@ -16,7 +17,22 @@ public class DataInteger implements Interfaces.PetriObject, Cloneable, Serializa
 	public void Execute() {
 
 	}
+	@Override
+	public String GetPlatform(int i){
+		// TODO Auto-generated method stub
+		return "";
+	}
+	@Override
+	public LocalTime GetDepTime(int i){
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public LocalTime GetLeavingTime(int i){
+		// TODO Auto-generated method stub
+		return null;
 
+	}
 	// Overriding clone() method of Object class
 	public PetriObject clone() throws CloneNotSupportedException {
 		return (DataInteger) super.clone();

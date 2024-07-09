@@ -41,7 +41,12 @@ public class ListTrainsHistory implements Cloneable, Serializable{
         return Trains.size()-1;
     }
 
-    public LocalTime Last_Dep_Time() {return Trains.get(Trains.size()-1).getDep_time();}
+    public LocalTime Last_Dep_Time() {
+        if(Trains.size()>0){
+            return Trains.get(Trains.size()-1).getDep_time();
+        }
+       return null;
+    }
     public boolean AddTrain(DataListTrains train) {
         Trains.add(train);
         return true;

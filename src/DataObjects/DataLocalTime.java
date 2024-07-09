@@ -30,6 +30,23 @@ public class DataLocalTime implements Interfaces.PetriObject, Cloneable, Seriali
     }
 
     @Override
+    public String GetPlatform(int i){
+        // TODO Auto-generated method stub
+        return "";
+    }
+    @Override
+    public LocalTime GetDepTime(int i){
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public LocalTime GetLeavingTime(int i){
+        // TODO Auto-generated method stub
+        return null;
+
+    }
+
+    @Override
     public PetriObjectType GetType() {
         return PetriObjectType.DataLocalTime;
     }

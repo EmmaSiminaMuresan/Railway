@@ -36,9 +36,7 @@ public class GuardActivation implements Serializable {
 	public DataListTrainsHistory new_history;
 	public DataString filePath;
 
-	public DataLocalTime time1;
-	public DataLocalTime time2;
-	public DataLocalTime time3;
+	public DataListTrainsQueue time;
 	public DataInteger seconds;
 	public DataString Controller;
 
@@ -120,13 +118,11 @@ public class GuardActivation implements Serializable {
 		this.Operation = Condition;
 	}
 
-	public GuardActivation(  DataLocalTime time1,  DataLocalTime time2, DataLocalTime time3, TransitionOperation Condition,
+	public GuardActivation(  DataListTrainsQueue time, TransitionOperation Condition,
 					  DataInteger seconds) {
 		  
 		 
-		this.time1 = time1;
-		this.time2 = time2;
-		this.time3 = time3;
+		this.time = time;
 		this.seconds = seconds;
 		this.Operation = Condition;
 	}

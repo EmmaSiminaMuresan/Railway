@@ -86,10 +86,11 @@ public class InputTrainA extends JFrame {
         JButton btnSend = new JButton("Send");
         btnSend.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                Socket s;
+                Socket s = null;
+                ObjectOutputStream oos = null;
                 try {
                     s = new Socket(InetAddress.getByName("localhost"), Integer.parseInt(txtPort.getText()));
-                    ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+                    oos = new ObjectOutputStream(s.getOutputStream());
                     DataOverNetwork DataToSend = new DataOverNetwork();
 
                     // Send Train Data
@@ -101,18 +102,20 @@ public class InputTrainA extends JFrame {
                     DataToSend.petriObject = (PetriObject) dataTrain;
                     DataToSend.NetWorkPort = Integer.parseInt(txtPort.getText());
                     oos.writeObject(DataToSend);
+                    oos.flush(); // Ensure data is sent immediately
 
                     // Send Departure Time
                     DataLocalTime departureTime = new DataLocalTime();
                     departureTime.SetName("Dep_Time_A");
                     try {
-                        LocalTime time = LocalTime.parse(txtDepartureTime.getText(), DateTimeFormatter.ofPattern("[HH:mm][HH:mm:ss]"));
+                        LocalTime time = LocalTime.parse(txtDepartureTime.getText(), DateTimeFormatter.ofPattern("HH:mm:ss"));
                         departureTime.SetValue(time);
                     } catch (DateTimeParseException e) {
                         e.printStackTrace();
                     }
                     DataToSend.petriObject = (PetriObject) departureTime;
                     oos.writeObject(DataToSend);
+                    oos.flush(); // Ensure data is sent immediately
 
                     // Send Platform
                     DataString platform = new DataString();
@@ -120,10 +123,25 @@ public class InputTrainA extends JFrame {
                     platform.SetValue(txtPlatform.getText());
                     DataToSend.petriObject = (PetriObject) platform;
                     oos.writeObject(DataToSend);
+                    oos.flush(); // Ensure data is sent immediately
 
-                    s.close();
                 } catch (IOException e) {
                     e.printStackTrace();
+                } finally {
+                    if (oos != null) {
+                        try {
+                            oos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (s != null) {
+                        try {
+                            s.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
         });

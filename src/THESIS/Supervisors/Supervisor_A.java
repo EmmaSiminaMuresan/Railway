@@ -1,4 +1,4 @@
-package THESIS.Supervisor;
+package THESIS.Supervisors;
 
 import Components.*;
 import DataObjects.*;
@@ -22,71 +22,46 @@ public class Supervisor_A {
 
         pn.NetworkPort = 1080;
 
-        LocalTime currentTime = LocalTime.now();
 
-        DataLocalTime present_time = new DataLocalTime(); // needed for when it is pass 23:59:59
-        present_time.SetName("present_time");
-        present_time.SetValue(currentTime);
-        pn.ConstantPlaceList.add(present_time);
-
-        DataLocalTime current_time = new DataLocalTime(); // time to pass for the current train
-        current_time.SetName("current_time");
-        current_time.SetValue(null);
-        pn.ConstantPlaceList.add(current_time); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
-
-        DataLocalTime prev_time = new DataLocalTime(); // time to pass for the prev train
-        prev_time.SetName("prev_time");
-        prev_time.SetValue(null);
-        pn.ConstantPlaceList.add(prev_time); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
-
-        DataLocalTime C_TimeA = new DataLocalTime(); // time to pass for the prev train
+        DataLocalTime C_TimeA = new DataLocalTime();
         C_TimeA.SetName("C_TimeA");
-        C_TimeA.SetValue(null);
-        pn.PlaceList.add(C_TimeA); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(C_TimeA);
 
-        DataLocalTime C_TimeA1 = new DataLocalTime(); // time to pass for the prev train
+        DataLocalTime C_TimeA1 = new DataLocalTime();
         C_TimeA1.SetName("C_TimeA1");
-        C_TimeA1.SetValue(null);
-        pn.PlaceList.add(C_TimeA1); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(C_TimeA1);
 
-        DataLocalTime C_TimeA2 = new DataLocalTime(); // time to pass for the prev train
+        DataLocalTime C_TimeA2 = new DataLocalTime();
         C_TimeA2.SetName("C_TimeA2");
-        C_TimeA2.SetValue(null);
-        pn.PlaceList.add(C_TimeA2); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(C_TimeA2);
 
-        DataLocalTime C_TimeA3 = new DataLocalTime(); // time to pass for the prev train
+        DataLocalTime C_TimeA3 = new DataLocalTime();
         C_TimeA3.SetName("C_TimeA");
-        C_TimeA3.SetValue(null);
-        pn.PlaceList.add(C_TimeA3); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(C_TimeA3);
 
         DataString C_PA = new DataString();
         C_PA.SetName("C_PA");
-        C_PA.SetValue(null);
         pn.ConstantPlaceList.add(C_PA);
 
         DataString C_PA1 = new DataString();
         C_PA1.SetName("C_PA1");
-        C_PA1.SetValue(null);
         pn.ConstantPlaceList.add(C_PA1);
 
         DataString C_PA2 = new DataString();
         C_PA2.SetName("C_PA2");
-        C_PA2.SetValue(null);
         pn.ConstantPlaceList.add(C_PA2);
 
         DataString C_PA3= new DataString();
         C_PA3.SetName("C_PA3");
-        C_PA3.SetValue(null);
         pn.ConstantPlaceList.add(C_PA3);
 
         DataString C_PA4 = new DataString();
         C_PA4.SetName("C_PA4");
-        C_PA4.SetValue(null);
         pn.ConstantPlaceList.add(C_PA4);
 
         DataString filePath = new DataString();
         filePath.SetName("filePath");
-        filePath.SetValue("Trains_Station_A.txt"); ///////////// change this for each station!!
+        filePath.SetValue("Trains_Station_A.txt");
         filePath.textfile();
         pn.ConstantPlaceList.add(filePath);
 
@@ -125,20 +100,6 @@ public class Supervisor_A {
         speed_on_platform.SetName("Speed_On_Platform");
         pn.ConstantPlaceList.add(speed_on_platform);
 
-        DataInteger zero = new DataInteger();
-        zero.SetName("Zero");
-        zero.SetValue(0);
-        pn.ConstantPlaceList.add(zero);
-
-        DataInteger one = new DataInteger();
-        one.SetName("One");
-        one.SetValue(1);
-        pn.ConstantPlaceList.add(one);
-
-        DataInteger two = new DataInteger();
-        two.SetName("Two");
-        two.SetValue(2);
-        pn.ConstantPlaceList.add(two);
 
         DataTrain p1 = new DataTrain();
         p1.SetName("Train_A");
@@ -204,6 +165,21 @@ public class Supervisor_A {
         t5.InputPlaceName.add("C_TimeA3");
         t5.InputPlaceName.add("C_TimeA4");
 
+        // T5 ------------------------------------------------
+
+        // Handle case when all inputs are null
+        Condition t5CtAllNull = new Condition(t5, "C_TimeA1", TransitionCondition.IsNull);
+        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeA2", TransitionCondition.IsNull));
+        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeA3", TransitionCondition.IsNull));
+        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeA4", TransitionCondition.IsNull));
+
+        GuardMapping grdT5AllNull = new GuardMapping();
+        grdT5AllNull.condition = t5CtAllNull;
+        grdT5AllNull.Activations.add(new Activation(t5, "", TransitionOperation.DoNothing, ""));
+        t5.GuardMappingList.add(grdT5AllNull);
+
+        t5.Delay = 0;
+        pn.Transitions.add(t5);
 
         Condition t5Ct1a = new Condition(t5, "C_TimeA1", TransitionCondition.NotNull);
 
@@ -248,6 +224,22 @@ public class Supervisor_A {
         t6.InputPlaceName.add("C_PA2");
         t6.InputPlaceName.add("C_PA3");
         t6.InputPlaceName.add("C_PA4");
+
+
+        // Handle case when all inputs are null
+        Condition t6CtAllNull = new Condition(t6, "C_PA1", TransitionCondition.IsNull);
+        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PA2", TransitionCondition.IsNull));
+        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PA3", TransitionCondition.IsNull));
+        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PA4", TransitionCondition.IsNull));
+
+        GuardMapping grdT6AllNull = new GuardMapping();
+        grdT6AllNull.condition = t6CtAllNull;
+        grdT6AllNull.Activations.add(new Activation(t6, "", TransitionOperation.DoNothing, ""));
+        t6.GuardMappingList.add(grdT6AllNull);
+
+        t6.Delay = 0;
+        pn.Transitions.add(t6);
+
 
 
         Condition t6Ct1a = new Condition(t6, "C_PA1", TransitionCondition.NotNull);
@@ -298,7 +290,7 @@ public class Supervisor_A {
 
 
         // no comming train
-
+        // first train created on platform A1
         Condition t0Ct1a = new Condition(t0, "Train_A", TransitionCondition.NotNull);
         Condition t0Ct2a = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
         Condition t0Ct3a = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
@@ -322,7 +314,7 @@ public class Supervisor_A {
         grdt0a.Activations.add(new Activation(t0,p4, TransitionOperation.MessageBox_SupervisorA));
         t0.GuardMappingList.add(grdt0a);
 
-
+        // first train created on platform A2
         Condition t0Ct1b = new Condition(t0, "Train_A", TransitionCondition.NotNull);
         Condition t0Ct2b = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
         Condition t0Ct3b = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
@@ -346,7 +338,7 @@ public class Supervisor_A {
         grdt0b.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorA));
         t0.GuardMappingList.add(grdt0b);
 
-
+        // first train created on platform A3
         Condition t0Ct1c = new Condition(t0, "Train_A", TransitionCondition.NotNull);
         Condition t0Ct2c = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
         Condition t0Ct3c = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
@@ -689,7 +681,7 @@ public class Supervisor_A {
 
 
         Condition t4Ct1a = new Condition(t4, "List_A", TransitionCondition.HaveListTrain);
-        Condition t4Ct2a = new Condition(t4, p4.getPlatform(), TransitionCondition.Platform_To_Send, "A1");
+        Condition t4Ct2a = new Condition(t4,"List_A", TransitionCondition.Platform_To_Send, "A1");
 
         t4Ct1a.SetNextCondition(LogicConnector.AND, t4Ct2a);
 
@@ -701,7 +693,7 @@ public class Supervisor_A {
 
 
         Condition t4Ct1b = new Condition(t4, "List_A", TransitionCondition.HaveListTrain);
-        Condition t4Ct2b = new Condition(t4, p4.getPlatform(), TransitionCondition.Platform_To_Send, "A2");
+        Condition t4Ct2b = new Condition(t4, "List_A", TransitionCondition.Platform_To_Send, "A2");
 
         t4Ct1b.SetNextCondition(LogicConnector.AND, t4Ct2b);
 
@@ -714,7 +706,7 @@ public class Supervisor_A {
 
 
         Condition t4Ct1c = new Condition(t4, "List_A", TransitionCondition.HaveListTrain);
-        Condition t4Ct2c = new Condition(t4, p4.getPlatform(), TransitionCondition.Platform_To_Send, "A3");
+        Condition t4Ct2c = new Condition(t4,"List_A", TransitionCondition.Platform_To_Send, "A3");
 
         t4Ct1c.SetNextCondition(LogicConnector.AND, t4Ct2c);
 

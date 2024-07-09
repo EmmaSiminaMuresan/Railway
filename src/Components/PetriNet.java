@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import DataObjects.DataSubPetriNet;
@@ -28,6 +29,22 @@ public class PetriNet implements PetriObject, Runnable, Cloneable, Serializable 
 	}
 
 
+	@Override
+	public String GetPlatform(int i){
+		// TODO Auto-generated method stub
+		return "";
+	}
+	@Override
+	public LocalTime GetDepTime(int i){
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public LocalTime GetLeavingTime(int i){
+		// TODO Auto-generated method stub
+		return null;
+
+	}
 	
 	/**
 	 * 

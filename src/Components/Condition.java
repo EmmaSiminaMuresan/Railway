@@ -252,7 +252,10 @@ public class Condition implements Serializable {
 			case Platform_To_Send: {
 				if (Value1 == null || Value2 == null)
 					return false;
-				if (Value1.contains(Value2)) {
+				if (Value1.GetValue() == null || Value2.GetValue() == null)
+					return false;
+				if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
+					if ((Value1.GetPlatform(0)).contains((String) Value2.GetValue()))
 						return true;
 				}
 				break;
@@ -370,6 +373,49 @@ public class Condition implements Serializable {
 						return true;
 					}
 				break;
+
+			case CheckDepartureTime: {
+				if (Value1 == null || Value2 == null)
+					return false;
+				if (Value1.GetValue() == null || Value2.GetValue() == null)
+					return false;
+				if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
+					if (Value1.GetDepTime(0).isAfter(Value2.GetDepTime(0))) {
+						return true;
+					}
+					else return false;
+				}
+				break;
+			}
+
+			case EqualDepartureTime: {
+				if (Value1 == null || Value2 == null)
+					return false;
+				if (Value1.GetValue() == null || Value2.GetValue() == null)
+					return false;
+				if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
+					if (Value1.GetDepTime(0).equals((Value2.GetDepTime(0)))) {
+						return true;
+					}
+					else return false;
+				}
+				break;
+			}
+
+			case CheckLeavingTime: {
+				if (Value1 == null || Value2 == null)
+					return false;
+				if (Value1.GetValue() == null || Value2.GetValue() == null)
+					return false;
+				if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
+					if (Value1.GetLeavingTime(0).isAfter(Value2.GetLeavingTime(0))) {
+						return true;
+					}
+					else return false;
+				}
+				break;
+			}
+
 
 			case CanAddTrains_List: {
 				if (Value1 == null)

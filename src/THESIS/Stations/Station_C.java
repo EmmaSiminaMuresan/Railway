@@ -15,7 +15,6 @@ public class Station_C {
 
         pn.NetworkPort = 1090;
 
-        int x=7;
 
         DataTrain p1 = new DataTrain();
         p1.SetName("Train_C1");
@@ -170,27 +169,22 @@ public class Station_C {
 
         DataInteger C1_Length = new DataInteger();
         C1_Length.SetName("C1_Length");
-        C1_Length.SetValue(x);  /////////
         pn.ConstantPlaceList.add(C1_Length);
 
         DataInteger C2_Length = new DataInteger();
         C2_Length.SetName("C2_Length");
-        C2_Length.SetValue(x);//////////
         pn.ConstantPlaceList.add(C2_Length);
 
         DataInteger C3_Length = new DataInteger();
         C3_Length.SetName("C3_Length");
-        C3_Length.SetValue(x);//////////
         pn.ConstantPlaceList.add(C3_Length);
 
         DataInteger C4_Length = new DataInteger();
         C4_Length.SetName("C1_Length");
-        C4_Length.SetValue(x);////////////
         pn.ConstantPlaceList.add(C4_Length);
 
         DataInteger speed_on_platform = new DataInteger();
         speed_on_platform.SetName("Speed_On_Platform");
-        speed_on_platform.SetValue(x); //////////////
         pn.ConstantPlaceList.add(speed_on_platform);
 
         DataLocalTime time = new DataLocalTime(); // needed for when it is pass 23:59:59

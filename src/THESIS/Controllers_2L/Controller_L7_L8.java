@@ -341,7 +341,7 @@ public class Controller_L7_L8 {
 
         GuardMapping grdt3 = new GuardMapping();
         grdt3.condition= t3Ct1;
-        grdt0h.Activations.add(new Activation(t0, "green", TransitionOperation.SendOverNetwork, "OP_L7"));
+        grdt3.Activations.add(new Activation(t3, "green", TransitionOperation.SendOverNetwork, "OP_L7"));
         grdt3.Activations.add(new Activation(t3, "P1", TransitionOperation.Move, "g1g2"));
         t3.GuardMappingList.add(grdt3);
 
@@ -360,8 +360,8 @@ public class Controller_L7_L8 {
 
         GuardMapping grdt4 = new GuardMapping();
         grdt4.condition= t4Ct1;
-        grdt0h.Activations.add(new Activation(t0, "green", TransitionOperation.SendOverNetwork, "OP_L8"));
-        grdt4.Activations.add(new Activation(t4, "P2", TransitionOperation.Move, "g1g2"));
+        grdt4.Activations.add(new Activation(t0, "green", TransitionOperation.SendOverNetwork, "OP_L8"));
+        grdt0h.Activations.add(new Activation(t4, "P2", TransitionOperation.Move, "g1g2"));
         t4.GuardMappingList.add(grdt4);
 
         t4.Delay = 0;

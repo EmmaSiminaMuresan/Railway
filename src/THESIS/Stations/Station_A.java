@@ -14,7 +14,6 @@ public class Station_A {
         pn.SetName("Station A");
 
         pn.NetworkPort = 1081;
-        int x=7;
 
         DataTrain p1 = new DataTrain();
         p1.SetName("Train_A1");
@@ -72,17 +71,17 @@ public class Station_A {
         p14.SetName("i2");
         pn.PlaceList.add(p14);
 
-        DataListTrainsQueue Time_A1 = new DataListTrainsQueue(); // time to pass for the prev train
+        DataListTrainsQueue Time_A1 = new DataListTrainsQueue();
         Time_A1.SetName("Time_A1");
-        pn.PlaceList.add(Time_A1); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(Time_A1);
 
-        DataListTrainsQueue Time_A2 = new DataListTrainsQueue(); // time to pass for the prev train
+        DataListTrainsQueue Time_A2 = new DataListTrainsQueue();
         Time_A2.SetName("Time_A2");
-        pn.PlaceList.add(Time_A2); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(Time_A2);
 
-        DataListTrainsQueue Time_A3 = new DataListTrainsQueue(); // time to pass for the prev train
+        DataListTrainsQueue Time_A3 = new DataListTrainsQueue();
         Time_A3.SetName("Time_A3");
-        pn.PlaceList.add(Time_A3); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(Time_A3);
 
         DataTransfer OP_A1 = new DataTransfer();
         OP_A1.SetName("OP_A1");
@@ -166,27 +165,22 @@ public class Station_A {
 
         DataInteger A1_Length = new DataInteger();
         A1_Length.SetName("A1_Length");
-        A1_Length.SetValue(x);  /////////
         pn.ConstantPlaceList.add(A1_Length);
 
         DataInteger A2_Length = new DataInteger();
         A2_Length.SetName("A2_Length");
-        A2_Length.SetValue(x);//////////
         pn.ConstantPlaceList.add(A2_Length);
 
         DataInteger A3_Length = new DataInteger();
         A3_Length.SetName("A3_Length");
-        A3_Length.SetValue(x);//////////
         pn.ConstantPlaceList.add(A3_Length);
 
         DataInteger A4_Length = new DataInteger();
-        A4_Length.SetName("A1_Length");
-        A4_Length.SetValue(x);////////////
+        A4_Length.SetName("A4_Length");
         pn.ConstantPlaceList.add(A4_Length);
 
         DataInteger speed_on_platform = new DataInteger();
         speed_on_platform.SetName("Speed_On_Platform");
-        speed_on_platform.SetValue(x); //////////////
         pn.ConstantPlaceList.add(speed_on_platform);
 
         DataLocalTime time = new DataLocalTime(); // needed for when it is pass 23:59:59

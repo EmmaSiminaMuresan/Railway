@@ -1,6 +1,7 @@
 package DataObjects;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 
 import DataOnly.FloatFloat;
 
@@ -24,7 +25,22 @@ public class DataFloatFloat implements Interfaces.PetriObject, Cloneable, Serial
 		// TODO Auto-generated method stub
 
 	}
+	@Override
+	public String GetPlatform(int i){
+		// TODO Auto-generated method stub
+		return "";
+	}
+	@Override
+	public LocalTime GetDepTime(int i){
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public LocalTime GetLeavingTime(int i){
+		// TODO Auto-generated method stub
+		return null;
 
+	}
 	@Override
 	public void Start() {
 		// TODO Auto-generated method stub

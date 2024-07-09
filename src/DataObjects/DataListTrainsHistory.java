@@ -31,6 +31,7 @@ public class DataListTrainsHistory implements Interfaces.PetriObject, Cloneable,
 
     }
 
+
     @Override
     public PetriObjectType GetType() {
         return PetriObjectType.DataListTrainsHistory;
@@ -67,10 +68,13 @@ public class DataListTrainsHistory implements Interfaces.PetriObject, Cloneable,
         return Value;
     }
 
+    @Override
     public String GetPlatform(int i) {return Value.getPlatform(i);}
 
+    @Override
     public LocalTime GetDepTime(int i) {return Value.GetDepTime(i);}
 
+    @Override
     public LocalTime GetLeavingTime(int i) {return Value.GetLeavingTime(i);}
     public int GetLength(int i) {return Value.GetLength(i);}
 

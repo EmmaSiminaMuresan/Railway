@@ -583,8 +583,8 @@ public class Functions implements Serializable {
 				ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value, Dep_Platform.Value);
 				new_train_list.SetValue(new_train);
 			} else {
-				leaving_time = TimeAfterPassing(C_Time.Value.plusMinutes(10), T.GetLength(), length1, length2, speed);
-				ListTrains new_train = new ListTrains(T.Value, C_Time.Value.plusMinutes(10), leaving_time.Value, Dep_Platform.Value);
+				leaving_time = TimeAfterPassing(C_Time.Value.plusMinutes(20), T.GetLength(), length1, length2, speed);
+				ListTrains new_train = new ListTrains(T.Value, C_Time.Value.plusMinutes(20), leaving_time.Value, Dep_Platform.Value);
 				new_train_list.SetValue(new_train);
 			}
 
@@ -595,8 +595,8 @@ public class Functions implements Serializable {
 					ListTrains new_train = new ListTrains(T.Value, Dep_Time.Value, leaving_time.Value, Dep_Platform.Value);
 					new_train_list.SetValue(new_train);
 				} else {
-					leaving_time = TimeAfterPassing(C_Time.Value.plusMinutes(10), T.GetLength(), length1, length2, speed);
-					ListTrains new_train = new ListTrains(T.Value, C_Time.Value.plusMinutes(10), leaving_time.Value, Dep_Platform.Value);
+					leaving_time = TimeAfterPassing(C_Time.Value.plusMinutes(20), T.GetLength(), length1, length2, speed);
+					ListTrains new_train = new ListTrains(T.Value, C_Time.Value.plusMinutes(20), leaving_time.Value, Dep_Platform.Value);
 					new_train_list.SetValue(new_train);
 				}
 			} else {
@@ -681,38 +681,11 @@ public class Functions implements Serializable {
 	}
 
 
-	public DataInteger Calculate_Light_Time_Station(DataListTrainsQueue Time1, DataListTrainsQueue Time2, DataListTrainsQueue Time3){
+	public DataInteger Calculate_Light_Time_Station(DataListTrainsQueue Time){
 		DataInteger time = new DataInteger();
 		time.SetValue(0);
 
-
-		if(Time1==null && Time2==null && Time3==null) time.Value = 0;
-		if(Time1!=null && Time2==null && Time3==null) time.Value = (int)(Duration.between(Time1.GetDepTime(0), Time1.GetLeavingTime(0)).getSeconds());
-		if(Time1==null && Time2!=null && Time3==null) time.Value = (int)(Duration.between(Time2.GetDepTime(0), Time2.GetLeavingTime(0)).getSeconds());
-		if(Time1==null && Time2==null && Time3!=null) time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
-		if(Time1!=null && Time2!=null && Time3==null) {
-			if(Time1.GetDepTime(0).isAfter(Time2.GetDepTime(0))) time.Value = (int)(Duration.between(Time1.GetDepTime(0), Time1.GetLeavingTime(0)).getSeconds());
-			else time.Value = (int)(Duration.between(Time2.GetDepTime(0), Time2.GetLeavingTime(0)).getSeconds());
-		}
-		if(Time1==null && Time2!=null && Time3!=null) {
-			if(Time2.GetDepTime(0).isAfter(Time3.GetDepTime(0))) time.Value = (int)(Duration.between(Time2.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
-			else time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
-		}
-		if(Time1!=null && Time2==null && Time3!=null) {
-			if(Time1.GetDepTime(0).isAfter(Time3.GetDepTime(0))) time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
-			else time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
-		}
-		if(Time1!=null && Time2!=null && Time3!=null){
-			if((Time1.GetDepTime(0).isAfter(Time2.GetDepTime(0)) && (Time2.GetDepTime(0).isAfter(Time3.GetDepTime(0)))) || ((Time1.GetDepTime(0).isAfter(Time3.GetDepTime(0)) && (Time3.GetDepTime(0).isAfter(Time2.GetDepTime(0)))))){
-				time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
-			}
-			if((Time2.GetDepTime(0).isAfter(Time1.GetDepTime(0)) && (Time1.GetDepTime(0).isAfter(Time3.GetDepTime(0)))) || ((Time2.GetDepTime(0).isAfter(Time3.GetDepTime(0)) && (Time3.GetDepTime(0).isAfter(Time1.GetDepTime(0)))))){
-				time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
-			}
-			if((Time3.GetDepTime(0).isAfter(Time2.GetDepTime(0)) && (Time2.GetDepTime(0).isAfter(Time1.GetDepTime(0)))) || ((Time3.GetDepTime(0).isAfter(Time1.GetDepTime(0)) && (Time1.GetDepTime(0).isAfter(Time2.GetDepTime(0)))))){
-				time.Value = (int)(Duration.between(Time3.GetDepTime(0), Time3.GetLeavingTime(0)).getSeconds());
-			}
-		}
+		time.Value = (int)(Duration.between(Time.GetDepTime(0), Time.GetLeavingTime(0))).getSeconds();
 
 		return time;
 	}

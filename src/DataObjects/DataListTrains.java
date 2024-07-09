@@ -46,7 +46,22 @@ public class DataListTrains implements Interfaces.PetriObject, Cloneable, Serial
         return Value;
     }
 
+    @Override
+    public String GetPlatform(int i){
+        // TODO Auto-generated method stub
+        return "";
+    }
+    @Override
+    public LocalTime GetDepTime(int i){
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public LocalTime GetLeavingTime(int i){
+        // TODO Auto-generated method stub
+        return null;
 
+    }
     @Override
     public void SetValue(Object value) {
         if (value == null) {
@@ -93,6 +108,7 @@ public class DataListTrains implements Interfaces.PetriObject, Cloneable, Serial
     public LocalTime getLeaving_time() {
         return Value.getLeaving_time();
     }
+
 
     public String getPlatform(){
         return Value.getPlatform();

@@ -1,6 +1,7 @@
 package DataObjects;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 
 import Enumerations.PetriObjectType;
 import Interfaces.PetriObject;
@@ -29,7 +30,22 @@ public class DataBoolean implements Interfaces.PetriObject, Cloneable, Serializa
 		// TODO Auto-generated method stub
 
 	}
+	@Override
+	public String GetPlatform(int i){
+		// TODO Auto-generated method stub
+		return "";
+	}
+	@Override
+	public LocalTime GetDepTime(int i){
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public LocalTime GetLeavingTime(int i){
+		// TODO Auto-generated method stub
+		return null;
 
+	}
 	@Override
 	public PetriObjectType GetType() {
 		return PetriObjectType.DataBoolean;

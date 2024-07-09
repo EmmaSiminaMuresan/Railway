@@ -27,6 +27,7 @@ public enum TransitionOperation implements Serializable{
 	CalculateLightTimeStation,
 	CalculateLightTimeRailway,
 	CreateTrain_NotNull,
+	DoNothing,
 
 	MessageBox_Controllers,
 	MessageBox_SupervisorA,

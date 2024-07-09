@@ -45,9 +45,7 @@ public class Activation implements Serializable {
 	public DataListTrainsHistory new_history;
 	public DataString filePath;
 
-	public DataLocalTime time1;
-	public DataLocalTime time2;
-	public DataLocalTime time3;
+	public DataListTrainsQueue time;
 	public DataInteger seconds;
 	public DataString Controller;
 
@@ -143,13 +141,11 @@ public class Activation implements Serializable {
 		this.Operation = Condition;
 	}
 
-	public Activation(PetriTransition Parent, DataLocalTime time1,  DataLocalTime time2, DataLocalTime time3, TransitionOperation Condition,
+	public Activation(PetriTransition Parent, DataListTrainsQueue time, TransitionOperation Condition,
 					  DataInteger seconds) {
 		util = new Functions();
 		this.Parent = Parent;
-		this.time1 = time1;
-		this.time2 = time2;
-		this.time3 = time3;
+		this.time = time;
 		this.seconds = seconds;
 		this.Operation = Condition;
 	}
@@ -190,6 +186,8 @@ public class Activation implements Serializable {
 
 	
 	public void Activate() throws CloneNotSupportedException {
+		if (Operation == TransitionOperation.DoNothing)
+			return;
 
 		if (Operation == TransitionOperation.SendTrainOverNetwork)
 			SendTrainOverNetwork();
@@ -294,6 +292,7 @@ public class Activation implements Serializable {
 			Div_FloatFlaot();
 		// ---------------------------------------------------------
 	}
+
 	private void MessageBox_SupervisorA() throws CloneNotSupportedException{
 		util.MessageBox_SupervisorA(list_train);
 	}
@@ -308,7 +307,7 @@ public class Activation implements Serializable {
 	}
 	private void CalculateLightTimeStation() throws CloneNotSupportedException{
 		DataInteger result = new DataInteger();
-		result = util.Calculate_Light_Time_Station(time1.Value,time2.Value,time3.Value);
+		result = util.Calculate_Light_Time_Station(time);
 
 		seconds.SetValue(result);
 	}

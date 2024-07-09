@@ -1,4 +1,4 @@
-package THESIS.Supervisor;
+package THESIS.Supervisors;
 
 import Components.*;
 import DataObjects.*;
@@ -17,42 +17,26 @@ public class Supervisor_B {
 
         pn.NetworkPort = 1091;
 
-        LocalTime currentTime = LocalTime.now();
 
-        DataLocalTime present_time = new DataLocalTime(); // needed for when it is pass 23:59:59
-        present_time.SetName("present_time");
-        present_time.SetValue(currentTime);
-        pn.ConstantPlaceList.add(present_time);
-
-        DataLocalTime current_time = new DataLocalTime(); // time to pass for the current train
-        current_time.SetName("current_time");
-        current_time.SetValue(null);
-        pn.ConstantPlaceList.add(current_time); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
-
-        DataLocalTime prev_time = new DataLocalTime(); // time to pass for the prev train
-        prev_time.SetName("prev_time");
-        prev_time.SetValue(null);
-        pn.ConstantPlaceList.add(prev_time); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
-
-        DataLocalTime C_TimeB = new DataLocalTime(); // time to pass for the prev train
+        DataLocalTime C_TimeB = new DataLocalTime();
         C_TimeB.SetName("C_TimeB");
         C_TimeB.SetValue(null);
-        pn.PlaceList.add(C_TimeB); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(C_TimeB);
 
-        DataLocalTime C_TimeB1 = new DataLocalTime(); // time to pass for the prev train
+        DataLocalTime C_TimeB1 = new DataLocalTime();
         C_TimeB1.SetName("C_TimeB1");
         C_TimeB1.SetValue(null);
-        pn.PlaceList.add(C_TimeB1); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(C_TimeB1);
 
-        DataLocalTime C_TimeB2 = new DataLocalTime(); // time to pass for the prev train
+        DataLocalTime C_TimeB2 = new DataLocalTime();
         C_TimeB2.SetName("C_TimeB2");
         C_TimeB2.SetValue(null);
-        pn.PlaceList.add(C_TimeB2); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(C_TimeB2);
 
-        DataLocalTime C_TimeB3 = new DataLocalTime(); // time to pass for the prev train
+        DataLocalTime C_TimeB3 = new DataLocalTime();
         C_TimeB3.SetName("C_TimeB");
         C_TimeB3.SetValue(null);
-        pn.PlaceList.add(C_TimeB3); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(C_TimeB3);
 
         DataString C_PB = new DataString();
         C_PB.SetName("C_PB");
@@ -81,7 +65,7 @@ public class Supervisor_B {
 
         DataString filePath = new DataString();
         filePath.SetName("filePath");
-        filePath.SetValue("Trains_Station_B.txt"); ///////////// change this for each station!!
+        filePath.SetValue("Trains_Station_B.txt");
         filePath.textfile();
         pn.ConstantPlaceList.add(filePath);
 
@@ -119,21 +103,6 @@ public class Supervisor_B {
         DataInteger speed_on_platform = new DataInteger();
         speed_on_platform.SetName("Speed_On_Platform");
         pn.ConstantPlaceList.add(speed_on_platform);
-
-        DataInteger zero = new DataInteger();
-        zero.SetName("Zero");
-        zero.SetValue(0);
-        pn.ConstantPlaceList.add(zero);
-
-        DataInteger one = new DataInteger();
-        one.SetName("One");
-        one.SetValue(1);
-        pn.ConstantPlaceList.add(one);
-
-        DataInteger two = new DataInteger();
-        two.SetName("Two");
-        two.SetValue(2);
-        pn.ConstantPlaceList.add(two);
 
         DataTrain p1 = new DataTrain();
         p1.SetName("Train_B");
@@ -683,7 +652,7 @@ public class Supervisor_B {
 
 
         Condition t4Ct1a = new Condition(t4, "List_B", TransitionCondition.HaveListTrain);
-        Condition t4Ct2a = new Condition(t4, p4.getPlatform(), TransitionCondition.Platform_To_Send, "B1");
+        Condition t4Ct2a = new Condition(t4, "List_B", TransitionCondition.Platform_To_Send, "B1");
 
         t4Ct1a.SetNextCondition(LogicConnector.AND, t4Ct2a);
 
@@ -696,7 +665,7 @@ public class Supervisor_B {
 
 
         Condition t4Ct1b = new Condition(t4, "List_B", TransitionCondition.HaveListTrain);
-        Condition t4Ct2b = new Condition(t4, p4.getPlatform(), TransitionCondition.Platform_To_Send, "B2");
+        Condition t4Ct2b = new Condition(t4, "List_B", TransitionCondition.Platform_To_Send, "B2");
 
         t4Ct1a.SetNextCondition(LogicConnector.AND, t4Ct2b);
 
@@ -708,7 +677,7 @@ public class Supervisor_B {
 
 
         Condition t4Ct1c = new Condition(t4, "List_B", TransitionCondition.HaveListTrain);
-        Condition t4Ct2c = new Condition(t4, p4.getPlatform(), TransitionCondition.Platform_To_Send, "B3");
+        Condition t4Ct2c = new Condition(t4,"List_B", TransitionCondition.Platform_To_Send, "B3");
 
         t4Ct1c.SetNextCondition(LogicConnector.AND, t4Ct2c);
 

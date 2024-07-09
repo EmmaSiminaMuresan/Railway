@@ -1,4 +1,4 @@
-package THESIS.Supervisor;
+package THESIS.Supervisors;
 
 import Components.*;
 import DataObjects.*;
@@ -18,35 +18,25 @@ public class Supervisor_C {
         pn.NetworkPort = 1092;
 
 
-        DataLocalTime current_time = new DataLocalTime(); // time to pass for the current train
-        current_time.SetName("current_time");
-        current_time.SetValue(null);
-        pn.ConstantPlaceList.add(current_time); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
-
-        DataLocalTime prev_time = new DataLocalTime(); // time to pass for the prev train
-        prev_time.SetName("prev_time");
-        prev_time.SetValue(null);
-        pn.ConstantPlaceList.add(prev_time); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
-
-        DataLocalTime C_TimeC = new DataLocalTime(); // time to pass for the prev train
+        DataLocalTime C_TimeC = new DataLocalTime();
         C_TimeC.SetName("C_TimeC");
         C_TimeC.SetValue(null);
-        pn.PlaceList.add(C_TimeC); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(C_TimeC);
 
-        DataLocalTime C_TimeC1 = new DataLocalTime(); // time to pass for the prev train
+        DataLocalTime C_TimeC1 = new DataLocalTime();
         C_TimeC1.SetName("C_TimeC1");
         C_TimeC1.SetValue(null);
-        pn.PlaceList.add(C_TimeC1); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(C_TimeC1);
 
-        DataLocalTime C_TimeC2 = new DataLocalTime(); // time to pass for the prev train
+        DataLocalTime C_TimeC2 = new DataLocalTime();
         C_TimeC2.SetName("C_TimeC2");
         C_TimeC2.SetValue(null);
-        pn.PlaceList.add(C_TimeC2); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(C_TimeC2);
 
-        DataLocalTime C_TimeC3 = new DataLocalTime(); // time to pass for the prev train
+        DataLocalTime C_TimeC3 = new DataLocalTime();
         C_TimeC3.SetName("C_TimeC");
         C_TimeC3.SetValue(null);
-        pn.PlaceList.add(C_TimeC3); /// IS THIS CONSTANT IF IT WILL CHANGE EACH TIME?
+        pn.PlaceList.add(C_TimeC3);
 
         DataString C_PC = new DataString();
         C_PC.SetName("C_PC");
@@ -75,7 +65,7 @@ public class Supervisor_C {
 
         DataString filePath = new DataString();
         filePath.SetName("filePath");
-        filePath.SetValue("Trains_Station_C.txt"); ///////////// change this for each station!!
+        filePath.SetValue("Trains_Station_C.txt");
         filePath.textfile();
         pn.ConstantPlaceList.add(filePath);
 
@@ -113,21 +103,6 @@ public class Supervisor_C {
         DataInteger speed_on_platform = new DataInteger();
         speed_on_platform.SetName("Speed_On_Platform");
         pn.ConstantPlaceList.add(speed_on_platform);
-
-        DataInteger zero = new DataInteger();
-        zero.SetName("Zero");
-        zero.SetValue(0);
-        pn.ConstantPlaceList.add(zero);
-
-        DataInteger one = new DataInteger();
-        one.SetName("One");
-        one.SetValue(1);
-        pn.ConstantPlaceList.add(one);
-
-        DataInteger two = new DataInteger();
-        two.SetName("Two");
-        two.SetValue(2);
-        pn.ConstantPlaceList.add(two);
 
         DataTrain p1 = new DataTrain();
         p1.SetName("Train_C");
@@ -679,7 +654,7 @@ public class Supervisor_C {
 
 
         Condition t4Ct1a = new Condition(t4, "List_C", TransitionCondition.HaveListTrain);
-        Condition t4Ct2a = new Condition(t4, p4.getPlatform(), TransitionCondition.Platform_To_Send,"C1");
+        Condition t4Ct2a = new Condition(t4, "List_C", TransitionCondition.Platform_To_Send,"C1");
 
         t4Ct1a.SetNextCondition(LogicConnector.AND, t4Ct2a);
 
@@ -690,7 +665,7 @@ public class Supervisor_C {
         t4.GuardMappingList.add(grdt4a);
 
         Condition t4Ct1b = new Condition(t4, "List_C", TransitionCondition.HaveListTrain);
-        Condition t4Ct2b = new Condition(t4, p4.getPlatform(), TransitionCondition.Platform_To_Send,"C2");
+        Condition t4Ct2b = new Condition(t4, "List_C", TransitionCondition.Platform_To_Send,"C2");
 
         t4Ct1b.SetNextCondition(LogicConnector.AND, t4Ct2b);
 
@@ -701,7 +676,7 @@ public class Supervisor_C {
         t4.GuardMappingList.add(grdt4b);
 
         Condition t4Ct1c = new Condition(t4, "List_C", TransitionCondition.HaveListTrain);
-        Condition t4Ct2c = new Condition(t4, p4.getPlatform(), TransitionCondition.Platform_To_Send,"C3");
+        Condition t4Ct2c = new Condition(t4,"List_C", TransitionCondition.Platform_To_Send,"C3");
 
         t4Ct1c.SetNextCondition(LogicConnector.AND, t4Ct2c);
 

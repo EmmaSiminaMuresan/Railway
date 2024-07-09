@@ -1,6 +1,7 @@
 package DataObjects;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.List;
 
 import DataOnly.Train;
@@ -33,11 +34,27 @@ public class DataTrain implements Interfaces.PetriObject, Cloneable, Serializabl
     }
 
     @Override
+    public String GetPlatform(int i){
+        // TODO Auto-generated method stub
+        return "";
+    }
+    @Override
+    public LocalTime GetDepTime(int i){
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public LocalTime GetLeavingTime(int i){
+        // TODO Auto-generated method stub
+        return null;
+
+    }
+    @Override
     public PetriObjectType GetType() {
         return PetriObjectType.DataTrain;
     }
 
-    public Train Value = null;
+    public Train Value ;
 
     @Override
     public Object GetValue() {

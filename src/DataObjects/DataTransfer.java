@@ -5,6 +5,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.time.LocalTime;
 
 import DataOnly.TransferOperation;
 import Enumerations.PetriObjectType;
@@ -49,6 +50,22 @@ public class DataTransfer  implements Interfaces.PetriObject, Cloneable, Seriali
 		
 	}
 
+	@Override
+	public String GetPlatform(int i){
+		// TODO Auto-generated method stub
+		return "";
+	}
+	@Override
+	public LocalTime GetDepTime(int i){
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public LocalTime GetLeavingTime(int i){
+		// TODO Auto-generated method stub
+		return null;
+
+	}
 	@Override
 	public PetriObjectType GetType() {
 		return PetriObjectType.DataTransfer;
