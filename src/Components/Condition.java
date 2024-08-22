@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import DataObjects.DataListTrains;
+import DataObjects.DataListTrainsHistory;
 import DataObjects.DataTrain;
 import DataOnly.*;
 import Enumerations.LogicConnector;
@@ -362,17 +363,24 @@ public class Condition implements Serializable {
 			}
 			case CheckTime_Before:
 				if (Value1.GetType() == PetriObjectType.DataListTrainsHistory)
-					if (((ListTrainsHistory) Value1.GetValue()).Last_Dep_Time().isBefore(LocalTime.of(23,59,59)) ||
-							((ListTrainsHistory) Value1.GetValue()).Last_Dep_Time().equals(LocalTime.of(23,59,59))) {
-						return true;
-					}
+				{
+					LocalTime lt=((DataListTrainsHistory) Value1).Value.Last_Dep_Time();
+					if(lt!=null)
+						if (lt.isBefore(LocalTime.of(23,59,59)) ||
+								lt.equals(LocalTime.of(23,59,59))) {
+							return true;
+						}
+				}
 				break;
-			case CheckTime_After:
-				if (Value1.GetType() == PetriObjectType.DataListTrainsHistory)
-					if (((ListTrainsHistory) Value1.GetValue()).Last_Dep_Time().isAfter(LocalTime.of(23,59,59))) {
-						return true;
-					}
+			case CheckTime_After: {
+				LocalTime lt=((DataListTrainsHistory) Value1).Value.Last_Dep_Time();
+				if(lt!=null)
+					if (Value1.GetType() == PetriObjectType.DataListTrainsHistory)
+						if (lt.isAfter(LocalTime.of(23, 59, 59))) {
+							return true;
+						}
 				break;
+			}
 
 			case CheckDepartureTime: {
 				if (Value1 == null || Value2 == null)
@@ -426,6 +434,7 @@ public class Condition implements Serializable {
 					if (((ListTrainsQueue) Value1.GetValue()).CanAddtrain()) {
 						return true;
 					}
+					else return false;
 				}
 				break;
 			}
@@ -438,7 +447,7 @@ public class Condition implements Serializable {
 				if (Value1.GetType() == PetriObjectType.DataListTrainsQueue) {
 					if (((ListTrainsQueue) Value1.GetValue()).CanNotAddtrain()) {
 						return true;
-					}
+					}else return false;
 				}
 				break;
 			}

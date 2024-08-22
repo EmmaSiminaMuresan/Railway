@@ -638,8 +638,8 @@ public class Station_A {
         t4_A2.GuardMappingList.add(grdt4_A2a);
 
 
-        t3_A3.Delay = 0;
-        pn.Transitions.add(t3_A3);
+        t4_A2.Delay = 0;
+        pn.Transitions.add(t4_A2);
 
         System.out.println("Station A started \n ------------------------------");
         pn.Delay = 3000;

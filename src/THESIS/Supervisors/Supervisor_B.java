@@ -96,9 +96,9 @@ public class Supervisor_B {
         B3_Length.SetName("B3_Length");
         pn.ConstantPlaceList.add(B3_Length);
 
-        DataInteger A4_Length = new DataInteger();
-        A4_Length.SetName("B1_Length");
-        pn.ConstantPlaceList.add(A4_Length);
+        DataInteger B4_Length = new DataInteger();
+        B4_Length.SetName("B4_Length");
+        pn.ConstantPlaceList.add(B4_Length);
 
         DataInteger speed_on_platform = new DataInteger();
         speed_on_platform.SetName("Speed_On_Platform");
@@ -281,7 +281,7 @@ public class Supervisor_B {
 
         GuardMapping grdt0a = new GuardMapping();
         grdt0a.condition = t0Ct1a;
-        grdt0a.Activations.add(new Activation(t0,p1,p2,p3,null,B1_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
+        grdt0a.Activations.add(new Activation(t0,p1,p2,p3,null,B1_Length,B4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
         grdt0a.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorB));
         t0.GuardMappingList.add(grdt0a);
 
@@ -305,7 +305,7 @@ public class Supervisor_B {
 
         GuardMapping grdt0b = new GuardMapping();
         grdt0b.condition = t0Ct1b;
-        grdt0b.Activations.add(new Activation(t0,p1,p2,p3,null,B2_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
+        grdt0b.Activations.add(new Activation(t0,p1,p2,p3,null,B2_Length,B4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
         grdt0b.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorB));
         t0.GuardMappingList.add(grdt0b);
 
@@ -353,7 +353,7 @@ public class Supervisor_B {
 
         GuardMapping grdt0d = new GuardMapping();
         grdt0d.condition = t0Ct1d;
-        grdt0d.Activations.add(new Activation(t0,p1,p2,p3,p6,B1_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
+        grdt0d.Activations.add(new Activation(t0,p1,p2,p3,p6,B1_Length,B4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
         grdt0d.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorB));
         t0.GuardMappingList.add(grdt0d);
 
@@ -377,7 +377,7 @@ public class Supervisor_B {
 
         GuardMapping grdt0e = new GuardMapping();
         grdt0e.condition = t0Ct1e;
-        grdt0e.Activations.add(new Activation(t0,p1,p2,p3,p6,B2_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
+        grdt0e.Activations.add(new Activation(t0,p1,p2,p3,p6,B2_Length,B4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
         grdt0e.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorB));
         t0.GuardMappingList.add(grdt0e);
 
@@ -427,7 +427,7 @@ public class Supervisor_B {
 
         GuardMapping grdt0g = new GuardMapping();
         grdt0g.condition = t0Ct1g;
-        grdt0g.Activations.add(new Activation(t0,p1,p2,p3,C_TimeB,C_PB,null,B1_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
+        grdt0g.Activations.add(new Activation(t0,p1,p2,p3,C_TimeB,C_PB,null,B1_Length,B4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
         grdt0g.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorB));
         t0.GuardMappingList.add(grdt0g);
 
@@ -452,7 +452,7 @@ public class Supervisor_B {
 
         GuardMapping grdt0h = new GuardMapping();
         grdt0h.condition = t0Ct1h;
-        grdt0h.Activations.add(new Activation(t0,p1,p2,p3,C_TimeB,C_PB,null,B2_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
+        grdt0h.Activations.add(new Activation(t0,p1,p2,p3,C_TimeB,C_PB,null,B2_Length,B4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
         grdt0h.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorB));
         t0.GuardMappingList.add(grdt0h);
 
@@ -502,7 +502,7 @@ public class Supervisor_B {
 
         GuardMapping grdt0j = new GuardMapping();
         grdt0j.condition = t0Ct1j;
-        grdt0j.Activations.add(new Activation(t0,p1,p2,p3,C_TimeB,C_PB,p6,B1_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
+        grdt0j.Activations.add(new Activation(t0,p1,p2,p3,C_TimeB,C_PB,p6,B1_Length,B4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
         grdt0j.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorB));
         t0.GuardMappingList.add(grdt0j);
 
@@ -527,7 +527,7 @@ public class Supervisor_B {
 
         GuardMapping grdt0k = new GuardMapping();
         grdt0k.condition = t0Ct1k;
-        grdt0k.Activations.add(new Activation(t0,p1,p2,p3,C_TimeB,C_PB,p6,B2_Length,A4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
+        grdt0k.Activations.add(new Activation(t0,p1,p2,p3,C_TimeB,C_PB,p6,B2_Length,B4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
         grdt0k.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorB));
         t0.GuardMappingList.add(grdt0k);
 

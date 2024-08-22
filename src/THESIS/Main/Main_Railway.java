@@ -18,7 +18,6 @@ public class Main_Railway {
 
         pn.NetworkPort = 1083;
 
-        int x=7;
 
         DataTrain inA = new DataTrain();
         inA.SetName("inA");
@@ -154,32 +153,26 @@ public class Main_Railway {
 
         DataInteger in7 = new DataInteger();
         in7.SetName("in7");
-        in7.SetValue(x);  /////////
         pn.ConstantPlaceList.add(in7);
 
         DataInteger in8 = new DataInteger();
         in8.SetName("in8");
-        in8.SetValue(x);//////////
         pn.ConstantPlaceList.add(in8);
 
         DataInteger in9 = new DataInteger();
         in9.SetName("in9");
-        in9.SetValue(x);//////////
         pn.ConstantPlaceList.add(in9);
 
         DataInteger in10 = new DataInteger();
         in10.SetName("in10");
-        in10.SetValue(x);  /////////
         pn.ConstantPlaceList.add(in10);
 
         DataInteger in11 = new DataInteger();
         in11.SetName("in11");
-        in11.SetValue(x);//////////
         pn.ConstantPlaceList.add(in11);
 
         DataInteger in12 = new DataInteger();
         in12.SetName("in12");
-        in12.SetValue(x);//////////
         pn.ConstantPlaceList.add(in12);
 
         // Train sent to the station

@@ -5,51 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a26b87d8-bbc5-40b6-b377-f3f41d0bab4d" name="Changes" comment="eighth commit">
+      <change afterPath="$PROJECT_DIR$/src/GUIs/InputDepTime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUIs/InputPlatformLength.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUIs/InputPlatformSpeed.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Activation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Condition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/PetriNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PetriNet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/PetriTransition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PetriTransition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataBoolean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataBoolean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataCar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataCar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataCarQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataCarQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataFloat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataFloat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataFloatFloat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataFloatFloat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataInteger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataInteger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataListTrains.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataListTrains.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataListTrainsHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataListTrainsHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataListTrainsQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataListTrainsQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataLocalTime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataLocalTime.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataREL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataREL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataRELQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataRELQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataString.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataSubPetriNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataSubPetriNet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataObjects/DataTrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataTrain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataObjects/DataTransfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataObjects/DataTransfer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataOnly/ListTrainsHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataOnly/ListTrainsHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enumerations/TransitionCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enumerations/TransitionCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enumerations/TransitionOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enumerations/TransitionOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/InputRailwaySpeed.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUIs/InputSensors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/InputSensors.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUIs/InputStationAData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/InputStationAData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUIs/InputStationBData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/InputStationBData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUIs/InputStationCData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/InputStationCData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUIs/InputTrainA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/InputTrainA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaces/PetriObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/PetriObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PetriDataPackage/GuardActivation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PetriDataPackage/GuardActivation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PetriDataPackage/PetriData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PetriDataPackage/PetriData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Controllers_1L/Controller_L3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/THESIS/Controllers_2L/Controller_L11_L12.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Controllers_2L/Controller_L11_L12.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/THESIS/Controllers_2L/Controller_L7_L8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Controllers_2L/Controller_L7_L8.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/THESIS/Controllers_2L/Controller_L9_L10.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Controllers_2L/Controller_L9_L10.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/InputStationAData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/InputStationBData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/InputStationCData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/InputTrainA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/InputTrain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/InputTrainB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/InputPlatform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/InputTrainC.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/THESIS/Main/Main_Railway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Main/Main_Railway.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/THESIS/Stations/Station_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Stations/Station_A.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/THESIS/Stations/Station_B.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Stations/Station_B.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/THESIS/Stations/Station_C.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Stations/Station_C.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_A.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_B.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_B.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_C.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/THESIS/Supervisors/Supervisor_C.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utilities/Functions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utilities/Functions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utilities/DataOverNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utilities/DataOverNetwork.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,9 +55,22 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Controller_L1.executor": "Run",
     "Application.Controller_L2.executor": "Run",
     "Application.Controller_L7_L8.executor": "Run",
     "Application.Controller_L9_L10.executor": "Run",
+    "Application.InputDepTime (1).executor": "Run",
+    "Application.InputDepTime.executor": "Run",
+    "Application.InputDepartureTime (1).executor": "Run",
+    "Application.InputDepartureTime.executor": "Run",
+    "Application.InputLength1.executor": "Run",
+    "Application.InputPlatform (1).executor": "Run",
+    "Application.InputPlatform.executor": "Run",
+    "Application.InputPlatform1Length.executor": "Run",
+    "Application.InputPlatformLength (1).executor": "Run",
+    "Application.InputPlatformLength.executor": "Run",
+    "Application.InputPlatformSpeed (1).executor": "Run",
+    "Application.InputPlatformSpeed.executor": "Run",
     "Application.InputRailwaySpeed.executor": "Run",
     "Application.InputSensors.executor": "Run",
     "Application.InputStationAData (1).executor": "Run",
@@ -90,14 +78,22 @@
     "Application.InputStationBData.executor": "Run",
     "Application.InputStationCData.executor": "Run",
     "Application.InputTrain (1).executor": "Run",
+    "Application.InputTrain (2).executor": "Run",
+    "Application.InputTrain (3).executor": "Run",
+    "Application.InputTrain (4).executor": "Run",
     "Application.InputTrain.executor": "Run",
     "Application.InputTrainA (1).executor": "Run",
     "Application.InputTrainA (2).executor": "Run",
     "Application.InputTrainA.executor": "Run",
     "Application.InputTrainB.executor": "Run",
     "Application.InputTrainC.executor": "Run",
+    "Application.Main_Railway.executor": "Run",
     "Application.Station_A.executor": "Run",
+    "Application.Station_B.executor": "Run",
+    "Application.Station_C.executor": "Run",
     "Application.Supervisor_A.executor": "Run",
+    "Application.Supervisor_B.executor": "Run",
+    "Application.Supervisor_C.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -107,13 +103,13 @@
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.InputTrainA">
-    <configuration name="InputStationAData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GUIs.InputStationAData" />
+  <component name="RunManager" selected="Application.Station_B">
+    <configuration name="Controller_L1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="THESIS.Controllers_1L.Controller_L1" />
       <module name="Railway" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="GUIs.*" />
+          <option name="PATTERN" value="THESIS.Controllers_1L.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -121,12 +117,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InputTrainA (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GUIs.InputTrainA" />
+    <configuration name="Controller_L7_L8" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="THESIS.Controllers_2L.Controller_L7_L8" />
       <module name="Railway" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="GUIs.*" />
+          <option name="PATTERN" value="THESIS.Controllers_2L.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -134,12 +130,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InputTrainA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GUIs.InputTrainA" />
+    <configuration name="Main_Railway" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="THESIS.Main.Main_Railway" />
       <module name="Railway" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="GUIs.*" />
+          <option name="PATTERN" value="THESIS.Main.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -160,12 +156,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Supervisor_A" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="THESIS.Supervisors.Supervisor_A" />
+    <configuration name="Station_B" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="THESIS.Stations.Station_B" />
       <module name="Railway" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="THESIS.Supervisors.*" />
+          <option name="PATTERN" value="THESIS.Stations.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -175,11 +171,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.InputTrainA" />
-        <item itemvalue="Application.InputStationAData" />
-        <item itemvalue="Application.Supervisor_A" />
+        <item itemvalue="Application.Station_B" />
         <item itemvalue="Application.Station_A" />
-        <item itemvalue="Application.InputTrainA (1)" />
+        <item itemvalue="Application.Main_Railway" />
+        <item itemvalue="Application.Controller_L7_L8" />
+        <item itemvalue="Application.Controller_L1" />
       </list>
     </recent_temporary>
   </component>
@@ -247,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720487737838</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="eighth commit">
+      <option name="closed" value="true" />
+      <created>1720558104530</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1720558104530</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -270,5 +274,15 @@
     <MESSAGE value="seventh commit" />
     <MESSAGE value="eighth commit" />
     <option name="LAST_COMMIT_MESSAGE" value="eighth commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IndexOutOfBoundsException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

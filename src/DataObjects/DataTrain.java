@@ -60,7 +60,11 @@ public class DataTrain implements Interfaces.PetriObject, Cloneable, Serializabl
     public Object GetValue() {
         return Value;
     }
-    public int GetLength() {return Value.Length;}
+    public int GetLength() {
+        if(Value.Length != 0)
+            return Value.Length;
+        else return 0;
+    }
 
     @Override
     public void SetValue(Object value) {

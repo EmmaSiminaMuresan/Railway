@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,14 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
-import DataObjects.DataLocalTime;
 import DataObjects.DataTrain;
 import DataOnly.Train;
-import DataObjects.DataString;
-import Interfaces.PetriObject;
 import Utilities.DataOverNetwork;
 
-public class InputTrainA extends JFrame {
+public class InputTrain extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -33,7 +27,7 @@ public class InputTrainA extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    InputTrainA frame = new InputTrainA();
+                    InputTrain frame = new InputTrain();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -42,46 +36,36 @@ public class InputTrainA extends JFrame {
         });
     }
 
-    public InputTrainA() {
-        setTitle("Supervisor A - Create Train");
+    public InputTrain() {
+        setTitle("Supervisor - Create Train");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 350, 300);
+        setBounds(100, 100, 310, 210);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
         JTextPane txtNumber = new JTextPane();
-        txtNumber.setText("number");
+        txtNumber.setText("Train Number");
         txtNumber.setToolTipText("");
-        txtNumber.setBounds(10, 20, 285, 20);
+        txtNumber.setBounds(10, 10, 270, 20);
         contentPane.add(txtNumber);
 
-        JTextPane txtPort = new JTextPane();
-        txtPort.setText("1080");
-        txtPort.setBounds(10, 50, 285, 20);
-        contentPane.add(txtPort);
-
         JTextPane txtLength = new JTextPane();
-        txtLength.setText("length");
-        txtLength.setBounds(10, 80, 285, 20);
+        txtLength.setText("Train Length");
+        txtLength.setBounds(10, 40, 270, 20);
         contentPane.add(txtLength);
 
         JTextPane txtTargets = new JTextPane();
         txtTargets.setToolTipText("");
         txtTargets.setText("targets");
-        txtTargets.setBounds(10, 110, 285, 20);
+        txtTargets.setBounds(10, 70, 270, 20);
         contentPane.add(txtTargets);
 
-        JTextPane txtDepartureTime = new JTextPane();
-        txtDepartureTime.setText("departure time");
-        txtDepartureTime.setBounds(10, 140, 285, 20);
-        contentPane.add(txtDepartureTime);
-
-        JTextPane txtPlatform = new JTextPane();
-        txtPlatform.setText("platform");
-        txtPlatform.setBounds(10, 170, 285, 20);
-        contentPane.add(txtPlatform);
+        JTextPane txtPort = new JTextPane();
+        txtPort.setText("Station: A / B / C");
+        txtPort.setBounds(10, 100, 270, 20);
+        contentPane.add(txtPort);
 
         JButton btnSend = new JButton("Send");
         btnSend.addActionListener(new ActionListener() {
@@ -89,39 +73,28 @@ public class InputTrainA extends JFrame {
                 Socket s = null;
                 ObjectOutputStream oos = null;
                 try {
-                    s = new Socket(InetAddress.getByName("localhost"), Integer.parseInt(txtPort.getText()));
+                    int port = getPort(txtPort.getText());
+                    if (port == -1) {
+                        System.err.println("Invalid port input!");
+                        return;
+                    }
+
+                    s = new Socket(InetAddress.getByName("localhost"), port);
                     oos = new ObjectOutputStream(s.getOutputStream());
                     DataOverNetwork DataToSend = new DataOverNetwork();
 
-                    // Send Train Data
+                    // Create Train Data
                     DataTrain dataTrain = new DataTrain();
                     String[] targetsArray = txtTargets.getText().split(",");
                     Train t = new Train(Integer.parseInt(txtLength.getText()), txtNumber.getText(), targetsArray);
                     dataTrain.SetValue(t);
-                    dataTrain.SetName("Train_A");
-                    DataToSend.petriObject = (PetriObject) dataTrain;
-                    DataToSend.NetWorkPort = Integer.parseInt(txtPort.getText());
-                    oos.writeObject(DataToSend);
-                    oos.flush(); // Ensure data is sent immediately
+                    dataTrain.SetName(getPlaceNameTrain(port));
 
-                    // Send Departure Time
-                    DataLocalTime departureTime = new DataLocalTime();
-                    departureTime.SetName("Dep_Time_A");
-                    try {
-                        LocalTime time = LocalTime.parse(txtDepartureTime.getText(), DateTimeFormatter.ofPattern("HH:mm:ss"));
-                        departureTime.SetValue(time);
-                    } catch (DateTimeParseException e) {
-                        e.printStackTrace();
-                    }
-                    DataToSend.petriObject = (PetriObject) departureTime;
-                    oos.writeObject(DataToSend);
-                    oos.flush(); // Ensure data is sent immediately
+                    // Set dataTrain as the petriObject
+                    DataToSend.petriObject = dataTrain;
+                    DataToSend.NetWorkPort = port;
 
-                    // Send Platform
-                    DataString platform = new DataString();
-                    platform.SetName("Platform_A");
-                    platform.SetValue(txtPlatform.getText());
-                    DataToSend.petriObject = (PetriObject) platform;
+                    // Send DataToSend object
                     oos.writeObject(DataToSend);
                     oos.flush(); // Ensure data is sent immediately
 
@@ -144,8 +117,34 @@ public class InputTrainA extends JFrame {
                     }
                 }
             }
+
+            private int getPort(String portText) {
+                switch (portText.trim().toUpperCase()) {
+                    case "A":
+                        return 1080;
+                    case "B":
+                        return 1091;
+                    case "C":
+                        return 1092;
+                    default:
+                        return -1;
+                }
+            }
+
+            private String getPlaceNameTrain(int port) {
+                switch (port) {
+                    case 1080:
+                        return "Train_A";
+                    case 1091:
+                        return "Train_B";
+                    case 1092:
+                        return "Train_C";
+                    default:
+                        return "Unknown";
+                }
+            }
         });
-        btnSend.setBounds(10, 200, 285, 44);
+        btnSend.setBounds(10, 130, 270, 30);
         contentPane.add(btnSend);
     }
 }

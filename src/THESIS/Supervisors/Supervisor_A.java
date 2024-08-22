@@ -93,7 +93,7 @@ public class Supervisor_A {
         pn.ConstantPlaceList.add(A3_Length);
 
         DataInteger A4_Length = new DataInteger();
-        A4_Length.SetName("A1_Length");
+        A4_Length.SetName("A4_Length");
         pn.ConstantPlaceList.add(A4_Length);
 
         DataInteger speed_on_platform = new DataInteger();
@@ -157,125 +157,7 @@ public class Supervisor_A {
         pn.PlaceList.add(Time3_A);
 
 
-        // T5 ------------------------------------------------
-        PetriTransition t5 = new PetriTransition(pn);
-        t5.TransitionName = "t5";
-        t5.InputPlaceName.add("C_TimeA1");
-        t5.InputPlaceName.add("C_TimeA2");
-        t5.InputPlaceName.add("C_TimeA3");
-        t5.InputPlaceName.add("C_TimeA4");
 
-        // T5 ------------------------------------------------
-
-        // Handle case when all inputs are null
-        Condition t5CtAllNull = new Condition(t5, "C_TimeA1", TransitionCondition.IsNull);
-        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeA2", TransitionCondition.IsNull));
-        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeA3", TransitionCondition.IsNull));
-        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeA4", TransitionCondition.IsNull));
-
-        GuardMapping grdT5AllNull = new GuardMapping();
-        grdT5AllNull.condition = t5CtAllNull;
-        grdT5AllNull.Activations.add(new Activation(t5, "", TransitionOperation.DoNothing, ""));
-        t5.GuardMappingList.add(grdT5AllNull);
-
-        t5.Delay = 0;
-        pn.Transitions.add(t5);
-
-        Condition t5Ct1a = new Condition(t5, "C_TimeA1", TransitionCondition.NotNull);
-
-        GuardMapping grdt5a = new GuardMapping();
-        grdt5a.condition = t5Ct1a;
-        grdt5a.Activations.add(new Activation(t5, "C_TimeA1", TransitionOperation.Move, "C_TimeA"));
-        t5.GuardMappingList.add(grdt5a);
-
-
-        Condition t5Ct1b = new Condition(t5, "C_TimeA2", TransitionCondition.NotNull);
-
-        GuardMapping grdt5b = new GuardMapping();
-        grdt5b.condition = t5Ct1b;
-        grdt5b.Activations.add(new Activation(t5, "C_TimeA2", TransitionOperation.Move, "C_TimeA"));
-        t5.GuardMappingList.add(grdt5b);
-
-
-        Condition t5Ct1c = new Condition(t5, "C_TimeA3", TransitionCondition.NotNull);
-
-        GuardMapping grdt5c = new GuardMapping();
-        grdt5c.condition = t5Ct1c;
-        grdt5c.Activations.add(new Activation(t5, "C_TimeA3", TransitionOperation.Move, "C_TimeA"));
-        t5.GuardMappingList.add(grdt5c);
-
-
-        Condition t5Ct1d = new Condition(t5, "C_TimeA4", TransitionCondition.NotNull);
-
-        GuardMapping grdt5d = new GuardMapping();
-        grdt5d.condition = t5Ct1d;
-        grdt5d.Activations.add(new Activation(t5, "C_TimeA4", TransitionOperation.Move, "C_TimeA"));
-        t5.GuardMappingList.add(grdt5d);
-
-
-        t5.Delay = 0;
-        pn.Transitions.add(t5);
-
-
-        // T6 ------------------------------------------------
-        PetriTransition t6 = new PetriTransition(pn);
-        t6.TransitionName = "t6";
-        t6.InputPlaceName.add("C_PA1");
-        t6.InputPlaceName.add("C_PA2");
-        t6.InputPlaceName.add("C_PA3");
-        t6.InputPlaceName.add("C_PA4");
-
-
-        // Handle case when all inputs are null
-        Condition t6CtAllNull = new Condition(t6, "C_PA1", TransitionCondition.IsNull);
-        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PA2", TransitionCondition.IsNull));
-        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PA3", TransitionCondition.IsNull));
-        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PA4", TransitionCondition.IsNull));
-
-        GuardMapping grdT6AllNull = new GuardMapping();
-        grdT6AllNull.condition = t6CtAllNull;
-        grdT6AllNull.Activations.add(new Activation(t6, "", TransitionOperation.DoNothing, ""));
-        t6.GuardMappingList.add(grdT6AllNull);
-
-        t6.Delay = 0;
-        pn.Transitions.add(t6);
-
-
-
-        Condition t6Ct1a = new Condition(t6, "C_PA1", TransitionCondition.NotNull);
-
-        GuardMapping grdt6a = new GuardMapping();
-        grdt6a.condition = t6Ct1a;
-        grdt6a.Activations.add(new Activation(t6, "C_PA1", TransitionOperation.Move, "C_PA"));
-        t6.GuardMappingList.add(grdt6a);
-
-
-        Condition t6Ct1b = new Condition(t6, "C_PA2", TransitionCondition.NotNull);
-
-        GuardMapping grdt6b = new GuardMapping();
-        grdt6b.condition = t6Ct1b;
-        grdt6b.Activations.add(new Activation(t6, "C_PA2", TransitionOperation.Move, "C_PA"));
-        t6.GuardMappingList.add(grdt6b);
-
-
-        Condition t6Ct1c = new Condition(t6, "C_PA3", TransitionCondition.NotNull);
-
-        GuardMapping grdt6c = new GuardMapping();
-        grdt6c.condition = t6Ct1c;
-        grdt6c.Activations.add(new Activation(t6, "C_PA3", TransitionOperation.Move, "C_PA"));
-        t6.GuardMappingList.add(grdt6c);
-
-
-        Condition t6Ct1d = new Condition(t6, "C_PA4", TransitionCondition.NotNull);
-
-        GuardMapping grdt6d = new GuardMapping();
-        grdt6d.condition = t6Ct1d;
-        grdt6d.Activations.add(new Activation(t6, "C_PA4", TransitionOperation.Move, "C_PA"));
-        t6.GuardMappingList.add(grdt6d);
-
-
-        t6.Delay = 0;
-        pn.Transitions.add(t6);
 
 
         // T0 ------------------------------------------------
@@ -720,7 +602,117 @@ public class Supervisor_A {
         t4.Delay = 0;
         pn.Transitions.add(t4);
 
+        // T5 ------------------------------------------------
+        PetriTransition t5 = new PetriTransition(pn);
+        t5.TransitionName = "t5";
+        t5.InputPlaceName.add("C_TimeA1");
+        t5.InputPlaceName.add("C_TimeA2");
+        t5.InputPlaceName.add("C_TimeA3");
+        t5.InputPlaceName.add("C_TimeA4");
 
+        // Handle case when all inputs are null
+        Condition t5CtAllNull = new Condition(t5, "C_TimeA1", TransitionCondition.IsNull);
+        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeA2", TransitionCondition.IsNull));
+        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeA3", TransitionCondition.IsNull));
+        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeA4", TransitionCondition.IsNull));
+
+        GuardMapping grdT5AllNull = new GuardMapping();
+        grdT5AllNull.condition = t5CtAllNull;
+        grdT5AllNull.Activations.add(new Activation(t5, "", TransitionOperation.DoNothing, ""));
+        t5.GuardMappingList.add(grdT5AllNull);
+
+
+        Condition t5Ct1a = new Condition(t5, "C_TimeA1", TransitionCondition.NotNull);
+
+        GuardMapping grdt5a = new GuardMapping();
+        grdt5a.condition = t5Ct1a;
+        grdt5a.Activations.add(new Activation(t5, "C_TimeA1", TransitionOperation.Move, "C_TimeA"));
+        t5.GuardMappingList.add(grdt5a);
+
+
+        Condition t5Ct1b = new Condition(t5, "C_TimeA2", TransitionCondition.NotNull);
+
+        GuardMapping grdt5b = new GuardMapping();
+        grdt5b.condition = t5Ct1b;
+        grdt5b.Activations.add(new Activation(t5, "C_TimeA2", TransitionOperation.Move, "C_TimeA"));
+        t5.GuardMappingList.add(grdt5b);
+
+
+        Condition t5Ct1c = new Condition(t5, "C_TimeA3", TransitionCondition.NotNull);
+
+        GuardMapping grdt5c = new GuardMapping();
+        grdt5c.condition = t5Ct1c;
+        grdt5c.Activations.add(new Activation(t5, "C_TimeA3", TransitionOperation.Move, "C_TimeA"));
+        t5.GuardMappingList.add(grdt5c);
+
+
+        Condition t5Ct1d = new Condition(t5, "C_TimeA4", TransitionCondition.NotNull);
+
+        GuardMapping grdt5d = new GuardMapping();
+        grdt5d.condition = t5Ct1d;
+        grdt5d.Activations.add(new Activation(t5, "C_TimeA4", TransitionOperation.Move, "C_TimeA"));
+        t5.GuardMappingList.add(grdt5d);
+
+
+        t5.Delay = 0;
+        pn.Transitions.add(t5);
+
+
+        // T6 ------------------------------------------------
+        PetriTransition t6 = new PetriTransition(pn);
+        t6.TransitionName = "t6";
+        t6.InputPlaceName.add("C_PA1");
+        t6.InputPlaceName.add("C_PA2");
+        t6.InputPlaceName.add("C_PA3");
+        t6.InputPlaceName.add("C_PA4");
+
+
+        // Handle case when all inputs are null
+        Condition t6CtAllNull = new Condition(t6, "C_PA1", TransitionCondition.IsNull);
+        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PA2", TransitionCondition.IsNull));
+        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PA3", TransitionCondition.IsNull));
+        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PA4", TransitionCondition.IsNull));
+
+        GuardMapping grdT6AllNull = new GuardMapping();
+        grdT6AllNull.condition = t6CtAllNull;
+        grdT6AllNull.Activations.add(new Activation(t6, "", TransitionOperation.DoNothing, ""));
+        t6.GuardMappingList.add(grdT6AllNull);
+
+
+        Condition t6Ct1a = new Condition(t6, "C_PA1", TransitionCondition.NotNull);
+
+        GuardMapping grdt6a = new GuardMapping();
+        grdt6a.condition = t6Ct1a;
+        grdt6a.Activations.add(new Activation(t6, "C_PA1", TransitionOperation.Move, "C_PA"));
+        t6.GuardMappingList.add(grdt6a);
+
+
+        Condition t6Ct1b = new Condition(t6, "C_PA2", TransitionCondition.NotNull);
+
+        GuardMapping grdt6b = new GuardMapping();
+        grdt6b.condition = t6Ct1b;
+        grdt6b.Activations.add(new Activation(t6, "C_PA2", TransitionOperation.Move, "C_PA"));
+        t6.GuardMappingList.add(grdt6b);
+
+
+        Condition t6Ct1c = new Condition(t6, "C_PA3", TransitionCondition.NotNull);
+
+        GuardMapping grdt6c = new GuardMapping();
+        grdt6c.condition = t6Ct1c;
+        grdt6c.Activations.add(new Activation(t6, "C_PA3", TransitionOperation.Move, "C_PA"));
+        t6.GuardMappingList.add(grdt6c);
+
+
+        Condition t6Ct1d = new Condition(t6, "C_PA4", TransitionCondition.NotNull);
+
+        GuardMapping grdt6d = new GuardMapping();
+        grdt6d.condition = t6Ct1d;
+        grdt6d.Activations.add(new Activation(t6, "C_PA4", TransitionOperation.Move, "C_PA"));
+        t6.GuardMappingList.add(grdt6d);
+
+
+        t6.Delay = 0;
+        pn.Transitions.add(t6);
 
         System.out.println("Supervisor A started \n ------------------------------");
         pn.Delay = 3000;
