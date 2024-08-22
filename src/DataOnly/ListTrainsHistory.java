@@ -38,7 +38,9 @@ public class ListTrainsHistory implements Cloneable, Serializable{
     public int GetLength(int i) {return Trains.get(i).GetLength();}
 
     public int LastIndex(){
-        return Trains.size()-1;
+        if(Trains.isEmpty())  return 0;
+        else return Trains.size()-1;
+
     }
 
     public LocalTime Last_Dep_Time() {

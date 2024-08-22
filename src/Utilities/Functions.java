@@ -489,8 +489,10 @@ public class Functions implements Serializable {
 		// no upcoming train
 		DataListTrains new_train_list = new DataListTrains();
 		DataLocalTime leaving_time;
+		int last_index;
 		DataLocalTime dep_time = new DataLocalTime();
-		int last_index = list.LastIndex();
+		if(list == null) last_index = 0;
+		else last_index = list.LastIndex();
 
 
 		if (list == null) { // first train to create in a day

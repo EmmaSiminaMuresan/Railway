@@ -82,7 +82,9 @@ public class ListTrainsQueue implements Cloneable, Serializable{
     }
 
     public int LastIndex(){
-        return Trains.size()-1;
+        if(Trains.isEmpty())  return 0;
+        else return Trains.size()-1;
+
     }
 
     public DataListTrains PopTrain(String target) {
