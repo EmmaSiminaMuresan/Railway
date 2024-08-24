@@ -681,7 +681,12 @@ public class Functions implements Serializable {
 
 		return platform;
 	}
+	public DataInteger Calculate_Delay(int seconds){
+		DataInteger time = new DataInteger();
+		time.SetValue(seconds/100);
 
+		return time;
+	}
 
 	public DataInteger Calculate_Light_Time_Station(DataListTrainsQueue Time){
 		DataInteger time = new DataInteger();
@@ -719,6 +724,8 @@ public class Functions implements Serializable {
 		if(t1.Length == t2.Length) return true;
 		else return false;
 	}
+
+
 
 	public void MessageBox_Controllers(DataInteger seconds,DataString controller){
 		String message = seconds.GetValue().toString() + " seconds for red light " + controller.GetValue().toString();

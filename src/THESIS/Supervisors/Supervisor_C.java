@@ -86,22 +86,27 @@ public class Supervisor_C {
 
         DataInteger C1_Length = new DataInteger();
         C1_Length.SetName("C1_Length");
+        C1_Length.SetValue(89);
         pn.ConstantPlaceList.add(C1_Length);
 
         DataInteger C2_Length = new DataInteger();
         C2_Length.SetName("C2_Length");
+        C2_Length.SetValue(90);
         pn.ConstantPlaceList.add(C2_Length);
 
         DataInteger C3_Length = new DataInteger();
         C3_Length.SetName("C3_Length");
+        C3_Length.SetValue(102);
         pn.ConstantPlaceList.add(C3_Length);
 
         DataInteger C4_Length = new DataInteger();
         C4_Length.SetName("C4_Length");
+        C4_Length.SetValue(77);
         pn.ConstantPlaceList.add(C4_Length);
 
         DataInteger speed_on_platform = new DataInteger();
         speed_on_platform.SetName("Speed_On_Platform");
+        speed_on_platform.SetValue(6);
         pn.ConstantPlaceList.add(speed_on_platform);
 
         DataTrain p1 = new DataTrain();
@@ -168,6 +173,17 @@ public class Supervisor_C {
         t5.InputPlaceName.add("C_TimeC3");
         t5.InputPlaceName.add("C_TimeC4");
 
+        // Handle case when all inputs are null
+        Condition t5CtAllNull = new Condition(t5, "C_TimeC1", TransitionCondition.IsNull);
+        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeC2", TransitionCondition.IsNull));
+        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeC3", TransitionCondition.IsNull));
+        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeC4", TransitionCondition.IsNull));
+
+        GuardMapping grdT5AllNull = new GuardMapping();
+        grdT5AllNull.condition = t5CtAllNull;
+        grdT5AllNull.Activations.add(new Activation(t5, "", TransitionOperation.DoNothing, ""));
+        t5.GuardMappingList.add(grdT5AllNull);
+
 
         Condition t5Ct1a = new Condition(t5, "C_TimeC1", TransitionCondition.NotNull);
 
@@ -212,6 +228,18 @@ public class Supervisor_C {
         t6.InputPlaceName.add("C_PC2");
         t6.InputPlaceName.add("C_PC3");
         t6.InputPlaceName.add("C_PC4");
+
+
+        // Handle case when all inputs are null
+        Condition t6CtAllNull = new Condition(t6, "C_PC1", TransitionCondition.IsNull);
+        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PC2", TransitionCondition.IsNull));
+        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PC3", TransitionCondition.IsNull));
+        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PC4", TransitionCondition.IsNull));
+
+        GuardMapping grdT6AllNull = new GuardMapping();
+        grdT6AllNull.condition = t6CtAllNull;
+        grdT6AllNull.Activations.add(new Activation(t6, "", TransitionOperation.DoNothing, ""));
+        t6.GuardMappingList.add(grdT6AllNull);
 
 
         Condition t6Ct1a = new Condition(t6, "C_PC1", TransitionCondition.NotNull);
@@ -283,8 +311,8 @@ public class Supervisor_C {
 
         GuardMapping grdt0a = new GuardMapping();
         grdt0a.condition = t0Ct1a;
-        grdt0a.Activations.add(new Activation(t0,p1,p2,p3,null,C1_Length,C4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
-        grdt0a.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
+        grdt0a.Activations.add(new Activation(t0,"Train_C","Dep_Time_C","Platform_C",null,"C1_Length","C4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_C"));
+        grdt0a.Activations.add(new Activation(t0, "D_Train_C", TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0a);
 
 
@@ -307,8 +335,8 @@ public class Supervisor_C {
 
         GuardMapping grdt0b = new GuardMapping();
         grdt0b.condition = t0Ct1b;
-        grdt0b.Activations.add(new Activation(t0,p1,p2,p3,null,C2_Length,C4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
-        grdt0b.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
+        grdt0b.Activations.add(new Activation(t0,"Train_C","Dep_Time_C","Platform_C",null,"C2_Length","C4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_C"));
+        grdt0b.Activations.add(new Activation(t0, "D_Train_C", TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0b);
 
 
@@ -331,8 +359,8 @@ public class Supervisor_C {
 
         GuardMapping grdt0c = new GuardMapping();
         grdt0c.condition = t0Ct1c;
-        grdt0c.Activations.add(new Activation(t0,p1,p2,p3,null,C3_Length,null,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
-        grdt0c.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
+        grdt0c.Activations.add(new Activation(t0,"Train_C","Dep_Time_C","Platform_C",null,"C3_Length",null,"Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_C"));
+        grdt0c.Activations.add(new Activation(t0, "D_Train_C", TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0c);
 
 
@@ -355,8 +383,8 @@ public class Supervisor_C {
 
         GuardMapping grdt0d = new GuardMapping();
         grdt0d.condition = t0Ct1d;
-        grdt0d.Activations.add(new Activation(t0,p1,p2,p3,p6,C1_Length,C4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
-        grdt0d.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
+        grdt0d.Activations.add(new Activation(t0,"Train_C","Dep_Time_C","Platform_C","H_List_C","C1_Length","C4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_C"));
+        grdt0d.Activations.add(new Activation(t0, "D_Train_C", TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0d);
 
 
@@ -379,8 +407,8 @@ public class Supervisor_C {
 
         GuardMapping grdt0e = new GuardMapping();
         grdt0e.condition = t0Ct1e;
-        grdt0e.Activations.add(new Activation(t0,p1,p2,p3,p6,C2_Length,C4_Length,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
-        grdt0e.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
+        grdt0e.Activations.add(new Activation(t0,"Train_C","Dep_Time_C","Platform_C","H_List_C","C2_Length","C4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_C"));
+        grdt0e.Activations.add(new Activation(t0, "D_Train_C", TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0e);
 
 
@@ -403,8 +431,8 @@ public class Supervisor_C {
 
         GuardMapping grdt0f = new GuardMapping();
         grdt0f.condition = t0Ct1f;
-        grdt0f.Activations.add(new Activation(t0,p1,p2,p3,p6,C3_Length,null,speed_on_platform, TransitionOperation.CreateTrain_Null, p4));
-        grdt0f.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
+        grdt0f.Activations.add(new Activation(t0,"Train_C","Dep_Time_C","Platform_C","H_List_C","C3_Length",null,"Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_C"));
+        grdt0f.Activations.add(new Activation(t0, "D_Train_C", TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0f);
 
 
@@ -429,8 +457,8 @@ public class Supervisor_C {
 
         GuardMapping grdt0g = new GuardMapping();
         grdt0g.condition = t0Ct1g;
-        grdt0g.Activations.add(new Activation(t0,p1,p2,p3,C_TimeC,C_PC,null,C1_Length,C4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
-        grdt0g.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
+        grdt0g.Activations.add(new Activation(t0,"Train_C","Dep_Time_C","Platform_C","C_TimeC","C_PC",null,"C1_Length","C4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_C"));
+        grdt0g.Activations.add(new Activation(t0, "D_Train_C", TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0g);
 
 
@@ -454,8 +482,8 @@ public class Supervisor_C {
 
         GuardMapping grdt0h = new GuardMapping();
         grdt0h.condition = t0Ct1h;
-        grdt0h.Activations.add(new Activation(t0,p1,p2,p3,C_TimeC,C_PC,null,C2_Length,C4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
-        grdt0h.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
+        grdt0h.Activations.add(new Activation(t0,"Train_C","Dep_Time_C","Platform_C","C_TimeC","C_PC",null,"C2_Length","C4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_C"));
+        grdt0h.Activations.add(new Activation(t0, "D_Train_C", TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0h);
 
 
@@ -479,8 +507,8 @@ public class Supervisor_C {
 
         GuardMapping grdt0i = new GuardMapping();
         grdt0i.condition = t0Ct1i;
-        grdt0i.Activations.add(new Activation(t0,p1,p2,p3,C_TimeC,C_PC,null,C3_Length,null,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
-        grdt0i.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
+        grdt0i.Activations.add(new Activation(t0,"Train_C","Dep_Time_C","Platform_C","C_TimeC","C_PC",null,"C3_Length",null,"Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_C"));
+        grdt0i.Activations.add(new Activation(t0, "D_Train_C", TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0i);
 
 
@@ -504,8 +532,8 @@ public class Supervisor_C {
 
         GuardMapping grdt0j = new GuardMapping();
         grdt0j.condition = t0Ct1j;
-        grdt0j.Activations.add(new Activation(t0,p1,p2,p3,C_TimeC,C_PC,p6,C1_Length,C4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
-        grdt0j.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
+        grdt0j.Activations.add(new Activation(t0,"Train_C","Dep_Time_C","Platform_C","C_TimeC","C_PC","H_List_C","C1_Length","C4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_C"));
+        grdt0j.Activations.add(new Activation(t0, "D_Train_C", TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0j);
 
 
@@ -529,8 +557,8 @@ public class Supervisor_C {
 
         GuardMapping grdt0k = new GuardMapping();
         grdt0k.condition = t0Ct1k;
-        grdt0k.Activations.add(new Activation(t0,p1,p2,p3,C_TimeC,C_PC,p6,C2_Length,C4_Length,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
-        grdt0k.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
+        grdt0k.Activations.add(new Activation(t0,"Train_C","Dep_Time_C","Platform_C","C_TimeC","C_PC","H_List_C","C2_Length","C4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_C"));
+        grdt0k.Activations.add(new Activation(t0, "D_Train_C", TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0k);
 
 
@@ -554,8 +582,8 @@ public class Supervisor_C {
 
         GuardMapping grdt0l = new GuardMapping();
         grdt0l.condition = t0Ct1l;
-        grdt0l.Activations.add(new Activation(t0,p1,p2,p3,C_TimeC,C_PC,p6,C3_Length,null,speed_on_platform, TransitionOperation.CreateTrain_NotNull, p4));
-        grdt0l.Activations.add(new Activation(t0, p4, TransitionOperation.MessageBox_SupervisorC));
+        grdt0l.Activations.add(new Activation(t0,"Train_C","Dep_Time_C","Platform_C","C_TimeC","C_PC","H_List_C","C3_Length",null,"Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_C"));
+        grdt0l.Activations.add(new Activation(t0, "D_Train_C", TransitionOperation.MessageBox_SupervisorC));
         t0.GuardMappingList.add(grdt0l);
 
         t0.Delay = 0;
@@ -586,7 +614,7 @@ public class Supervisor_C {
 
         GuardMapping grdt1b = new GuardMapping();
         grdt1b.condition = t1Ct1b;
-        grdt1b.Activations.add(new Activation(t1, p5, TransitionOperation.RemoveFirst, p5));
+        grdt1b.Activations.add(new Activation(t1, "List_C", TransitionOperation.RemoveFirst, "List_C"));
         grdt1b.Activations.add(new Activation(t1, "D_Train_C", TransitionOperation.AddElement, "List_C"));
         grdt1b.Activations.add(new Activation(t1, "D_Train_C", TransitionOperation.Move, "D_Train_C"));
         t1.GuardMappingList.add(grdt1b);
@@ -640,7 +668,7 @@ public class Supervisor_C {
 
         GuardMapping grdt3b = new GuardMapping();
         grdt3b.condition = t3Ct2b;
-        grdt3b.Activations.add(new Activation(t3,p6, filePath , TransitionOperation.SaveAndDelete, p6));
+        grdt3b.Activations.add(new Activation(t3,"H_List_C", "filePath", TransitionOperation.SaveAndDelete, "H_List_C"));
         t3.GuardMappingList.add(grdt3b);
 
         t3.Delay = 0;
@@ -696,6 +724,7 @@ public class Supervisor_C {
         pn.Delay = 3000;
 
         PetriNetWindow frame = new PetriNetWindow(false);
+        frame.setTitle("Supervisor C");
         frame.petriNet = pn;
         frame.setVisible(true);
     }

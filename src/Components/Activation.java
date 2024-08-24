@@ -28,6 +28,27 @@ public class Activation implements Serializable {
 	public TransitionOperation Operation;
 	public Functions util;
 
+	String TrainPlaceName ;
+	String  dep_timePlaceName;
+	String dep_platformPlaceName;
+	String DataListTrainsHistoryPlaceName ;
+	String length1PlaceName;
+	String length2PlaceName;
+	String speedPlaceName;
+	String  DataListTrainsPlaceName;
+	String C_TimePlaceName;
+	String TimePlaceName;
+	String C_PlatformPlaceName;
+	String list_trainPlaceName;
+	String list_queue_inPlaceName;
+	String list_queue_outPlaceName;
+	String old_historyPlaceName;
+	String new_historyPlaceName;
+	String filePathPlaceName;
+	String timePlaceName;
+	String secondsPlaceName;
+	String ControllerPlaceName;
+
 	public DataTrain T;
 	public DataLocalTime Dep_Time;
 	public DataString Dep_Platform;
@@ -83,104 +104,136 @@ public class Activation implements Serializable {
 		this.Operation = Condition;
 	}
 
-	public Activation(PetriTransition Parent, DataInteger seconds, DataString controller, TransitionOperation Condition) {
+	public Activation(PetriTransition Parent, String secondsPlaceName, String controllerPlaceName, TransitionOperation Condition) {
 		util = new Functions();
 		this.Parent = Parent;
-		this.seconds = seconds;
-		this.Controller = controller;
+		this.secondsPlaceName = secondsPlaceName;
+		this.ControllerPlaceName = controllerPlaceName;
 		this.Operation = Condition;
 	}
 
-	public Activation(PetriTransition Parent, DataListTrainsHistory old_history, DataString filePath, TransitionOperation Condition,
-					  DataListTrainsHistory new_history) {
+	public Activation(PetriTransition Parent, String old_historyPlaceName, String filePathPlaceName, TransitionOperation Condition,
+					  String new_historyPlaceName) {
 		util = new Functions();
 		this.Parent = Parent;
-		this.old_history = old_history;
-		this.filePath = filePath;
-		this.new_history = new_history;
+		this.old_historyPlaceName = old_historyPlaceName;
+		this.filePathPlaceName = filePathPlaceName;
+		this.new_historyPlaceName = new_historyPlaceName;
 		this.Operation = Condition;
 	}
 
-	public Activation(PetriTransition Parent, DataListTrains list_train, TransitionOperation Condition) {
+	public Activation(PetriTransition Parent, String list_trainPlaceName, TransitionOperation Condition) {
 		util = new Functions();
 		this.Parent = Parent;
-		this.list_train = list_train;
+		this.list_trainPlaceName = list_trainPlaceName;
 		this.Operation = Condition;
 	}
 
 
-	public Activation(PetriTransition Parent, DataListTrainsQueue list_queue_in,  TransitionOperation Condition,
-					  DataListTrainsQueue list_queue_out) {
+//	public Activation(PetriTransition Parent, String list_queue_in,  TransitionOperation Condition,
+//					  String list_queue_out) {
+//		util = new Functions();
+//		this.Parent = Parent;
+//		this.list_queue_in = list_queue_in;
+//		this.list_queue_out = list_queue_out;
+//		this.Operation = Condition;
+//
+//	}
+
+	public Activation(PetriTransition Parent, String trainPlaceName,  String length1PlaceName, String length2PlaceName,  String speedPlaceName, TransitionOperation Condition,
+					  String timePlaceName) {
 		util = new Functions();
 		this.Parent = Parent;
-		this.list_queue_in = list_queue_in;
-		this.list_queue_out = list_queue_out;
-		this.Operation = Condition;
-
-	}
-
-	public Activation(PetriTransition Parent, DataTrain train,  DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
-					  DataLocalTime time) {
-		util = new Functions();
-		this.Parent = Parent;
-		this.T = train;
-		this.length1 = length1;
-		this.length2 = length2;
-		this.speed = speed;
-		this.Time = time;
-		this.Operation = Condition;
-	}
-
-	public Activation(PetriTransition Parent,DataTrain train,  DataInteger speed, TransitionOperation Condition,
-					  DataInteger time) {
-		util = new Functions();
-		this.Parent = Parent;
-		this.T = train;
-		this.speed = speed;
-		this.seconds = time;
+		this.TrainPlaceName = trainPlaceName;
+		this.length1PlaceName = length1PlaceName;
+		this.length2PlaceName = length2PlaceName;
+		this.speedPlaceName = speedPlaceName;
+		this.TimePlaceName = timePlaceName;
 		this.Operation = Condition;
 	}
 
-	public Activation(PetriTransition Parent, DataListTrainsQueue time, TransitionOperation Condition,
-					  DataInteger seconds) {
+//	public Activation(PetriTransition Parent,String train,  String speed, TransitionOperation Condition,
+//					  String time) {
+//		util = new Functions();
+//		this.Parent = Parent;
+//		this.T = train;
+//		this.speed = speed;
+//		this.seconds = time;
+//		this.Operation = Condition;
+//	}
+
+//	public Activation(PetriTransition Parent, String time, TransitionOperation Condition,
+//					  String seconds) {
+//		util = new Functions();
+//		this.Parent = Parent;
+//		this.time = time;
+//		this.seconds = seconds;
+//		this.Operation = Condition;
+//	}
+
+	public Activation(PetriTransition Parent,
+					  String trainPlaceName,
+					  String dep_timePlaceName,
+					  String dep_platformPlaceName,
+					  String c_timePlaceName,
+					  String c_platformPlaceName,
+					  String DataListTrainsHistoryPlaceName,
+					  String length1PlaceName,
+					  String length2PlaceName,
+					  String speedPlaceName,
+					  TransitionOperation Condition,
+					  String list_trainPlaceName) {
 		util = new Functions();
 		this.Parent = Parent;
-		this.time = time;
-		this.seconds = seconds;
+		this.list_trainPlaceName = list_trainPlaceName;
 		this.Operation = Condition;
+		this.TrainPlaceName = trainPlaceName;
+		this.dep_timePlaceName = dep_timePlaceName;
+		this.dep_platformPlaceName = dep_platformPlaceName;
+		this.C_TimePlaceName = c_timePlaceName;
+		this.C_PlatformPlaceName = c_platformPlaceName;
+		this.DataListTrainsHistoryPlaceName = DataListTrainsHistoryPlaceName;
+		this.length1PlaceName = length1PlaceName;
+		this.length2PlaceName = length2PlaceName;
+		this.speedPlaceName = speedPlaceName;
 	}
 
-	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataLocalTime c_time, DataString c_platform,DataListTrainsHistory list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
-					  DataListTrains list_train) {
+//	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataListTrainsHistory list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
+//					  DataListTrains list_train) {
+//		util = new Functions();
+//		this.Parent = Parent;
+//		this.list_train = list_train;
+//		this.Operation = Condition;
+//		this.T = train;
+//		this.Dep_Time = dep_time;
+//		this.Dep_Platform = dep_platform;
+//		this.list = list;
+//		this.length1 = length1;
+//		this.length2 = length2;
+//		this.speed = speed;
+//	}
+
+	public Activation(PetriTransition Parent,
+					  String TrainPlaceName ,
+					  String  dep_timePlaceName,
+					  String dep_platformPlaceName,
+					  String DataListTrainsHistoryPlaceName ,
+					  String length1PlaceName,
+					  String length2PlaceName,
+					  String speedPlaceName,
+					  TransitionOperation Condition,
+					  String  DataListTrainsPlaceName ) {
 		util = new Functions();
 		this.Parent = Parent;
-		this.list_train = list_train;
+		this.TrainPlaceName = TrainPlaceName;
 		this.Operation = Condition;
-		this.T = train;
-		this.Dep_Time = dep_time;
-		this.Dep_Platform = dep_platform;
-		this.C_Time = c_time;
-		this.C_Platform = c_platform;
-		this.list = list;
-		this.length1 = length1;
-		this.length2 = length2;
-		this.speed = speed;
-	}
-
-	public Activation(PetriTransition Parent, DataTrain train, DataLocalTime dep_time, DataString dep_platform, DataListTrainsHistory list, DataInteger length1, DataInteger length2,  DataInteger speed, TransitionOperation Condition,
-					  DataListTrains list_train) {
-		util = new Functions();
-		this.Parent = Parent;
-		this.list_train = list_train;
-		this.Operation = Condition;
-		this.T = train;
-		this.Dep_Time = dep_time;
-		this.Dep_Platform = dep_platform;
-		this.list = list;
-		this.length1 = length1;
-		this.length2 = length2;
-		this.speed = speed;
-
+		this.dep_timePlaceName= dep_timePlaceName;
+		this.dep_platformPlaceName = dep_platformPlaceName;
+		this.DataListTrainsHistoryPlaceName = DataListTrainsHistoryPlaceName;
+		this.length1PlaceName = length1PlaceName;
+		this.length2PlaceName = length2PlaceName;
+		this.speedPlaceName = speedPlaceName;
+		this.DataListTrainsPlaceName=DataListTrainsPlaceName;
 	}
 
 
@@ -188,6 +241,9 @@ public class Activation implements Serializable {
 	public void Activate() throws CloneNotSupportedException {
 		if (Operation == TransitionOperation.DoNothing)
 			return;
+
+		if (Operation == TransitionOperation.CalculateDelay)
+			CalculateDelay();
 
 		if (Operation == TransitionOperation.SendTrainOverNetwork)
 			SendTrainOverNetwork();
@@ -292,61 +348,129 @@ public class Activation implements Serializable {
 			Div_FloatFlaot();
 		// ---------------------------------------------------------
 	}
+	private void CalculateDelay() throws CloneNotSupportedException{
+		Integer outputIndex = util.GetIndexByName(OutputPlaceName, Parent.Parent.ConstantPlaceList); // ???
 
+		DataInteger result;
+		seconds = (DataInteger)util.GetFromListByName(InputPlaceName, Parent.Parent.ConstantPlaceList); // or Parent.PlaceList??
+
+		result = util.Calculate_Delay(seconds.Value);
+		result.SetName(OutputPlaceName);
+		Parent.Parent.PlaceList.set(outputIndex, result);
+	}
 	private void MessageBox_SupervisorA() throws CloneNotSupportedException{
+		// the correct way to get the required data using the name
+		list_train= (DataListTrains) util.GetFromListByName(list_trainPlaceName, Parent.Parent.PlaceList);
 		util.MessageBox_SupervisorA(list_train);
 	}
 	private void MessageBox_SupervisorB() throws CloneNotSupportedException{
+		list_train= (DataListTrains) util.GetFromListByName(list_trainPlaceName, Parent.Parent.PlaceList);
 		util.MessageBox_SupervisorB(list_train);
 	}
 	private void MessageBox_SupervisorC() throws CloneNotSupportedException{
+		list_train= (DataListTrains) util.GetFromListByName(list_trainPlaceName, Parent.Parent.PlaceList);
 		util.MessageBox_SupervisorC(list_train);
 	}
 	private void MessageBox_Controllers() throws CloneNotSupportedException{
+		seconds = (DataInteger) util.GetFromListByName(secondsPlaceName, Parent.Parent.ConstantPlaceList);
+		Controller = (DataString) util.GetFromListByName(ControllerPlaceName, Parent.Parent.ConstantPlaceList);
 		util.MessageBox_Controllers(seconds,Controller);
 	}
 	private void CalculateLightTimeStation() throws CloneNotSupportedException{
-		DataInteger result = new DataInteger();
-		result = util.Calculate_Light_Time_Station(time);
+		Integer outputIndex = util.GetIndexByName(secondsPlaceName, Parent.Parent.ConstantPlaceList); // ???
 
-		seconds.SetValue(result);
+		DataInteger result;
+		time = (DataListTrainsQueue)util.GetFromListByName(TrainPlaceName, Parent.TempMarking); // or Parent.PlaceList??
+
+		result = util.Calculate_Light_Time_Station(time);
+		result.SetName(secondsPlaceName);
+		Parent.Parent.PlaceList.set(outputIndex, result);
 	}
 	private void CalculateLightTimeRailway() throws CloneNotSupportedException{
-		DataInteger result = new DataInteger();
+		Integer outputIndex = util.GetIndexByName(secondsPlaceName, Parent.Parent.ConstantPlaceList); // ???
+
+		DataInteger result;
+		T = (DataTrain)util.GetFromListByName(TrainPlaceName, Parent.TempMarking);
+		speed = (DataInteger)util.GetFromListByName(speedPlaceName, Parent.Parent.ConstantPlaceList);
 		result = util.Calculate_Light_Time_Railway(T.GetLength(),speed.Value);
 
-		seconds.SetValue(result);
+		result.SetName(secondsPlaceName);
+		Parent.Parent.PlaceList.set(outputIndex, result);  /// constant place list? maybe.
 	}
 	private void CalculateTime() throws CloneNotSupportedException{
-		DataLocalTime result = new DataLocalTime();
+		Integer outputIndex = util.GetIndexByName(TimePlaceName, Parent.Parent.ConstantPlaceList); // ???
+
+		DataLocalTime result;
+		T = (DataTrain)util.GetFromListByName(TrainPlaceName, Parent.TempMarking);
+		length1 = (DataInteger)util.GetFromListByName(length1PlaceName, Parent.Parent.ConstantPlaceList);
+		length2 = (DataInteger)util.GetFromListByName(length2PlaceName, Parent.Parent.ConstantPlaceList);
+		speed = (DataInteger)util.GetFromListByName(speedPlaceName, Parent.Parent.ConstantPlaceList);
 		result = util.Calculate_Time(T,length1,length2,speed);
 
-		Time.SetValue(result);
+		result.SetName(TimePlaceName);
+		Parent.Parent.PlaceList.set(outputIndex, result);
+
 	}
 	private void SaveAndDelete() throws CloneNotSupportedException{
-		DataListTrainsHistory result = new DataListTrainsHistory();
+		Integer outputIndex = util.GetIndexByName(new_historyPlaceName, Parent.Parent.PlaceList); // ???
+
+		DataListTrainsHistory result;
+		old_history = (DataListTrainsHistory) util.GetFromListByName(old_historyPlaceName, Parent.Parent.PlaceList);
+		filePath = (DataString) util.GetFromListByName(filePathPlaceName, Parent.Parent.ConstantPlaceList);;
 		result = util.Save_And_Delete(old_history,filePath);
 
-		new_history.SetValue(result);
+		result.SetName(new_historyPlaceName);
+		Parent.Parent.PlaceList.set(outputIndex, result);
 	}
 	private void RemoveFirst() throws CloneNotSupportedException{
-		DataListTrainsQueue result = new DataListTrainsQueue();
+		Integer outputIndex = util.GetIndexByName(OutputPlaceName, Parent.Parent.PlaceList); // ???
+
+		DataListTrainsQueue result;
+		list_queue_in = (DataListTrainsQueue) util.GetFromListByName(InputPlaceName, Parent.Parent.PlaceList);;
 		result = util.Remove_First(list_queue_in);
 
-		list_queue_out.SetValue(result);
+		result.SetName(OutputPlaceName);
+		Parent.Parent.PlaceList.set(outputIndex, result);
 	}
 
 	private void CreateTrain_Null() throws CloneNotSupportedException{
-		DataListTrains result = new DataListTrains();
-		result = util.Create_Train_Null(T,Dep_Time,Dep_Platform,list, length1,  length2, speed);
 
-		list_train.SetValue(result);
+		Integer outputIndex = util.GetIndexByName(DataListTrainsPlaceName, Parent.Parent.PlaceList);
+
+		// example to understand how things works
+//		PetriObject tt = util.GetFromListByName("Train_A", Parent.TempMarking);
+//		PetriObject tttt = util.GetFromListByName(Parent.InputPlaceName.get(0), Parent.TempMarking);
+
+		// if you have the data place names comes from constructor you can use them according to the source
+		// will get some from constants and others from tempMarkings
+		T = (DataTrain)util.GetFromListByName(TrainPlaceName, Parent.TempMarking);
+		Dep_Time=(DataLocalTime)util.GetFromListByName(dep_timePlaceName, Parent.TempMarking);
+		Dep_Platform = (DataString)util.GetFromListByName(dep_platformPlaceName, Parent.TempMarking);
+		speed = (DataInteger)util.GetFromListByName(speedPlaceName, Parent.Parent.ConstantPlaceList);
+		length1 = (DataInteger)util.GetFromListByName(length1PlaceName, Parent.Parent.ConstantPlaceList);
+		length2 = (DataInteger)util.GetFromListByName(length2PlaceName, Parent.Parent.ConstantPlaceList);
+
+		DataListTrains methodResult= util.Create_Train_Null(T,Dep_Time,Dep_Platform,list, length1,  length2, speed);
+		methodResult.SetName(DataListTrainsPlaceName);
+		Parent.Parent.PlaceList.set(outputIndex, methodResult);
 	}
 	private void CreateTrain_NotNull() throws CloneNotSupportedException{
-		DataListTrains result = new DataListTrains();
+		Integer outputIndex = util.GetIndexByName(DataListTrainsPlaceName, Parent.Parent.PlaceList);
+
+		DataListTrains result;
+		T = (DataTrain)util.GetFromListByName(TrainPlaceName, Parent.TempMarking);
+		Dep_Time=(DataLocalTime)util.GetFromListByName(dep_timePlaceName, Parent.TempMarking);
+		Dep_Platform = (DataString)util.GetFromListByName(dep_platformPlaceName, Parent.TempMarking);
+		C_Time = (DataLocalTime) util.GetFromListByName(C_TimePlaceName, Parent.TempMarking); ///////////// ????
+		C_Platform = (DataString) util.GetFromListByName(C_PlatformPlaceName, Parent.TempMarking); ///////////// ????
+		speed = (DataInteger)util.GetFromListByName(speedPlaceName, Parent.Parent.ConstantPlaceList);
+		length1 = (DataInteger)util.GetFromListByName(length1PlaceName, Parent.Parent.ConstantPlaceList);
+		length2 = (DataInteger)util.GetFromListByName(length2PlaceName, Parent.Parent.ConstantPlaceList);
+
 		result = util.Create_Train_NotNull(T,Dep_Time,Dep_Platform,C_Time, C_Platform, length1,  length2, speed);
 
-		list_train.SetValue(result);
+		result.SetName(DataListTrainsPlaceName);
+		Parent.Parent.PlaceList.set(outputIndex, result);
 	}
 
 	private void MakeNull() throws CloneNotSupportedException {
@@ -888,23 +1012,23 @@ public class Activation implements Serializable {
 		}
 
 		if (temp instanceof DataLocalTime) {
-			result = (PetriObject) ((DataLocalTime) temp).clone();
+			result.SetValue((PetriObject) ((DataLocalTime) temp).clone());
 		}
 
 		if (temp instanceof DataTrain) {
-			result = (PetriObject) ((DataTrain) temp).clone();
+			result.SetValue((PetriObject) ((DataTrain) temp).clone());
 		}
 
 		if (temp instanceof DataListTrains) {
-			result = (PetriObject) ((DataListTrains) temp).clone();
+			result.SetValue((PetriObject) ((DataListTrains) temp).clone());
 		}
 
 		if (temp instanceof DataListTrainsHistory) {
-			result = (PetriObject) ((DataListTrainsHistory) temp).clone();
+			result.SetValue((PetriObject) ((DataListTrainsHistory) temp).clone());
 		}
 
 		if (temp instanceof DataListTrainsQueue) {
-			result = (PetriObject) ((DataListTrainsQueue) temp).clone();
+			result.SetValue((PetriObject) ((DataListTrainsQueue) temp).clone());
 		}
 
 	}
@@ -940,32 +1064,62 @@ public class Activation implements Serializable {
 
 
 
-	private void SendTrainOverNetwork() throws CloneNotSupportedException {
 
+	public void SendTrainOverNetwork() throws CloneNotSupportedException {
+		// Retrieve the output object using the output place name
 		PetriObject output = util.GetPetriObjectByName(OutputPlaceName, Parent.Parent.PlaceList);
+
+		// Get the input index from the temporary marking
 		Integer inputIndex = util.GetIndexByName(InputPlaceName, Parent.TempMarking);
 
+		// Initialize the result object as null
 		PetriObject result = null;
 
+		// Check if the output is a DataTransfer instance, and if so, clone it to result
 		if (output instanceof DataTransfer) {
 			result = (PetriObject) ((DataTransfer) output).clone();
 		}
 
-		if (inputIndex == -1)
+		// Return if the input index is invalid
+		if (inputIndex == -1) {
 			return;
+		}
 
+		// Retrieve the DataListTrainsQueue object from TempMarking
 		DataListTrainsQueue temp = (DataListTrainsQueue) Parent.TempMarking.get(inputIndex);
 
+		// Check if the Trains list is empty; if it is, return without sending
+		if (temp.Value.Trains.isEmpty()) {
+			return;
+		}
+
+		// Prepare the DataTrain object to be sent over the network
 		DataTrain toSend = new DataTrain();
 		toSend.SetName(OutputPlaceName);
 		toSend.SetValue(temp.Value.Trains.get(0).getTrain());
 
-		if (temp.Value.Trains.get(0).getTrain() != ((DataTrain) Parent.TempMarking.get(1)).Value) {
-			if (toSend instanceof DataTrain) {
-				result.SetValue((PetriObject) ((DataTrain) toSend).clone());
+		// Check if Parent.TempMarking has more than one element and the train to send is not the same
+		if (Parent.TempMarking.size() > 1 &&
+				!temp.Value.Trains.get(0).getTrain().equals(((DataTrain) Parent.TempMarking.get(1)).Value)) {
+
+			// Ensure that the result object is not null before setting its value
+			if (result != null) {
+				result.SetValue((PetriObject) toSend.clone());
+			}
+		} else {
+			// Directly set the train to the result's value if the above condition is not met
+			if (result != null) {
+				result.SetValue(toSend);
 			}
 		}
+
+		// Ensure that the result is stored in the appropriate output place
+		util.SetToListByName(OutputPlaceName, Parent.Parent.PlaceList, result);
 	}
+
+
+
+
 
 	private void SendPetriNetOverNetwork() throws CloneNotSupportedException {
 

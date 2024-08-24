@@ -165,25 +165,30 @@ public class Station_A {
 
         DataInteger A1_Length = new DataInteger();
         A1_Length.SetName("A1_Length");
+        A1_Length.SetValue(78);
         pn.ConstantPlaceList.add(A1_Length);
 
         DataInteger A2_Length = new DataInteger();
         A2_Length.SetName("A2_Length");
+        A2_Length.SetValue(85);
         pn.ConstantPlaceList.add(A2_Length);
 
         DataInteger A3_Length = new DataInteger();
         A3_Length.SetName("A3_Length");
+        A3_Length.SetValue(96);
         pn.ConstantPlaceList.add(A3_Length);
 
         DataInteger A4_Length = new DataInteger();
         A4_Length.SetName("A4_Length");
+        A4_Length.SetValue(58);
         pn.ConstantPlaceList.add(A4_Length);
 
         DataInteger speed_on_platform = new DataInteger();
         speed_on_platform.SetName("Speed_On_Platform");
+        speed_on_platform.SetValue(5);
         pn.ConstantPlaceList.add(speed_on_platform);
 
-        DataLocalTime time = new DataLocalTime(); // needed for when it is pass 23:59:59
+        DataLocalTime time = new DataLocalTime();
         time.SetName("Time");
         time.SetValue(null);
         pn.ConstantPlaceList.add(time);
@@ -193,6 +198,15 @@ public class Station_A {
         PetriTransition t1_A1 = new PetriTransition(pn);
         t1_A1.TransitionName = "t1_A1";
         t1_A1.InputPlaceName.add("Train_A1");
+
+
+        // Handle case when input is null
+        Condition t1_A1CtAllNull = new Condition(t1_A1, "Train_A1", TransitionCondition.IsNull);
+
+        GuardMapping grdt1_A1AllNull = new GuardMapping();
+        grdt1_A1AllNull.condition = t1_A1CtAllNull;
+        grdt1_A1AllNull.Activations.add(new Activation(t1_A1, "", TransitionOperation.DoNothing, ""));
+        t1_A1.GuardMappingList.add(grdt1_A1AllNull);
 
 
         Condition t1_A1Ct1a = new Condition(t1_A1, "Train_A1", TransitionCondition.NotNull);
@@ -240,16 +254,23 @@ public class Station_A {
         S1.InputPlaceName.add("P_A1");
         S1.InputPlaceName.add("A1");
 
+        Condition S1CtAllNull = new Condition(S1, "Time_A1", TransitionCondition.IsNull);
+        S1CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(S1, "P_A1", TransitionCondition.IsNull));
+        S1CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(S1, "A1", TransitionCondition.IsNull));
 
-        Condition S1Ct1a = new Condition(S1, "Train_A1", TransitionCondition.NotNull);
+        GuardMapping grdS1AllNull = new GuardMapping();
+        grdS1AllNull.condition = S1CtAllNull;
+        grdS1AllNull.Activations.add(new Activation(S1, "", TransitionOperation.DoNothing, ""));
+        S1.GuardMappingList.add(grdS1AllNull);
+
+
         Condition S1Ct2a = new Condition(S1, "A1", TransitionCondition.NotNull);
         Condition S1Ct3a = new Condition(S1, "P_A1", TransitionCondition.IsNull);
 
         S1Ct2a.SetNextCondition(LogicConnector.AND, S1Ct3a);
-        S1Ct1a.SetNextCondition(LogicConnector.AND, S1Ct2a);
 
         GuardMapping grdS1a = new GuardMapping();
-        grdS1a.condition = S1Ct1a;
+        grdS1a.condition = S1Ct2a;
         grdS1a.Activations.add(new Activation(S1, "Time_A1", TransitionOperation.SendOverNetwork, "OP_A1"));
         grdS1a.Activations.add(new Activation(S1, "A1", TransitionOperation.Move, "P_A1"));
         S1.GuardMappingList.add(grdS1a);
@@ -281,6 +302,15 @@ public class Station_A {
         t3_A1.InputPlaceName.add("P_A1");
 
 
+        // Handle case when input is null
+        Condition t3_A1CtAllNull = new Condition(t3_A1, "i1", TransitionCondition.IsNull);
+        t3_A1CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t3_A1, "P_A1", TransitionCondition.IsNull));
+
+        GuardMapping grdt3_A1AllNull = new GuardMapping();
+        grdt3_A1AllNull.condition = t3_A1CtAllNull;
+        grdt3_A1AllNull.Activations.add(new Activation(t3_A1, "", TransitionOperation.DoNothing, ""));
+        t3_A1.GuardMappingList.add(grdt3_A1AllNull);
+
         // train leaving station
         Condition t3_A1Ct2a = new Condition(t3_A1, "i1", TransitionCondition.IsNull);
         Condition t3_A1Ct3a = new Condition(t3_A1, "P_A1", TransitionCondition.NotNull);
@@ -300,7 +330,7 @@ public class Station_A {
 
         GuardMapping grdt3_A1b = new GuardMapping();
         grdt3_A1b.condition = t3_A1Ct1b;
-        grdt3_A1b.Activations.add(new Activation(t3_A1, p14,A1_Length,null,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_A1b.Activations.add(new Activation(t3_A1, "i2","A1_Length",null,"Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
         grdt3_A1b.Activations.add(new Activation(t3_A1, "Time", TransitionOperation.SendOverNetwork, "OP_TimeA1"));
         grdt3_A1b.Activations.add(new Activation(t3_A1, "A1", TransitionOperation.SendOverNetwork, "OP_PA1"));
         grdt3_A1b.Activations.add(new Activation(t3_A1, "i1", TransitionOperation.Move, "P_A1"));
@@ -319,6 +349,14 @@ public class Station_A {
         PetriTransition t1_A2 = new PetriTransition(pn);
         t1_A2.TransitionName = "t1_A2";
         t1_A2.InputPlaceName.add("Train_A2");
+
+        // Handle case when input is null
+        Condition t1_A2CtAllNull = new Condition(t1_A2, "Train_A2", TransitionCondition.IsNull);
+
+        GuardMapping grdt1_A2AllNull = new GuardMapping();
+        grdt1_A2AllNull.condition = t1_A2CtAllNull;
+        grdt1_A2AllNull.Activations.add(new Activation(t1_A2, "", TransitionOperation.DoNothing, ""));
+        t1_A2.GuardMappingList.add(grdt1_A2AllNull);
 
 
         Condition t1_A2Ct1a = new Condition(t1_A2, "Train_A2", TransitionCondition.NotNull);
@@ -405,6 +443,15 @@ public class Station_A {
         t3_A2.InputPlaceName.add("P_A2");
 
 
+        // Handle case when input is null
+        Condition t3_A2CtAllNull = new Condition(t3_A2, "i1", TransitionCondition.IsNull);
+        t3_A2CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t3_A2, "P_A2", TransitionCondition.IsNull));
+
+        GuardMapping grdt3_A2AllNull = new GuardMapping();
+        grdt3_A2AllNull.condition = t3_A2CtAllNull;
+        grdt3_A2AllNull.Activations.add(new Activation(t3_A2, "", TransitionOperation.DoNothing, ""));
+        t3_A2.GuardMappingList.add(grdt3_A2AllNull);
+
 
         Condition t3_A2Ct2a = new Condition(t3_A2, "i1", TransitionCondition.IsNull);
         Condition t3_A2Ct3a = new Condition(t3_A2, "P_A2", TransitionCondition.NotNull);
@@ -425,7 +472,7 @@ public class Station_A {
 
         GuardMapping grdt3_A2b = new GuardMapping();
         grdt3_A2b.condition = t3_A2Ct1b;
-        grdt3_A2b.Activations.add(new Activation(t3_A2, p14,A2_Length,null,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_A2b.Activations.add(new Activation(t3_A2, "i2","A2_Length",null,"Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
         grdt3_A2b.Activations.add(new Activation(t3_A2, "Time", TransitionOperation.SendOverNetwork, "OP_TimeA2"));
         grdt3_A2b.Activations.add(new Activation(t3_A2, "A2", TransitionOperation.SendOverNetwork, "OP_PA2"));
         grdt3_A2b.Activations.add(new Activation(t3_A2, "i1", TransitionOperation.Move, "P_A2"));
@@ -445,6 +492,15 @@ public class Station_A {
         t4_A1.InputPlaceName.add("i1");
         t4_A1.InputPlaceName.add("i2");
 
+
+        // Handle case when input is null
+        Condition t4_A1CtAllNull = new Condition(t4_A1, "i1", TransitionCondition.IsNull);
+        t4_A1CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t4_A1, "i2", TransitionCondition.IsNull));
+
+        GuardMapping grdt4_A1AllNull = new GuardMapping();
+        grdt4_A1AllNull.condition = t4_A1CtAllNull;
+        grdt4_A1AllNull.Activations.add(new Activation(t4_A1, "", TransitionOperation.DoNothing, ""));
+        t4_A1.GuardMappingList.add(grdt4_A1AllNull);
 
         // train leaving station
         Condition t4_A1Ct2a = new Condition(t4_A1, "i2", TransitionCondition.IsNull);
@@ -468,7 +524,7 @@ public class Station_A {
 
         GuardMapping grdt4_A1b = new GuardMapping();
         grdt4_A1b.condition = t4_A1Ct1b;
-        grdt4_A1b.Activations.add(new Activation(t4_A1, p14,A1_Length,A4_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt4_A1b.Activations.add(new Activation(t4_A1, "i2","A1_Length","A4_Length","Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
         grdt4_A1b.Activations.add(new Activation(t4_A1, "Time", TransitionOperation.SendOverNetwork, "OP_TimeA4"));
         grdt4_A1b.Activations.add(new Activation(t4_A1, "A4", TransitionOperation.SendOverNetwork, "OP_PA4"));
         grdt4_A1b.Activations.add(new Activation(t4_A1, "i2", TransitionOperation.Move, "i1"));
@@ -485,7 +541,7 @@ public class Station_A {
 
         GuardMapping grdt4_A1c = new GuardMapping();
         grdt4_A1c.condition = t4_A1Ct1b;
-        grdt4_A1c.Activations.add(new Activation(t4_A1, p14,A2_Length,A4_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt4_A1c.Activations.add(new Activation(t4_A1, "i2","A2_Length","A4_Length","Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
         grdt4_A1c.Activations.add(new Activation(t4_A1, "Time", TransitionOperation.SendOverNetwork, "OP_TimeA4"));
         grdt4_A1c.Activations.add(new Activation(t4_A1, "A4", TransitionOperation.SendOverNetwork, "OP_PA4"));
         grdt4_A1c.Activations.add(new Activation(t4_A1, "i2", TransitionOperation.Move, "i1"));
@@ -503,6 +559,16 @@ public class Station_A {
         PetriTransition t1_A3 = new PetriTransition(pn);
         t1_A3.TransitionName = "t1_A3";
         t1_A3.InputPlaceName.add("Train_A3");
+
+
+        // Handle case when input is null
+        Condition t1_A3CtAllNull = new Condition(t1_A3, "Train_A3", TransitionCondition.IsNull);
+
+        GuardMapping grdt1_A3AllNull = new GuardMapping();
+        grdt1_A3AllNull.condition = t1_A3CtAllNull;
+        grdt1_A3AllNull.Activations.add(new Activation(t1_A3, "", TransitionOperation.DoNothing, ""));
+        t1_A3.GuardMappingList.add(grdt1_A3AllNull);
+
 
 
         Condition t1_A3Ct1a = new Condition(t1_A3, "Train_A3", TransitionCondition.NotNull);
@@ -590,6 +656,16 @@ public class Station_A {
         t3_A3.InputPlaceName.add("P_A3");
 
 
+        // Handle case when input is null
+        Condition t3_A3CtAllNull = new Condition(t3_A3, "i2", TransitionCondition.IsNull);
+        t3_A3CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t3_A3, "P_A3", TransitionCondition.IsNull));
+
+        GuardMapping grdt3_A3AllNull = new GuardMapping();
+        grdt3_A3AllNull.condition = t3_A3CtAllNull;
+        grdt3_A3AllNull.Activations.add(new Activation(t3_A3, "", TransitionOperation.DoNothing, ""));
+        t3_A3.GuardMappingList.add(grdt3_A3AllNull);
+
+
         // train leaving
         Condition t3_A3Ct2a = new Condition(t3_A3, "i2", TransitionCondition.IsNull);
         Condition t3_A3Ct3a = new Condition(t3_A3, "P_A3", TransitionCondition.NotNull);
@@ -611,7 +687,7 @@ public class Station_A {
 
         GuardMapping grdt3_A3b = new GuardMapping();
         grdt3_A3b.condition = t3_A3Ct1b;
-        grdt3_A3b.Activations.add(new Activation(t3_A3, p14,A3_Length,null,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_A3b.Activations.add(new Activation(t3_A3, "i2","A3_Length",null,"Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
         grdt3_A3b.Activations.add(new Activation(t3_A3, "Time", TransitionOperation.SendOverNetwork, "OP_TimeA3"));
         grdt3_A3b.Activations.add(new Activation(t3_A3, "A3", TransitionOperation.SendOverNetwork, "OP_PA3"));
         grdt3_A3b.Activations.add(new Activation(t3_A3, "i2", TransitionOperation.Move, "P_A3"));
@@ -630,6 +706,16 @@ public class Station_A {
         t4_A2.InputPlaceName.add("i2");
 
 
+        // Handle case when input is null
+        Condition t4_A2CtAllNull = new Condition(t4_A2, "i2", TransitionCondition.IsNull);
+
+        GuardMapping grdt4_A2AllNull = new GuardMapping();
+        grdt4_A2AllNull.condition = t4_A2CtAllNull;
+        grdt4_A2AllNull.Activations.add(new Activation(t4_A2, "", TransitionOperation.DoNothing, ""));
+        t4_A2.GuardMappingList.add(grdt4_A2AllNull);
+
+
+
         Condition t4_A2Ct2a = new Condition(t4_A2, "i2", TransitionCondition.HaveTrainForMe);
 
         GuardMapping grdt4_A2a = new GuardMapping();
@@ -645,6 +731,7 @@ public class Station_A {
         pn.Delay = 3000;
 
         PetriNetWindow frame = new PetriNetWindow(false);
+        frame.setTitle("Station A");
         frame.petriNet = pn;
         frame.setVisible(true);
     }

@@ -27,6 +27,11 @@ public class Controller_L1 {
         Delay.SetValue(0);
         pn.ConstantPlaceList.add(Delay);
 
+        DataInteger Delay_Simulation = new DataInteger();
+        Delay_Simulation.SetName("Delay_Simulation");
+        Delay_Simulation.SetValue(0);
+        pn.ConstantPlaceList.add(Delay_Simulation);
+
         DataListTrainsQueue in_a1 = new DataListTrainsQueue();
         in_a1.SetName("in_a1");
         pn.PlaceList.add(in_a1);
@@ -116,8 +121,10 @@ public class Controller_L1 {
 
         GuardMapping grdt1b = new GuardMapping();
         grdt1b.condition= t1Ct1b;
-        grdt1b.Activations.add(new Activation(t1, in_a1,TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1b.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1b.Activations.add(new Activation(t1, "in_a1",TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1b.Activations.add(new Activation(t1, "Delay", TransitionOperation.CalculateDelay,"Delay_Simulation"));
+        grdt1b.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
+        grdt1b.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1b.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1b.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1b);
@@ -135,8 +142,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1c = new GuardMapping();
         grdt1c.condition= t1Ct1c;
-        grdt1c.Activations.add(new Activation(t1, in_a2,TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1c.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1c.Activations.add(new Activation(t1, "in_a2",TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1c.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1c.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1c.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1c);
@@ -154,8 +161,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1d = new GuardMapping();
         grdt1d.condition= t1Ct1d;
-        grdt1d.Activations.add(new Activation(t1,in_a3,TransitionOperation.CalculateLightTimeStation,Delay));
-        grdt1d.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1d.Activations.add(new Activation(t1,"in_a3",TransitionOperation.CalculateLightTimeStation,"Delay"));
+        grdt1d.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1d.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1d.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1d);
@@ -177,8 +184,8 @@ public class Controller_L1 {
         GuardMapping grdt1e = new GuardMapping();
         grdt1e.condition= t1Ct1e;
 
-        grdt1e.Activations.add(new Activation(t1, in_a1, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1e.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1e.Activations.add(new Activation(t1, "in_a1", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1e.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1e.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1e.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1e);
@@ -199,8 +206,8 @@ public class Controller_L1 {
         GuardMapping grdt1e1 = new GuardMapping();
         grdt1e1.condition= t1Ct1e1;
 
-        grdt1e1.Activations.add(new Activation(t1, in_a2, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1e1.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1e1.Activations.add(new Activation(t1, "in_a2", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1e1.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1e1.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1e1.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1e1);
@@ -223,8 +230,8 @@ public class Controller_L1 {
         GuardMapping grdt1e2 = new GuardMapping();
         grdt1e2.condition= t1Ct1e2;
 
-        grdt1e2.Activations.add(new Activation(t1, in_a2, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1e2.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1e2.Activations.add(new Activation(t1, "in_a2", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1e2.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1e2.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1e2.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1e2);
@@ -248,8 +255,8 @@ public class Controller_L1 {
         GuardMapping grdt1e3 = new GuardMapping();
         grdt1e2.condition= t1Ct1e3;
 
-        grdt1e3.Activations.add(new Activation(t1, in_a2, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1e3.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1e3.Activations.add(new Activation(t1, "in_a2", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1e3.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1e3.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1e3.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1e3);
@@ -270,8 +277,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1f = new GuardMapping();
         grdt1f.condition= t1Ct1f;
-        grdt1f.Activations.add(new Activation(t1, in_a1, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1f.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1f.Activations.add(new Activation(t1, "in_a1", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1f.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1f.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1f.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1f);
@@ -290,8 +297,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1f1 = new GuardMapping();
         grdt1f1.condition= t1Ct1f1;
-        grdt1f1.Activations.add(new Activation(t1, in_a3, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1f1.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1f1.Activations.add(new Activation(t1, "in_a3", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1f1.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1f1.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1f1.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1f1);
@@ -312,8 +319,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1f2 = new GuardMapping();
         grdt1f2.condition= t1Ct1f2;
-        grdt1f2.Activations.add(new Activation(t1, in_a1, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1f2.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1f2.Activations.add(new Activation(t1, "in_a1", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1f2.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1f2.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1f2.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1f2);
@@ -335,8 +342,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1f3 = new GuardMapping();
         grdt1f3.condition= t1Ct1f3;
-        grdt1f3.Activations.add(new Activation(t1, in_a3, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1f3.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1f3.Activations.add(new Activation(t1, "in_a3", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1f3.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1f3.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1f3.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1f3);
@@ -357,8 +364,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1g = new GuardMapping();
         grdt1g.condition = t1Ct1g;
-        grdt1g.Activations.add(new Activation(t1, in_a2, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1g.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1g.Activations.add(new Activation(t1, "in_a2", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1g.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1g.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1g.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1g);
@@ -377,8 +384,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1g1 = new GuardMapping();
         grdt1g1.condition = t1Ct1g1;
-        grdt1g1.Activations.add(new Activation(t1, in_a3, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1g1.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1g1.Activations.add(new Activation(t1, "in_a3", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1g1.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1g1.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1g1.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1g1);
@@ -399,8 +406,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1g2 = new GuardMapping();
         grdt1g2.condition = t1Ct1g2;
-        grdt1g2.Activations.add(new Activation(t1, in_a2, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1g2.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1g2.Activations.add(new Activation(t1, "in_a2", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1g2.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1g2.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1g2.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1g2);
@@ -421,8 +428,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1g3 = new GuardMapping();
         grdt1g3.condition = t1Ct1g3;
-        grdt1g3.Activations.add(new Activation(t1, in_a3, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1g3.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1g3.Activations.add(new Activation(t1, "in_a3", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1g3.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1g3.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1g3.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1g3);
@@ -446,8 +453,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1h = new GuardMapping();
         grdt1h.condition = t1Ct1h;
-        grdt1h.Activations.add(new Activation(t1, in_a1, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1h.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1h.Activations.add(new Activation(t1, "in_a1", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1h.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1h.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1h.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1h);
@@ -468,8 +475,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1i = new GuardMapping();
         grdt1i.condition = t1Ct1i;
-        grdt1i.Activations.add(new Activation(t1, in_a1, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1i.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1i.Activations.add(new Activation(t1, "in_a1", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1i.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1i.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1i.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1i);
@@ -490,8 +497,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1j = new GuardMapping();
         grdt1j.condition = t1Ct1j;
-        grdt1j.Activations.add(new Activation(t1, in_a2, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1j.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1j.Activations.add(new Activation(t1, "in_a2", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1j.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1j.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1j.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1j);
@@ -512,8 +519,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1k = new GuardMapping();
         grdt1k.condition = t1Ct1k;
-        grdt1k.Activations.add(new Activation(t1, in_a2, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1k.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1k.Activations.add(new Activation(t1, "in_a2", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1k.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1k.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1k.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1k);
@@ -534,8 +541,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1l = new GuardMapping();
         grdt1l.condition = t1Ct1l;
-        grdt1l.Activations.add(new Activation(t1, in_a3, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1l.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1l.Activations.add(new Activation(t1, "in_a3", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1l.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1l.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1l.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1l);
@@ -556,8 +563,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1m = new GuardMapping();
         grdt1m.condition = t1Ct1m;
-        grdt1m.Activations.add(new Activation(t1, in_a3, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1m.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1m.Activations.add(new Activation(t1, "in_a3", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1m.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1m.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1m.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1m);
@@ -579,8 +586,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1o = new GuardMapping();
         grdt1o.condition = t1Ct1o;
-        grdt1o.Activations.add(new Activation(t1, in_a3, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1o.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1o.Activations.add(new Activation(t1, "in_a3", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1o.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1o.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1o.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1o);
@@ -601,8 +608,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1o1 = new GuardMapping();
         grdt1o1.condition = t1Ct1o1;
-        grdt1o1.Activations.add(new Activation(t1, in_a1, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1o1.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1o1.Activations.add(new Activation(t1, "in_a1", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1o1.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1o1.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1o1.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1o1);
@@ -623,8 +630,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1p = new GuardMapping();
         grdt1p.condition = t1Ct1p;
-        grdt1p.Activations.add(new Activation(t1, in_a2, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1p.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1p.Activations.add(new Activation(t1, "in_a2", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1p.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1p.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1p.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1p);
@@ -645,8 +652,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1q = new GuardMapping();
         grdt1q.condition = t1Ct1q;
-        grdt1q.Activations.add(new Activation(t1, in_a1, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1q.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1q.Activations.add(new Activation(t1, "in_a1", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1q.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1q.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1q.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1q);
@@ -668,8 +675,8 @@ public class Controller_L1 {
 
         GuardMapping grdt1r = new GuardMapping();
         grdt1r.condition = t1Ct1r;
-        grdt1r.Activations.add(new Activation(t1, in_a2, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1r.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1r.Activations.add(new Activation(t1, "in_a2", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1r.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
         grdt1r.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1r.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1r);
@@ -691,8 +698,10 @@ public class Controller_L1 {
 
         GuardMapping grdt1s = new GuardMapping();
         grdt1s.condition = t1Ct1s;
-        grdt1s.Activations.add(new Activation(t1, in_a1, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1s.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1s.Activations.add(new Activation(t1, "in_a1", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1s.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
+        grdt1s.Activations.add(new Activation(t1, "Delay", TransitionOperation.CalculateDelay,"Delay_Simulation"));
+        grdt1s.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt1s.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1s.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1s);
@@ -717,8 +726,10 @@ public class Controller_L1 {
 
         GuardMapping grdt1t = new GuardMapping();
         grdt1t.condition = t1Ct1t;
-        grdt1t.Activations.add(new Activation(t1, in_a1, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1t.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1t.Activations.add(new Activation(t1, "in_a1", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1t.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
+        grdt1t.Activations.add(new Activation(t1, "Delay", TransitionOperation.CalculateDelay,"Delay_Simulation"));
+        grdt1t.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt1t.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1t.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1t);
@@ -744,8 +755,10 @@ public class Controller_L1 {
 
         GuardMapping grdt1u = new GuardMapping();
         grdt1u.condition = t1Ct1u;
-        grdt1u.Activations.add(new Activation(t1, in_a1, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1u.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1u.Activations.add(new Activation(t1, "in_a1", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1u.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
+        grdt1u.Activations.add(new Activation(t1, "Delay", TransitionOperation.CalculateDelay,"Delay_Simulation"));
+        grdt1u.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt1u.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1u.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1u);
@@ -771,8 +784,10 @@ public class Controller_L1 {
 
         GuardMapping grdt1v = new GuardMapping();
         grdt1v.condition = t1Ct1v;
-        grdt1v.Activations.add(new Activation(t1, in_a2, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1v.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1v.Activations.add(new Activation(t1, "in_a2", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1v.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
+        grdt1v.Activations.add(new Activation(t1, "Delay", TransitionOperation.CalculateDelay,"Delay_Simulation"));
+        grdt1v.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt1v.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1v.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1v);
@@ -798,8 +813,10 @@ public class Controller_L1 {
 
         GuardMapping grdt1w = new GuardMapping();
         grdt1w.condition = t1Ct1w;
-        grdt1w.Activations.add(new Activation(t1, in_a2, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1w.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1w.Activations.add(new Activation(t1, "in_a2", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1w.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
+        grdt1w.Activations.add(new Activation(t1, "Delay", TransitionOperation.CalculateDelay,"Delay_Simulation"));
+        grdt1w.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt1w.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1w.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1w);
@@ -824,8 +841,10 @@ public class Controller_L1 {
 
         GuardMapping grdt1x = new GuardMapping();
         grdt1x.condition = t1Ct1x;
-        grdt1x.Activations.add(new Activation(t1, in_a3, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1x.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1x.Activations.add(new Activation(t1, "in_a3", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1x.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
+        grdt1x.Activations.add(new Activation(t1, "Delay", TransitionOperation.CalculateDelay,"Delay_Simulation"));
+        grdt1x.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt1x.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1x.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1x);
@@ -850,8 +869,10 @@ public class Controller_L1 {
 
         GuardMapping grdt1y = new GuardMapping();
         grdt1y.condition = t1Ct1y;
-        grdt1y.Activations.add(new Activation(t1, in_a3, TransitionOperation.CalculateLightTimeStation, Delay));
-        grdt1y.Activations.add(new Activation(t1, Delay, L1, TransitionOperation.MessageBox_Controllers));
+        grdt1y.Activations.add(new Activation(t1, "in_a3", TransitionOperation.CalculateLightTimeStation, "Delay"));
+        grdt1y.Activations.add(new Activation(t1, "Delay", "L1", TransitionOperation.MessageBox_Controllers));
+        grdt1y.Activations.add(new Activation(t1, "Delay", TransitionOperation.CalculateDelay,"Delay_Simulation"));
+        grdt1y.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt1y.Activations.add(new Activation(t1, "g", TransitionOperation.Move, "r"));
         grdt1y.Activations.add(new Activation(t1, "red", TransitionOperation.SendOverNetwork, "OP_L1"));
         t1.GuardMappingList.add(grdt1y);
@@ -874,7 +895,7 @@ public class Controller_L1 {
         grdt2.Activations.add(new Activation(t2, "r", TransitionOperation.Move, "i"));
         t2.GuardMappingList.add(grdt2);
 
-        t2.Delay = 5;
+        t2.Delay = 0;
         pn.Transitions.add(t2);
 
         // t0----------------------------------------------------------------
@@ -898,6 +919,7 @@ public class Controller_L1 {
         pn.Delay = 3000;
 
         PetriNetWindow frame = new PetriNetWindow(false);
+        frame.setTitle("Controller L1 - A Station");
         frame.petriNet = pn;
         frame.setVisible(true);
 

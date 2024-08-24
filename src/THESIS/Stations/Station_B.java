@@ -166,22 +166,27 @@ public class Station_B {
 
         DataInteger B1_Length = new DataInteger();
         B1_Length.SetName("B1_Length");
+        B1_Length.SetValue(45);
         pn.ConstantPlaceList.add(B1_Length);
 
         DataInteger B2_Length = new DataInteger();
         B2_Length.SetName("B2_Length");
+        B2_Length.SetValue(76);
         pn.ConstantPlaceList.add(B2_Length);
 
         DataInteger B3_Length = new DataInteger();
         B3_Length.SetName("B3_Length");
+        B3_Length.SetValue(59);
         pn.ConstantPlaceList.add(B3_Length);
 
         DataInteger B4_Length = new DataInteger();
         B4_Length.SetName("B1_Length");
+        B4_Length.SetValue(67);
         pn.ConstantPlaceList.add(B4_Length);
 
         DataInteger speed_on_platform = new DataInteger();
         speed_on_platform.SetName("Speed_On_Platform");
+        speed_on_platform.SetValue(4);
         pn.ConstantPlaceList.add(speed_on_platform);
 
         DataLocalTime time = new DataLocalTime(); // needed for when it is pass 23:59:59
@@ -301,7 +306,7 @@ public class Station_B {
 
         GuardMapping grdt3_B1b = new GuardMapping();
         grdt3_B1b.condition = t3_B1Ct1b;
-        grdt3_B1b.Activations.add(new Activation(t3_B1, p14,B1_Length,null,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_B1b.Activations.add(new Activation(t3_B1, "i4","B1_Length",null,"Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
         grdt3_B1b.Activations.add(new Activation(t3_B1, "Time", TransitionOperation.SendOverNetwork, "OP_TimeB1"));
         grdt3_B1b.Activations.add(new Activation(t3_B1, "B1", TransitionOperation.SendOverNetwork, "OP_PB1"));
         grdt3_B1b.Activations.add(new Activation(t3_B1, "i3", TransitionOperation.Move, "P_B1"));
@@ -426,7 +431,7 @@ public class Station_B {
 
         GuardMapping grdt3_B2b = new GuardMapping();
         grdt3_B2b.condition = t3_B2Ct1b;
-        grdt3_B2b.Activations.add(new Activation(t3_B2, p14,B2_Length,null,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_B2b.Activations.add(new Activation(t3_B2, "i4","B2_Length",null,"Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
         grdt3_B2b.Activations.add(new Activation(t3_B2, "Time", TransitionOperation.SendOverNetwork, "OP_TimeB2"));
         grdt3_B2b.Activations.add(new Activation(t3_B2, "B2", TransitionOperation.SendOverNetwork, "OP_PB2"));
         grdt3_B2b.Activations.add(new Activation(t3_B2, "i4", TransitionOperation.Move, "P_B2"));
@@ -469,7 +474,7 @@ public class Station_B {
 
         GuardMapping grdt4_B1b = new GuardMapping();
         grdt4_B1b.condition = t4_B1Ct1b;
-        grdt4_B1b.Activations.add(new Activation(t4_B1, p14,B3_Length,B4_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt4_B1b.Activations.add(new Activation(t4_B1, "i4","B3_Length","B4_Length","Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
         grdt4_B1b.Activations.add(new Activation(t4_B1, "Time", TransitionOperation.SendOverNetwork, "OP_TimeB4"));
         grdt4_B1b.Activations.add(new Activation(t4_B1, "B4", TransitionOperation.SendOverNetwork, "OP_PB4"));
         grdt4_B1b.Activations.add(new Activation(t4_B1, "i3", TransitionOperation.Move, "i4"));
@@ -486,7 +491,7 @@ public class Station_B {
 
         GuardMapping grdt4_B1c = new GuardMapping();
         grdt4_B1c.condition = t4_B1Ct1b;
-        grdt4_B1c.Activations.add(new Activation(t4_B1, p14,B2_Length,B4_Length,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt4_B1c.Activations.add(new Activation(t4_B1, "i4","B2_Length","B4_Length","Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
         grdt4_B1c.Activations.add(new Activation(t4_B1, "Time", TransitionOperation.SendOverNetwork, "OP_TimeB4"));
         grdt4_B1c.Activations.add(new Activation(t4_B1, "B4", TransitionOperation.SendOverNetwork, "OP_PB4"));
         grdt4_B1c.Activations.add(new Activation(t4_B1, "i3", TransitionOperation.Move, "i4"));
@@ -612,7 +617,7 @@ public class Station_B {
 
         GuardMapping grdt3_B3b = new GuardMapping();
         grdt3_B3b.condition = t3_B3Ct1b;
-        grdt3_B3b.Activations.add(new Activation(t3_B3, p14,B3_Length,null,speed_on_platform, TransitionOperation.CalculateTime, time));
+        grdt3_B3b.Activations.add(new Activation(t3_B3, "i4","B3_Length",null,"Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
         grdt3_B3b.Activations.add(new Activation(t3_B3, "Time", TransitionOperation.SendOverNetwork, "OP_TimeB3"));
         grdt3_B3b.Activations.add(new Activation(t3_B3, "B3", TransitionOperation.SendOverNetwork, "OP_PB3"));
         grdt3_B3b.Activations.add(new Activation(t3_B3, "i4", TransitionOperation.Move, "P_B3"));
@@ -646,6 +651,7 @@ public class Station_B {
         pn.Delay = 3000;
 
         PetriNetWindow frame = new PetriNetWindow(false);
+        frame.setTitle("Station B");
         frame.petriNet = pn;
         frame.setVisible(true);
     }
