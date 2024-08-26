@@ -30,7 +30,7 @@ public class Controller_L3 {
         pn.PlaceList.add(in_c1);
 
         DataListTrainsQueue in_c2 = new DataListTrainsQueue(); // time to pass for the prev train
-        in_c2.SetName("in_c1");
+        in_c2.SetName("in_c2");
         pn.PlaceList.add(in_c2);
 
         DataListTrainsQueue in_c3 = new DataListTrainsQueue(); // time to pass for the prev train

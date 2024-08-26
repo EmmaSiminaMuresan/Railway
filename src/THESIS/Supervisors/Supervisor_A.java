@@ -2,17 +2,10 @@ package THESIS.Supervisors;
 
 import Components.*;
 import DataObjects.*;
-import DataOnly.ListTrains;
 import DataOnly.TransferOperation;
 import Enumerations.LogicConnector;
-import Enumerations.PetriObjectType;
 import Enumerations.TransitionCondition;
 import Enumerations.TransitionOperation;
-import Interfaces.PetriObject;
-
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 public class Supervisor_A {
     public static void main(String[] args) {
@@ -80,6 +73,11 @@ public class Supervisor_A {
         A3.SetValue("A3");
         pn.ConstantPlaceList.add(A3);
 
+        DataInteger Zero = new DataInteger();
+        Zero.SetName("Zero");
+        Zero.SetValue(0);
+        pn.ConstantPlaceList.add(Zero);
+
         DataInteger A1_Length = new DataInteger();
         A1_Length.SetName("A1_Length");
         A1_Length.SetValue(78);
@@ -127,8 +125,9 @@ public class Supervisor_A {
         p5.SetName("List_A");
         pn.PlaceList.add(p5);
 
-        DataListTrainsHistory p6 = new DataListTrainsHistory();
+        DataListTrainsQueue p6 = new DataListTrainsQueue();
         p6.SetName("H_List_A");
+        p6.Value.Size = 100;
         pn.PlaceList.add(p6);
 
         DataTransfer T1_A = new DataTransfer();
@@ -176,18 +175,18 @@ public class Supervisor_A {
         t0.InputPlaceName.add("H_List_A");
 
 
-        // Handle case when all inputs are null
-        Condition t0CtAllNull = new Condition(t0, "Train_A", TransitionCondition.IsNull);
-        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "Dep_Time_A", TransitionCondition.IsNull));
-        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "Platform_A", TransitionCondition.IsNull));
-        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "C_PA", TransitionCondition.IsNull));
-        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "C_TimeA", TransitionCondition.IsNull));
-        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "H_List_A", TransitionCondition.IsNull));
-
-        GuardMapping grdT0AllNull = new GuardMapping();
-        grdT0AllNull.condition = t0CtAllNull;
-        grdT0AllNull.Activations.add(new Activation(t0, "", TransitionOperation.DoNothing, ""));
-        t0.GuardMappingList.add(grdT0AllNull);
+//        // Handle case when all inputs are null
+//        Condition t0CtAllNull = new Condition(t0, "Train_A", TransitionCondition.IsNull);
+//        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "Dep_Time_A", TransitionCondition.IsNull));
+//        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "Platform_A", TransitionCondition.IsNull));
+//        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "C_PA", TransitionCondition.IsNull));
+//        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "C_TimeA", TransitionCondition.IsNull));
+//        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "H_List_A", TransitionCondition.IsNull));
+//
+//        GuardMapping grdT0AllNull = new GuardMapping();
+//        grdT0AllNull.condition = t0CtAllNull;
+//        grdT0AllNull.Activations.add(new Activation(t0, "", TransitionOperation.DoNothing, ""));
+//        t0.GuardMappingList.add(grdT0AllNull);
 
         // no comming train
         // first train created on platform A1
@@ -277,7 +276,7 @@ public class Supervisor_A {
 
         GuardMapping grdt0c = new GuardMapping();
         grdt0c.condition = t0Ct1c;
-        grdt0c.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A",null,"A3_Length",null,"Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_A"));
+        grdt0c.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A",null,"A3_Length","Zero","Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_A"));
         grdt0c.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
         t0.GuardMappingList.add(grdt0c);
 
@@ -349,7 +348,7 @@ public class Supervisor_A {
 
         GuardMapping grdt0f = new GuardMapping();
         grdt0f.condition = t0Ct1f;
-        grdt0f.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","H_List_A","A3_Length",null,"Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_A"));
+        grdt0f.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","H_List_A","A3_Length","Zero","Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_A"));
         grdt0f.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
         t0.GuardMappingList.add(grdt0f);
 
@@ -425,7 +424,7 @@ public class Supervisor_A {
 
         GuardMapping grdt0i = new GuardMapping();
         grdt0i.condition = t0Ct1i;
-        grdt0i.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","C_TimeA","C_PA",null,"A3_Length",null,"Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_A"));
+        grdt0i.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","C_TimeA","C_PA",null,"A3_Length","Zero","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_A"));
         grdt0i.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
         t0.GuardMappingList.add(grdt0i);
 
@@ -510,7 +509,7 @@ public class Supervisor_A {
 
         GuardMapping grdt0l = new GuardMapping();
         grdt0l.condition = t0Ct1l;
-        grdt0l.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","C_TimeA","C_PA","H_List_A","A3_Length",null,"Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_A"));
+        grdt0l.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","C_TimeA","C_PA","H_List_A","A3_Length","Zero","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_A"));
         grdt0l.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
         t0.GuardMappingList.add(grdt0l);
 

@@ -40,12 +40,9 @@ public class Activation implements Serializable {
 	String TimePlaceName;
 	String C_PlatformPlaceName;
 	String list_trainPlaceName;
-	String list_queue_inPlaceName;
-	String list_queue_outPlaceName;
 	String old_historyPlaceName;
 	String new_historyPlaceName;
 	String filePathPlaceName;
-	String timePlaceName;
 	String secondsPlaceName;
 	String ControllerPlaceName;
 
@@ -53,7 +50,6 @@ public class Activation implements Serializable {
 	public DataLocalTime Dep_Time;
 	public DataString Dep_Platform;
 	public DataLocalTime C_Time;
-	public DataLocalTime Time;
 	public DataString C_Platform;
 	public DataListTrainsHistory list;
 	public DataInteger length1;
@@ -61,9 +57,7 @@ public class Activation implements Serializable {
 	public DataInteger speed;
 	public DataListTrains list_train;
 	public DataListTrainsQueue list_queue_in;
-	public DataListTrainsQueue list_queue_out;
 	public DataListTrainsHistory old_history;
-	public DataListTrainsHistory new_history;
 	public DataString filePath;
 
 	public DataListTrainsQueue time;
@@ -377,13 +371,13 @@ public class Activation implements Serializable {
 		util.MessageBox_Controllers(seconds,Controller);
 	}
 	private void CalculateLightTimeStation() throws CloneNotSupportedException{
-		Integer outputIndex = util.GetIndexByName(secondsPlaceName, Parent.Parent.ConstantPlaceList); // ???
+		Integer outputIndex = util.GetIndexByName(OutputPlaceName, Parent.Parent.ConstantPlaceList); // ???
 
 		DataInteger result;
-		time = (DataListTrainsQueue)util.GetFromListByName(TrainPlaceName, Parent.TempMarking); // or Parent.PlaceList??
+		time = (DataListTrainsQueue)util.GetFromListByName(InputPlaceName, Parent.TempMarking); // or Parent.PlaceList??
 
 		result = util.Calculate_Light_Time_Station(time);
-		result.SetName(secondsPlaceName);
+		result.SetName(OutputPlaceName);
 		Parent.Parent.PlaceList.set(outputIndex, result);
 	}
 	private void CalculateLightTimeRailway() throws CloneNotSupportedException{
@@ -838,6 +832,7 @@ public class Activation implements Serializable {
 		if (temp instanceof DataLocalTime) {
 			result = (PetriObject) ((DataLocalTime) temp).clone();
 		}
+
 
 		result.SetName(OutputPlaceName);
 		result.SetValue(temp.GetValue());

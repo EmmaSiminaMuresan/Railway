@@ -167,6 +167,11 @@ public class Station_C {
         C4.SetValue("C4");
         pn.ConstantPlaceList.add(C4);
 
+        DataInteger Zero = new DataInteger();
+        Zero.SetName("Zero");
+        Zero.SetValue(0);
+        pn.ConstantPlaceList.add(Zero);
+
         DataInteger C1_Length = new DataInteger();
         C1_Length.SetName("C1_Length");
         C1_Length.SetValue(89);
@@ -309,7 +314,7 @@ public class Station_C {
 
         GuardMapping grdt3_C1b = new GuardMapping();
         grdt3_C1b.condition = t3_C1Ct1b;
-        grdt3_C1b.Activations.add(new Activation(t3_C1, "i8","C1_Length",null,"Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
+        grdt3_C1b.Activations.add(new Activation(t3_C1, "i8","C1_Length","Zero","Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
         grdt3_C1b.Activations.add(new Activation(t3_C1, "Time", TransitionOperation.SendOverNetwork, "OP_TimeC1"));
         grdt3_C1b.Activations.add(new Activation(t3_C1, "C1", TransitionOperation.SendOverNetwork, "OP_PC1"));
         grdt3_C1b.Activations.add(new Activation(t3_C1, "i9", TransitionOperation.Move, "P_C1"));
@@ -434,7 +439,7 @@ public class Station_C {
 
         GuardMapping grdt3_C2b = new GuardMapping();
         grdt3_C2b.condition = t3_C2Ct1b;
-        grdt3_C2b.Activations.add(new Activation(t3_C2, "i8","C2_Length",null,"Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
+        grdt3_C2b.Activations.add(new Activation(t3_C2, "i8","C2_Length","Zero","Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
         grdt3_C2b.Activations.add(new Activation(t3_C2, "Time", TransitionOperation.SendOverNetwork, "OP_TimeC2"));
         grdt3_C2b.Activations.add(new Activation(t3_C2, "C2", TransitionOperation.SendOverNetwork, "OP_PC2"));
         grdt3_C2b.Activations.add(new Activation(t3_C2, "i9", TransitionOperation.Move, "P_C2"));
@@ -620,7 +625,7 @@ public class Station_C {
 
         GuardMapping grdt3_C3b = new GuardMapping();
         grdt3_C3b.condition = t3_C3Ct1b;
-        grdt3_C3b.Activations.add(new Activation(t3_C3, "i8","C3_Length",null,"Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
+        grdt3_C3b.Activations.add(new Activation(t3_C3, "i8","C3_Length","Zero","Speed_On_Platform", TransitionOperation.CalculateTime, "Time"));
         grdt3_C3b.Activations.add(new Activation(t3_C3, "Time", TransitionOperation.SendOverNetwork, "OP_TimeC3"));
         grdt3_C3b.Activations.add(new Activation(t3_C3, "C3", TransitionOperation.SendOverNetwork, "OP_PC3"));
         grdt3_C3b.Activations.add(new Activation(t3_C3, "i8", TransitionOperation.Move, "P_C3"));

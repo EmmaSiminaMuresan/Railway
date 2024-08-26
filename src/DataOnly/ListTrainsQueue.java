@@ -25,6 +25,9 @@ public class ListTrainsQueue implements Cloneable, Serializable{
     public ListTrainsQueue() {
 
     }
+    public void setSize(int size){
+        this.Size = size;
+    }
 
     public int getSize() {return Trains.size();}
 
@@ -32,7 +35,9 @@ public class ListTrainsQueue implements Cloneable, Serializable{
 
     public LocalTime GetLeavingTime(int i) {return Trains.get(i).getLeaving_time();}
 
-    public LocalTime GetDepTime(int i) {return Trains.get(i).getDep_time();}
+    public LocalTime GetDepTime(int i) {
+        return Trains.get(i).getDep_time();
+    }
 
     public int GetLength(int i) {return Trains.get(i).GetLength();}
 

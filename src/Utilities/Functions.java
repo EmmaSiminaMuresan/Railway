@@ -254,6 +254,26 @@ public class Functions implements Serializable {
 					pls = new DataSubPetriNet();
 					break;
 				}
+				case DataListTrains: {
+					pls = new DataListTrains();
+					break;
+				}
+				case DataListTrainsHistory: {
+					pls = new DataListTrainsHistory();
+					break;
+				}
+				case DataListTrainsQueue: {
+					pls = new DataListTrainsQueue();
+					break;
+				}
+				case DataLocalTime: {
+					pls = new DataLocalTime();
+					break;
+				}
+				case DataTrain: {
+					pls = new DataTrain();
+					break;
+				}
 				case DataTransfer: {
 					pls = new DataTransfer();
 					break;
@@ -312,6 +332,26 @@ public class Functions implements Serializable {
 				}
 				case DataTransfer: {
 					pls = new DataTransfer();
+					break;
+				}
+				case DataListTrains: {
+					pls = new DataListTrains();
+					break;
+				}
+				case DataListTrainsHistory: {
+					pls = new DataListTrainsHistory();
+					break;
+				}
+				case DataListTrainsQueue: {
+					pls = new DataListTrainsQueue();
+					break;
+				}
+				case DataLocalTime: {
+					pls = new DataLocalTime();
+					break;
+				}
+				case DataTrain: {
+					pls = new DataTrain();
 					break;
 				}
 				default:
@@ -692,7 +732,8 @@ public class Functions implements Serializable {
 		DataInteger time = new DataInteger();
 		time.SetValue(0);
 
-		time.Value = (int)(Duration.between(Time.GetDepTime(0), Time.GetLeavingTime(0))).getSeconds();
+		if(Time.Value.getSize()==0) time.SetValue(0);
+		else time.SetValue((Duration.between(Time.GetDepTime(0), Time.GetLeavingTime(0))).getSeconds()) ;
 
 		return time;
 	}

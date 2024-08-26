@@ -34,15 +34,19 @@ public class Controller_L1 {
 
         DataListTrainsQueue in_a1 = new DataListTrainsQueue();
         in_a1.SetName("in_a1");
+        in_a1.SetValue(null); // Explicitly set to null
         pn.PlaceList.add(in_a1);
 
         DataListTrainsQueue in_a2 = new DataListTrainsQueue();
-        in_a2.SetName("in_a1");
+        in_a2.SetName("in_a2");
+        in_a2.SetValue(null); // Explicitly set to null
         pn.PlaceList.add(in_a2);
 
         DataListTrainsQueue in_a3 = new DataListTrainsQueue();
         in_a3.SetName("in_a3");
+        in_a3.SetValue(null); // Explicitly set to null
         pn.PlaceList.add(in_a3);
+
 
         DataString ini = new DataString();
         //ini.Printable = false;
@@ -72,7 +76,7 @@ public class Controller_L1 {
 
         DataString g = new DataString();
         g.SetName("g");
-        g.SetValue("signal"); ///???
+        g.SetValue("signal");
         pn.PlaceList.add(g);
 
         DataTransfer OP_L1 = new DataTransfer();
@@ -108,6 +112,16 @@ public class Controller_L1 {
         t1.InputPlaceName.add("in_a2");
         t1.InputPlaceName.add("in_a3");
 
+//        // Handle case when all inputs are null - evaluated first
+//        Condition t1CtAllNull = new Condition(t1, "in_a1", TransitionCondition.IsNull);
+//        t1CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t1, "in_a2", TransitionCondition.IsNull));
+//        t1CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t1, "in_a3", TransitionCondition.IsNull));
+//        t1CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t1, "g", TransitionCondition.NotNull));
+//
+//        GuardMapping grdT1AllNull = new GuardMapping();
+//        grdT1AllNull.condition = t1CtAllNull;
+//        grdT1AllNull.Activations.add(new Activation(t1, "", TransitionOperation.DoNothing, ""));
+//        t1.GuardMappingList.add(grdT1AllNull);
 
         // 1 comming train on A1
         Condition t1Ct1b = new Condition(t1, "g", TransitionCondition.NotNull);
@@ -886,6 +900,14 @@ public class Controller_L1 {
         t2.TransitionName = "t2";
         t2.InputPlaceName.add("r");
 
+//        Condition t2DoNothingCondition = new Condition(t2, "r", TransitionCondition.IsNull);
+//
+//        GuardMapping grdT2DoNothing = new GuardMapping();
+//        grdT2DoNothing.condition = t2DoNothingCondition;
+//        grdT2DoNothing.Activations.add(new Activation(t2, "", TransitionOperation.DoNothing, ""));
+//        t2.GuardMappingList.add(grdT2DoNothing);
+
+
 
         Condition t2Ct1 = new Condition(t2, "r", TransitionCondition.NotNull);
 
@@ -895,6 +917,8 @@ public class Controller_L1 {
         grdt2.Activations.add(new Activation(t2, "r", TransitionOperation.Move, "i"));
         t2.GuardMappingList.add(grdt2);
 
+
+
         t2.Delay = 0;
         pn.Transitions.add(t2);
 
@@ -902,6 +926,14 @@ public class Controller_L1 {
         PetriTransition t0 = new PetriTransition(pn);
         t0.TransitionName = "t0";
         t0.InputPlaceName.add("i");
+
+
+        Condition t0DoNothingCondition = new Condition(t0, "i", TransitionCondition.IsNull);
+
+        GuardMapping grdT0DoNothing = new GuardMapping();
+        grdT0DoNothing.condition = t0DoNothingCondition;
+        grdT0DoNothing.Activations.add(new Activation(t0, "", TransitionOperation.DoNothing, ""));
+        t0.GuardMappingList.add(grdT0DoNothing);
 
 
         Condition t0Ct1 = new Condition(t0, "i", TransitionCondition.NotNull);

@@ -84,6 +84,11 @@ public class Supervisor_B {
         B3.SetValue("B3");
         pn.ConstantPlaceList.add(B3);
 
+        DataInteger Zero = new DataInteger();
+        Zero.SetName("Zero");
+        Zero.SetValue(0);
+        pn.ConstantPlaceList.add(Zero);
+
         DataInteger B1_Length = new DataInteger();
         B1_Length.SetName("B1_Length");
         B1_Length.SetValue(45);
@@ -288,6 +293,20 @@ public class Supervisor_B {
         t0.InputPlaceName.add("H_List_B");
 
 
+
+        // Handle case when all inputs are null
+        Condition t0CtAllNull = new Condition(t0, "Train_B", TransitionCondition.IsNull);
+        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "Dep_Time_B", TransitionCondition.IsNull));
+        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "Platform_B", TransitionCondition.IsNull));
+        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "C_PB", TransitionCondition.IsNull));
+        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "C_TimeB", TransitionCondition.IsNull));
+        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "H_List_B", TransitionCondition.IsNull));
+
+        GuardMapping grdT0AllNull = new GuardMapping();
+        grdT0AllNull.condition = t0CtAllNull;
+        grdT0AllNull.Activations.add(new Activation(t0, "", TransitionOperation.DoNothing, ""));
+        t0.GuardMappingList.add(grdT0AllNull);
+
         // no comming train
 
         Condition t0Ct1a = new Condition(t0, "Train_B", TransitionCondition.NotNull);
@@ -357,7 +376,7 @@ public class Supervisor_B {
 
         GuardMapping grdt0c = new GuardMapping();
         grdt0c.condition = t0Ct1c;
-        grdt0c.Activations.add(new Activation(t0,"Train_B","Dep_Time_B","Platform_B",null,"B3_Length",null,"Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_B"));
+        grdt0c.Activations.add(new Activation(t0,"Train_B","Dep_Time_B","Platform_B",null,"B3_Length","Zero","Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_B"));
         grdt0c.Activations.add(new Activation(t0, "D_Train_B", TransitionOperation.MessageBox_SupervisorB));
         t0.GuardMappingList.add(grdt0c);
 
@@ -429,7 +448,7 @@ public class Supervisor_B {
 
         GuardMapping grdt0f = new GuardMapping();
         grdt0f.condition = t0Ct1f;
-        grdt0f.Activations.add(new Activation(t0,"Train_B","Dep_Time_B","Platform_B","H_List_B","B3_Length",null,"Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_B"));
+        grdt0f.Activations.add(new Activation(t0,"Train_B","Dep_Time_B","Platform_B","H_List_B","B3_Length","Zero","Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_B"));
         grdt0f.Activations.add(new Activation(t0, "D_Train_B", TransitionOperation.MessageBox_SupervisorB));
         t0.GuardMappingList.add(grdt0f);
 
@@ -505,7 +524,7 @@ public class Supervisor_B {
 
         GuardMapping grdt0i = new GuardMapping();
         grdt0i.condition = t0Ct1i;
-        grdt0i.Activations.add(new Activation(t0,"Train_B","Dep_Time_B","Platform_B","C_TimeB","C_PB",null,"B3_Length",null,"Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_B"));
+        grdt0i.Activations.add(new Activation(t0,"Train_B","Dep_Time_B","Platform_B","C_TimeB","C_PB",null,"B3_Length","Zero","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_B"));
         grdt0i.Activations.add(new Activation(t0, "D_Train_B", TransitionOperation.MessageBox_SupervisorB));
         t0.GuardMappingList.add(grdt0i);
 
@@ -580,7 +599,7 @@ public class Supervisor_B {
 
         GuardMapping grdt0l = new GuardMapping();
         grdt0l.condition = t0Ct1l;
-        grdt0l.Activations.add(new Activation(t0,"Train_B","Dep_Time_B","Platform_B","C_TimeB","C_PB","H_List_B","B3_Length",null,"Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_B"));
+        grdt0l.Activations.add(new Activation(t0,"Train_B","Dep_Time_B","Platform_B","C_TimeB","C_PB","H_List_B","B3_Length","Zero","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_B"));
         grdt0l.Activations.add(new Activation(t0, "D_Train_B", TransitionOperation.MessageBox_SupervisorB));
         t0.GuardMappingList.add(grdt0l);
 

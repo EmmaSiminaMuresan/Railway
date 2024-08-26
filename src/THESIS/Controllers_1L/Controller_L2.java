@@ -30,7 +30,7 @@ public class Controller_L2 {
         pn.PlaceList.add(in_b1);
 
         DataListTrainsQueue in_b2 = new DataListTrainsQueue();
-        in_b2.SetName("in_b1");
+        in_b2.SetName("in_b2");
         pn.PlaceList.add(in_b2);
 
         DataListTrainsQueue in_b3 = new DataListTrainsQueue();
