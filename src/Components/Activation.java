@@ -390,9 +390,9 @@ public class Activation implements Serializable {
 		util.MessageBox_SupervisorC(list_train);
 	}
 	private void MessageBox_Controllers() throws CloneNotSupportedException{
-		seconds = (DataInteger) util.GetFromListByName(secondsPlaceName, Parent.Parent.PlaceList);
-		Controller = (DataString) util.GetFromListByName(ControllerPlaceName, Parent.Parent.PlaceList);
-		util.MessageBox_Controllers(seconds,Controller);
+		seconds = (DataInteger) util.GetFromListByName(list_trainPlaceName, Parent.Parent.PlaceList);
+		//Controller = (DataString) util.GetFromListByName(ControllerPlaceName, Parent.Parent.PlaceList);
+		util.MessageBox_Controllers(seconds);
 	}
 	private void CalculateLightTimeStation() throws CloneNotSupportedException{
 		Integer outputIndex = util.GetIndexByName(OutputPlaceName, Parent.Parent.PlaceList); // ???
@@ -405,17 +405,46 @@ public class Activation implements Serializable {
 		Parent.Parent.PlaceList.set(outputIndex, result);
 	}
 	private void CalculateLightTimeRailway() throws CloneNotSupportedException{
-		Integer outputIndex = util.GetIndexByName(secondsPlaceName, Parent.Parent.ConstantPlaceList); // ???
+		Integer outputIndex = util.GetIndexByName(new_historyPlaceName, Parent.Parent.PlaceList); // ???
 
 
 		DataInteger result;
 		T = (DataTrain)util.GetFromListByName(old_historyPlaceName, Parent.TempMarking);
-		speed = (DataInteger)util.GetFromListByName(filePathPlaceName, Parent.Parent.ConstantPlaceList);
+		speed = (DataInteger)util.GetFromListByName(filePathPlaceName, Parent.TempMarking);
 		result = util.Calculate_Light_Time_Railway(T.GetLength(),speed.Value);
 
-		result.SetName(secondsPlaceName);
+		result.SetName(new_historyPlaceName);
 		Parent.Parent.PlaceList.set(outputIndex, result);  /// constant place list? maybe.
 	}
+
+//	private void CalculateLightTimeRailway() throws CloneNotSupportedException {
+//		Integer outputIndex = util.GetIndexByName(secondsPlaceName, Parent.Parent.PlaceList);
+//
+//		DataInteger result;
+//		DataTrain T = (DataTrain) util.GetFromListByName(old_historyPlaceName, Parent.TempMarking);
+//		DataInteger speed = (DataInteger) util.GetFromListByName("in7_2", Parent.Parent.PlaceList);
+//
+//		if (T == null) {
+//			System.out.println("Error: Train data (T) is null.");
+//		} else {
+//			System.out.println("Train length: " + T.GetLength());
+//		}
+//
+//		if (speed == null) {
+//			System.out.println("Error: Speed data (in7_2) is null.");
+//		} else {
+//			System.out.println("Speed value: " + speed.GetValue());
+//		}
+//
+//		if (T != null && speed != null) {
+//			result = util.Calculate_Light_Time_Railway(T.GetLength(), speed.Value);
+//			result.SetName(secondsPlaceName);
+//			Parent.Parent.PlaceList.set(outputIndex, result);
+//			System.out.println("Calculated light time: " + result.GetValue());
+//		}
+//	}
+
+
 	private void CalculateTime() throws CloneNotSupportedException{
 		Integer outputIndex = util.GetIndexByName(TimePlaceName, Parent.Parent.ConstantPlaceList); // ???
 

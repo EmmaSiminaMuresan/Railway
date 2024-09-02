@@ -837,9 +837,9 @@ public class Functions implements Serializable {
 
 
 
-	public void MessageBox_Controllers(DataInteger seconds,DataString controller){
-		String message = seconds.GetValue().toString() + " seconds for red light " + controller.GetValue().toString();
-		JOptionPane.showMessageDialog(null, message, controller.GetValue().toString(), JOptionPane.INFORMATION_MESSAGE);
+	public void MessageBox_Controllers(DataInteger seconds){
+		String message = seconds.GetValue().toString() + " seconds for red light " ;
+		JOptionPane.showMessageDialog(null, message);
 	}
 
 	public void MessageBox_SupervisorA(DataListTrains list){
