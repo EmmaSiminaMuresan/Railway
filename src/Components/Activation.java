@@ -260,8 +260,11 @@ public class Activation implements Serializable {
 		if (Operation == TransitionOperation.MessageBox_SupervisorC)
 			MessageBox_SupervisorC();
 
-		if (Operation == TransitionOperation.MessageBox_Controllers)
-			MessageBox_Controllers();
+		if (Operation == TransitionOperation.MessageBox_Controllers_OneLight)
+			MessageBox_Controllers_OneLight();
+
+		if (Operation == TransitionOperation.MessageBox_Controllers_TwoLights)
+			MessageBox_Controllers_TwoLights();
 
 		if (Operation == TransitionOperation.CalculateLightTimeRailway)
 			CalculateLightTimeRailway();
@@ -389,10 +392,14 @@ public class Activation implements Serializable {
 		list_train= (DataListTrains) util.GetFromListByName(list_trainPlaceName, Parent.Parent.PlaceList);
 		util.MessageBox_SupervisorC(list_train);
 	}
-	private void MessageBox_Controllers() throws CloneNotSupportedException{
+	private void MessageBox_Controllers_OneLight() throws CloneNotSupportedException{
+		seconds = (DataInteger) util.GetFromListByName(secondsPlaceName, Parent.Parent.PlaceList);
+		Controller = (DataString) util.GetFromListByName(ControllerPlaceName, Parent.Parent.PlaceList);
+		util.MessageBox_Controllers_One_Light(seconds,Controller);
+	}
+	private void MessageBox_Controllers_TwoLights() throws CloneNotSupportedException{
 		seconds = (DataInteger) util.GetFromListByName(list_trainPlaceName, Parent.Parent.PlaceList);
-		//Controller = (DataString) util.GetFromListByName(ControllerPlaceName, Parent.Parent.PlaceList);
-		util.MessageBox_Controllers(seconds);
+		util.MessageBox_Controllers_Two_Lights(seconds);
 	}
 	private void CalculateLightTimeStation() throws CloneNotSupportedException{
 		Integer outputIndex = util.GetIndexByName(OutputPlaceName, Parent.Parent.PlaceList); // ???

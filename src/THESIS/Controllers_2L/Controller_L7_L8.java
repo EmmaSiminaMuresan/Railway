@@ -259,7 +259,7 @@ public class Controller_L7_L8 {
         GuardMapping grdt0b = new GuardMapping();
         grdt0b.condition= t0Ct1b;
         grdt0b.Activations.add(new Activation(t0, "in7_1","in7_2", TransitionOperation.CalculateLightTimeRailway,"Delay"));
-        grdt0b.Activations.add(new Activation(t0, "Delay",  TransitionOperation.MessageBox_Controllers));
+        grdt0b.Activations.add(new Activation(t0, "Delay",  TransitionOperation.MessageBox_Controllers_TwoLights));
         //grdt0b.Activations.add(new Activation(t2, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt0b.Activations.add(new Activation(t0, "L8", TransitionOperation.Copy, "Control"));
         grdt0b.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Copy, "r1g2"));
@@ -287,7 +287,7 @@ public class Controller_L7_L8 {
         GuardMapping grdt0c = new GuardMapping();
         grdt0c.condition= t0Ct1c;
         grdt0c.Activations.add(new Activation(t0, "in8_1","in8_2", TransitionOperation.CalculateLightTimeRailway,"Delay"));
-        grdt0c.Activations.add(new Activation(t0, "Delay", "L7", TransitionOperation.MessageBox_Controllers));
+        grdt0c.Activations.add(new Activation(t0, "Delay", "L7", TransitionOperation.MessageBox_Controllers_TwoLights));
         //grdt0c.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt0c.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0c.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
@@ -319,7 +319,7 @@ public class Controller_L7_L8 {
         GuardMapping grdt0d = new GuardMapping();
         grdt0d.condition = t0Ct1d;
         grdt0d.Activations.add(new Activation(t0, "in7_1", "in7_2", TransitionOperation.CalculateLightTimeRailway, "Delay"));
-        grdt0d.Activations.add(new Activation(t0, "Delay", "L8", TransitionOperation.MessageBox_Controllers));
+        grdt0d.Activations.add(new Activation(t0, "Delay", "L8", TransitionOperation.MessageBox_Controllers_TwoLights));
         //grdt0d.Activations.add(new Activation(t2, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt0d.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0d.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
@@ -349,7 +349,7 @@ public class Controller_L7_L8 {
         GuardMapping grdt0e = new GuardMapping();
         grdt0e.condition = t0Ct1e;
         grdt0e.Activations.add(new Activation(t0, "in8_1", "in8_2", TransitionOperation.CalculateLightTimeRailway, "Delay"));
-        grdt0e.Activations.add(new Activation(t0, "Delay", "L7", TransitionOperation.MessageBox_Controllers));
+        grdt0e.Activations.add(new Activation(t0, "Delay", "L7", TransitionOperation.MessageBox_Controllers_TwoLights));
         // grdt0e.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt0e.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0e.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
@@ -383,7 +383,7 @@ public class Controller_L7_L8 {
         GuardMapping grdt0f = new GuardMapping();
         grdt0f.condition = t0Ct1f;
         grdt0f.Activations.add(new Activation(t0, "in8_1", "in8_2", TransitionOperation.CalculateLightTimeRailway, "Delay"));
-        grdt0f.Activations.add(new Activation(t0, "Delay", "L7", TransitionOperation.MessageBox_Controllers));
+        grdt0f.Activations.add(new Activation(t0, "Delay", "L7", TransitionOperation.MessageBox_Controllers_TwoLights));
         //grdt0f.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt0f.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0f.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
@@ -418,7 +418,7 @@ public class Controller_L7_L8 {
         GuardMapping grdt0g = new GuardMapping();
         grdt0g.condition = t0Ct1g;
         grdt0g.Activations.add(new Activation(t0, "in7_1", "in7_2", TransitionOperation.CalculateLightTimeRailway, "Delay"));
-        grdt0g.Activations.add(new Activation(t0, "Delay", "L8", TransitionOperation.MessageBox_Controllers));
+        grdt0g.Activations.add(new Activation(t0, "Delay", "L8", TransitionOperation.MessageBox_Controllers_TwoLights));
         //grdt0g.Activations.add(new Activation(t2, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt0g.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0g.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
@@ -452,7 +452,7 @@ public class Controller_L7_L8 {
         GuardMapping grdt0i = new GuardMapping();
         grdt0i.condition = t0Ct1i;
         grdt0i.Activations.add(new Activation(t0, "in8_1", "in8_2", TransitionOperation.CalculateLightTimeRailway, "Delay"));
-        grdt0i.Activations.add(new Activation(t0, "Delay", "L7", TransitionOperation.MessageBox_Controllers));
+        grdt0i.Activations.add(new Activation(t0, "Delay", "L7", TransitionOperation.MessageBox_Controllers_TwoLights));
         // grdt0i.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt0i.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0i.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));

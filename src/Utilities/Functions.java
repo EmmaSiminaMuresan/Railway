@@ -837,10 +837,16 @@ public class Functions implements Serializable {
 
 
 
-	public void MessageBox_Controllers(DataInteger seconds){
+	public void MessageBox_Controllers_One_Light(DataInteger seconds,DataString controller){
+		String message = seconds.GetValue().toString() + " seconds for red light " + controller.GetString();
+		JOptionPane.showMessageDialog(null, message, controller.GetString(), JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void MessageBox_Controllers_Two_Lights(DataInteger seconds){
 		String message = seconds.GetValue().toString() + " seconds for red light " ;
 		JOptionPane.showMessageDialog(null, message);
 	}
+
 
 	public void MessageBox_SupervisorA(DataListTrains list){
 		String message = "Train " + list.GetTrainNumber() + " depart at " + list.getDep_time() + " on platform " +list.getPlatform();
