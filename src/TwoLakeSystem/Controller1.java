@@ -19,7 +19,7 @@ public class Controller1 {
 
 		PetriNet pn = new PetriNet();
 		pn.PetriNetName = "Controller 1";
-		pn.NetworkPort = 1080;
+		pn.NetworkPort = 1082;
 
 		DataFloat hr1 = new DataFloat();
 		hr1.SetName("hr1");

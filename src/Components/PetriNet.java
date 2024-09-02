@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import DataObjects.DataSubPetriNet;
 import DataOnly.SubPetri;
@@ -28,6 +29,11 @@ public class PetriNet implements PetriObject, Runnable, Cloneable, Serializable 
 		return Metrics.toString();
 	}
 
+	@Override
+	public List<String> getTargets(){
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public String GetPlatform(int i){

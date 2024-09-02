@@ -2,11 +2,12 @@ package DataObjects;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.List;
 
 import DataOnly.ListTrainsQueue;
 import Enumerations.PetriObjectType;
 import Interfaces.PetriObject;
-public class DataListTrainsQueue implements Interfaces.PetriObject, Cloneable, Serializable {
+public class DataListTrainsQueue extends DataListTrains implements Interfaces.PetriObject, Cloneable, Serializable {
     /**
      *
      */
@@ -28,7 +29,11 @@ public class DataListTrainsQueue implements Interfaces.PetriObject, Cloneable, S
         // TODO Auto-generated method stub
 
     }
-
+    @Override
+    public List<String> getTargets(){
+        // TODO Auto-generated method stub
+        return null;
+    }
     @Override
     public PetriObjectType GetType() {
         return PetriObjectType.DataListTrainsQueue;

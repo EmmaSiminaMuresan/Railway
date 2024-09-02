@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import DataObjects.DataListTrains;
 import com.sun.jdi.Value;
@@ -23,6 +24,7 @@ public class ListTrainsHistory implements Cloneable, Serializable{
 
     public ListTrainsHistory() {
     }
+
     public int GetSize() {return Trains.size();}
 
     public void Remove(int i){

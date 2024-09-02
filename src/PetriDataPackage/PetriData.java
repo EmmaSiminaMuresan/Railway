@@ -3,6 +3,7 @@ package PetriDataPackage;
 import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import Enumerations.PetriObjectType;
 import Interfaces.PetriObject;
@@ -46,6 +47,11 @@ public class PetriData implements PetriObject, Serializable {
 
 	}
 
+	@Override
+	public List<String> getTargets(){
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public String GetPlatform(int i){

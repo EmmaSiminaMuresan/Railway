@@ -2,6 +2,7 @@ package DataObjects;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.List;
 
 import DataOnly.FloatFloat;
 
@@ -24,6 +25,11 @@ public class DataFloatFloat implements Interfaces.PetriObject, Cloneable, Serial
 	public void Execute() {
 		// TODO Auto-generated method stub
 
+	}
+	@Override
+	public List<String> getTargets(){
+		// TODO Auto-generated method stub
+		return null;
 	}
 	@Override
 	public String GetPlatform(int i){

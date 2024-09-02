@@ -33,13 +33,16 @@ public class DataListTrains implements Interfaces.PetriObject, Cloneable, Serial
         // TODO Auto-generated method stub
 
     }
-
+    @Override
+    public List<String> getTargets() {
+        return Value.getTargets();
+    }
     @Override
     public PetriObjectType GetType() {
         return PetriObjectType.DataListTrains;
     }
 
-    public ListTrains Value = null;
+    public ListTrains Value;
 
     @Override
     public Object GetValue() {
@@ -48,19 +51,15 @@ public class DataListTrains implements Interfaces.PetriObject, Cloneable, Serial
 
     @Override
     public String GetPlatform(int i){
-        // TODO Auto-generated method stub
-        return "";
+        return Value.getPlatform();
     }
     @Override
     public LocalTime GetDepTime(int i){
-        // TODO Auto-generated method stub
-        return null;
+        return Value.getDep_time();
     }
     @Override
     public LocalTime GetLeavingTime(int i){
-        // TODO Auto-generated method stub
-        return null;
-
+        return Value.getLeaving_time();
     }
     @Override
     public void SetValue(Object value) {

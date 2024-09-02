@@ -3,7 +3,6 @@ package Enumerations;
 import java.io.Serializable;
 
 public enum TransitionCondition implements Serializable{
-	Undefined,
 	Equal,
 	NotEqual,
 	MoreThan,
@@ -23,18 +22,17 @@ public enum TransitionCondition implements Serializable{
 
 	Equal_Length,
 	MoreThan_Length,
-	CanAddTrains_List,
-	CanNotAddTrains_List,
+	Check_Platform_History,
+	Check_Transition_Target_List_NO,
+	Check_Transition_Target_List,
 	Platform,
-	HaveTrainForMe,
 	Platform_To_Send,
+	//HasElements,
 	CheckDepartureTime,
 	EqualDepartureTime,
 	CheckLeavingTime,
 	HaveListTrain_History,
-	Have_NoListTrain,
 	Have_NoListTrain_History,
-	HaveListTrain,
 	CheckTime_After,
 	CheckTime_Before,
 	

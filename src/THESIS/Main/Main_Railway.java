@@ -117,69 +117,63 @@ public class Main_Railway {
 
         DataString L1 = new DataString();
         L1.SetName("L1");
-        pn.ConstantPlaceList.add(L1);
+        pn.PlaceList.add(L1);
 
         DataString L2 = new DataString();
         L2.SetName("L2");
-        pn.ConstantPlaceList.add(L2);
+        pn.PlaceList.add(L2);
 
         DataString L3 = new DataString();
         L3.SetName("L3");
-        pn.ConstantPlaceList.add(L3);
+        pn.PlaceList.add(L3);
 
         DataString L7 = new DataString();
         L7.SetName("L7");
-        pn.ConstantPlaceList.add(L7);
+        pn.PlaceList.add(L7);
 
         DataString L8 = new DataString();
         L8.SetName("L8");
-        pn.ConstantPlaceList.add(L8);
+        pn.PlaceList.add(L8);
 
         DataString L9 = new DataString();
         L9.SetName("L9");
-        pn.ConstantPlaceList.add(L9);
+        pn.PlaceList.add(L9);
 
         DataString L10 = new DataString();
         L10.SetName("L10");
-        pn.ConstantPlaceList.add(L10);
+        pn.PlaceList.add(L10);
 
         DataString L11 = new DataString();
         L11.SetName("L11");
-        pn.ConstantPlaceList.add(L11);
+        pn.PlaceList.add(L11);
 
         DataString L12 = new DataString();
         L12.SetName("L12");
-        pn.ConstantPlaceList.add(L12);
+        pn.PlaceList.add(L12);
 
         DataInteger in7 = new DataInteger();
         in7.SetName("in7");
-        in7.SetValue(90);
-        pn.ConstantPlaceList.add(in7);
+        pn.PlaceList.add(in7);
 
         DataInteger in8 = new DataInteger();
         in8.SetName("in8");
-        in8.SetValue(65);
-        pn.ConstantPlaceList.add(in8);
+        pn.PlaceList.add(in8);
 
         DataInteger in9 = new DataInteger();
         in9.SetName("in9");
-        in9.SetValue(80);
-        pn.ConstantPlaceList.add(in9);
+        pn.PlaceList.add(in9);
 
         DataInteger in10 = new DataInteger();
         in10.SetName("in10");
-        in10.SetValue(77);
-        pn.ConstantPlaceList.add(in10);
+        pn.PlaceList.add(in10);
 
         DataInteger in11 = new DataInteger();
         in11.SetName("in11");
-        in11.SetValue(88);
-        pn.ConstantPlaceList.add(in11);
+        pn.PlaceList.add(in11);
 
         DataInteger in12 = new DataInteger();
         in12.SetName("in12");
-        in7.SetValue(104);
-        pn.ConstantPlaceList.add(in12);
+        pn.PlaceList.add(in12);
 
         // Train sent to the station
         // station A
@@ -316,7 +310,6 @@ public class Main_Railway {
         GuardMapping grdS7b = new GuardMapping();
         grdS7b.condition = S7Ct1b;
         grdS7b.Activations.add(new Activation(S7, "in7", TransitionOperation.SendOverNetwork, "OP7_2"));
-        grdS7b.Activations.add(new Activation(S7, "P7_1", TransitionOperation.SendOverNetwork, "OP7_1"));
         grdS7b.Activations.add(new Activation(S7, "in7", TransitionOperation.Move, "in7"));
         S7.GuardMappingList.add(grdS7b);
 
@@ -356,7 +349,7 @@ public class Main_Railway {
         t2_1.InputPlaceName.add("i5");
 
 
-        Condition t2_1Ct2a = new Condition(t2_1, "i5", TransitionCondition.HaveTrainForMe);
+        Condition t2_1Ct2a = new Condition(t2_1, "i5", TransitionCondition.NotNull);
         Condition t2_1Ct3a = new Condition(t2_1, "P2", TransitionCondition.IsNull);
 
         t2_1Ct2a.SetNextCondition(LogicConnector.AND, t2_1Ct3a);
@@ -448,7 +441,7 @@ public class Main_Railway {
         GuardMapping grdS10b = new GuardMapping();
         grdS10b.condition = S10Ct1b;
         grdS10b.Activations.add(new Activation(S10, "in10", TransitionOperation.SendOverNetwork, "OP10_2"));
-        grdS10b.Activations.add(new Activation(S10, "P10_1", TransitionOperation.SendOverNetwork, "OP10_1"));
+     //   grdS10b.Activations.add(new Activation(S10, "P10_1", TransitionOperation.SendOverNetwork, "OP10_1"));
         grdS10b.Activations.add(new Activation(S10, "in10", TransitionOperation.Move, "in10"));
         S10.GuardMappingList.add(grdS10b);
 
@@ -488,7 +481,7 @@ public class Main_Railway {
         t3_1.InputPlaceName.add("i6");
 
 
-        Condition t3_1Ct2a = new Condition(t3_1, "i6", TransitionCondition.HaveTrainForMe);
+        Condition t3_1Ct2a = new Condition(t3_1, "i6", TransitionCondition.NotNull);
         Condition t3_1Ct3a = new Condition(t3_1, "P3", TransitionCondition.IsNull);
 
         t3_1Ct2a.SetNextCondition(LogicConnector.AND, t3_1Ct3a);
@@ -579,7 +572,7 @@ public class Main_Railway {
         GuardMapping grdS12b = new GuardMapping();
         grdS12b.condition = S12Ct1b;
         grdS12b.Activations.add(new Activation(S12, "in12", TransitionOperation.SendOverNetwork, "OP12_2"));
-        grdS12b.Activations.add(new Activation(S12, "P12_1", TransitionOperation.SendOverNetwork, "OP12_1"));
+     //   grdS12b.Activations.add(new Activation(S12, "P12_1", TransitionOperation.SendOverNetwork, "OP12_1"));
         grdS12b.Activations.add(new Activation(S12, "in12", TransitionOperation.Move, "in12"));
         S12.GuardMappingList.add(grdS12b);
 
@@ -619,7 +612,7 @@ public class Main_Railway {
         t1_1.InputPlaceName.add("i7");
 
 
-        Condition t1_1Ct2a = new Condition(t1_1, "i7", TransitionCondition.HaveTrainForMe);
+        Condition t1_1Ct2a = new Condition(t1_1, "i7", TransitionCondition.NotNull);
         Condition t1_1Ct3a = new Condition(t1_1, "P1", TransitionCondition.IsNull);
 
         t1_1Ct2a.SetNextCondition(LogicConnector.AND, t1_1Ct3a);
@@ -665,7 +658,7 @@ public class Main_Railway {
         t8_1.InputPlaceName.add("i7");
 
 
-        Condition t8_1Ct2a = new Condition(t8_1, "i7", TransitionCondition.HaveTrainForMe);
+        Condition t8_1Ct2a = new Condition(t8_1, "i7", TransitionCondition.NotNull);
         Condition t8_1Ct3a = new Condition(t8_1, "P8_1", TransitionCondition.IsNull);
 
         t8_1Ct2a.SetNextCondition(LogicConnector.AND, t8_1Ct3a);
@@ -709,7 +702,7 @@ public class Main_Railway {
         GuardMapping grdS8b = new GuardMapping();
         grdS8b.condition = S8Ct1b;
         grdS8b.Activations.add(new Activation(S8, "in8", TransitionOperation.SendOverNetwork, "OP8_2"));
-        grdS8b.Activations.add(new Activation(S8, "P8_1", TransitionOperation.SendOverNetwork, "OP8_1"));
+    //    grdS8b.Activations.add(new Activation(S8, "P8_1", TransitionOperation.SendOverNetwork, "OP8_1"));
         grdS8b.Activations.add(new Activation(S8, "in8", TransitionOperation.Move, "in8"));
         S8.GuardMappingList.add(grdS8b);
 
@@ -749,7 +742,7 @@ public class Main_Railway {
         t9_1.InputPlaceName.add("i5");
 
 
-        Condition t9_1Ct2a = new Condition(t9_1, "i5", TransitionCondition.HaveTrainForMe);
+        Condition t9_1Ct2a = new Condition(t9_1, "i5", TransitionCondition.NotNull);
         Condition t9_1Ct3a = new Condition(t9_1, "P9_1", TransitionCondition.IsNull);
 
         t9_1Ct2a.SetNextCondition(LogicConnector.AND, t9_1Ct3a);
@@ -793,7 +786,7 @@ public class Main_Railway {
         GuardMapping grdS9b = new GuardMapping();
         grdS9b.condition = S9Ct1b;
         grdS9b.Activations.add(new Activation(S9, "in9", TransitionOperation.SendOverNetwork, "OP9_2"));
-        grdS9b.Activations.add(new Activation(S9, "P9_1", TransitionOperation.SendOverNetwork, "OP9_1"));
+        //grdS9b.Activations.add(new Activation(S9, "P9_1", TransitionOperation.SendOverNetwork, "OP9_1"));
         grdS9b.Activations.add(new Activation(S9, "in9", TransitionOperation.Move, "in9"));
         S9.GuardMappingList.add(grdS9b);
 
@@ -833,7 +826,7 @@ public class Main_Railway {
         t11_1.InputPlaceName.add("i6");
 
 
-        Condition t11_1Ct2a = new Condition(t11_1, "i6", TransitionCondition.HaveTrainForMe);
+        Condition t11_1Ct2a = new Condition(t11_1, "i6", TransitionCondition.NotNull);
         Condition t11_1Ct3a = new Condition(t11_1, "P11_1", TransitionCondition.IsNull);
 
         t11_1Ct2a.SetNextCondition(LogicConnector.AND, t11_1Ct3a);
@@ -877,7 +870,7 @@ public class Main_Railway {
         GuardMapping grdS11b = new GuardMapping();
         grdS11b.condition = S11Ct1b;
         grdS11b.Activations.add(new Activation(S11, "in11", TransitionOperation.SendOverNetwork, "OP11_2"));
-        grdS11b.Activations.add(new Activation(S11, "P11_1", TransitionOperation.SendOverNetwork, "OP11_1"));
+       // grdS11b.Activations.add(new Activation(S11, "P11_1", TransitionOperation.SendOverNetwork, "OP11_1"));
         grdS11b.Activations.add(new Activation(S11, "in11", TransitionOperation.Move, "in11"));
         S11.GuardMappingList.add(grdS11b);
 

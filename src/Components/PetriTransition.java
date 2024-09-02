@@ -3,6 +3,7 @@ package Components;
 import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import DataObjects.*;
 import Enumerations.PetriObjectType;
@@ -22,6 +23,11 @@ public class PetriTransition implements PetriObject, Serializable {
 
 	}
 
+	@Override
+	public List<String> getTargets(){
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public String GetPlatform(int i){

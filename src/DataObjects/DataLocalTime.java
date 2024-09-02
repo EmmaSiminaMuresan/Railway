@@ -2,6 +2,7 @@ package DataObjects;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.List;
 
 import Enumerations.PetriObjectType;
 import Interfaces.PetriObject;
@@ -28,7 +29,11 @@ public class DataLocalTime implements Interfaces.PetriObject, Cloneable, Seriali
         // TODO Auto-generated method stub
 
     }
-
+    @Override
+    public List<String> getTargets(){
+        // TODO Auto-generated method stub
+        return null;
+    }
     @Override
     public String GetPlatform(int i){
         // TODO Auto-generated method stub

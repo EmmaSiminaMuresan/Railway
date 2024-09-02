@@ -2,6 +2,7 @@ package DataObjects;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.List;
 
 import Enumerations.PetriObjectType;
 import Interfaces.PetriObject;
@@ -29,6 +30,11 @@ public class DataBoolean implements Interfaces.PetriObject, Cloneable, Serializa
 	public void Stop() {
 		// TODO Auto-generated method stub
 
+	}
+	@Override
+	public List<String> getTargets(){
+		// TODO Auto-generated method stub
+		return null;
 	}
 	@Override
 	public String GetPlatform(int i){

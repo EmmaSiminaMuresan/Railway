@@ -2,6 +2,7 @@ package DataObjects;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.List;
 
 import DataOnly.REL;
 import Enumerations.PetriObjectType;
@@ -29,7 +30,11 @@ public class DataREL  implements Interfaces.PetriObject, Cloneable, Serializable
 		// TODO Auto-generated method stub
 
 	}
-
+	@Override
+	public List<String> getTargets(){
+		// TODO Auto-generated method stub
+		return null;
+	}
 	@Override
 	public String GetPlatform(int i){
 		// TODO Auto-generated method stub

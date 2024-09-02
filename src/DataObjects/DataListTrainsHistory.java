@@ -3,6 +3,7 @@ package DataObjects;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.List;
 
 import DataOnly.ListTrains;
 import DataOnly.ListTrainsHistory;
@@ -61,6 +62,11 @@ public class DataListTrainsHistory implements Interfaces.PetriObject, Cloneable,
         } else {
             return GetName() +"(Null)";
         }
+    }
+    @Override
+    public List<String> getTargets(){
+        // TODO Auto-generated method stub
+        return null;
     }
 
     private String name = "";

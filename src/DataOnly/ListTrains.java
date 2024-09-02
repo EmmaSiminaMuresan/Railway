@@ -43,6 +43,9 @@ public class ListTrains implements Cloneable, Serializable{
             this.Targets.add(string);
         }
     }
+    public List<String> getTargets() {
+        return Targets;
+    }
     public List<Object> getTrainAttributes() {
         return train.getAttributes();
     }
@@ -65,7 +68,9 @@ public class ListTrains implements Cloneable, Serializable{
     }
 
     public String toString() {
-        return "Train " + train.toString() + " leaves at " + dep_time + " on platform " + platform;
+        return train.toString() + " departs:" + dep_time + " on platform " + platform + ",leaving station: "+leaving_time;
     }
+
+
 
 }

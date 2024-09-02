@@ -2,6 +2,7 @@ package DataObjects;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.List;
 
 import DataOnly.Car;
 import Enumerations.PetriObjectType;
@@ -16,6 +17,11 @@ public class DataCar implements Interfaces.PetriObject, Cloneable, Serializable 
 	public void AddElement(Object value) {
 		// TODO Auto-generated method stub
 
+	}
+	@Override
+	public List<String> getTargets(){
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

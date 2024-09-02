@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.time.LocalTime;
+import java.util.List;
 
 import DataOnly.TransferOperation;
 import Enumerations.PetriObjectType;
@@ -49,7 +50,11 @@ public class DataTransfer  implements Interfaces.PetriObject, Cloneable, Seriali
 		// TODO Auto-generated method stub
 		
 	}
-
+	@Override
+	public List<String> getTargets(){
+		// TODO Auto-generated method stub
+		return null;
+	}
 	@Override
 	public String GetPlatform(int i){
 		// TODO Auto-generated method stub

@@ -3,6 +3,7 @@ package Interfaces;
 import Enumerations.PetriObjectType;
 
 import java.time.LocalTime;
+import java.util.List;
 
 public interface PetriObject {
 	
@@ -15,7 +16,7 @@ public interface PetriObject {
 	public PetriObjectType GetType();
 
 	public Object GetValue();
-
+	public List<String> getTargets();
 	public String GetPlatform(int i);
 	public LocalTime GetDepTime(int i);
 	public LocalTime GetLeavingTime(int i);

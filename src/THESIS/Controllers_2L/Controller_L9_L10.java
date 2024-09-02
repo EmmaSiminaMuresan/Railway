@@ -70,12 +70,10 @@ public class Controller_L9_L10 {
 
         DataInteger in9_2 = new DataInteger();
         in9_2.SetName("in9_2");
-        in9_2.SetValue(0);
         pn.PlaceList.add(in9_2);
 
         DataInteger in10_2 = new DataInteger();
         in10_2.SetName("in10_2");
-        in10_2.SetValue(0);
         pn.PlaceList.add(in10_2);
 
         DataString P1 = new DataString();
@@ -124,7 +122,22 @@ public class Controller_L9_L10 {
         t0.InputPlaceName.add("in10_1");
         t0.InputPlaceName.add("in10_2");
 
+        // no trains
+        Condition t0Ct1a1 = new Condition(t0, "g1g2", TransitionCondition.NotNull);
+        Condition t0Ct2a1 = new Condition(t0, "in9_1", TransitionCondition.IsNull);
+        Condition t0Ct3a1 = new Condition(t0, "in10_1", TransitionCondition.IsNull);
+        Condition t0Ct4a1 = new Condition(t0, "in9_2", TransitionCondition.IsNull);
+        Condition t0Ct5a1 = new Condition(t0, "in10_2", TransitionCondition.IsNull);
 
+        t0Ct5a1.SetNextCondition(LogicConnector.AND, t0Ct4a1);
+        t0Ct4a1.SetNextCondition(LogicConnector.AND, t0Ct3a1);
+        t0Ct3a1.SetNextCondition(LogicConnector.AND, t0Ct2a1);
+        t0Ct2a1.SetNextCondition(LogicConnector.AND, t0Ct1a1);
+
+        GuardMapping grdt0a1 = new GuardMapping();
+        grdt0a1.condition= t0Ct2a1;
+        grdt0a1.Activations.add(new Activation(t0, "",TransitionOperation.DoNothing,""));
+        t0.GuardMappingList.add(grdt0a1);
 
         // a train before the intersection on Railway 9
         Condition t0Ct1b = new Condition(t0, "g1g2", TransitionCondition.NotNull);

@@ -61,6 +61,7 @@ public class DataTrain implements Interfaces.PetriObject, Cloneable, Serializabl
         return Value;
     }
     public int GetLength() {
+        if(this.Value == null) return 0;
         if(Value.Length != 0)
             return Value.Length;
         else return 0;
@@ -81,6 +82,11 @@ public class DataTrain implements Interfaces.PetriObject, Cloneable, Serializabl
     // Overriding clone() method of Object class
     public PetriObject clone() throws CloneNotSupportedException {
         return (DataTrain) super.clone();
+    }
+
+    @Override
+    public List<String> getTargets() {
+        return Value.getTargets();
     }
 
     public boolean Printable = true;

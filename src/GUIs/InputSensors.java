@@ -8,10 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextPane;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import DataObjects.DataInteger;
@@ -69,6 +66,8 @@ public class InputSensors extends JFrame {
                     // Send Speed Data for current section
                     sendSpeedData(oos, DataToSend, "in" + currentSection, txtSpeed.getText(), txtPort.getText());
 
+                    // Close the socket after sending data
+                    oos.close();
                     s.close();
 
                     // Update for next section
@@ -87,11 +86,26 @@ public class InputSensors extends JFrame {
     }
 
     private void sendSpeedData(ObjectOutputStream oos, DataOverNetwork DataToSend, String name, String value, String port) throws IOException {
-        DataInteger speed = new DataInteger();
-        speed.SetName(name);
-        speed.SetValue(Integer.parseInt(value));
-        DataToSend.petriObject = (PetriObject) speed;
-        DataToSend.NetWorkPort = Integer.parseInt(port);
-        oos.writeObject(DataToSend);
+        try {
+            // Validate input as an integer
+            int speedValue = Integer.parseInt(value);
+
+            // Prepare and send the data
+            DataInteger speed = new DataInteger();
+            speed.SetName(name);
+            speed.SetValue(speedValue);
+            DataToSend.petriObject = (PetriObject) speed;
+            DataToSend.NetWorkPort = Integer.parseInt(port);
+            oos.writeObject(DataToSend);
+        } catch (NumberFormatException e) {
+            // Display an error message if input is not a valid integer
+            JOptionPane.showMessageDialog(this, "Please enter a valid integer for speed.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            // Handle any IO errors
+            JOptionPane.showMessageDialog(this, "Error sending data: " + e.getMessage(), "Communication Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }
+
+
 }

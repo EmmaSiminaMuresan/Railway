@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.List;
 
 import Enumerations.PetriObjectType;
 import Interfaces.PetriObject;
@@ -26,7 +27,11 @@ public class DataString implements Interfaces.PetriObject, Cloneable, Serializab
 		// TODO Auto-generated method stub
 
 	}
-
+	@Override
+	public List<String> getTargets(){
+		// TODO Auto-generated method stub
+		return null;
+	}
 	@Override
 	public String GetPlatform(int i){
 		// TODO Auto-generated method stub

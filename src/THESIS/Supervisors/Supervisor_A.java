@@ -73,6 +73,10 @@ public class Supervisor_A {
         A3.SetValue("A3");
         pn.ConstantPlaceList.add(A3);
 
+        DataTrain temp = new DataTrain();
+        temp.SetName("Temp");
+        pn.ConstantPlaceList.add(temp);
+
         DataInteger Zero = new DataInteger();
         Zero.SetName("Zero");
         Zero.SetValue(0);
@@ -80,22 +84,22 @@ public class Supervisor_A {
 
         DataInteger A1_Length = new DataInteger();
         A1_Length.SetName("A1_Length");
-        A1_Length.SetValue(78);
+        A1_Length.SetValue(140);
         pn.ConstantPlaceList.add(A1_Length);
 
         DataInteger A2_Length = new DataInteger();
         A2_Length.SetName("A2_Length");
-        A2_Length.SetValue(85);
+        A2_Length.SetValue(100);
         pn.ConstantPlaceList.add(A2_Length);
 
         DataInteger A3_Length = new DataInteger();
         A3_Length.SetName("A3_Length");
-        A3_Length.SetValue(96);
+        A3_Length.SetValue(130);
         pn.ConstantPlaceList.add(A3_Length);
 
         DataInteger A4_Length = new DataInteger();
         A4_Length.SetName("A4_Length");
-        A4_Length.SetValue(58);
+        A4_Length.SetValue(70);
         pn.ConstantPlaceList.add(A4_Length);
 
         DataInteger speed_on_platform = new DataInteger();
@@ -120,14 +124,12 @@ public class Supervisor_A {
         p4.SetName("D_Train_A");
         pn.PlaceList.add(p4);
 
-        DataListTrainsQueue p5 = new DataListTrainsQueue();
-        p5.Value.Size = 2;
+        DataListTrains p5 = new DataListTrains();
         p5.SetName("List_A");
         pn.PlaceList.add(p5);
 
-        DataListTrainsQueue p6 = new DataListTrainsQueue();
+        DataListTrainsHistory p6 = new DataListTrainsHistory();
         p6.SetName("H_List_A");
-        p6.Value.Size = 100;
         pn.PlaceList.add(p6);
 
         DataTransfer T1_A = new DataTransfer();
@@ -163,6 +165,120 @@ public class Supervisor_A {
 
 
 
+// t4 ------------------------------------------------
+        PetriTransition t4 = new PetriTransition(pn);
+        t4.TransitionName = "t4";
+        t4.InputPlaceName.add("C_TimeA1");
+        t4.InputPlaceName.add("C_TimeA2");
+        t4.InputPlaceName.add("C_TimeA3");
+        t4.InputPlaceName.add("C_TimeA4");
+/*
+        // Handle case when all inputs are null
+        Condition t4CtAllNull = new Condition(t4, "C_TimeA1", TransitionCondition.IsNull);
+        t4CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t4, "C_TimeA2", TransitionCondition.IsNull));
+        t4CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t4, "C_TimeA3", TransitionCondition.IsNull));
+        t4CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t4, "C_TimeA4", TransitionCondition.IsNull));
+
+        GuardMapping grdt4AllNull = new GuardMapping();
+       grdt4AllNull.condition = t4CtAllNull;
+        grdt4AllNull.Activations.add(new Activation(t4, "", TransitionOperation.DoNothing, ""));
+        t4.GuardMappingList.add(grdt4AllNull);
+*/
+
+        Condition t4Ct1a = new Condition(t4, "C_TimeA1", TransitionCondition.NotNull);
+
+        GuardMapping grdt4a = new GuardMapping();
+        grdt4a.condition = t4Ct1a;
+        grdt4a.Activations.add(new Activation(t4, "C_TimeA1", TransitionOperation.Move, "C_TimeA"));
+        t4.GuardMappingList.add(grdt4a);
+
+
+        Condition t4Ct1b = new Condition(t4, "C_TimeA2", TransitionCondition.NotNull);
+
+        GuardMapping grdt4b = new GuardMapping();
+        grdt4b.condition = t4Ct1b;
+        grdt4b.Activations.add(new Activation(t4, "C_TimeA2", TransitionOperation.Move, "C_TimeA"));
+        t4.GuardMappingList.add(grdt4b);
+
+
+        Condition t4Ct1c = new Condition(t4, "C_TimeA3", TransitionCondition.NotNull);
+
+        GuardMapping grdt4c = new GuardMapping();
+        grdt4c.condition = t4Ct1c;
+        grdt4c.Activations.add(new Activation(t4, "C_TimeA3", TransitionOperation.Move, "C_TimeA"));
+        t4.GuardMappingList.add(grdt4c);
+
+
+        Condition t4Ct1d = new Condition(t4, "C_TimeA4", TransitionCondition.NotNull);
+
+        GuardMapping grdt4d = new GuardMapping();
+        grdt4d.condition = t4Ct1d;
+        grdt4d.Activations.add(new Activation(t4, "C_TimeA4", TransitionOperation.Move, "C_TimeA"));
+        t4.GuardMappingList.add(grdt4d);
+
+
+        t4.Delay = 0;
+        pn.Transitions.add(t4);
+
+
+        // t5 ------------------------------------------------
+        PetriTransition t5 = new PetriTransition(pn);
+        t5.TransitionName = "t5";
+        t5.InputPlaceName.add("C_PA1");
+        t5.InputPlaceName.add("C_PA2");
+        t5.InputPlaceName.add("C_PA3");
+        t5.InputPlaceName.add("C_PA4");
+
+/*
+//        // Handle case when all inputs are null
+        Condition t5CtAllNull = new Condition(t5, "C_PA1", TransitionCondition.IsNull);
+        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_PA2", TransitionCondition.IsNull));
+        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_PA3", TransitionCondition.IsNull));
+        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_PA4", TransitionCondition.IsNull));
+
+        GuardMapping grdt5AllNull = new GuardMapping();
+        grdt5AllNull.condition = t5CtAllNull;
+        grdt5AllNull.Activations.add(new Activation(t5, "", TransitionOperation.DoNothing, ""));
+        t5.GuardMappingList.add(grdt5AllNull);
+*/
+
+        Condition t5Ct1a = new Condition(t5, "C_PA1", TransitionCondition.NotNull);
+
+        GuardMapping grdt5a = new GuardMapping();
+        grdt5a.condition = t5Ct1a;
+        grdt5a.Activations.add(new Activation(t5, "C_PA1", TransitionOperation.Move, "C_PA"));
+        t5.GuardMappingList.add(grdt5a);
+
+
+        Condition t5Ct1b = new Condition(t5, "C_PA2", TransitionCondition.NotNull);
+
+        GuardMapping grdt5b = new GuardMapping();
+        grdt5b.condition = t5Ct1b;
+        grdt5b.Activations.add(new Activation(t5, "C_PA2", TransitionOperation.Move, "C_PA"));
+        t5.GuardMappingList.add(grdt5b);
+
+
+        Condition t5Ct1c = new Condition(t5, "C_PA3", TransitionCondition.NotNull);
+
+        GuardMapping grdt5c = new GuardMapping();
+        grdt5c.condition = t5Ct1c;
+        grdt5c.Activations.add(new Activation(t5, "C_PA3", TransitionOperation.Move, "C_PA"));
+        t5.GuardMappingList.add(grdt5c);
+
+
+        Condition t5Ct1d = new Condition(t5, "C_PA4", TransitionCondition.NotNull);
+
+        GuardMapping grdt5d = new GuardMapping();
+        grdt5d.condition = t5Ct1d;
+        grdt5d.Activations.add(new Activation(t5, "C_PA4", TransitionOperation.Move, "C_PA"));
+        t5.GuardMappingList.add(grdt5d);
+
+
+        t5.Delay = 0;
+        pn.Transitions.add(t5);
+
+
+
 
         // T0 ------------------------------------------------
         PetriTransition t0 = new PetriTransition(pn);
@@ -174,20 +290,20 @@ public class Supervisor_A {
         t0.InputPlaceName.add("C_TimeA");
         t0.InputPlaceName.add("H_List_A");
 
+/*
+        // Handle case when all inputs are null
+        Condition t0CtAllNull = new Condition(t0, "Train_A", TransitionCondition.IsNull);
+        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "Dep_Time_A", TransitionCondition.IsNull));
+        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "Platform_A", TransitionCondition.IsNull));
+        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "C_PA", TransitionCondition.IsNull));
+        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "C_TimeA", TransitionCondition.IsNull));
+        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "H_List_A", TransitionCondition.IsNull));
 
-//        // Handle case when all inputs are null
-//        Condition t0CtAllNull = new Condition(t0, "Train_A", TransitionCondition.IsNull);
-//        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "Dep_Time_A", TransitionCondition.IsNull));
-//        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "Platform_A", TransitionCondition.IsNull));
-//        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "C_PA", TransitionCondition.IsNull));
-//        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "C_TimeA", TransitionCondition.IsNull));
-//        t0CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t0, "H_List_A", TransitionCondition.IsNull));
-//
-//        GuardMapping grdT0AllNull = new GuardMapping();
-//        grdT0AllNull.condition = t0CtAllNull;
-//        grdT0AllNull.Activations.add(new Activation(t0, "", TransitionOperation.DoNothing, ""));
-//        t0.GuardMappingList.add(grdT0AllNull);
-
+        GuardMapping grdT0AllNull = new GuardMapping();
+        grdT0AllNull.condition = t0CtAllNull;
+        grdT0AllNull.Activations.add(new Activation(t0, "", TransitionOperation.DoNothing, ""));
+        t0.GuardMappingList.add(grdT0AllNull);
+*/
         // no comming train
         // first train created on platform A1
         Condition t0Ct1a = new Condition(t0, "Train_A", TransitionCondition.NotNull);
@@ -217,6 +333,8 @@ public class Supervisor_A {
                 null,
                 A1_Length.GetName(),
                 A4_Length.GetName(),
+                "Zero",
+                "Zero",
                 speed_on_platform.GetName(),
                 TransitionOperation.CreateTrain_Null,
                 p4.GetName()));
@@ -250,6 +368,8 @@ public class Supervisor_A {
                 null,
                 "A2_Length",
                 "A4_Length",
+                "Zero",
+                "Zero",
                 "Speed_On_Platform",
                 TransitionOperation.CreateTrain_Null,
                 "D_Train_A"));
@@ -276,11 +396,24 @@ public class Supervisor_A {
 
         GuardMapping grdt0c = new GuardMapping();
         grdt0c.condition = t0Ct1c;
-        grdt0c.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A",null,"A3_Length","Zero","Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_A"));
+        grdt0c.Activations.add(new Activation(t0,"Train_A",
+                "Dep_Time_A",
+                "Platform_A",
+                null,
+                "A3_Length",
+                "Zero",
+                "Zero",
+                "Zero",
+                "Speed_On_Platform",
+                TransitionOperation.CreateTrain_Null,
+                "D_Train_A"));
         grdt0c.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
         t0.GuardMappingList.add(grdt0c);
 
 
+        //Not the first train created in the day
+        // Platform of the new : A1
+        // Platform of the last : A1
         Condition t0Ct1d = new Condition(t0, "Train_A", TransitionCondition.NotNull);
         Condition t0Ct2d = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
         Condition t0Ct3d = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
@@ -289,7 +422,9 @@ public class Supervisor_A {
         Condition t0Ct6d = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
         Condition t0Ct7d = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
         Condition t0Ct8d = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A1");
+        Condition t0Ct9d = new Condition(t0, "H_List_A", TransitionCondition.Check_Platform_History,"A1");
 
+        t0Ct8d.SetNextCondition(LogicConnector.AND, t0Ct9d);
         t0Ct7d.SetNextCondition(LogicConnector.AND, t0Ct8d);
         t0Ct6d.SetNextCondition(LogicConnector.AND, t0Ct7d);
         t0Ct5d.SetNextCondition(LogicConnector.AND, t0Ct6d);
@@ -300,71 +435,255 @@ public class Supervisor_A {
 
         GuardMapping grdt0d = new GuardMapping();
         grdt0d.condition = t0Ct1d;
-        grdt0d.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","H_List_A","A1_Length","A4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_A"));
+        grdt0d.Activations.add(new Activation(t0,"Train_A",
+                "Dep_Time_A",
+                "Platform_A",
+                "H_List_A",
+                "A1_Length",
+                "A4_Length",
+                "A1_Length",
+                "Zero",
+                "Speed_On_Platform",
+                TransitionOperation.CreateTrain_Null,
+                "D_Train_A"));
         grdt0d.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
         t0.GuardMappingList.add(grdt0d);
 
+        // Platform of the new : A1
+        // Platform of the last : A2
+        Condition t0Ct1d1 = new Condition(t0, "Train_A", TransitionCondition.NotNull);
+        Condition t0Ct2d1 = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
+        Condition t0Ct3d1 = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
+        Condition t0Ct4d1 = new Condition(t0, "C_PA", TransitionCondition.IsNull);
+        Condition t0Ct5d1 = new Condition(t0, "C_TimeA", TransitionCondition.IsNull);
+        Condition t0Ct6d1 = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
+        Condition t0Ct7d1 = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
+        Condition t0Ct8d1 = new Condition(t0, "Platform_A", TransitionCondition.Contains, "A1");
+        Condition t0Ct9d1 = new Condition(t0, "H_List_A", TransitionCondition.Check_Platform_History, "A2");
 
-        Condition t0Ct1e = new Condition(t0, "Train_A", TransitionCondition.NotNull);
-        Condition t0Ct2e = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
-        Condition t0Ct3e = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
-        Condition t0Ct4e = new Condition(t0, "C_PA", TransitionCondition.IsNull);
-        Condition t0Ct5e = new Condition(t0, "C_TimeA", TransitionCondition.IsNull);
-        Condition t0Ct6e = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
-        Condition t0Ct7e = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
-        Condition t0Ct8e = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A2");
+        t0Ct8d1.SetNextCondition(LogicConnector.AND, t0Ct9d1);
+        t0Ct7d1.SetNextCondition(LogicConnector.AND, t0Ct8d1);
+        t0Ct6d1.SetNextCondition(LogicConnector.AND, t0Ct7d1);
+        t0Ct5d1.SetNextCondition(LogicConnector.AND, t0Ct6d1);
+        t0Ct4d1.SetNextCondition(LogicConnector.AND, t0Ct5d1);
+        t0Ct3d1.SetNextCondition(LogicConnector.AND, t0Ct4d1);
+        t0Ct2d1.SetNextCondition(LogicConnector.AND, t0Ct3d1);
+        t0Ct1d1.SetNextCondition(LogicConnector.AND, t0Ct2d1);
 
-        t0Ct7e.SetNextCondition(LogicConnector.AND, t0Ct8e);
-        t0Ct6e.SetNextCondition(LogicConnector.AND, t0Ct7e);
-        t0Ct5e.SetNextCondition(LogicConnector.AND, t0Ct6e);
-        t0Ct4e.SetNextCondition(LogicConnector.AND, t0Ct5e);
-        t0Ct3e.SetNextCondition(LogicConnector.AND, t0Ct4e);
-        t0Ct2e.SetNextCondition(LogicConnector.AND, t0Ct3e);
-        t0Ct1e.SetNextCondition(LogicConnector.AND, t0Ct2e);
+        GuardMapping grdt0d1 = new GuardMapping();
+        grdt0d1.condition = t0Ct1d1;
+        grdt0d1.Activations.add(new Activation(t0, "Train_A",
+                "Dep_Time_A",
+                "Platform_A",
+                "H_List_A",
+                "A1_Length",
+                "A4_Length",
+                "A2_Length",
+                "Zero",
+                "Speed_On_Platform",
+                TransitionOperation.CreateTrain_Null,
+                "D_Train_A"));
+        grdt0d1.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
+        t0.GuardMappingList.add(grdt0d1);
 
-        GuardMapping grdt0e = new GuardMapping();
-        grdt0e.condition = t0Ct1e;
-        grdt0e.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","H_List_A","A2_Length","A4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_A"));
-        grdt0e.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
-        t0.GuardMappingList.add(grdt0e);
+        // Platform of the new : A1
+        // Platform of the last : A3
+        Condition t0Ct1d2 = new Condition(t0, "Train_A", TransitionCondition.NotNull);
+        Condition t0Ct2d2 = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
+        Condition t0Ct3d2 = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
+        Condition t0Ct4d2 = new Condition(t0, "C_PA", TransitionCondition.IsNull);
+        Condition t0Ct5d2 = new Condition(t0, "C_TimeA", TransitionCondition.IsNull);
+        Condition t0Ct6d2 = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
+        Condition t0Ct7d2 = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
+        Condition t0Ct8d2 = new Condition(t0, "Platform_A", TransitionCondition.Contains, "A1");
+        Condition t0Ct9d2 = new Condition(t0, "H_List_A", TransitionCondition.Check_Platform_History, "A3");
+
+        t0Ct8d2.SetNextCondition(LogicConnector.AND, t0Ct9d2);
+        t0Ct7d2.SetNextCondition(LogicConnector.AND, t0Ct8d2);
+        t0Ct6d2.SetNextCondition(LogicConnector.AND, t0Ct7d2);
+        t0Ct5d2.SetNextCondition(LogicConnector.AND, t0Ct6d2);
+        t0Ct4d2.SetNextCondition(LogicConnector.AND, t0Ct5d2);
+        t0Ct3d2.SetNextCondition(LogicConnector.AND, t0Ct4d2);
+        t0Ct2d2.SetNextCondition(LogicConnector.AND, t0Ct3d2);
+        t0Ct1d2.SetNextCondition(LogicConnector.AND, t0Ct2d2);
+
+        GuardMapping grdt0d2 = new GuardMapping();
+        grdt0d2.condition = t0Ct1d2;
+        grdt0d2.Activations.add(new Activation(t0, "Train_A",
+                "Dep_Time_A",
+                "Platform_A",
+                "H_List_A",
+                "A1_Length",
+                "A4_Length",
+                "Zero",
+                "Zero",
+                "Speed_On_Platform",
+                TransitionOperation.CreateTrain_Null,
+                "D_Train_A"));
+        grdt0d2.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
+        t0.GuardMappingList.add(grdt0d2);
 
 
-        Condition t0Ct1f = new Condition(t0, "Train_A", TransitionCondition.NotNull);
-        Condition t0Ct2f = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
-        Condition t0Ct3f = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
-        Condition t0Ct4f = new Condition(t0, "C_PA", TransitionCondition.IsNull);
-        Condition t0Ct5f = new Condition(t0, "C_TimeA", TransitionCondition.IsNull);
-        Condition t0Ct6f = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
-        Condition t0Ct7f = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
-        Condition t0Ct8f = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A3");
+        // Platform of the new : A2
+        // Platform of the last : A1
+        Condition t0Ct1e1 = new Condition(t0, "Train_A", TransitionCondition.NotNull);
+        Condition t0Ct2e1 = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
+        Condition t0Ct3e1 = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
+        Condition t0Ct4e1 = new Condition(t0, "C_PA", TransitionCondition.IsNull);
+        Condition t0Ct5e1 = new Condition(t0, "C_TimeA", TransitionCondition.IsNull);
+        Condition t0Ct6e1 = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
+        Condition t0Ct7e1 = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
+        Condition t0Ct8e1 = new Condition(t0, "Platform_A", TransitionCondition.Contains, "A2");
+        Condition t0Ct9e1 = new Condition(t0, "H_List_A", TransitionCondition.Check_Platform_History, "A1");
 
-        t0Ct7f.SetNextCondition(LogicConnector.AND, t0Ct8f);
-        t0Ct6f.SetNextCondition(LogicConnector.AND, t0Ct7f);
-        t0Ct5f.SetNextCondition(LogicConnector.AND, t0Ct6f);
-        t0Ct4f.SetNextCondition(LogicConnector.AND, t0Ct5f);
-        t0Ct3f.SetNextCondition(LogicConnector.AND, t0Ct4f);
-        t0Ct2f.SetNextCondition(LogicConnector.AND, t0Ct3f);
-        t0Ct1f.SetNextCondition(LogicConnector.AND, t0Ct2f);
+        t0Ct8e1.SetNextCondition(LogicConnector.AND, t0Ct9e1);
+        t0Ct7e1.SetNextCondition(LogicConnector.AND, t0Ct8e1);
+        t0Ct6e1.SetNextCondition(LogicConnector.AND, t0Ct7e1);
+        t0Ct5e1.SetNextCondition(LogicConnector.AND, t0Ct6e1);
+        t0Ct4e1.SetNextCondition(LogicConnector.AND, t0Ct5e1);
+        t0Ct3e1.SetNextCondition(LogicConnector.AND, t0Ct4e1);
+        t0Ct2e1.SetNextCondition(LogicConnector.AND, t0Ct3e1);
+        t0Ct1e1.SetNextCondition(LogicConnector.AND, t0Ct2e1);
 
-        GuardMapping grdt0f = new GuardMapping();
-        grdt0f.condition = t0Ct1f;
-        grdt0f.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","H_List_A","A3_Length","Zero","Speed_On_Platform", TransitionOperation.CreateTrain_Null, "D_Train_A"));
-        grdt0f.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
-        t0.GuardMappingList.add(grdt0f);
+        GuardMapping grdt0e1 = new GuardMapping();
+        grdt0e1.condition = t0Ct1e1;
+        grdt0e1.Activations.add(new Activation(t0,"Train_A",
+                "Dep_Time_A",
+                "Platform_A",
+                "H_List_A",
+                "A2_Length",
+                "A4_Length",
+                "A1_Length",
+                "Zero",
+                "Speed_On_Platform",
+                TransitionOperation.CreateTrain_Null,
+                "D_Train_A"));
+        grdt0e1.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
+        t0.GuardMappingList.add(grdt0e1);
+
+        // Platform of the new : A2
+        // Platform of the last : A2
+        Condition t0Ct1e2 = new Condition(t0, "Train_A", TransitionCondition.NotNull);
+        Condition t0Ct2e2 = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
+        Condition t0Ct3e2 = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
+        Condition t0Ct4e2 = new Condition(t0, "C_PA", TransitionCondition.IsNull);
+        Condition t0Ct5e2 = new Condition(t0, "C_TimeA", TransitionCondition.IsNull);
+        Condition t0Ct6e2 = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
+        Condition t0Ct7e2 = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
+        Condition t0Ct8e2 = new Condition(t0, "Platform_A", TransitionCondition.Contains, "A2");
+        Condition t0Ct9e2 = new Condition(t0, "H_List_A", TransitionCondition.Check_Platform_History, "A2");
+
+        t0Ct8e2.SetNextCondition(LogicConnector.AND, t0Ct9e2);
+        t0Ct7e2.SetNextCondition(LogicConnector.AND, t0Ct8e2);
+        t0Ct6e2.SetNextCondition(LogicConnector.AND, t0Ct7e2);
+        t0Ct5e2.SetNextCondition(LogicConnector.AND, t0Ct6e2);
+        t0Ct4e2.SetNextCondition(LogicConnector.AND, t0Ct5e2);
+        t0Ct3e2.SetNextCondition(LogicConnector.AND, t0Ct4e2);
+        t0Ct2e2.SetNextCondition(LogicConnector.AND, t0Ct3e2);
+        t0Ct1e2.SetNextCondition(LogicConnector.AND, t0Ct2e2);
+
+        GuardMapping grdt0e2 = new GuardMapping();
+        grdt0e2.condition = t0Ct1e2;
+        grdt0e2.Activations.add(new Activation(t0,"Train_A",
+                "Dep_Time_A",
+                "Platform_A",
+                "H_List_A",
+                "A2_Length",
+                "A4_Length",
+                "A2_Length",
+                "Zero",
+                "Speed_On_Platform",
+                TransitionOperation.CreateTrain_Null,
+                "D_Train_A"));
+        grdt0e2.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
+        t0.GuardMappingList.add(grdt0e2);
+
+        // Platform of the new : A2
+        // Platform of the last : A3
+        Condition t0Ct1e3 = new Condition(t0, "Train_A", TransitionCondition.NotNull);
+        Condition t0Ct2e3 = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
+        Condition t0Ct3e3 = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
+        Condition t0Ct4e3 = new Condition(t0, "C_PA", TransitionCondition.IsNull);
+        Condition t0Ct5e3 = new Condition(t0, "C_TimeA", TransitionCondition.IsNull);
+        Condition t0Ct6e3 = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
+        Condition t0Ct7e3 = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
+        Condition t0Ct8e3 = new Condition(t0, "Platform_A", TransitionCondition.Contains, "A2");
+        Condition t0Ct9e3 = new Condition(t0, "H_List_A", TransitionCondition.Check_Platform_History, "A3");
+
+        t0Ct8e3.SetNextCondition(LogicConnector.AND, t0Ct9e3);
+        t0Ct7e3.SetNextCondition(LogicConnector.AND, t0Ct8e3);
+        t0Ct6e3.SetNextCondition(LogicConnector.AND, t0Ct7e3);
+        t0Ct5e3.SetNextCondition(LogicConnector.AND, t0Ct6e3);
+        t0Ct4e3.SetNextCondition(LogicConnector.AND, t0Ct5e3);
+        t0Ct3e3.SetNextCondition(LogicConnector.AND, t0Ct4e3);
+        t0Ct2e3.SetNextCondition(LogicConnector.AND, t0Ct3e3);
+        t0Ct1e3.SetNextCondition(LogicConnector.AND, t0Ct2e3);
+
+        GuardMapping grdt0e3 = new GuardMapping();
+        grdt0e3.condition = t0Ct1e3;
+        grdt0e3.Activations.add(new Activation(t0,"Train_A",
+                "Dep_Time_A",
+                "Platform_A",
+                "H_List_A",
+                "A2_Length",
+                "A4_Length",
+                "Zero",
+                "Zero",
+                "Speed_On_Platform",
+                TransitionOperation.CreateTrain_Null,
+                "D_Train_A"));
+        grdt0e3.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
+        t0.GuardMappingList.add(grdt0e3);
+
+
+        // Platform of the new : A3
+        // Platform of the last : A1, A2 or A3 doesn't matter, we take into account the leaving time of the station = intersection with the new train
+        Condition t0Ct1f1 = new Condition(t0, "Train_A", TransitionCondition.NotNull);
+        Condition t0Ct2f1 = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
+        Condition t0Ct3f1 = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
+        Condition t0Ct4f1 = new Condition(t0, "C_PA", TransitionCondition.IsNull);
+        Condition t0Ct5f1 = new Condition(t0, "C_TimeA", TransitionCondition.IsNull);
+        Condition t0Ct6f1 = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
+        Condition t0Ct7f1 = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
+        Condition t0Ct8f1 = new Condition(t0, "Platform_A", TransitionCondition.Contains, "A3");
+
+        t0Ct7f1.SetNextCondition(LogicConnector.AND, t0Ct8f1);
+        t0Ct6f1.SetNextCondition(LogicConnector.AND, t0Ct7f1);
+        t0Ct5f1.SetNextCondition(LogicConnector.AND, t0Ct6f1);
+        t0Ct4f1.SetNextCondition(LogicConnector.AND, t0Ct5f1);
+        t0Ct3f1.SetNextCondition(LogicConnector.AND, t0Ct4f1);
+        t0Ct2f1.SetNextCondition(LogicConnector.AND, t0Ct3f1);
+        t0Ct1f1.SetNextCondition(LogicConnector.AND, t0Ct2f1);
+
+        GuardMapping grdt0f1 = new GuardMapping();
+        grdt0f1.condition = t0Ct1f1;
+        grdt0f1.Activations.add(new Activation(t0,"Train_A",
+                "Dep_Time_A",
+                "Platform_A",
+                "H_List_A",
+                "A3_Length",
+                "Zero",
+                "Zero",
+                "Zero",
+                "Speed_On_Platform",
+                TransitionOperation.CreateTrain_Null,
+                "D_Train_A"));
+        grdt0f1.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
+        t0.GuardMappingList.add(grdt0f1);
+
 
 
         // there is a comming train
-
         Condition t0Ct1g = new Condition(t0, "Train_A", TransitionCondition.NotNull);
         Condition t0Ct2g = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
         Condition t0Ct3g = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
         Condition t0Ct4g = new Condition(t0, "C_PA", TransitionCondition.NotNull);
         Condition t0Ct5g = new Condition(t0, "C_TimeA", TransitionCondition.NotNull);
         Condition t0Ct6g = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
-        Condition t0Ct7g = new Condition(t0, "H_List_A", TransitionCondition.Have_NoListTrain_History);
-        Condition t0Ct8g = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A1");
+       // Condition t0Ct7g = new Condition(t0, "H_List_A", TransitionCondition.Have_NoListTrain_History);
+        Condition t0Ct7g = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A1");
 
-        t0Ct7g.SetNextCondition(LogicConnector.AND, t0Ct8g);
+       // t0Ct7g.SetNextCondition(LogicConnector.AND, t0Ct8g);
         t0Ct6g.SetNextCondition(LogicConnector.AND, t0Ct7g);
         t0Ct5g.SetNextCondition(LogicConnector.AND, t0Ct6g);
         t0Ct4g.SetNextCondition(LogicConnector.AND, t0Ct5g);
@@ -374,7 +693,16 @@ public class Supervisor_A {
 
         GuardMapping grdt0g = new GuardMapping();
         grdt0g.condition = t0Ct1g;
-        grdt0g.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","C_TimeA","C_PA",null,"A1_Length","A4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_A"));
+        grdt0g.Activations.add(new Activation(t0,"Train_A",
+                "Dep_Time_A",
+                "Platform_A",
+                "C_TimeA",
+                "C_PA",
+                "A1_Length",
+                "A4_Length",
+                "Speed_On_Platform",
+                TransitionOperation.CreateTrain_NotNull,
+                "D_Train_A"));
         grdt0g.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
         t0.GuardMappingList.add(grdt0g);
 
@@ -385,10 +713,10 @@ public class Supervisor_A {
         Condition t0Ct4h = new Condition(t0, "C_PA", TransitionCondition.NotNull);
         Condition t0Ct5h = new Condition(t0, "C_TimeA", TransitionCondition.NotNull);
         Condition t0Ct6h = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
-        Condition t0Ct7h = new Condition(t0, "H_List_A", TransitionCondition.Have_NoListTrain_History);
-        Condition t0Ct8h = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A2");
+        //Condition t0Ct7h = new Condition(t0, "H_List_A", TransitionCondition.Have_NoListTrain_History);
+        Condition t0Ct7h = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A2");
 
-        t0Ct7h.SetNextCondition(LogicConnector.AND, t0Ct8h);
+       // t0Ct7h.SetNextCondition(LogicConnector.AND, t0Ct8h);
         t0Ct6h.SetNextCondition(LogicConnector.AND, t0Ct7h);
         t0Ct5h.SetNextCondition(LogicConnector.AND, t0Ct6h);
         t0Ct4h.SetNextCondition(LogicConnector.AND, t0Ct5h);
@@ -399,7 +727,16 @@ public class Supervisor_A {
 
         GuardMapping grdt0h = new GuardMapping();
         grdt0h.condition = t0Ct1h;
-        grdt0h.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","C_TimeA","C_PA",null,"A2_Length","A4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_A"));
+        grdt0h.Activations.add(new Activation(t0,"Train_A",
+                "Dep_Time_A",
+                "Platform_A",
+                "C_TimeA",
+                "C_PA",
+                "A2_Length",
+                "A4_Length",
+                "Speed_On_Platform",
+                TransitionOperation.CreateTrain_NotNull,
+                "D_Train_A"));
         grdt0h.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
         t0.GuardMappingList.add(grdt0h);
 
@@ -407,13 +744,13 @@ public class Supervisor_A {
         Condition t0Ct1i = new Condition(t0, "Train_A", TransitionCondition.NotNull);
         Condition t0Ct2i = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
         Condition t0Ct3i = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
-        Condition t0Ct4i = new Condition(t0, "C_PA", TransitionCondition.IsNull);
+        Condition t0Ct4i = new Condition(t0, "C_PA", TransitionCondition.NotNull);
         Condition t0Ct5i = new Condition(t0, "C_TimeA", TransitionCondition.NotNull);
-        Condition t0Ct6i = new Condition(t0, "D_Train_A", TransitionCondition.NotNull);
-        Condition t0Ct7i = new Condition(t0, "H_List_A", TransitionCondition.Have_NoListTrain_History);
-        Condition t0Ct8i = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A3");
+        Condition t0Ct6i = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
+        //Condition t0Ct7i = new Condition(t0, "H_List_A", TransitionCondition.Have_NoListTrain_History);
+        Condition t0Ct7i = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A3");
 
-        t0Ct7i.SetNextCondition(LogicConnector.AND, t0Ct8i);
+        //t0Ct7i.SetNextCondition(LogicConnector.AND, t0Ct8i);
         t0Ct6i.SetNextCondition(LogicConnector.AND, t0Ct7i);
         t0Ct5i.SetNextCondition(LogicConnector.AND, t0Ct6i);
         t0Ct4i.SetNextCondition(LogicConnector.AND, t0Ct5i);
@@ -424,94 +761,104 @@ public class Supervisor_A {
 
         GuardMapping grdt0i = new GuardMapping();
         grdt0i.condition = t0Ct1i;
-        grdt0i.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","C_TimeA","C_PA",null,"A3_Length","Zero","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_A"));
-        grdt0i.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
-        t0.GuardMappingList.add(grdt0i);
-
-
-        Condition t0Ct1j = new Condition(t0, "Train_A", TransitionCondition.NotNull);
-        Condition t0Ct2j = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
-        Condition t0Ct3j = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
-        Condition t0Ct4j = new Condition(t0, "C_PA", TransitionCondition.NotNull);
-        Condition t0Ct5j = new Condition(t0, "C_TimeA", TransitionCondition.NotNull);
-        Condition t0Ct6j = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
-        Condition t0Ct7j = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
-        Condition t0Ct8j = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A1");
-
-        t0Ct7j.SetNextCondition(LogicConnector.AND, t0Ct8j);
-        t0Ct6j.SetNextCondition(LogicConnector.AND, t0Ct7j);
-        t0Ct5j.SetNextCondition(LogicConnector.AND, t0Ct6j);
-        t0Ct4j.SetNextCondition(LogicConnector.AND, t0Ct5j);
-        t0Ct3j.SetNextCondition(LogicConnector.AND, t0Ct4j);
-        t0Ct2j.SetNextCondition(LogicConnector.AND, t0Ct3j);
-        t0Ct1j.SetNextCondition(LogicConnector.AND, t0Ct2j);
-
-
-        GuardMapping grdt0j = new GuardMapping();
-        grdt0j.condition = t0Ct1j;
-        grdt0j.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","C_TimeA","C_PA","H_List_A","A1_Length","A4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_A"));
-        grdt0j.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
-        t0.GuardMappingList.add(grdt0j);
-
-
-        Condition t0Ct1k = new Condition(t0, "Train_A", TransitionCondition.NotNull);
-        Condition t0Ct2k = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
-        Condition t0Ct3k = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
-        Condition t0Ct4k = new Condition(t0, "C_PA", TransitionCondition.NotNull);
-        Condition t0Ct5k = new Condition(t0, "C_TimeA", TransitionCondition.NotNull);
-        Condition t0Ct6k = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
-        Condition t0Ct7k = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
-        Condition t0Ct8k = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A2");
-
-        t0Ct7k.SetNextCondition(LogicConnector.AND, t0Ct8k);
-        t0Ct6k.SetNextCondition(LogicConnector.AND, t0Ct7k);
-        t0Ct5k.SetNextCondition(LogicConnector.AND, t0Ct6k);
-        t0Ct4k.SetNextCondition(LogicConnector.AND, t0Ct5k);
-        t0Ct3k.SetNextCondition(LogicConnector.AND, t0Ct4k);
-        t0Ct2k.SetNextCondition(LogicConnector.AND, t0Ct3k);
-        t0Ct1k.SetNextCondition(LogicConnector.AND, t0Ct2k);
-
-
-        GuardMapping grdt0k = new GuardMapping();
-        grdt0k.condition = t0Ct1k;
-        grdt0k.Activations.add(new Activation(t0,"Train_A",
+        grdt0i.Activations.add(new Activation(t0,"Train_A",
                 "Dep_Time_A",
                 "Platform_A",
                 "C_TimeA",
                 "C_PA",
-                "H_List_A",
-                "A2_Length",
-                "A4_Length",
+                "A3_Length",
+                "Zero",
                 "Speed_On_Platform",
                 TransitionOperation.CreateTrain_NotNull,
                 "D_Train_A"));
-        grdt0k.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
-        t0.GuardMappingList.add(grdt0k);
+        grdt0i.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
+        t0.GuardMappingList.add(grdt0i);
 
 
-        Condition t0Ct1l = new Condition(t0, "Train_A", TransitionCondition.NotNull);
-        Condition t0Ct2l = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
-        Condition t0Ct3l = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
-        Condition t0Ct4l = new Condition(t0, "C_PA", TransitionCondition.NotNull);
-        Condition t0Ct5l = new Condition(t0, "C_TimeA", TransitionCondition.NotNull);
-        Condition t0Ct6l = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
-        Condition t0Ct7l = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
-        Condition t0Ct8l = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A3");
-
-        t0Ct7l.SetNextCondition(LogicConnector.AND, t0Ct8l);
-        t0Ct6l.SetNextCondition(LogicConnector.AND, t0Ct7l);
-        t0Ct5l.SetNextCondition(LogicConnector.AND, t0Ct6l);
-        t0Ct4l.SetNextCondition(LogicConnector.AND, t0Ct5l);
-        t0Ct3l.SetNextCondition(LogicConnector.AND, t0Ct4l);
-        t0Ct2l.SetNextCondition(LogicConnector.AND, t0Ct3l);
-        t0Ct1l.SetNextCondition(LogicConnector.AND, t0Ct2l);
-
-
-        GuardMapping grdt0l = new GuardMapping();
-        grdt0l.condition = t0Ct1l;
-        grdt0l.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","C_TimeA","C_PA","H_List_A","A3_Length","Zero","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_A"));
-        grdt0l.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
-        t0.GuardMappingList.add(grdt0l);
+//        // not the first created train in that day
+//        Condition t0Ct1j = new Condition(t0, "Train_A", TransitionCondition.NotNull);
+//        Condition t0Ct2j = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
+//        Condition t0Ct3j = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
+//        Condition t0Ct4j = new Condition(t0, "C_PA", TransitionCondition.NotNull);
+//        Condition t0Ct5j = new Condition(t0, "C_TimeA", TransitionCondition.NotNull);
+//        Condition t0Ct6j = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
+//        Condition t0Ct7j = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
+//        Condition t0Ct8j = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A1");
+//
+//        t0Ct7j.SetNextCondition(LogicConnector.AND, t0Ct8j);
+//        t0Ct6j.SetNextCondition(LogicConnector.AND, t0Ct7j);
+//        t0Ct5j.SetNextCondition(LogicConnector.AND, t0Ct6j);
+//        t0Ct4j.SetNextCondition(LogicConnector.AND, t0Ct5j);
+//        t0Ct3j.SetNextCondition(LogicConnector.AND, t0Ct4j);
+//        t0Ct2j.SetNextCondition(LogicConnector.AND, t0Ct3j);
+//        t0Ct1j.SetNextCondition(LogicConnector.AND, t0Ct2j);
+//
+//
+//        GuardMapping grdt0j = new GuardMapping();
+//        grdt0j.condition = t0Ct1j;
+//        grdt0j.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","C_TimeA","C_PA","H_List_A","A1_Length","A4_Length","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_A"));
+//        grdt0j.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
+//        t0.GuardMappingList.add(grdt0j);
+//
+//
+//        Condition t0Ct1k = new Condition(t0, "Train_A", TransitionCondition.NotNull);
+//        Condition t0Ct2k = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
+//        Condition t0Ct3k = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
+//        Condition t0Ct4k = new Condition(t0, "C_PA", TransitionCondition.NotNull);
+//        Condition t0Ct5k = new Condition(t0, "C_TimeA", TransitionCondition.NotNull);
+//        Condition t0Ct6k = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
+//        Condition t0Ct7k = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
+//        Condition t0Ct8k = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A2");
+//
+//        t0Ct7k.SetNextCondition(LogicConnector.AND, t0Ct8k);
+//        t0Ct6k.SetNextCondition(LogicConnector.AND, t0Ct7k);
+//        t0Ct5k.SetNextCondition(LogicConnector.AND, t0Ct6k);
+//        t0Ct4k.SetNextCondition(LogicConnector.AND, t0Ct5k);
+//        t0Ct3k.SetNextCondition(LogicConnector.AND, t0Ct4k);
+//        t0Ct2k.SetNextCondition(LogicConnector.AND, t0Ct3k);
+//        t0Ct1k.SetNextCondition(LogicConnector.AND, t0Ct2k);
+//
+//
+//        GuardMapping grdt0k = new GuardMapping();
+//        grdt0k.condition = t0Ct1k;
+//        grdt0k.Activations.add(new Activation(t0,"Train_A",
+//                "Dep_Time_A",
+//                "Platform_A",
+//                "C_TimeA",
+//                "C_PA",
+//                "H_List_A",
+//                "A2_Length",
+//                "A4_Length",
+//                "Speed_On_Platform",
+//                TransitionOperation.CreateTrain_NotNull,
+//                "D_Train_A"));
+//        grdt0k.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
+//        t0.GuardMappingList.add(grdt0k);
+//
+//
+//        Condition t0Ct1l = new Condition(t0, "Train_A", TransitionCondition.NotNull);
+//        Condition t0Ct2l = new Condition(t0, "Dep_Time_A", TransitionCondition.NotNull);
+//        Condition t0Ct3l = new Condition(t0, "Platform_A", TransitionCondition.NotNull);
+//        Condition t0Ct4l = new Condition(t0, "C_PA", TransitionCondition.NotNull);
+//        Condition t0Ct5l = new Condition(t0, "C_TimeA", TransitionCondition.NotNull);
+//        Condition t0Ct6l = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
+//        Condition t0Ct7l = new Condition(t0, "H_List_A", TransitionCondition.HaveListTrain_History);
+//        Condition t0Ct8l = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A3");
+//
+//        t0Ct7l.SetNextCondition(LogicConnector.AND, t0Ct8l);
+//        t0Ct6l.SetNextCondition(LogicConnector.AND, t0Ct7l);
+//        t0Ct5l.SetNextCondition(LogicConnector.AND, t0Ct6l);
+//        t0Ct4l.SetNextCondition(LogicConnector.AND, t0Ct5l);
+//        t0Ct3l.SetNextCondition(LogicConnector.AND, t0Ct4l);
+//        t0Ct2l.SetNextCondition(LogicConnector.AND, t0Ct3l);
+//        t0Ct1l.SetNextCondition(LogicConnector.AND, t0Ct2l);
+//
+//
+//        GuardMapping grdt0l = new GuardMapping();
+//        grdt0l.condition = t0Ct1l;
+//        grdt0l.Activations.add(new Activation(t0,"Train_A","Dep_Time_A","Platform_A","C_TimeA","C_PA","H_List_A","A3_Length","Zero","Speed_On_Platform", TransitionOperation.CreateTrain_NotNull, "D_Train_A"));
+//        grdt0l.Activations.add(new Activation(t0, "D_Train_A", TransitionOperation.MessageBox_SupervisorA));
+//        t0.GuardMappingList.add(grdt0l);
 
         t0.Delay = 0;
         pn.Transitions.add(t0);
@@ -521,7 +868,7 @@ public class Supervisor_A {
         t1.TransitionName = "t1";
         t1.InputPlaceName.add("D_Train_A");
 
-
+/*
         // Handle case when all inputs are null
         Condition t1CtAllNull = new Condition(t1, "D_Train_A", TransitionCondition.IsNull);
 
@@ -529,266 +876,162 @@ public class Supervisor_A {
         grdT1AllNull.condition = t1CtAllNull;
         grdT1AllNull.Activations.add(new Activation(t1, "", TransitionOperation.DoNothing, ""));
         t1.GuardMappingList.add(grdT1AllNull);
-
+*/
 
         Condition t1Ct1a = new Condition(t1, "D_Train_A", TransitionCondition.NotNull);
-        Condition t1Ct2a = new Condition(t1, "List_A", TransitionCondition.CanAddTrains_List);
+        Condition t1Ct2a = new Condition(t1, "List_A", TransitionCondition.IsNull); // CanAddTrains_List
 
         t1Ct1a.SetNextCondition(LogicConnector.AND, t1Ct2a);
 
         GuardMapping grdt1a = new GuardMapping();
         grdt1a.condition = t1Ct1a;
-        grdt1a.Activations.add(new Activation(t1, "D_Train_A", TransitionOperation.AddElement, "List_A"));
-        grdt1a.Activations.add(new Activation(t1, "D_Train_A", TransitionOperation.Move, "D_Train_A"));
+        grdt1a.Activations.add(new Activation(t1, "D_Train_A", TransitionOperation.AddElement, "H_List_A"));
+        grdt1a.Activations.add(new Activation(t1, "D_Train_A", TransitionOperation.Move, "List_A"));
+        //grdt1a.Activations.add(new Activation(t1, "D_Train_A", TransitionOperation.MakeNull, "D_Train_A"));
         t1.GuardMappingList.add(grdt1a);
 
-
-        Condition t1Ct1b = new Condition(t1, "D_Train_A", TransitionCondition.NotNull);
-        Condition t1Ct2b = new Condition(t1, "List_A", TransitionCondition.CanNotAddTrains_List);
-
-        t1Ct1b.SetNextCondition(LogicConnector.AND, t1Ct2b);
-
-        GuardMapping grdt1b = new GuardMapping();
-        grdt1b.condition = t1Ct1b;
-        grdt1b.Activations.add(new Activation(t1, "List_A", TransitionOperation.RemoveFirst, "List_A"));
-        grdt1b.Activations.add(new Activation(t1, "D_Train_A", TransitionOperation.AddElement, "List_A"));
-        grdt1b.Activations.add(new Activation(t1, "D_Train_A", TransitionOperation.Move, "D_Train_A"));
-        t1.GuardMappingList.add(grdt1b);
+//
+//        Condition t1Ct1b = new Condition(t1, "D_Train_A", TransitionCondition.NotNull);
+//        Condition t1Ct2b = new Condition(t1, "List_A", TransitionCondition.CanNotAddTrains_List);
+//
+//        t1Ct1b.SetNextCondition(LogicConnector.AND, t1Ct2b);
+//
+//        GuardMapping grdt1b = new GuardMapping();
+//        grdt1b.condition = t1Ct1b;
+//        grdt1b.Activations.add(new Activation(t1, "List_A", TransitionOperation.RemoveFirst, "List_A"));
+//        grdt1b.Activations.add(new Activation(t1, "D_Train_A", TransitionOperation.AddElement, "List_A"));
+//        grdt1b.Activations.add(new Activation(t1, "D_Train_A", TransitionOperation.Move, "D_Train_A"));
+//        t1.GuardMappingList.add(grdt1b);
 
 
         t1.Delay = 0;
         pn.Transitions.add(t1);
 
-        // T2 ------------------------------------------------
+//        // T2 ------------------------------------------------
+//        PetriTransition t2 = new PetriTransition(pn);
+//        t2.TransitionName = "t2";
+//        t2.InputPlaceName.add("D_Train_A");
+//
+//
+//
+//
+//        Condition t2Ct1 = new Condition(t2, "D_Train_A", TransitionCondition.NotNull);
+//
+//
+//        GuardMapping grdt2 = new GuardMapping();
+//        grdt2.condition = t2Ct1;
+//        grdt2.Activations.add(new Activation(t2, "D_Train_A", TransitionOperation.AddElement, "H_List_A"));
+//        t2.GuardMappingList.add(grdt2);
+//
+//        t2.Delay = 0;
+//        pn.Transitions.add(t2);
+
+
+        // t2 ------------------------------------------------
+
+
         PetriTransition t2 = new PetriTransition(pn);
         t2.TransitionName = "t2";
-        t2.InputPlaceName.add("D_Train_A");
+        t2.InputPlaceName.add("H_List_A");
+
+/*
+        // Handle case when all inputs are null
+        Condition t2CtAllNull = new Condition(t2, "H_List_A", TransitionCondition.IsNull);
+
+        GuardMapping grdt2AllNull = new GuardMapping();
+        grdt2AllNull.condition = t2CtAllNull;
+        grdt2AllNull.Activations.add(new Activation(t2, "", TransitionOperation.DoNothing, ""));
+        t2.GuardMappingList.add(grdt2AllNull);
+*/
+
+
+        Condition t2Ct1a = new Condition(t2, "H_List_A", TransitionCondition.HaveListTrain_History);
+        Condition t2Ct2a = new Condition(t2, "H_List_A", TransitionCondition.CheckTime_Before);
+
+        t2Ct1a.SetNextCondition(LogicConnector.AND, t2Ct2a);
+
+        GuardMapping grdt2a = new GuardMapping();
+        grdt2a.condition = t2Ct2a;
+        grdt2a.Activations.add(new Activation(t2, "H_List_A", TransitionOperation.Move, "H_List_A"));
+        t2.GuardMappingList.add(grdt2a);
 
 
 
+        Condition t2Ct1b = new Condition(t2, "H_List_A", TransitionCondition.HaveListTrain_History);
+        Condition t2Ct2b= new Condition(t2, "H_List_A", TransitionCondition.CheckTime_After);
 
-        Condition t2Ct1 = new Condition(t2, "D_Train_A", TransitionCondition.NotNull);
+        t2Ct1b.SetNextCondition(LogicConnector.AND, t2Ct2b);
 
-
-        GuardMapping grdt2 = new GuardMapping();
-        grdt2.condition = t2Ct1;
-        grdt2.Activations.add(new Activation(t2, "D_Train_A", TransitionOperation.AddElement, "H_List_A"));
-        t2.GuardMappingList.add(grdt2);
+        GuardMapping grdt2b = new GuardMapping();
+        grdt2b.condition = t2Ct2b;
+        grdt2b.Activations.add(new Activation(t2,"H_List_A", "filePath", TransitionOperation.SaveAndDelete, "H_List_A"));
+        t2.GuardMappingList.add(grdt2b);
 
         t2.Delay = 0;
         pn.Transitions.add(t2);
 
 
         // T3 ------------------------------------------------
-
-
         PetriTransition t3 = new PetriTransition(pn);
         t3.TransitionName = "t3";
-        t3.InputPlaceName.add("H_List_A");
+        t3.InputPlaceName.add("List_A");
 
-
+/*
         // Handle case when all inputs are null
-        Condition t3CtAllNull = new Condition(t3, "H_List_A", TransitionCondition.IsNull);
+        Condition t3CtAllNull = new Condition(t3, "List_A", TransitionCondition.IsNull);
 
-        GuardMapping grdT3AllNull = new GuardMapping();
-        grdT3AllNull.condition = t3CtAllNull;
-        grdT3AllNull.Activations.add(new Activation(t3, "", TransitionOperation.DoNothing, ""));
-        t3.GuardMappingList.add(grdT3AllNull);
+        GuardMapping grdt3AllNull = new GuardMapping();
+        grdt3AllNull.condition = t3CtAllNull;
+        grdt3AllNull.Activations.add(new Activation(t3, "", TransitionOperation.DoNothing, ""));
+        t3.GuardMappingList.add(grdt3AllNull);
+*/
 
-
-
-        Condition t3Ct1a = new Condition(t3, "H_List_A", TransitionCondition.HaveListTrain_History);
-        Condition t3Ct2a = new Condition(t3, "H_List_A", TransitionCondition.CheckTime_Before);
+        Condition t3Ct1a = new Condition(t3, "List_A", TransitionCondition.NotNull); //HaveListTrain
+        Condition t3Ct2a = new Condition(t3,"List_A", TransitionCondition.Platform_To_Send, "A1");
 
         t3Ct1a.SetNextCondition(LogicConnector.AND, t3Ct2a);
 
         GuardMapping grdt3a = new GuardMapping();
-        grdt3a.condition = t3Ct2a;
-        grdt3a.Activations.add(new Activation(t3, "H_List_A", TransitionOperation.Move, "H_List_A"));
+        grdt3a.condition = t3Ct1a;
+        grdt3a.Activations.add(new Activation(t3, "List_A", TransitionOperation.SendTrainOverNetwork, "T1_A"));
+        grdt3a.Activations.add(new Activation(t3, "List_A", TransitionOperation.SendOverNetwork, "Time1_A"));
+        //grdt3a.Activations.add(new Activation(t3, "List_A", TransitionOperation.PopElement_Train, "List_A"));
+        grdt3a.Activations.add(new Activation(t3, "List_A", TransitionOperation.MakeNull, "List_A"));
         t3.GuardMappingList.add(grdt3a);
 
 
-
-        Condition t3Ct1b = new Condition(t3, "H_List_A", TransitionCondition.HaveListTrain_History);
-        Condition t3Ct2b= new Condition(t3, "H_List_A", TransitionCondition.CheckTime_After);
+        Condition t3Ct1b = new Condition(t3, "List_A", TransitionCondition.NotNull);
+        Condition t3Ct2b = new Condition(t3, "List_A", TransitionCondition.Platform_To_Send, "A2");
 
         t3Ct1b.SetNextCondition(LogicConnector.AND, t3Ct2b);
 
         GuardMapping grdt3b = new GuardMapping();
-        grdt3b.condition = t3Ct2b;
-        grdt3b.Activations.add(new Activation(t3,"H_List_A", "filePath", TransitionOperation.SaveAndDelete, "H_List_A"));
+        grdt3b.condition = t3Ct1b;
+        grdt3b.Activations.add(new Activation(t3, "List_A", TransitionOperation.SendTrainOverNetwork, "T2_A"));
+        grdt3b.Activations.add(new Activation(t3, "List_A", TransitionOperation.SendOverNetwork, "Time2_A"));
+        //grdt3b.Activations.add(new Activation(t3, "List_A", TransitionOperation.PopElement_Train, "Temp"));
+        grdt3b.Activations.add(new Activation(t3, "List_A", TransitionOperation.MakeNull, "List_A"));
         t3.GuardMappingList.add(grdt3b);
+
+
+
+        Condition t3Ct1c = new Condition(t3, "List_A", TransitionCondition.NotNull);
+        Condition t3Ct2c = new Condition(t3,"List_A", TransitionCondition.Platform_To_Send, "A3");
+
+       t3Ct1c.SetNextCondition(LogicConnector.AND, t3Ct2c);
+
+        GuardMapping grdt3c = new GuardMapping();
+        grdt3c.condition = t3Ct1c;
+        grdt3c.Activations.add(new Activation(t3, "List_A", TransitionOperation.SendTrainOverNetwork, "T3_A"));
+        grdt3c.Activations.add(new Activation(t3, "List_A", TransitionOperation.SendOverNetwork, "Time3_A"));
+        //grdt3c.Activations.add(new Activation(t3, "List_A", TransitionOperation.PopElement_Train, "List_A"));
+        grdt3c.Activations.add(new Activation(t3, "List_A", TransitionOperation.MakeNull, "List_A"));
+        t3.GuardMappingList.add(grdt3c);
+
 
         t3.Delay = 0;
         pn.Transitions.add(t3);
 
-
-        // T4 ------------------------------------------------
-        PetriTransition t4 = new PetriTransition(pn);
-        t4.TransitionName = "t4";
-        t4.InputPlaceName.add("List_A");
-
-
-        // Handle case when all inputs are null
-        Condition t4CtAllNull = new Condition(t4, "List_A", TransitionCondition.IsNull);
-
-        GuardMapping grdT4AllNull = new GuardMapping();
-        grdT4AllNull.condition = t4CtAllNull;
-        grdT4AllNull.Activations.add(new Activation(t4, "", TransitionOperation.DoNothing, ""));
-        t4.GuardMappingList.add(grdT4AllNull);
-
-
-        Condition t4Ct1a = new Condition(t4, "List_A", TransitionCondition.HaveListTrain);
-        Condition t4Ct2a = new Condition(t4,"List_A", TransitionCondition.Platform_To_Send, "A1");
-
-        t4Ct1a.SetNextCondition(LogicConnector.AND, t4Ct2a);
-
-        GuardMapping grdt4a = new GuardMapping();
-        grdt4a.condition = t4Ct1a;
-        grdt4a.Activations.add(new Activation(t4, "List_A", TransitionOperation.SendTrainOverNetwork, "T1_A"));
-        grdt4a.Activations.add(new Activation(t4, "List_A", TransitionOperation.SendOverNetwork, "Time1_A"));
-        t4.GuardMappingList.add(grdt4a);
-
-
-        Condition t4Ct1b = new Condition(t4, "List_A", TransitionCondition.HaveListTrain);
-        Condition t4Ct2b = new Condition(t4, "List_A", TransitionCondition.Platform_To_Send, "A2");
-
-        t4Ct1b.SetNextCondition(LogicConnector.AND, t4Ct2b);
-
-        GuardMapping grdt4b = new GuardMapping();
-        grdt4b.condition = t4Ct1b;
-        grdt4b.Activations.add(new Activation(t4, "List_A", TransitionOperation.SendTrainOverNetwork, "T2_A"));
-        grdt4b.Activations.add(new Activation(t4, "List_A", TransitionOperation.SendOverNetwork, "Time2_A"));
-        t4.GuardMappingList.add(grdt4b);
-
-
-
-        Condition t4Ct1c = new Condition(t4, "List_A", TransitionCondition.HaveListTrain);
-        Condition t4Ct2c = new Condition(t4,"List_A", TransitionCondition.Platform_To_Send, "A3");
-
-        t4Ct1c.SetNextCondition(LogicConnector.AND, t4Ct2c);
-
-        GuardMapping grdt4c = new GuardMapping();
-        grdt4c.condition = t4Ct1c;
-        grdt4c.Activations.add(new Activation(t4, "List_A", TransitionOperation.SendTrainOverNetwork, "T3_A"));
-        grdt4c.Activations.add(new Activation(t4, "List_A", TransitionOperation.SendOverNetwork, "Time3_A"));
-        t4.GuardMappingList.add(grdt4c);
-
-
-        t4.Delay = 0;
-        pn.Transitions.add(t4);
-
-        // T5 ------------------------------------------------
-        PetriTransition t5 = new PetriTransition(pn);
-        t5.TransitionName = "t5";
-        t5.InputPlaceName.add("C_TimeA1");
-        t5.InputPlaceName.add("C_TimeA2");
-        t5.InputPlaceName.add("C_TimeA3");
-        t5.InputPlaceName.add("C_TimeA4");
-
-        // Handle case when all inputs are null
-        Condition t5CtAllNull = new Condition(t5, "C_TimeA1", TransitionCondition.IsNull);
-        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeA2", TransitionCondition.IsNull));
-        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeA3", TransitionCondition.IsNull));
-        t5CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t5, "C_TimeA4", TransitionCondition.IsNull));
-
-        GuardMapping grdT5AllNull = new GuardMapping();
-        grdT5AllNull.condition = t5CtAllNull;
-        grdT5AllNull.Activations.add(new Activation(t5, "", TransitionOperation.DoNothing, ""));
-        t5.GuardMappingList.add(grdT5AllNull);
-
-
-        Condition t5Ct1a = new Condition(t5, "C_TimeA1", TransitionCondition.NotNull);
-
-        GuardMapping grdt5a = new GuardMapping();
-        grdt5a.condition = t5Ct1a;
-        grdt5a.Activations.add(new Activation(t5, "C_TimeA1", TransitionOperation.Move, "C_TimeA"));
-        t5.GuardMappingList.add(grdt5a);
-
-
-        Condition t5Ct1b = new Condition(t5, "C_TimeA2", TransitionCondition.NotNull);
-
-        GuardMapping grdt5b = new GuardMapping();
-        grdt5b.condition = t5Ct1b;
-        grdt5b.Activations.add(new Activation(t5, "C_TimeA2", TransitionOperation.Move, "C_TimeA"));
-        t5.GuardMappingList.add(grdt5b);
-
-
-        Condition t5Ct1c = new Condition(t5, "C_TimeA3", TransitionCondition.NotNull);
-
-        GuardMapping grdt5c = new GuardMapping();
-        grdt5c.condition = t5Ct1c;
-        grdt5c.Activations.add(new Activation(t5, "C_TimeA3", TransitionOperation.Move, "C_TimeA"));
-        t5.GuardMappingList.add(grdt5c);
-
-
-        Condition t5Ct1d = new Condition(t5, "C_TimeA4", TransitionCondition.NotNull);
-
-        GuardMapping grdt5d = new GuardMapping();
-        grdt5d.condition = t5Ct1d;
-        grdt5d.Activations.add(new Activation(t5, "C_TimeA4", TransitionOperation.Move, "C_TimeA"));
-        t5.GuardMappingList.add(grdt5d);
-
-
-        t5.Delay = 0;
-        pn.Transitions.add(t5);
-
-
-        // T6 ------------------------------------------------
-        PetriTransition t6 = new PetriTransition(pn);
-        t6.TransitionName = "t6";
-        t6.InputPlaceName.add("C_PA1");
-        t6.InputPlaceName.add("C_PA2");
-        t6.InputPlaceName.add("C_PA3");
-        t6.InputPlaceName.add("C_PA4");
-
-
-        // Handle case when all inputs are null
-        Condition t6CtAllNull = new Condition(t6, "C_PA1", TransitionCondition.IsNull);
-        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PA2", TransitionCondition.IsNull));
-        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PA3", TransitionCondition.IsNull));
-        t6CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t6, "C_PA4", TransitionCondition.IsNull));
-
-        GuardMapping grdT6AllNull = new GuardMapping();
-        grdT6AllNull.condition = t6CtAllNull;
-        grdT6AllNull.Activations.add(new Activation(t6, "", TransitionOperation.DoNothing, ""));
-        t6.GuardMappingList.add(grdT6AllNull);
-
-
-        Condition t6Ct1a = new Condition(t6, "C_PA1", TransitionCondition.NotNull);
-
-        GuardMapping grdt6a = new GuardMapping();
-        grdt6a.condition = t6Ct1a;
-        grdt6a.Activations.add(new Activation(t6, "C_PA1", TransitionOperation.Move, "C_PA"));
-        t6.GuardMappingList.add(grdt6a);
-
-
-        Condition t6Ct1b = new Condition(t6, "C_PA2", TransitionCondition.NotNull);
-
-        GuardMapping grdt6b = new GuardMapping();
-        grdt6b.condition = t6Ct1b;
-        grdt6b.Activations.add(new Activation(t6, "C_PA2", TransitionOperation.Move, "C_PA"));
-        t6.GuardMappingList.add(grdt6b);
-
-
-        Condition t6Ct1c = new Condition(t6, "C_PA3", TransitionCondition.NotNull);
-
-        GuardMapping grdt6c = new GuardMapping();
-        grdt6c.condition = t6Ct1c;
-        grdt6c.Activations.add(new Activation(t6, "C_PA3", TransitionOperation.Move, "C_PA"));
-        t6.GuardMappingList.add(grdt6c);
-
-
-        Condition t6Ct1d = new Condition(t6, "C_PA4", TransitionCondition.NotNull);
-
-        GuardMapping grdt6d = new GuardMapping();
-        grdt6d.condition = t6Ct1d;
-        grdt6d.Activations.add(new Activation(t6, "C_PA4", TransitionOperation.Move, "C_PA"));
-        t6.GuardMappingList.add(grdt6d);
-
-
-        t6.Delay = 0;
-        pn.Transitions.add(t6);
 
         System.out.println("Supervisor A started \n ------------------------------");
         pn.Delay = 3000;
