@@ -209,10 +209,6 @@ public class Controller_L7_L8 {
         Condition t0Ct4a1 = new Condition(t0, "in7_2", TransitionCondition.IsNull);
         Condition t0Ct5a1 = new Condition(t0, "in8_2", TransitionCondition.IsNull);
 
-     /*   t0Ct5a1.SetNextCondition(LogicConnector.AND, t0Ct4a1);
-        t0Ct4a1.SetNextCondition(LogicConnector.AND, t0Ct3a1);
-        t0Ct3a1.SetNextCondition(LogicConnector.AND, t0Ct2a1);
-        t0Ct2a1.SetNextCondition(LogicConnector.AND, t0Ct1a1); */
 
         t0Ct4a1.SetNextCondition(LogicConnector.AND, t0Ct5a1);
         t0Ct3a1.SetNextCondition(LogicConnector.AND, t0Ct4a1);
@@ -260,7 +256,6 @@ public class Controller_L7_L8 {
         grdt0b.condition= t0Ct1b;
         grdt0b.Activations.add(new Activation(t0, "in7_1","in7_2", TransitionOperation.CalculateLightTimeRailway,"Delay"));
         grdt0b.Activations.add(new Activation(t0, "Delay",  TransitionOperation.MessageBox_Controllers_TwoLights));
-        //grdt0b.Activations.add(new Activation(t2, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt0b.Activations.add(new Activation(t0, "L8", TransitionOperation.Copy, "Control"));
         grdt0b.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Copy, "r1g2"));
         grdt0b.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
@@ -273,11 +268,6 @@ public class Controller_L7_L8 {
         Condition t0Ct3c = new Condition(t0, "in8_1", TransitionCondition.NotNull);
         Condition t0Ct4c = new Condition(t0, "in7_2", TransitionCondition.NotNull);
         Condition t0Ct5c = new Condition(t0, "in8_2", TransitionCondition.NotNull);
-
-        /*t0Ct5c.SetNextCondition(LogicConnector.AND, t0Ct4c);
-        t0Ct4c.SetNextCondition(LogicConnector.AND, t0Ct3c);
-        t0Ct3c.SetNextCondition(LogicConnector.AND, t0Ct2c);
-        t0Ct2c.SetNextCondition(LogicConnector.AND, t0Ct1c);*/
 
         t0Ct4c.SetNextCondition(LogicConnector.AND, t0Ct5c);
         t0Ct3c.SetNextCondition(LogicConnector.AND, t0Ct4c);
@@ -304,11 +294,6 @@ public class Controller_L7_L8 {
         Condition t0Ct5d = new Condition(t0, "in8_2", TransitionCondition.NotNull);
         Condition t0Ct6d = new Condition(t0, "in7_2", TransitionCondition.MoreThan, "in8_2");
 
-        /*t0Ct6d.SetNextCondition(LogicConnector.AND, t0Ct5d);
-        t0Ct5d.SetNextCondition(LogicConnector.AND, t0Ct4d);
-        t0Ct4d.SetNextCondition(LogicConnector.AND, t0Ct3d);
-        t0Ct3d.SetNextCondition(LogicConnector.AND, t0Ct2d);
-        t0Ct2d.SetNextCondition(LogicConnector.AND, t0Ct1d);*/
 
         t0Ct5d.SetNextCondition(LogicConnector.AND, t0Ct6d);
         t0Ct4d.SetNextCondition(LogicConnector.AND, t0Ct5d);
@@ -320,7 +305,6 @@ public class Controller_L7_L8 {
         grdt0d.condition = t0Ct1d;
         grdt0d.Activations.add(new Activation(t0, "in7_1", "in7_2", TransitionOperation.CalculateLightTimeRailway, "Delay"));
         grdt0d.Activations.add(new Activation(t0, "Delay", "L8", TransitionOperation.MessageBox_Controllers_TwoLights));
-        //grdt0d.Activations.add(new Activation(t2, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt0d.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0d.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0d.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L8"));
@@ -334,11 +318,6 @@ public class Controller_L7_L8 {
         Condition t0Ct5e = new Condition(t0, "in8_2", TransitionCondition.NotNull);
         Condition t0Ct6e = new Condition(t0, "in8_2", TransitionCondition.MoreThan, "in7_2");
 
-       /*t0Ct6e.SetNextCondition(LogicConnector.AND, t0Ct5e);
-        t0Ct5e.SetNextCondition(LogicConnector.AND, t0Ct4e);
-        t0Ct4e.SetNextCondition(LogicConnector.AND, t0Ct3e);
-        t0Ct3e.SetNextCondition(LogicConnector.AND, t0Ct2e);
-        t0Ct2e.SetNextCondition(LogicConnector.AND, t0Ct1e);*/
 
         t0Ct5e.SetNextCondition(LogicConnector.AND, t0Ct6e);
         t0Ct4e.SetNextCondition(LogicConnector.AND, t0Ct5e);
@@ -350,7 +329,6 @@ public class Controller_L7_L8 {
         grdt0e.condition = t0Ct1e;
         grdt0e.Activations.add(new Activation(t0, "in8_1", "in8_2", TransitionOperation.CalculateLightTimeRailway, "Delay"));
         grdt0e.Activations.add(new Activation(t0, "Delay", "L7", TransitionOperation.MessageBox_Controllers_TwoLights));
-        // grdt0e.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt0e.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0e.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0e.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L7"));
@@ -366,12 +344,6 @@ public class Controller_L7_L8 {
         Condition t0Ct6f = new Condition(t0, "in8_2", TransitionCondition.Equal, "in7_2");
         Condition t0Ct7f = new Condition(t0, "in7_1", TransitionCondition.MoreThan_Length, "in8_1");
 
-        /*t0Ct7f.SetNextCondition(LogicConnector.AND, t0Ct6f);
-        t0Ct6f.SetNextCondition(LogicConnector.AND, t0Ct5f);
-        t0Ct5f.SetNextCondition(LogicConnector.AND, t0Ct4f);
-        t0Ct4f.SetNextCondition(LogicConnector.AND, t0Ct3f);
-        t0Ct3f.SetNextCondition(LogicConnector.AND, t0Ct2f);
-        t0Ct2f.SetNextCondition(LogicConnector.AND, t0Ct1f);*/
 
         t0Ct6f.SetNextCondition(LogicConnector.AND, t0Ct7f);
         t0Ct5f.SetNextCondition(LogicConnector.AND, t0Ct6f);
@@ -384,7 +356,6 @@ public class Controller_L7_L8 {
         grdt0f.condition = t0Ct1f;
         grdt0f.Activations.add(new Activation(t0, "in8_1", "in8_2", TransitionOperation.CalculateLightTimeRailway, "Delay"));
         grdt0f.Activations.add(new Activation(t0, "Delay", "L7", TransitionOperation.MessageBox_Controllers_TwoLights));
-        //grdt0f.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt0f.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0f.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0f.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L7"));
@@ -400,12 +371,6 @@ public class Controller_L7_L8 {
         Condition t0Ct6g = new Condition(t0, "in8_2", TransitionCondition.Equal, "in7_2");
         Condition t0Ct7g = new Condition(t0, "in8_1", TransitionCondition.MoreThan_Length, "in7_1");
 
-       /* t0Ct7g.SetNextCondition(LogicConnector.AND, t0Ct6g);
-        t0Ct6g.SetNextCondition(LogicConnector.AND, t0Ct5g);
-        t0Ct5g.SetNextCondition(LogicConnector.AND, t0Ct4g);
-        t0Ct4g.SetNextCondition(LogicConnector.AND, t0Ct3g);
-        t0Ct3g.SetNextCondition(LogicConnector.AND, t0Ct2g);
-        t0Ct2g.SetNextCondition(LogicConnector.AND, t0Ct1g);*/
 
         t0Ct6g.SetNextCondition(LogicConnector.AND, t0Ct7g);
         t0Ct5g.SetNextCondition(LogicConnector.AND, t0Ct6g);
@@ -419,7 +384,6 @@ public class Controller_L7_L8 {
         grdt0g.condition = t0Ct1g;
         grdt0g.Activations.add(new Activation(t0, "in7_1", "in7_2", TransitionOperation.CalculateLightTimeRailway, "Delay"));
         grdt0g.Activations.add(new Activation(t0, "Delay", "L8", TransitionOperation.MessageBox_Controllers_TwoLights));
-        //grdt0g.Activations.add(new Activation(t2, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt0g.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0g.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0g.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L8"));
@@ -435,12 +399,6 @@ public class Controller_L7_L8 {
         Condition t0Ct6i = new Condition(t0, "in8_2", TransitionCondition.Equal, "in7_2");
         Condition t0Ct7i = new Condition(t0, "in8_1", TransitionCondition.Equal_Length, "in7_1");
 
-        /*t0Ct7i.SetNextCondition(LogicConnector.AND, t0Ct6i);
-        t0Ct6i.SetNextCondition(LogicConnector.AND, t0Ct5i);
-        t0Ct5i.SetNextCondition(LogicConnector.AND, t0Ct4i);
-        t0Ct4i.SetNextCondition(LogicConnector.AND, t0Ct3i);
-        t0Ct3i.SetNextCondition(LogicConnector.AND, t0Ct2i);
-        t0Ct2i.SetNextCondition(LogicConnector.AND, t0Ct1i);*/
 
         t0Ct6i.SetNextCondition(LogicConnector.AND, t0Ct7i);
         t0Ct5i.SetNextCondition(LogicConnector.AND, t0Ct6i);
@@ -453,7 +411,6 @@ public class Controller_L7_L8 {
         grdt0i.condition = t0Ct1i;
         grdt0i.Activations.add(new Activation(t0, "in8_1", "in8_2", TransitionOperation.CalculateLightTimeRailway, "Delay"));
         grdt0i.Activations.add(new Activation(t0, "Delay", "L7", TransitionOperation.MessageBox_Controllers_TwoLights));
-        // grdt0i.Activations.add(new Activation(t1, "Delay_Simulation", TransitionOperation.DynamicDelay,""));
         grdt0i.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "r1g2"));
         grdt0i.Activations.add(new Activation(t0, "g1g2", TransitionOperation.Move, "g1r2"));
         grdt0i.Activations.add(new Activation(t0, "red", TransitionOperation.SendOverNetwork, "OP_L7"));
@@ -527,8 +484,6 @@ public class Controller_L7_L8 {
 
         t4.Delay = 0;
         pn.Transitions.add(t4);
-        System.out.println("in7_2 (speed): " + in7_2.GetValue());
-        System.out.println("in8_2 (speed): " + in8_2.GetValue());
 
 
         System.out.println("Controller L7 L8 started \n ------------------------------");

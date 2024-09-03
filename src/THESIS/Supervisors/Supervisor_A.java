@@ -34,23 +34,23 @@ public class Supervisor_A {
 
         DataString C_PA = new DataString();
         C_PA.SetName("C_PA");
-        pn.ConstantPlaceList.add(C_PA);
+        pn.PlaceList.add(C_PA);
 
         DataString C_PA1 = new DataString();
         C_PA1.SetName("C_PA1");
-        pn.ConstantPlaceList.add(C_PA1);
+        pn.PlaceList.add(C_PA1);
 
         DataString C_PA2 = new DataString();
         C_PA2.SetName("C_PA2");
-        pn.ConstantPlaceList.add(C_PA2);
+        pn.PlaceList.add(C_PA2);
 
         DataString C_PA3= new DataString();
         C_PA3.SetName("C_PA3");
-        pn.ConstantPlaceList.add(C_PA3);
+        pn.PlaceList.add(C_PA3);
 
         DataString C_PA4 = new DataString();
         C_PA4.SetName("C_PA4");
-        pn.ConstantPlaceList.add(C_PA4);
+        pn.PlaceList.add(C_PA4);
 
         DataString filePath = new DataString();
         filePath.SetName("filePath");
@@ -72,10 +72,6 @@ public class Supervisor_A {
         A3.SetName("A3");
         A3.SetValue("A3");
         pn.ConstantPlaceList.add(A3);
-
-        DataTrain temp = new DataTrain();
-        temp.SetName("Temp");
-        pn.ConstantPlaceList.add(temp);
 
         DataInteger Zero = new DataInteger();
         Zero.SetName("Zero");
@@ -643,10 +639,8 @@ public class Supervisor_A {
         Condition t0Ct4g = new Condition(t0, "C_PA", TransitionCondition.NotNull);
         Condition t0Ct5g = new Condition(t0, "C_TimeA", TransitionCondition.NotNull);
         Condition t0Ct6g = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
-       // Condition t0Ct7g = new Condition(t0, "H_List_A", TransitionCondition.Have_NoListTrain_History);
         Condition t0Ct7g = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A1");
 
-       // t0Ct7g.SetNextCondition(LogicConnector.AND, t0Ct8g);
         t0Ct6g.SetNextCondition(LogicConnector.AND, t0Ct7g);
         t0Ct5g.SetNextCondition(LogicConnector.AND, t0Ct6g);
         t0Ct4g.SetNextCondition(LogicConnector.AND, t0Ct5g);
@@ -676,10 +670,8 @@ public class Supervisor_A {
         Condition t0Ct4h = new Condition(t0, "C_PA", TransitionCondition.NotNull);
         Condition t0Ct5h = new Condition(t0, "C_TimeA", TransitionCondition.NotNull);
         Condition t0Ct6h = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
-        //Condition t0Ct7h = new Condition(t0, "H_List_A", TransitionCondition.Have_NoListTrain_History);
         Condition t0Ct7h = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A2");
 
-       // t0Ct7h.SetNextCondition(LogicConnector.AND, t0Ct8h);
         t0Ct6h.SetNextCondition(LogicConnector.AND, t0Ct7h);
         t0Ct5h.SetNextCondition(LogicConnector.AND, t0Ct6h);
         t0Ct4h.SetNextCondition(LogicConnector.AND, t0Ct5h);
@@ -710,10 +702,8 @@ public class Supervisor_A {
         Condition t0Ct4i = new Condition(t0, "C_PA", TransitionCondition.NotNull);
         Condition t0Ct5i = new Condition(t0, "C_TimeA", TransitionCondition.NotNull);
         Condition t0Ct6i = new Condition(t0, "D_Train_A", TransitionCondition.IsNull);
-        //Condition t0Ct7i = new Condition(t0, "H_List_A", TransitionCondition.Have_NoListTrain_History);
         Condition t0Ct7i = new Condition(t0, "Platform_A", TransitionCondition.Contains,"A3");
 
-        //t0Ct7i.SetNextCondition(LogicConnector.AND, t0Ct8i);
         t0Ct6i.SetNextCondition(LogicConnector.AND, t0Ct7i);
         t0Ct5i.SetNextCondition(LogicConnector.AND, t0Ct6i);
         t0Ct4i.SetNextCondition(LogicConnector.AND, t0Ct5i);
@@ -757,7 +747,6 @@ public class Supervisor_A {
         grdt1a.condition = t1Ct1a;
         grdt1a.Activations.add(new Activation(t1, "D_Train_A", TransitionOperation.AddElement, "H_List_A"));
         grdt1a.Activations.add(new Activation(t1, "D_Train_A", TransitionOperation.Move, "List_A"));
-        //grdt1a.Activations.add(new Activation(t1, "D_Train_A", TransitionOperation.MakeNull, "D_Train_A"));
         t1.GuardMappingList.add(grdt1a);
 
 
@@ -814,7 +803,6 @@ public class Supervisor_A {
         grdt3a.condition = t3Ct1a;
         grdt3a.Activations.add(new Activation(t3, "List_A", TransitionOperation.SendTrainOverNetwork, "T1_A"));
         grdt3a.Activations.add(new Activation(t3, "List_A", TransitionOperation.SendOverNetwork, "Time1_A"));
-        //grdt3a.Activations.add(new Activation(t3, "List_A", TransitionOperation.PopElement_Train, "List_A"));
         grdt3a.Activations.add(new Activation(t3, "List_A", TransitionOperation.MakeNull, "List_A"));
         t3.GuardMappingList.add(grdt3a);
 
@@ -828,7 +816,6 @@ public class Supervisor_A {
         grdt3b.condition = t3Ct1b;
         grdt3b.Activations.add(new Activation(t3, "List_A", TransitionOperation.SendTrainOverNetwork, "T2_A"));
         grdt3b.Activations.add(new Activation(t3, "List_A", TransitionOperation.SendOverNetwork, "Time2_A"));
-        //grdt3b.Activations.add(new Activation(t3, "List_A", TransitionOperation.PopElement_Train, "Temp"));
         grdt3b.Activations.add(new Activation(t3, "List_A", TransitionOperation.MakeNull, "List_A"));
         t3.GuardMappingList.add(grdt3b);
 
@@ -843,7 +830,6 @@ public class Supervisor_A {
         grdt3c.condition = t3Ct1c;
         grdt3c.Activations.add(new Activation(t3, "List_A", TransitionOperation.SendTrainOverNetwork, "T3_A"));
         grdt3c.Activations.add(new Activation(t3, "List_A", TransitionOperation.SendOverNetwork, "Time3_A"));
-        //grdt3c.Activations.add(new Activation(t3, "List_A", TransitionOperation.PopElement_Train, "List_A"));
         grdt3c.Activations.add(new Activation(t3, "List_A", TransitionOperation.MakeNull, "List_A"));
         t3.GuardMappingList.add(grdt3c);
 

@@ -714,7 +714,7 @@ public class Functions implements Serializable {
 		double totalDistance = 2 * (train_length + first_length + second_length);
 		//System.out.println("total dist " +totalDistance);
 
-		double timeTakenSeconds = totalDistance / speed.Value;
+		double timeTakenSeconds = totalDistance / ((double) (speed.Value * 1000) /3600);
 		//System.out.println("timeTakenSeconds " +timeTakenSeconds);
 		Duration timeTaken = Duration.ofSeconds((long) timeTakenSeconds);
 		//System.out.println("total timeTaken " +timeTaken);
@@ -809,7 +809,7 @@ public class Functions implements Serializable {
 	public DataInteger Calculate_Light_Time_Railway(int length, int speed){
 
 		DataInteger time = new DataInteger();
-		time.SetValue((500 + length)/speed); // 500 m from the sensor to the light
+		time.SetValue((2*(500 + length)/(speed*1000/3600))); // 500 m from the sensor to the intersection
 
 		return time;
 	}

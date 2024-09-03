@@ -231,11 +231,11 @@ public class Station_A {
         grdt1_A1AllNull.Activations.add(new Activation(t1_A1, "", TransitionOperation.DoNothing, ""));
         t1_A1.GuardMappingList.add(grdt1_A1AllNull);
 
+
+
         Condition t1_A1Ct1a = new Condition(t1_A1, "Train_A1", TransitionCondition.NotNull);
         Condition t1_A1Ct2a = new Condition(t1_A1, "A1", TransitionCondition.IsNull);
-       // Condition t1_A1Ct3a = new Condition(t1_A1, "Train_A1", TransitionCondition.Check_Transition_Target_List,"t1_A1");
 
-       // t1_A1Ct2a.SetNextCondition(LogicConnector.AND, t1_A1Ct3a);
         t1_A1Ct1a.SetNextCondition(LogicConnector.AND, t1_A1Ct2a);
 
         GuardMapping grdt1_A1a = new GuardMapping();
@@ -264,7 +264,7 @@ public class Station_A {
         grdt2_A1a.Activations.add(new Activation(t2_A1, "A1", TransitionOperation.Move, "Exit_A1"));
         t2_A1.GuardMappingList.add(grdt2_A1a);
 
-        t2_A1.Delay = 3; // Use the Delay constant
+        t2_A1.Delay = 3;
         pn.Transitions.add(t2_A1);
 
         // S1 ------------------------------------------------
@@ -274,15 +274,6 @@ public class Station_A {
         S1.InputPlaceName.add("Time_A1");
         S1.InputPlaceName.add("P_A1");
         S1.InputPlaceName.add("A1");
-
-//        Condition S1CtAllNull = new Condition(S1, "Time_A1", TransitionCondition.IsNull);
-//        S1CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(S1, "P_A1", TransitionCondition.IsNull));
-//        S1CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(S1, "A1", TransitionCondition.IsNull));
-//
-//        GuardMapping grdS1AllNull = new GuardMapping();
-//        grdS1AllNull.condition = S1CtAllNull;
-//        grdS1AllNull.Activations.add(new Activation(S1, "", TransitionOperation.DoNothing, ""));
-//        S1.GuardMappingList.add(grdS1AllNull);
 
 
         Condition S1Ct2a = new Condition(S1, "A1", TransitionCondition.NotNull);
@@ -320,14 +311,6 @@ public class Station_A {
         t3_A1.InputPlaceName.add("i1");
         t3_A1.InputPlaceName.add("P_A1");
 
-//        // Handle case when input is null
-//        Condition t3_A1CtAllNull = new Condition(t3_A1, "i1", TransitionCondition.IsNull);
-//        t3_A1CtAllNull.SetNextCondition(LogicConnector.AND, new Condition(t3_A1, "P_A1", TransitionCondition.IsNull));
-//
-//        GuardMapping grdt3_A1AllNull = new GuardMapping();
-//        grdt3_A1AllNull.condition = t3_A1CtAllNull;
-//        grdt3_A1AllNull.Activations.add(new Activation(t3_A1, "", TransitionOperation.DoNothing, ""));
-//        t3_A1.GuardMappingList.add(grdt3_A1AllNull);
 
         // Train leaving station
         Condition t3_A1Ct1a = new Condition(t3_A1, "i1", TransitionCondition.IsNull);
